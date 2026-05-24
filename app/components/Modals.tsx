@@ -88,7 +88,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
 
             <p style={{ gridColumn: 'span 2', fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginTop: '10px', marginBottom: '-2px', letterSpacing: '0.5px' }}>ธีม (Light / Dark)</p>
             <button className="theme-btn" onClick={() => onSelectTheme('white')} style={{ background: '#ffffff', color: '#000000' }}>WHITE</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('black')} style={{ background: '#000000', color: '#ffffff' }}>BLACK</button>
+            <button className="theme-btn" onClick={() => onSelectTheme('black')} style={{ background: '#050505', color: '#f5f5f5', borderColor: '#2b2b2b' }}>BLACK</button>
             <button className="theme-btn" onClick={() => onSelectTheme('rosepine-light')} style={{ background: '#faf4ed', color: '#d7827e' }}><i className="ph-duotone ph-flower-lotus"></i> Pine L</button>
             <button className="theme-btn" onClick={() => onSelectTheme('rosepine')} style={{ background: '#191724', color: '#eb6f92' }}><i className="ph-duotone ph-flower"></i> Pine D</button>
 

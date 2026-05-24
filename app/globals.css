@@ -30,17 +30,21 @@
     --active-date-text: #ffffff;
 }
 
-/* ⚫ Theme: Black (เวอร์ชันแก้ไขปุ่มขาวจั๊วหายวับ มองเห็นตัวหนังสือชัดเจน) */
+/* ⚫ Theme: Black */
 [data-theme="black"] {
-    --bg: #000000;              /* ฉากหลังดำสนิท */
-    --card: #141414;            /* ตัวกล่อง/การ์ด สีดำเทาเข้ม แยกชั้นสวยงาม */
-    --text: #ffffff;            /* ตัวหนังสือปกติสีขาว */
-    --muted: #737373;           /* ตัวหนังสือจางสีเทา */
-    --border: #262626;          /* เส้นขอบสีเทาเข้ม */
+    --bg: #050505;
+    --card: #101010;
+    --text: #f5f5f5;
+    --muted: #a3a3a3;
+    --border: #2b2b2b;
     
-    --primary: #ffffff !important;     /* ⚪ สีหลักตอน Active จะแสดงผลเป็นสีขาว */
-    --primary-bg: #1f1f1f !important;  /* พื้นหลังแบนเนอร์สรุป */
-    --secondary: #a3a3a3;       /* สีรองสีเทาเงิน */
+    --primary: #f8fafc !important;
+    --primary-bg: #1a1a1a !important;
+    --secondary: #d4d4d4;
+    --pattern-color: rgba(255, 255, 255, 0.035);
+    --body-bg-image: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 32rem), repeating-linear-gradient(135deg, var(--pattern-color) 0, var(--pattern-color) 1px, transparent 1px, transparent 18px);
+    --body-bg-size: 100% 100%, 18px 18px;
+    --active-date-text: #050505;
 }
 
 [data-theme="black"] .tab.active,
@@ -51,15 +55,31 @@
 [data-theme="black"] .date-item.active,
 [data-theme="black"] .date-item.active span,
 [data-theme="black"] .main-save-btn:not(.success) {
-    color: #000000 !important; /* บังคับเปลี่ยนตัวหนังสือเป็นสีดำ */
+    color: #050505 !important;
 } 
 
 [data-theme="black"] .tab.active .i-icon,
 [data-theme="black"] .seg-btn.active .i-sm,
 [data-theme="black"] .main-save-btn .i-icon {
-    color: #000000 !important;
+    color: #050505 !important;
 }
 [data-theme="black"] .seg-btn.active { background-color: var(--primary) }
+
+[data-theme="black"] .card,
+[data-theme="black"] .auth-card,
+[data-theme="black"] .modal-content,
+[data-theme="black"] .tab,
+[data-theme="black"] .seg-btn,
+[data-theme="black"] .cal-cell,
+[data-theme="black"] .date-bar-item {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="black"] .driver-input,
+[data-theme="black"] .input-field {
+    background: #050505 !important;
+    border-color: #303030;
+}
 
 
 /* 🧸 Theme: Shin-chan (Cloudy Shape v.4.7.1) */
