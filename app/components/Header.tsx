@@ -1,0 +1,87 @@
+'use client';
+
+interface HeaderProps {
+  userEmail: string;
+  currentDate: Date;
+  onChangeMonth: (diff: number) => void;
+  activeView: string;
+  onSwitchView: (view: string) => void;
+  onOpenModal: (modalName: 'profile' | 'theme' | null) => void;
+  onLogout: () => void;
+  onOpenCalendar: () => void; 
+}
+
+export default function Header({
+  userEmail,
+  currentDate,
+  onChangeMonth,
+  activeView,
+  onSwitchView,
+  onOpenModal,
+  onLogout,
+  onOpenCalendar 
+}: HeaderProps) {
+  const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+  return (
+    <>
+      <div className="sticky-header">
+        <div className="user-bar">
+          <div style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }} onClick={() => onOpenModal('profile')}>
+            <i className="ph-duotone ph-user i-sm"></i> <span>{userEmail}</span>
+          </div>
+          <div onClick={() => onOpenModal('theme')} style={{ cursor: 'pointer', color: 'var(--primary)', fontWeight: 700, display: 'flex', alignItems: 'center' }}>
+            <i className="ph-duotone ph-palette i-sm"></i> ตั้งค่าธีม
+          </div>
+          <div style={{ cursor: 'pointer', opacity: 0.6, display: 'flex', alignItems: 'center' }} onClick={onLogout}>
+            <i className="ph-duotone ph-sign-out i-sm"></i> ออกจากระบบ
+          </div>
+        </div>
+        
+        <div className="header">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '600px', margin: '0 auto' }}>
+            <button className="del-btn-small" style={{ width: '35px', height: '35px' }} onClick={() => onChangeMonth(-1)}>
+              <i className="ph-duotone ph-caret-left"></i>
+            </button>
+            
+            {/* 🟢 ปรับสไตล์ตัวหนังสือชื่อเดือนให้หนาขึ้น และใส่ Transition เวลาเอานิ้วกดดูปฏิทิน */}
+            <h2 
+              onClick={onOpenCalendar}
+              style={{ 
+                fontSize: '22px', /* ปรับลงมานิดนึงเพื่อให้ไม่เบียดกับปุ่มลูกศรในมือถือจอแคบ */
+                fontWeight: 800,
+                cursor: 'pointer', 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: '6px',
+                userSelect: 'none',
+                transition: 'opacity 0.1s ease'
+              }}
+              onTouchStart={(e) => e.currentTarget.style.opacity = '0.5'}
+              onTouchEnd={(e) => e.currentTarget.style.opacity = '1'}
+            >
+              {`${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`} 
+              <i className="ph ph-calendar-blank" style={{ fontSize: '18px', color: 'var(--primary)' }}></i>
+            </h2>
+            
+            <button className="del-btn-small" style={{ width: '35px', height: '35px' }} onClick={() => onChangeMonth(1)}>
+              <i className="ph-duotone ph-caret-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div className="nav-tabs">
+        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => onSwitchView('daily')}>
+          <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
+        </div>
+        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => onSwitchView('monthly')}>
+          <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
+        </div>
+        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => onSwitchView('salary')}>
+          <i className="ph-duotone ph-wallet i-icon"></i> รายได้
+        </div>
+      </div>
+    </>
+  );
+}
