@@ -149,7 +149,7 @@ export default function Home() {
         onOpenCalendar={() => setIsCalendarOpen(true)} 
       />
 
-      <main className="content-area" style={{ paddingBottom: '150px' }}>
+      <main className="content-area">
         {activeView === 'daily' && (
           <DailyView 
             userId={session.user.id}
@@ -188,6 +188,15 @@ export default function Home() {
           />
         )}
       </main>
+
+      <button className="fab-btn" onClick={() => {
+          const today = new Date();
+          setCurrentDate(today);
+          setSelectedDay(today.getDate());
+          setActiveView('daily');
+        }}>
+        <i className="ph-duotone ph-calendar-dots"></i>
+      </button>
 
       <div className="nav-tabs">
         <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => setActiveView('daily')}>

@@ -298,11 +298,6 @@ export default function DailyView({
         </div>
       )}
 
-      {/* 🖍️ Doodle Divider */}
-      <div style={{ textAlign: 'center', margin: '20px 0', color: 'var(--primary)', opacity: 0.6 }}>
-        <i className="ph-bold ph-scribble-loop" style={{ fontSize: '24px' }}></i>
-      </div>
-
       {/* ปุ่มบันทึกใหญ่ */}
       <button className={`main-save-btn ${saveStatus === 'success' ? 'success' : ''}`} onClick={handleSave} disabled={saveStatus === 'saving'}>
         <i className={`ph-duotone ${saveStatus === 'success' ? 'ph-check-circle' : saveStatus === 'saving' ? 'ph-spinner-gap spin' : 'ph-floppy-disk'} i-icon`}></i>
