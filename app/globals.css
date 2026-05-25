@@ -1,86 +1,60 @@
 @import "tailwindcss";
 
 :root {
-    /* 🔴🔵 GO Wholesale Branding (Default) */
-    --primary: #e81e25;      /* แดง GO Wholesale */
-    --secondary: #0054a6;    /* น้ำเงิน GO Wholesale */
-    --primary-bg: #fff5f5;
-    --bg: #FAFAFA;
+    /* 🎨 Retro Pastel (Default) */
+    --bg: #F9F7F2;
     --card: #FFFFFF;
-    --text: #1a1a1a;
-    --muted: #576574;
-    --border: #e0e0e0;
-    --pattern-color: rgba(0, 84, 166, 0.03); /* แพทเทิร์นจางๆ เป็นสีน้ำเงิน */
-    --body-bg-image: repeating-linear-gradient(45deg, var(--pattern-color) 0, var(--pattern-color) 1px, transparent 0, transparent 50%);
+    --text: #2D2D2D;
+    --muted: #5D5D5D;
+    --border: #2D2D2D;
+    --primary: #FF6B6B;
+    --primary-bg: #FFE5E5;
+    --secondary: #06D6A0;
+    --pattern-color: rgba(255, 107, 107, 0.04);
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
     --body-bg-size: 24px 24px;
-    --active-date-text: #ffffff; /* สีตัวอักษรบนกล่องวันที่แอคทีฟ */
-}
-
-/* Standard Dark Mode */
-[data-theme="dark"] {
-    --bg: #121212; --card: #1e1e1e; --text: #ffffff; --muted: #999999; --border: #333333; 
-    --primary-bg: #2d2d2d; --secondary: #54a0ff;
     --active-date-text: #ffffff;
 }
 
-/* ⚪ Theme: White */
-[data-theme="white"] {
-    --bg: #ffffff; --card: #f5f5f5; --text: #000000; --muted: #666666; --border: #dddddd;
-    --primary: #000000 !important; --primary-bg: #eeeeee !important; --secondary: #3d3d3d;
-    --active-date-text: #ffffff;
+/* 🎨 Retro Pastel (explicit, same as root) */
+[data-theme="retro-pastel"] {
+    --bg: #F9F7F2;
+    --card: #FFFFFF;
+    --text: #2D2D2D;
+    --muted: #5D5D5D;
+    --border: #2D2D2D;
+    --primary: #FF6B6B !important;
+    --primary-bg: #FFE5E5 !important;
+    --secondary: #06D6A0 !important;
+    --active-date-text: #FFFFFF;
+}
+[data-theme="retro-pastel"] .card,
+[data-theme="retro-pastel"] .tab,
+[data-theme="retro-pastel"] .seg-btn,
+[data-theme="retro-pastel"] .main-save-btn,
+[data-theme="retro-pastel"] .cal-cell,
+[data-theme="retro-pastel"] .date-bar-item {
+    border-radius: 8px !important;
+    border: 4px solid var(--border) !important;
+    box-shadow: none !important;
 }
 
-/* ⚫ Theme: Black */
-[data-theme="black"] {
-    --bg: #050505;
-    --card: #101010;
-    --text: #f5f5f5;
-    --muted: #a3a3a3;
-    --border: #2b2b2b;
-    
-    --primary: #f8fafc !important;
-    --primary-bg: #1a1a1a !important;
-    --secondary: #d4d4d4;
-    --pattern-color: rgba(255, 255, 255, 0.035);
-    --body-bg-image: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 32rem), repeating-linear-gradient(135deg, var(--pattern-color) 0, var(--pattern-color) 1px, transparent 1px, transparent 18px);
-    --body-bg-size: 100% 100%, 18px 18px;
-    --active-date-text: #050505;
+/* 📟 Theme: Retro Dark */
+[data-theme="retro-dark"] {
+    --bg: #121212;
+    --card: #1F1F1F;
+    --text: #E0E0E0;
+    --muted: #888888;
+    --border: #333333;
+    --primary: #FF6B6B !important;
+    --primary-bg: #3D2E2E !important;
+    --secondary: #06D6A0 !important;
+    --active-date-text: #121212;
 }
-
-[data-theme="black"] .tab.active,
-[data-theme="black"] .seg-btn.active,
-[data-theme="black"] .date-bar-item.active,
-[data-theme="black"] .date-bar-item.active .day-name,
-[data-theme="black"] .date-bar-item.active .day-num,
-[data-theme="black"] .date-item.active,
-[data-theme="black"] .date-item.active span,
-[data-theme="black"] .main-save-btn:not(.success) {
-    color: #050505 !important;
-} 
-
-[data-theme="black"] .tab.active .i-icon,
-[data-theme="black"] .seg-btn.active .i-sm,
-[data-theme="black"] .main-save-btn .i-icon {
-    color: #050505 !important;
+[data-theme="retro-dark"] .card, [data-theme="retro-dark"] .tab, [data-theme="retro-dark"] .seg-btn, [data-theme="retro-dark"] .main-save-btn, [data-theme="retro-dark"] .cal-cell, [data-theme="retro-dark"] .date-bar-item {
+    border-radius: 8px !important; border: 4px solid var(--border) !important; box-shadow: none !important;
 }
-[data-theme="black"] .seg-btn.active { background-color: var(--primary) }
-
-[data-theme="black"] .card,
-[data-theme="black"] .auth-card,
-[data-theme="black"] .modal-content,
-[data-theme="black"] .tab,
-[data-theme="black"] .seg-btn,
-[data-theme="black"] .cal-cell,
-[data-theme="black"] .date-bar-item {
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-}
-
-[data-theme="black"] .driver-input,
-[data-theme="black"] .input-field {
-    background: #050505 !important;
-    border-color: #303030;
-}
-
 
 /* 🧸 Theme: Shin-chan (Cloudy Shape v.4.7.1) */
 [data-theme="shinchan"] {
@@ -111,10 +85,6 @@
     background: transparent !important;
     box-shadow: none !important; 
 }
-[data-theme="shinchan"] .seg-btn.active {
-    background: var(--primary) !important;
-    color: #FFFFFF !important;
-}
 
 [data-theme="shinchan"] .input-field {
     background-color: #FFF9E6 !important;
@@ -123,7 +93,8 @@
 
 [data-theme="shinchan"] .tab.active, 
 [data-theme="shinchan"] .main-save-btn, 
-[data-theme="shinchan"] .auth-btn {
+[data-theme="shinchan"] .auth-btn,
+[data-theme="shinchan"] .seg-btn.active {
     background: var(--primary) !important;
     color: #FFFFFF !important;
     font-weight: 800;
@@ -147,15 +118,25 @@
 }
 
 
-/* 🌿 Theme: Solar Mint */
-[data-theme="solar-mint"] {
-    --bg: #F9FAFB; --card: #FFFFFF; --text: #1F2937; --muted: #6B7280; --border: #E5E7EB;        
-    --primary: #2DD4BF !important; --primary-bg: #E0F2F1 !important; --secondary: #0D9488 !important; 
-    --body-bg-image: none;
+/* ☀️ Theme: Summer Morning */
+[data-theme="summer-morning"] {
+    --bg: #fff6de;
+    --card: #ffffff;
+    --text: #5D4037;
+    --muted: #8c7e7a;
+    --border: #8bdfdd;
+    --primary: #f48f68 !important;
+    --primary-bg: #ffe394 !important;
+    --secondary: #8bdfdd !important;
     --active-date-text: #ffffff;
 }
-[data-theme="solar-mint"] .card, [data-theme="solar-mint"] .tab, [data-theme="solar-mint"] .seg-btn, [data-theme="solar-mint"] .main-save-btn, [data-theme="solar-mint"] .cal-cell, [data-theme="solar-mint"] .date-bar-item {
-    border-radius: 28px !important; border: none !important; box-shadow: none !important;
+
+[data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
+    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: none !important;
+}
+
+[data-theme="summer-morning"] .seg-btn {
+    color: #5D4037 !important;
 }
 
 /* ===================================================
@@ -357,22 +338,6 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
 .slider-day-name { font-size: 11px; opacity: 0.6; font-weight: 500; margin-bottom: 2px; }
 .slider-day-num { font-size: 18px; font-weight: 800; line-height: 1.1; }
 
-/* 👾 Theme: Project EVA-01 */
-[data-theme="eva01"] {
-    --bg: #0e0c15; 
-    --card: #1a162a; 
-    --text: #eeeeff; 
-    --muted: #a0de59; 
-    --border: #4a3e63;        
-    --primary: #84cc16 !important; 
-    --primary-bg: #222d0b !important; 
-    --secondary: #cc00ff !important;     
-    --pattern-color: #2b1f45;
-    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px), linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
-    --body-bg-size: 40px 40px;
-    --active-date-text: #ffffff;
-}
-
 /* 🌆 Theme: Neon Sunset */
 [data-theme="sunset"] {
     --bg: #1a0b2e; 
@@ -385,4 +350,251 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
     --secondary: #00f5d4;     
     --body-bg-image: none;
     --active-date-text: #ffffff;
+}
+
+/* Evangelion Genesis */
+
+/* 🔵 Theme: Project EVA-00 */
+[data-theme="eva00"] {
+    --bg: #010810;
+    --card: #041220;
+    --text: #e0f4ff;
+    --muted: #5599bb;
+    --border: #0d3050;
+    --primary: #00ccff !important;
+    --primary-bg: #021828 !important;
+    --secondary: #aaddff !important;
+    --pattern-color: rgba(0, 204, 255, 0.06);
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #010810;
+}
+[data-theme="eva00"] .card,
+[data-theme="eva00"] .tab,
+[data-theme="eva00"] .seg-btn,
+[data-theme="eva00"] .date-bar-item {
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.12);
+}
+
+
+/* 👾 Theme: Project EVA-01 */
+[data-theme="eva01"] {
+    --bg: #06030f;
+    --card: #110d20;
+    --text: #f0eeff;
+    --muted: #b0de60;
+    --border: #3a2a5a;
+    --primary: #99ee00 !important;
+    --primary-bg: #1a2800 !important;
+    --secondary: #dd00ff !important;
+    --pattern-color: #1e1030;
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #06030f;
+}
+[data-theme="eva01"] .card,
+[data-theme="eva01"] .tab,
+[data-theme="eva01"] .seg-btn,
+[data-theme="eva01"] .date-bar-item {
+    box-shadow: 0 0 20px rgba(153, 238, 0, 0.1);
+}
+
+
+/* 🔴 Theme: Project EVA-02 */
+[data-theme="eva02"] {
+    --bg: #0c0100;
+    --card: #1e0500;
+    --text: #ffe8d0;
+    --muted: #dd5500;
+    --border: #7a1a00;
+    --primary: #ff1100 !important;
+    --primary-bg: #2e0800 !important;
+    --secondary: #ffaa00 !important;
+    --pattern-color: rgba(255, 17, 0, 0.06);
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #ffffff;
+}
+[data-theme="eva02"] .card,
+[data-theme="eva02"] .tab,
+[data-theme="eva02"] .seg-btn,
+[data-theme="eva02"] .date-bar-item {
+    box-shadow: 0 0 20px rgba(255, 17, 0, 0.15);
+}
+
+
+/* ⚫ Theme: Project EVA-03 */
+[data-theme="eva03"] {
+    --bg: #050505;
+    --card: #0e0e0e;
+    --text: #dddddd;
+    --muted: #777777;
+    --border: #2e2e2e;
+    --primary: #555555 !important;
+    --primary-bg: #161616 !important;
+    --secondary: #cc0000 !important;
+    --pattern-color: rgba(170, 0, 0, 0.07);
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #ffffff;
+}
+[data-theme="eva03"] .card,
+[data-theme="eva03"] .tab,
+[data-theme="eva03"] .seg-btn,
+[data-theme="eva03"] .date-bar-item {
+    box-shadow: 0 0 18px rgba(170, 0, 0, 0.12);
+}
+
+
+/* 🩶 Theme: Project EVA-04 */
+[data-theme="eva04"] {
+    --bg: #04060e;
+    --card: #090e1e;
+    --text: #d8eaff;
+    --muted: #6688aa;
+    --border: #162240;
+    --primary: #c0d8f8 !important;
+    --primary-bg: #080e20 !important;
+    --secondary: #5599ee !important;
+    --pattern-color: rgba(192, 216, 248, 0.05);
+    --body-bg-image: radial-gradient(ellipse at center, rgba(85, 153, 238, 0.07) 0%, transparent 70%),
+                     linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: cover, 40px 40px, 40px 40px;
+    --active-date-text: #04060e;
+}
+[data-theme="eva04"] .card,
+[data-theme="eva04"] .tab,
+[data-theme="eva04"] .seg-btn,
+[data-theme="eva04"] .date-bar-item {
+    box-shadow: 0 0 22px rgba(192, 216, 248, 0.08);
+}
+
+
+/* 🟡 Theme: Project EVA-05 */
+[data-theme="eva05"] {
+    --bg: #080600;
+    --card: #120e00;
+    --text: #fff0cc;
+    --muted: #997700;
+    --border: #302000;
+    --primary: #ffcc00 !important;
+    --primary-bg: #1e1600 !important;
+    --secondary: #ffee66 !important;
+    --pattern-color: rgba(255, 204, 0, 0.06);
+    --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #080600;
+}
+[data-theme="eva05"] .card,
+[data-theme="eva05"] .tab,
+[data-theme="eva05"] .seg-btn,
+[data-theme="eva05"] .date-bar-item {
+    box-shadow: 0 0 18px rgba(255, 204, 0, 0.1);
+}
+
+
+/* 🤍 Theme: Project EVA-06 */
+[data-theme="eva06"] {
+    --bg: #faf8f0;
+    --card: #ffffff;
+    --text: #1a1410;
+    --muted: #7a6a50;
+    --border: #c8b880;
+    --primary: #b8900a !important;
+    --primary-bg: #fdf0c0 !important;
+    --secondary: #c8880a !important;
+    --pattern-color: rgba(184, 144, 10, 0.07);
+    --body-bg-image: radial-gradient(ellipse at top, rgba(184, 144, 10, 0.1) 0%, transparent 55%),
+                     linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: cover, 40px 40px, 40px 40px;
+    --active-date-text: #ffffff;
+}
+[data-theme="eva06"] .card,
+[data-theme="eva06"] .tab,
+[data-theme="eva06"] .seg-btn,
+[data-theme="eva06"] .date-bar-item {
+    box-shadow: 0 0 24px rgba(184, 144, 10, 0.15);
+}
+
+
+/* 🩷 Theme: Project EVA-08 */
+[data-theme="eva08"] {
+    --bg: #0e0008;
+    --card: #1c0014;
+    --text: #ffe8ff;
+    --muted: #cc44aa;
+    --border: #520030;
+    --primary: #ff0099 !important;
+    --primary-bg: #280010 !important;
+    --secondary: #ff88dd !important;
+    --pattern-color: rgba(255, 0, 153, 0.06);
+    --body-bg-image: linear-gradient(135deg, var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(225deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: 40px 40px;
+    --active-date-text: #ffffff;
+}
+[data-theme="eva08"] .card,
+[data-theme="eva08"] .tab,
+[data-theme="eva08"] .seg-btn,
+[data-theme="eva08"] .date-bar-item {
+    box-shadow: 0 0 20px rgba(255, 0, 153, 0.15);
+}
+
+
+/* ☯️ Theme: Project EVA-13 */
+[data-theme="eva13"] {
+    --bg: #040404;
+    --card: #0c0c0c;
+    --text: #f8f8f8;
+    --muted: #999999;
+    --border: #1e1e1e;
+    --primary: #ffffff !important;
+    --primary-bg: #181818 !important;
+    --secondary: #444444 !important;
+    --pattern-color: rgba(255, 255, 255, 0.04);
+    --body-bg-image: radial-gradient(ellipse at top left, rgba(255,255,255,0.06) 0%, transparent 45%),
+                     radial-gradient(ellipse at bottom right, rgba(255,255,255,0.03) 0%, transparent 45%),
+                     linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: cover, cover, 40px 40px, 40px 40px;
+    --active-date-text: #040404;
+}
+[data-theme="eva13"] .card,
+[data-theme="eva13"] .tab,
+[data-theme="eva13"] .seg-btn,
+[data-theme="eva13"] .date-bar-item {
+    box-shadow: 0 0 28px rgba(255, 255, 255, 0.06),
+                inset 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+
+/* 👻 Theme: Project EVA-Mark.09 */
+[data-theme="eva-mark09"] {
+    --bg: #020802;
+    --card: #081008;
+    --text: #ccffcc;
+    --muted: #44aa44;
+    --border: #0e2a0e;
+    --primary: #00ff66 !important;
+    --primary-bg: #041a08 !important;
+    --secondary: #55dd55 !important;
+    --pattern-color: rgba(0, 255, 102, 0.05);
+    --body-bg-image: radial-gradient(ellipse at center, rgba(0, 255, 102, 0.06) 0%, transparent 60%),
+                     linear-gradient(var(--pattern-color) 1px, transparent 1px),
+                     linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
+    --body-bg-size: cover, 40px 40px, 40px 40px;
+    --active-date-text: #020802;
+}
+[data-theme="eva-mark09"] .card,
+[data-theme="eva-mark09"] .tab,
+[data-theme="eva-mark09"] .seg-btn,
+[data-theme="eva-mark09"] .date-bar-item {
+    box-shadow: 0 0 22px rgba(0, 255, 102, 0.08);
 }

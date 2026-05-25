@@ -84,20 +84,26 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             {/* Light Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>Light Styles</p>
-              <button className="theme-btn" onClick={() => onSelectTheme('light')} style={{ background: '#ffffff', color: '#e81e25', borderColor: '#0054a6' }}>Light</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('white')} style={{ background: '#ffffff', color: '#000000', borderColor: '#cccccc' }}>WHITE</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('solar-mint')} style={{ background: '#FFFFFF', color: '#2DD4BF', borderColor: '#E5E7EB' }}>Solar Mint</button>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>&nbsp;</p>
+              <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
               <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
-            </div>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva00')} style={{ background: '#071828', color: '#00aacc', borderColor: '#0e2a40' }}>🔵 EVA-00</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva02')} style={{ background: '#1c0a00', color: '#ff8c00', borderColor: '#cc1100' }}>EVA-02</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva04')} style={{ background: '#0d1120', color: '#4a90d9', borderColor: '#1e2d45' }}>EVA-04</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva06')} style={{ background: '#ffffff', color: '#c8a840', borderColor: '#e0d4b8' }}>🤍 EVA-06</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva-mark09')} style={{ background: '#111811', color: '#88cc88', borderColor: '#1a2e1a' }}>👻 Mark.09</button>
+              </div>
 
             {/* Dark Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>Dark Styles</p>
-              <button className="theme-btn" onClick={() => onSelectTheme('dark')} style={{ background: '#1e1e1e', color: '#ffffff', borderColor: '#e81e25' }}>Dark</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('black')} style={{ background: '#050505', color: '#f5f5f5', borderColor: '#2b2b2b' }}>BLACK</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva01')} style={{ background: '#0e0c15', color: '#7cff00', borderColor: '#cc00ff' }}>EVA-01</button>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>&nbsp;</p>
+              <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: '#2D2D2D', color: '#FDF6E3', borderColor: '#FDF6E3' }}>Retro Dark</button>
               <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva01')} style={{ background: '#0e0c15', color: '#7cff00', borderColor: '#cc00ff' }}>EVA-01</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva03')} style={{ background: '#111111', color: '#8b0000', borderColor: '#3a3a3a' }}>EVA-03</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva05')} style={{ background: '#141414', color: '#c8a000', borderColor: '#2a2416' }}>🟡 EVA-05</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva08')} style={{ background: '#1e0418', color: '#ff66cc', borderColor: '#4a1040' }}>🩷 EVA-08</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva13')} style={{ background: '#111111', color: '#f0f0f0', borderColor: '#222222' }}>☯️ EVA-13</button>
             </div>
           </div>
         )}
