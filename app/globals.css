@@ -171,7 +171,7 @@ body {
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .nav-tabs {
-    background: rgba(128, 128, 128, 0.15);
+    background: rgba(128, 128, 128, 0.3);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     will-change: transform;
@@ -326,7 +326,7 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .shift-sheet {
-    background: rgba(128, 128, 128, 0.15);
+    background: rgba(128, 128, 128, 0.3);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     will-change: transform;
@@ -734,7 +734,7 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   #install-banner {
-    background: rgba(128, 128, 128, 0.15);
+    background: rgba(128, 128, 128, 0.3);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     will-change: transform;
