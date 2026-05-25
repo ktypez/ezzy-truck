@@ -189,17 +189,13 @@ export default function Home() {
         )}
       </main>
 
-      <button className="fab-btn" onClick={() => {
-          const today = new Date();
-          setCurrentDate(today);
-          setSelectedDay(today.getDate());
-          setActiveView('daily');
-        }}>
-        <i className="ph-duotone ph-calendar-dots"></i>
-      </button>
-
       <div className="nav-tabs">
-        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => setActiveView('daily')}>
+        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => {
+            const today = new Date();
+            setCurrentDate(today);
+            setSelectedDay(today.getDate());
+            setActiveView('daily');
+          }}>
           <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
         </div>
         <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => setActiveView('monthly')}>

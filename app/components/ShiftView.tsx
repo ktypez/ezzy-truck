@@ -129,11 +129,16 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
           {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
             const shiftData = shiftDataMap[day]; 
             const isHoliday = shiftData === "หยุด";
+            const dayOfWeek = new Date(currentYear, currentMonth - 1, day).getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            const isToday = new Date().getFullYear() === currentYear && new Date().getMonth() + 1 === currentMonth && new Date().getDate() === day;
+            const isSelected = selectedDay === day;
+            const shiftClass = shiftData === '07:00' ? 'has-shift-07' : shiftData === '08:00' ? 'has-shift-08' : shiftData === '09:00' ? 'has-shift-09' : shiftData === 'หยุด' ? 'has-shift-off' : '';
             
             return (
               <div 
                 key={day} 
-                className={`cal-cell ${isHoliday ? 'holiday' : ''}`}
+                className={`cal-cell ${shiftClass} ${isHoliday ? 'holiday' : ''} ${isWeekend ? 'weekend' : ''} ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}`}
                 onClick={() => handleCellClick(day)}
                 style={{ cursor: 'pointer' }}
               >
@@ -150,90 +155,37 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
       </div>
 
       {/* ===================================================
-         💎 SUB-MODAL เลือกกะงาน (เปลี่ยนพฤติกรรมเป็นจิ้มแล้วเซฟทันที)
+         💎 BOTTOM SHEET เลือกกะงาน (แตะวันอื่นอัปเดตทันที)
          =================================================== */}
-      {selectedDay !== null && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-          backgroundColor: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-          display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10000, padding: '20px'
-        }}>
-          <div className="card" style={{ width: '100%', maxWidth: '340px', textAlign: 'center', padding: '25px 20px', margin: 0, boxShadow: '0 8px 25px rgba(0,0,0,0.3)' }}>
-            
-            <h4 style={{ fontSize: '16px', fontWeight: 700, marginBottom: '20px', color: 'var(--text)' }}>
-              วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}
-            </h4>
-            
-            <div style={{ marginBottom: '25px' }}>
-              <label className="mid-label" style={{ display: 'block', textAlign: 'left', marginBottom: '10px', fontWeight: 600, fontSize: '13px', color: 'var(--muted)' }}>
-                จิ้มเลือกเวลากะทำงาน หรือ วันหยุด (เซฟทันที)
-              </label>
-              
-              {/* แถวบน: 3 ปุ่มเวลางานเรียงข้างกัน จิ้มแล้วยิงเซฟผ่านฟังก์ชันด่วน */}
-              <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderCollapse: 'separate', borderSpacing: '6px 0', margin: '0 -6px 10px -6px' }}>
-                {['07:00', '08:00', '09:00'].map(time => {
-                  const isSelected = chosenShift === time;
-                  return (
-                    <div 
-                      key={time}
-                      onClick={() => !isSaving && handleQuickSaveActual(time)} // 🟢 สั่งเซฟทันที
-                      style={{
-                        display: 'table-cell',
-                        padding: '12px 0',
-                        textAlign: 'center',
-                        borderRadius: '12px',
-                        cursor: isSaving ? 'default' : 'pointer',
-                        fontWeight: 700,
-                        fontSize: '15px',
-                        border: isSelected ? '2px solid transparent' : '2px solid var(--border)',
-                        background: isSelected ? (time === '07:00' ? '#2ecc71' : time === '08:00' ? '#3498db' : '#9b59b6') : 'transparent',
-                        color: isSelected ? 'white' : 'var(--text)',
-                        opacity: isSaving ? 0.6 : 1,
-                        transition: 'all 0.2s'
-                      }}
-                    >
-                      {time}
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* แถวล่าง: ปุ่มวันหยุดกว้างเต็มพื้นที่ จิ้มแล้วยิงเซฟทันที */}
-              <div 
-                onClick={() => !isSaving && handleQuickSaveActual('หยุด')} // 🟢 สั่งเซฟทันที
-                style={{
-                  width: '100%',
-                  padding: '12px 0',
-                  textAlign: 'center',
-                  borderRadius: '12px',
-                  cursor: isSaving ? 'default' : 'pointer',
-                  fontWeight: 700,
-                  fontSize: '15px',
-                  border: chosenShift === 'หยุด' ? '2px solid transparent' : '2px solid var(--border)',
-                  background: chosenShift === 'หยุด' ? '#e74c3c' : 'transparent',
-                  color: chosenShift === 'หยุด' ? 'white' : 'var(--text)',
-                  opacity: isSaving ? 0.6 : 1,
-                  transition: 'all 0.2s'
-                }}
-              >
-                🛑 วันหยุด
-              </div>
-            </div>
-            
-            {/* ปุ่มยกเลิก/ปิดหน้าต่างตัวเลือกย่อย */}
-            <button 
-              type="button"
-              onClick={() => setSelectedDay(null)}
-              disabled={isSaving}
-              style={{ width: '100%', padding: '12px', borderRadius: '15px', border: '2px solid var(--border)', background: 'transparent', color: 'var(--muted)', fontWeight: 600, cursor: 'pointer', fontSize: '15px' }}
-            >
-              {isSaving ? 'กำลังบันทึกข้อมูล...' : 'ปิดหน้าต่าง'}
-            </button>
-
+      {/* Backdrop */}
+      <div onClick={() => setSelectedDay(null)} style={{ position: 'fixed', inset: 0, zIndex: 250, display: selectedDay !== null ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
+      
+      <div className={`shift-sheet ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
+        <div className="shift-sheet-handle" />
+        <div className="shift-sheet-header">
+          <h4>วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}</h4>
+          <button className="shift-sheet-close" onClick={() => setSelectedDay(null)}><i className="ph-bold ph-x"></i></button>
+        </div>
+        <div className="shift-sheet-body">
+          <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0' }}>
+            {['07:00', '08:00', '09:00'].map(time => {
+              const sel = chosenShift === time;
+              return (
+                <div key={time} onClick={() => !isSaving && handleQuickSaveActual(time)}
+                  style={{ display: 'table-cell', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSaving ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px',
+                    border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? 'var(--primary)' : 'transparent', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSaving ? 0.6 : 1 }}>
+                  {time}
+                </div>
+              );
+            })}
+          </div>
+          <div onClick={() => !isSaving && handleQuickSaveActual('หยุด')}
+            style={{ width: '100%', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSaving ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px', marginTop: '10px',
+              border: chosenShift === 'หยุด' ? '2px solid transparent' : '2px solid var(--border)', background: chosenShift === 'หยุด' ? '#e74c3c' : 'transparent', color: chosenShift === 'หยุด' ? 'white' : 'var(--text)', opacity: isSaving ? 0.6 : 1 }}>
+            🛑 วันหยุด
           </div>
         </div>
-      )}
-
+      </div>
     </div>
   );
 }
