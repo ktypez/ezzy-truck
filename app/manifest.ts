@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'บันทึกข้อมูลประจำวัน',
     start_url: '/',
     display: 'standalone',
-    background_color: '#e81e25',
-    theme_color: '#e81e25',
+    background_color: '#FF6B6B',
+    theme_color: '#FF6B6B',
     icons: [
       {
         src: '/icons/icon-152x152.png',
@@ -21,7 +21,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
       {
-        src: '/icons/icon-512x512.png', // ถ้ามีไฟล์ขนาด 512 ในโฟลเดอร์ให้ใส่บรรทัดนี้ไว้ด้วยครับ
+        src: '/icons/icon-512x512.png',
         sizes: '512x512',
         type: 'image/png',
       },
