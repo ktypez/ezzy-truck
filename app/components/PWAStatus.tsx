@@ -16,14 +16,21 @@ export default function PWAStatus() {
     // 1. Initialize state safely
     setIsOffline(!navigator.onLine);
 
-    // 1. ระบบตรวจจับ Offline / Online
+    // 2. Register service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(() => {
+        // SW registration failed — non-critical
+      });
+    }
+
+    // 3. ระบบตรวจจับ Offline / Online
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // 2. ระบบตรวจจับ PWA Install Prompt
+    // 4. ระบบตรวจจับ PWA Install Prompt
     const handleBeforeInstallPrompt = (e: Event) => {
       // ป้องกันไม่ให้เบราว์เซอร์โชว์แถบติดตั้งเอง
       e.preventDefault();
