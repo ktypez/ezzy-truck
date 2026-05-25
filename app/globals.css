@@ -300,15 +300,15 @@ body {
     top: 0; 
     z-index: 100; 
     background: rgba(var(--card-rgb), 0.7); 
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
 }
-.user-bar { background: var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 500; background: rgba(var(--card-rgb), 0.95); }
+.user-bar { background: var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 500; background: rgba(var(--card-rgb), 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .user-bar .i-sm { color: var(--secondary); } 
 
-.header { background: var(--card); padding: 15px 20px; border-bottom: 1px solid var(--border); text-align: center; background: rgba(var(--card-rgb), 0.95); }
+.header { background: rgba(var(--card-rgb), 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 20px; border-bottom: 1px solid var(--border); text-align: center; }
 
 .nav-tabs { 
     position: fixed; 
@@ -321,8 +321,8 @@ body {
     max-width: 600px; 
     margin: 0 auto; 
     background: rgba(var(--card-rgb), 0.7); 
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 24px; 
     border: 1px solid rgba(255, 255, 255, 0.2); 
     box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.1); 
@@ -336,7 +336,16 @@ body {
 .view { display: none; }
 .view.active { display: block; }
 
-.card { background: var(--card); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); background: rgba(var(--card-rgb), 0.95); }
+.card { 
+    background: rgba(var(--card-rgb), 0.7); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border-radius: 20px; 
+    padding: 15px; 
+    margin-bottom: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+}
 
 .controls-row { display: flex; gap: 8px; margin-bottom: 15px; }
 .segmented-control { flex: 1; display: flex; background: var(--border); padding: 4px; border-radius: 15px; transition: 0.3s ease; }
@@ -396,9 +405,32 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
 .auth-btn { padding: 18px !important; font-size: 18px !important; }
 
 /* MODALS OVERLAY */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; background: rgba(0,0,0,0.9); }
+.modal { 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.2); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); 
+    display: none; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 9999; 
+    padding: 20px; 
+}
 .modal.active { display: flex; }
-.modal-content { background: var(--card); padding: 25px; border-radius: 25px; width: 100%; max-width: 440px; border: 1px solid var(--border); text-align: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+.modal-content { 
+    background: rgba(var(--card-rgb), 0.8); 
+    backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px); 
+    padding: 25px; 
+    border-radius: 25px; 
+    width: 100%; 
+    max-width: 440px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    text-align: center; 
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+}
 .theme-btn { font-size: 13px; padding: 10px 8px; border-radius: 12px; border: 2px solid var(--border); cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
 /* CALENDAR BADGE SYSTEM */
