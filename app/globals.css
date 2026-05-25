@@ -127,7 +127,7 @@
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
     
-    --card: rgba(255, 255, 255, 0.85) !important; 
+    --card: rgba(255, 255, 255, 0.60) !important; 
     --text: #4a3f3b; 
     --muted: #8c7e7a; 
     --border: #feca57; 
@@ -177,7 +177,9 @@
 
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
-    background: rgba(255, 255, 255, 0.85) !important; 
+    background: rgba(255, 255, 255, 0.60) !important; 
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
     border: 3px solid var(--border) !important; 
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important; 
 }
