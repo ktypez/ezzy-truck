@@ -158,7 +158,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
          💎 BOTTOM SHEET เลือกกะงาน (แตะวันอื่นอัปเดตทันที)
          =================================================== */}
       {/* Backdrop */}
-      <div onClick={() => setSelectedDay(null)} style={{ position: 'fixed', inset: 0, zIndex: 250, display: selectedDay !== null ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
+      <div onClick={() => setSelectedDay(null)} style={{ position: 'fixed', inset: 0, zIndex: 199, display: selectedDay !== null ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
       
       <div className={`shift-sheet ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
         <div className="shift-sheet-handle" />
