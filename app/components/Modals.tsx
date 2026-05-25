@@ -81,26 +81,26 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
         )}
 
         {activeModal === 'theme' && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', textAlign: 'left' }}>
-            <p style={{ gridColumn: 'span 2', fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-2px', letterSpacing: '0.5px' }}>โหมดมาตรฐาน</p>
-            <button className="theme-btn" onClick={() => onSelectTheme('light')} style={{ background: '#ffffff', color: '#e81e25', borderColor: '#0054a6' }}><i className="ph-duotone ph-sun"></i> Light</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('dark')} style={{ background: '#1e1e1e', color: '#ffffff', borderColor: '#e81e25' }}><i className="ph-duotone ph-moon"></i> Dark</button>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+            {/* Light Column */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>Light Styles</p>
+              <button className="theme-btn" onClick={() => onSelectTheme('light')} style={{ background: '#ffffff', color: '#e81e25', borderColor: '#0054a6' }}>Light</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('white')} style={{ background: '#ffffff', color: '#000000', borderColor: '#cccccc' }}>WHITE</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('rosepine-light')} style={{ background: '#faf4ed', color: '#d7827e', borderColor: '#d7827e' }}>Pine L</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('solar-mint')} style={{ background: '#FFFFFF', color: '#2DD4BF', borderColor: '#E5E7EB' }}>Solar Mint</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
+            </div>
 
-            <p style={{ gridColumn: 'span 2', fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginTop: '10px', marginBottom: '-2px', letterSpacing: '0.5px' }}>ธีม (Light / Dark)</p>
-            <button className="theme-btn" onClick={() => onSelectTheme('white')} style={{ background: '#ffffff', color: '#000000' }}>WHITE</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('black')} style={{ background: '#050505', color: '#f5f5f5', borderColor: '#2b2b2b' }}>BLACK</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('rosepine-light')} style={{ background: '#faf4ed', color: '#d7827e' }}><i className="ph-duotone ph-flower-lotus"></i> Pine L</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('rosepine')} style={{ background: '#191724', color: '#eb6f92' }}><i className="ph-duotone ph-flower"></i> Pine D</button>
-
-            <p style={{ gridColumn: 'span 2', fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginTop: '10px', marginBottom: '-2px', letterSpacing: '0.5px' }}>ธีมแนะนำใหม่ ✨</p>
-            <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: 'rgba(217, 199, 182, 0.6)' }}><i className="ph-duotone ph-sparkle"></i> Shin-Chan</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('eva01')} style={{ background: '#0e0c15', color: '#7cff00', border: '2px solid #cc00ff' }}>👾 Project EVA</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('matcha')} style={{ background: '#f4f6f0', color: '#7d9d79', borderColor: '#d3dbd4' }}>🍵 Matcha</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('cyber')} style={{ background: '#0b0f19', color: '#fce21b', borderColor: '#1e293b' }}>🚧 Cyber</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('sakura')} style={{ background: '#fff5f7', color: '#ff9aa2', borderColor: '#ffd1dc' }}>🌸 Sakura Petal</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>🌆 Neon Sunset</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('solar-mint')} style={{ background: '#FFFFFF', color: '#2DD4BF', borderColor: '#E5E7EB' }}>🌿 Solar Mint</button>
-            <button className="theme-btn" onClick={() => onSelectTheme('siblò')} style={{ background: '#0d0d0d', color: '#ff007f', borderColor: '#333333' }}>🚛 สิบล้อซิ่ง</button>
+            {/* Dark Column */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>Dark Styles</p>
+              <button className="theme-btn" onClick={() => onSelectTheme('dark')} style={{ background: '#1e1e1e', color: '#ffffff', borderColor: '#e81e25' }}>Dark</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('black')} style={{ background: '#050505', color: '#f5f5f5', borderColor: '#2b2b2b' }}>BLACK</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('rosepine')} style={{ background: '#191724', color: '#eb6f92', borderColor: '#eb6f92' }}>Pine D</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('eva01')} style={{ background: '#0e0c15', color: '#7cff00', borderColor: '#cc00ff' }}>EVA-01</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
+            </div>
           </div>
         )}
       </div>

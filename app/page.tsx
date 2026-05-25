@@ -149,7 +149,7 @@ export default function Home() {
         onOpenCalendar={() => setIsCalendarOpen(true)} 
       />
 
-      <main className="content-area">
+      <main className="content-area" style={{ paddingBottom: '150px' }}>
         {activeView === 'daily' && (
           <DailyView 
             userId={session.user.id}
@@ -178,38 +178,36 @@ export default function Home() {
             refreshTrigger={refreshTrigger}
           />
         )}
+        {activeView === 'calendar' && (
+          <ShiftView 
+            userId={session.user.id} 
+            currentDate={currentDate} 
+            isOpen={true} 
+            onClose={() => setActiveView('daily')}
+            onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
+          />
+        )}
       </main>
 
-      <footer style={{
-          marginTop: '40px',
-          padding: '20px',
-          textAlign: 'center',
-          borderTop: '1px solid var(--border)',
-          color: 'var(--muted)',
-          fontSize: '12px'
-      }}>
-          <div style={{ marginBottom: '8px' }}>
-              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                      <path d="M8 0L16 14H0L8 0z" />
-                  </svg>
-                  Made with Next.js
-              </span>
-          </div>
-          <div>{APP_CONFIG.APP_NAME} v.{APP_CONFIG.VERSION}</div>
-      </footer>
+      <div className="nav-tabs">
+        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => setActiveView('daily')}>
+          <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
+        </div>
+        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => setActiveView('monthly')}>
+          <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
+        </div>
+        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => setActiveView('salary')}>
+          <i className="ph-duotone ph-wallet i-icon"></i> รายได้
+        </div>
+        <div className={`tab ${activeView === 'calendar' ? 'active' : ''}`} onClick={() => setActiveView('calendar')}>
+          <i className="ph-duotone ph-calendar-blank i-icon"></i> ปฏิทิน
+        </div>
+      </div>
 
       <Modals 
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
         onSelectTheme={setTheme}
-      />
-
-      <ShiftView 
-        userId={session.user.id} 
-        currentDate={currentDate} 
-        isOpen={isCalendarOpen} 
-        onClose={() => setIsCalendarOpen(false)} 
       />
     </div>
   );

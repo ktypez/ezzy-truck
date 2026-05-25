@@ -1,28 +1,34 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+// Define explicit types
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
+
 export default function PWAStatus() {
   const [isOffline, setIsOffline] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallBanner, setShowInstallBanner] = useState(false);
 
   useEffect(() => {
+    // 1. Initialize state safely
+    setIsOffline(!navigator.onLine);
+
     // 1. ระบบตรวจจับ Offline / Online
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => setIsOffline(true);
-
-    if (typeof window !== 'undefined') {
-      setIsOffline(!navigator.onLine);
-    }
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
     // 2. ระบบตรวจจับ PWA Install Prompt
-    const handleBeforeInstallPrompt = (e: any) => {
-      // ป้องกันไม่ให้เบราว์เซอร์โชว์แถบติดตั้งเอง (เราจะใช้ Banner ของเราเอง)
+    const handleBeforeInstallPrompt = (e: Event) => {
+      // ป้องกันไม่ให้เบราว์เซอร์โชว์แถบติดตั้งเอง
       e.preventDefault();
-      setDeferredPrompt(e);
+      const promptEvent = e as BeforeInstallPromptEvent;
+      setDeferredPrompt(promptEvent);
       
       // เช็คว่าผู้ใช้เคยกดปิด Banner นี้ไปหรือยัง
       const isDismissed = localStorage.getItem('pwa-dismissed');
@@ -31,12 +37,12 @@ export default function PWAStatus() {
       }
     };
 
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
 
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as EventListener);
     };
   }, []);
 

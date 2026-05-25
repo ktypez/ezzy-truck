@@ -115,52 +115,40 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
   };
 
   return (
-    <div style={{
-      position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
-      backgroundColor: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
-      display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '15px'
-    }}>
-      
-      <div className="card" style={{ width: '100%', maxWidth: '440px', padding: '20px', margin: 0, position: 'relative', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
+    <div className="view active" style={{ paddingBottom: '80px' }}>
+      <h3 style={{ fontSize: '18px', fontWeight: 800, textAlign: 'center', marginBottom: '15px', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <i className="ph-duotone ph-calendar-blank"></i> จัดกะงานเดือน {months[currentMonth - 1]} {currentYear}
+      </h3>
+
+      <div className="calendar-grid">
+        {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map(d => (
+          <div key={d} className="cal-header">{d}</div>
+        ))}
         
-        <button className="modal-close-red" onClick={onClose} style={{ top: '15px', right: '15px' }}>
-          <i className="ph-bold ph-x"></i>
-        </button>
+        {Array.from({ length: firstDay }).map((_, i) => (
+          <div key={`empty-${i}`} className="cal-cell empty" />
+        ))}
 
-        <h3 style={{ fontSize: '18px', fontWeight: 800, textAlign: 'center', marginBottom: '15px', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-          <i className="ph-duotone ph-calendar-blank"></i> จัดกะงานเดือน {months[currentMonth - 1]} {currentYear}
-        </h3>
-
-        <div className="calendar-grid">
-          {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map(d => (
-            <div key={d} className="cal-header">{d}</div>
-          ))}
+        {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
+          const shiftData = shiftDataMap[day]; 
+          const isHoliday = shiftData === "หยุด";
           
-          {Array.from({ length: firstDay }).map((_, i) => (
-            <div key={`empty-${i}`} className="cal-cell empty" />
-          ))}
-
-          {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
-            const shiftData = shiftDataMap[day]; 
-            const isHoliday = shiftData === "หยุด";
-            
-            return (
-              <div 
-                key={day} 
-                className={`cal-cell ${isHoliday ? 'holiday' : ''}`}
-                onClick={() => handleCellClick(day)}
-                style={{ cursor: 'pointer' }}
-              >
-                <span className="cal-day">{day}</span>
-                {shiftData && (
-                  <div className={`cal-shift-badge ${getBadgeClass(shiftData)}`}>
-                    {isHoliday ? 'หยุด' : shiftData}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+          return (
+            <div 
+              key={day} 
+              className={`cal-cell ${isHoliday ? 'holiday' : ''}`}
+              onClick={() => handleCellClick(day)}
+              style={{ cursor: 'pointer' }}
+            >
+              <span className="cal-day">{day}</span>
+              {shiftData && (
+                <div className={`cal-shift-badge ${getBadgeClass(shiftData)}`}>
+                  {isHoliday ? 'หยุด' : shiftData}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* ===================================================
