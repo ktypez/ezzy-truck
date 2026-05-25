@@ -46,56 +46,56 @@ export default function SalaryView({ userId, currentDate, refreshTrigger }: Sala
         <div className="input-group">
           <span>เงินเดือน</span>
           <span className="mid-label"></span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.base)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.base)} readOnly />
         </div>
         
         <div className="input-group">
           <span>X2</span>
           <span className="mid-label">{salaryResult.x2Days || 0} วัน</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.extraInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.extraInc)} readOnly />
         </div>
         
         {/* 🟢 เปลี่ยนแถวรถยนต์เดิม แยกออกเป็น "จำนวนรอบวิ่ง" และ "จำนวนจุดส่ง" ชัดเจนตามกฎใหม่ */}
         <div className="input-group">
           <span>จำนวนรอบ</span>
           <span className="mid-label">{salaryResult.totalRounds || 0} รอบ</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.roundInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.roundInc)} readOnly />
         </div>
 
         <div className="input-group">
           <span>จำนวนจุด</span>
           <span className="mid-label">{salaryResult.totalPoints || 0} จุด</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.pointInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.pointInc)} readOnly />
         </div>
 
         <div className="input-group">
           <span>ค่า OT</span>
           <span className="mid-label">{salaryResult.totalOT || 0} ชม.</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.otInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.otInc)} readOnly />
         </div>
         
         <div className="input-group">
           <span>ค่าอาหาร</span>
           <span className="mid-label">{salaryResult.workDays || 0} วัน</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.foodInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.foodInc)} readOnly />
         </div>
         
         <div className="input-group">
           <span>ค่าโทรศัพท์</span>
           <span className="mid-label">{salaryResult.workDays || 0} วัน</span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.phoneInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.phoneInc)} readOnly />
         </div>
         
         <div className="input-group">
           <span>เบี้ยขยัน</span>
           <span className="mid-label"></span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.diligenceInc)} readOnly />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.diligenceInc)} readOnly />
         </div>
         
         <div className="input-group">
           <span>หักสาย</span>
           <span className="mid-label"></span>
-          <input type="text" className="input-field input-readonly" value={fmt(salaryResult.lateDed)} readOnly style={{ color: '#e74c3c' }} />
+          <input type="text" className="input-field input-field-accent input-readonly" value={fmt(salaryResult.lateDed)} readOnly style={{ color: '#e74c3c' }} />
         </div>
       </div>
 

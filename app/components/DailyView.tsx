@@ -249,10 +249,10 @@ export default function DailyView({
         <div id="form-container">
           {/* การ์ดบันทึกตัวเลขไมล์รถและเวลาสาย */}
           <div className="card">
-            <div className="input-group"><span>ไมล์เข้า</span><input type="number" id="odoIn" className="input-field" value={odoIn} onChange={e => setOdoIn(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('odoOut')?.focus() }} /></div>
-            <div className="input-group"><span>ไมล์ออก</span><input type="number" id="odoOut" className="input-field" value={odoOut} onChange={e => setOdoOut(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('otHours')?.focus() }} /></div>
-            <div className="input-group"><span>ชั่วโมง OT</span><input type="number" step="0.5" id="otHours" className="input-field" value={otHours} onChange={e => setOtHours(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('lateMin')?.focus() }} /></div>
-            <div className="input-group"><span>สาย (นาที)</span><input type="number" id="lateMin" className="input-field" value={lateMin} onChange={e => setLateMin(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }} /></div>
+            <div className="input-group"><span>ไมล์เข้า</span><input type="number" id="odoIn" className="input-field input-field-accent" value={odoIn} onChange={e => setOdoIn(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('odoOut')?.focus() }} /></div>
+            <div className="input-group"><span>ไมล์ออก</span><input type="number" id="odoOut" className="input-field input-field-accent" value={odoOut} onChange={e => setOdoOut(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('otHours')?.focus() }} /></div>
+            <div className="input-group"><span>ชั่วโมง OT</span><input type="number" step="0.5" id="otHours" className="input-field input-field-accent" value={otHours} onChange={e => setOtHours(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('lateMin')?.focus() }} /></div>
+            <div className="input-group"><span>สาย (นาที)</span><input type="number" id="lateMin" className="input-field input-field-accent" value={lateMin} onChange={e => setLateMin(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }} /></div>
           </div>
 
           {/* การ์ดป้อน "รอบ" และ "จุด" เวอร์ชันปุ่มและฟอนต์บิ๊กบึ้ม */}
