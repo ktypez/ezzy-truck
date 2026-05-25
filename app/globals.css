@@ -312,16 +312,32 @@ body {
     position: sticky; 
     top: 0; 
     z-index: 100; 
-    background: rgba(var(--card-rgb), 0.7); 
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+    background: rgba(var(--card-rgb), 0.12) !important; 
+    backdrop-filter: blur(24px) saturate(180%) !important; 
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important; 
 }
-.user-bar { background: var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 500; background: rgba(var(--card-rgb), 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.user-bar { 
+    background: rgba(var(--card-rgb), 0.12) !important; 
+    backdrop-filter: blur(24px) saturate(180%) !important; 
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important; 
+    padding: 12px 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    font-size: 14px; 
+    font-weight: 500; 
+}
 .user-bar .i-sm { color: var(--secondary); } 
 
-.header { background: rgba(var(--card-rgb), 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 15px 20px; border-bottom: 1px solid var(--border); text-align: center; }
+.header { 
+    background: rgba(var(--card-rgb), 0.12) !important; 
+    backdrop-filter: blur(24px) saturate(180%) !important; 
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important; 
+    padding: 15px 20px; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18) !important; 
+    text-align: center; 
+}
 
 .nav-tabs { 
     position: fixed; 
@@ -333,12 +349,12 @@ body {
     padding: 8px; 
     max-width: 600px; 
     margin: 0 auto; 
-    background: rgba(var(--card-rgb), 0.7); 
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(var(--card-rgb), 0.12) !important; 
+    backdrop-filter: blur(24px) saturate(180%) !important; 
+    -webkit-backdrop-filter: blur(24px) saturate(180%) !important; 
     border-radius: 24px; 
-    border: 1px solid rgba(255, 255, 255, 0.2); 
-    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.18) !important; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important; 
     z-index: 100;
 }
 .tab { flex: 1; padding: 12px 5px; text-align: center; background: transparent; border-radius: 18px; border: none; cursor: pointer; font-weight: 600; color: var(--muted); font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
@@ -375,7 +391,19 @@ body {
 .input-group:last-child { border-bottom: none; }
 .input-group > span:first-child { width: 80px; flex-shrink: 0; font-size: 14px; }
 
-.input-field { border: none; outline: none; text-align: right; font-size: 16px; font-weight: 700; color: var(--primary); width: 120px; background: var(--bg) !important; padding: 8px 12px; border-radius: 12px; }
+.input-field { 
+    border: 1px solid rgba(255, 255, 255, 0.1) !important; 
+    outline: none; 
+    text-align: right; 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: var(--primary); 
+    width: 120px; 
+    background: rgba(var(--card-rgb), 0.2) !important; 
+    backdrop-filter: blur(5px) !important;
+    padding: 8px 12px; 
+    border-radius: 12px; 
+}
 .input-readonly { color: var(--muted); opacity: 0.8; }
 .mid-label { flex: 1; text-align: center; font-size: 13px; color: var(--muted); font-weight: 500; }
 
@@ -538,16 +566,18 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
 }
 
 .date-slider-item {
-  flex: 0 0 56px;                    /* ล็อกความกว้างของแต่ละวันให้เท่ากันเป๊ะที่ 56px ไม่เบิ้มไม่แหว่ง */
+  flex: 0 0 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 12px 0;
   border-radius: 14px;
-  background: var(--card);
+  background: rgba(var(--card-rgb), 0.12) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
   color: var(--text);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   cursor: pointer;
   transition: all 0.15s ease;
   text-align: center;
