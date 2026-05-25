@@ -123,10 +123,7 @@
 /* 🧸 Theme: Shin-chan (Cloudy Shape v.4.7.1) */
 [data-theme="shinchan"] {
     --bg: transparent; 
-    --body-bg-image: url('/files/001.jpeg');
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    
+    --body-bg-image: none;
     --card: rgba(255, 255, 255, 0.60) !important; 
     --text: #4a3f3b; 
     --muted: #8c7e7a; 
@@ -135,6 +132,17 @@
     --primary-bg: rgba(102, 187, 106, 0.2) !important;
     --secondary: #e6a800 !important;
     --active-date-text: #3d3532;
+}
+
+[data-theme="shinchan"] body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('/files/001.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: -1;
 }
 
 /* ☁️ บังคับรูปทรงก้อนเมฆชินจัง */
