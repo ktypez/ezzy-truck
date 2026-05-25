@@ -350,7 +350,7 @@ body {
 .view.active { display: block; }
 
 .card { 
-    background: rgba(var(--card-rgb), 0.7) !important; 
+    background: rgba(var(--card-rgb), 0.85) !important; 
     backdrop-filter: blur(15px) !important; 
     -webkit-backdrop-filter: blur(15px) !important; 
     border-radius: 20px; 
@@ -358,6 +358,10 @@ body {
     margin-bottom: 15px; 
     border: 1px solid rgba(255, 255, 255, 0.1) !important; 
     box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+}
+
+.card * { 
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1) !important; 
 }
 
 .controls-row { display: flex; gap: 8px; margin-bottom: 15px; }
