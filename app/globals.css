@@ -259,12 +259,28 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
 .theme-btn { font-size: 13px; padding: 10px 8px; border-radius: 12px; border: 2px solid var(--border); cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 6px; }
 
 /* CALENDAR BADGE SYSTEM */
-.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; background: transparent; border: none; margin-top: 10px; }
-.cal-header { text-align: center; font-size: 12px; font-weight: 700; color: var(--secondary); padding: 6px 0; }
-.cal-cell { background: var(--card); aspect-ratio: 1 / 1; padding: 6px; position: relative; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.cal-cell.empty { background: transparent; border: none; pointer-events: none; }
-.cal-day { font-weight: 700; font-size: 13px; color: var(--text); align-self: flex-start; line-height: 1; }
-.cal-shift-badge { width: 100%; padding: 3px 0; border-radius: 6px; font-size: 10px; font-weight: 800; color: white !important; text-align: center; line-height: 1.2; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+.calendar-grid { 
+    display: grid; 
+    grid-template-columns: repeat(7, minmax(0, 1fr)); 
+    gap: 1px; 
+    margin-top: 10px; 
+}
+.cal-header { text-align: center; font-size: 12px; font-weight: 700; color: var(--secondary); padding: 8px 0; background: var(--primary-bg); }
+.cal-cell { 
+    background: var(--card); 
+    aspect-ratio: 1 / 1; 
+    padding: 4px; 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    justify-content: space-between;
+    border: none; 
+    border-radius: 0; 
+}
+
+.cal-day { font-weight: 700; font-size: 18px; color: var(--text); line-height: 1; align-self: flex-start; }
+.cal-shift-badge { width: 100%; padding: 3px 0; border-radius: 6px; font-size: 10px; font-weight: 800; color: white !important; text-align: center; line-height: 1.2; margin-top: auto; }
 
 .badge-07 { background: #2ecc71 !important; }
 .badge-08 { background: #3498db !important; }
@@ -359,7 +375,14 @@ td { padding: 12px 5px; border-bottom: 1px solid var(--border); font-size: 14px;
 
 /* 🌆 Theme: Neon Sunset */
 [data-theme="sunset"] {
-    --bg: #1a0b2e; --card: #271744; --text: #f8e5ff; --muted: #9f86c0; --border: #432c7a;        
-    --primary: #ff477e !important; --primary-bg: #2d1a4d !important; --secondary: #00f5d4;     
+    --bg: #1a0b2e; 
+    --card: #271744; 
+    --text: #f8e5ff; 
+    --muted: #9f86c0; 
+    --border: #432c7a;        
+    --primary: #ff477e !important; 
+    --primary-bg: #2d1a4d !important; 
+    --secondary: #00f5d4;     
+    --body-bg-image: none;
     --active-date-text: #ffffff;
 }
