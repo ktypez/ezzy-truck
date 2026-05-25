@@ -160,7 +160,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
       {/* Backdrop */}
       <div onClick={() => setSelectedDay(null)} style={{ position: 'fixed', inset: 0, zIndex: 199, display: selectedDay !== null ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
       
-      <div className={`shift-sheet ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
+      <div className={`shift-sheet backdrop-filter backdrop-blur-lg ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
         <div className="shift-sheet-handle" />
         <div className="shift-sheet-header">
           <h4>วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}</h4>

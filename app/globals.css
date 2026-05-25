@@ -169,6 +169,7 @@ body {
     background: rgba(80, 80, 80, 0.55);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    --tw-backdrop-blur: blur(16px);
     box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
 }
 
@@ -313,6 +314,7 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
   background: rgba(80, 80, 80, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  --tw-backdrop-blur: blur(16px);
   border-top: 1px solid rgba(128, 128, 128, 0.2);
   border-radius: 20px 20px 0 0;
   padding: 10px 16px;
@@ -720,6 +722,7 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
   background: rgba(80, 80, 80, 0.55);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  --tw-backdrop-blur: blur(16px);
   border-top: 1px solid rgba(128, 128, 128, 0.2);
   box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
   animation: slideUp 0.35s ease-out;

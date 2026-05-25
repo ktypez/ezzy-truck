@@ -113,7 +113,7 @@ export default function PWAStatus() {
       )}
 
       {showInstallBanner && (
-        <div id="install-banner">
+        <div id="install-banner" className="backdrop-filter backdrop-blur-lg">
           <div className="banner-icon">🚛</div>
           <div className="banner-text">
             <strong>ติดตั้ง Ezzy Truck</strong>

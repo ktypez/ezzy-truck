@@ -238,7 +238,7 @@ export default function DailyView({
       {/* Backdrop */}
       <div onClick={() => setShowShiftSelector(false)} style={{ position: 'fixed', inset: 0, zIndex: 250, display: showShiftSelector ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
       
-      <div className={`shift-sheet ${showShiftSelector ? 'open' : ''}`} style={{ zIndex: 300 }}>
+      <div className={`shift-sheet backdrop-filter backdrop-blur-lg ${showShiftSelector ? 'open' : ''}`} style={{ zIndex: 300 }}>
         <div className="shift-sheet-handle" />
         <div className="shift-sheet-header">
           <h4>วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}</h4>
