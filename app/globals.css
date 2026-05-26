@@ -172,6 +172,11 @@ body {
     --tw-backdrop-blur: blur(16px);
     box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
 }
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+  .nav-tabs {
+    background: color-mix(in srgb, var(--card) 55%, transparent);
+  }
+}
 
 .tab { flex: 1; padding: 12px 5px; text-align: center; background: var(--card); border-radius: 15px; border: 2px solid var(--border); cursor: pointer; font-weight: 700; color: var(--muted); font-size: 15px; display: flex; align-items: center; justify-content: center; }
 .tab.active { background: var(--primary); color: var(--active-date-text); border-color: var(--primary); }
@@ -322,6 +327,11 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
   display: none;
   box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
   animation: slideUp 0.3s ease-out;
+}
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+  .shift-sheet {
+    background: color-mix(in srgb, var(--card) 55%, transparent);
+  }
 }
 
 .shift-sheet.open { display: block; }
@@ -727,7 +737,11 @@ tr.row-off td { color: #e74c3c; opacity: 0.7; }
   box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
   animation: slideUp 0.35s ease-out;
 }
-
+@supports (background: color-mix(in srgb, red 50%, blue)) {
+  #install-banner {
+    background: color-mix(in srgb, var(--card) 55%, transparent);
+  }
+}
 
 .banner-icon {
   font-size: 28px;
