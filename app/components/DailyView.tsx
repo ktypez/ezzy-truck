@@ -142,7 +142,7 @@ export default function DailyView({
 
       {/* Shift badge + Day type */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
-        <div style={{ flex: 1, background: 'var(--primary-bg)', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }} onClick={() => setShowShiftSelector(true)}>
+        <div style={{ flex: 1, background: 'var(--primary-bg)', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: '2px solid var(--border)' }} onClick={() => setShowShiftSelector(true)}>
           <i className={`ph-duotone ${currentShift === 'หยุด' ? 'ph-prohibit' : 'ph-clock'} i-sm`} style={{ color: currentShift === 'หยุด' ? '#e74c3c' : 'var(--secondary)' }}></i>
           <span style={{ fontSize: '16px', fontWeight: 700, color: currentShift === 'หยุด' ? '#e74c3c' : 'var(--text)' }}>
             {currentShift ? (currentShift === 'หยุด' ? 'วันหยุด' : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
@@ -150,11 +150,11 @@ export default function DailyView({
         </div>
         <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
           <button type="button" onClick={() => setDayType('normal')}
-            style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'normal' ? 'var(--primary)' : 'var(--border)', color: dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)' }}>
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'normal' ? 'var(--primary)' : 'var(--border)', color: dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)', border: dayType === 'normal' ? '2px solid var(--primary)' : '2px solid transparent' }}>
             ปกติ
           </button>
           <button type="button" onClick={() => setDayType('special')}
-            style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'special' ? 'var(--primary)' : 'var(--border)', color: dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)' }}>
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'special' ? 'var(--primary)' : 'var(--border)', color: dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)', border: dayType === 'special' ? '2px solid var(--primary)' : '2px solid transparent' }}>
             x2
           </button>
         </div>
