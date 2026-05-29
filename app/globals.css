@@ -159,23 +159,16 @@ body {
 .user-bar { background: var(--border); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; font-weight: 600; }
 .user-bar .i-sm { color: var(--secondary); } 
 
-.header { background: var(--card); padding: 15px 20px; border-bottom: 1px solid var(--border); text-align: center; }
+.header { background: var(--card); padding: 15px 20px; margin-top: env(safe-area-inset-top, 0px); border-bottom: 1px solid var(--border); text-align: center; }
 
-.nav-tabs { 
-    position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 8px; padding: 8px 16px; 
-    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid rgba(128, 128, 128, 0.2);
+.nav-tabs {
+    position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 8px; padding: 8px 16px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+    border-top: 1px solid var(--border);
     z-index: 100;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    --tw-backdrop-blur: blur(16px);
-    box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
-}
-@supports (background: color-mix(in srgb, red 50%, blue)) {
-  .nav-tabs {
-    background: color-mix(in srgb, var(--card) 55%, transparent);
-  }
+    background: var(--card);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
 }
 
 .tab { flex: 1; padding: 8px 5px; text-align: center; background: var(--card); border-radius: 15px; border: 2px solid var(--border); cursor: pointer; font-weight: 700; color: var(--muted); font-size: 15px; display: flex; align-items: center; justify-content: center; }
@@ -320,22 +313,14 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
   left: 0;
   right: 0;
   z-index: 200;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  --tw-backdrop-blur: blur(16px);
-  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  background: var(--card);
+  border-top: 1px solid var(--border);
   border-radius: 20px 20px 0 0;
   padding: 10px 16px;
   padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   display: none;
-  box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
   animation: slideUp 0.3s ease-out;
-}
-@supports (background: color-mix(in srgb, red 50%, blue)) {
-  .shift-sheet {
-    background: color-mix(in srgb, var(--card) 55%, transparent);
-  }
 }
 
 .shift-sheet.open { display: block; }
@@ -443,13 +428,13 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 
 /* 🌆 Theme: Neon Sunset */
 [data-theme="sunset"] {
-    --bg: #1a0b2e; 
-    --card: #271744; 
-    --text: #f8e5ff; 
-    --muted: #9f86c0; 
-    --border: #432c7a;        
-    --primary: #ff477e !important; 
-    --primary-bg: #2d1a4d !important; 
+    --bg: #1a0b2e;
+    --card: #271744;
+    --text: #f8e5ff;
+    --muted: #b8a0d8;
+    --border: #432c7a;
+    --primary: #ff477e !important;
+    --primary-bg: #3a2560 !important;
     --secondary: #00f5d4;     
     --body-bg-image: none;
     --active-date-text: #ffffff;
@@ -462,10 +447,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #010810;
     --card: #041220;
     --text: #e0f4ff;
-    --muted: #5599bb;
+    --muted: #7ab8dd;
     --border: #0d3050;
     --primary: #00ccff !important;
-    --primary-bg: #021828 !important;
+    --primary-bg: #0a2a40 !important;
     --secondary: #aaddff !important;
     --pattern-color: rgba(0, 204, 255, 0.06);
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
@@ -489,7 +474,7 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --muted: #b0de60;
     --border: #3a2a5a;
     --primary: #99ee00 !important;
-    --primary-bg: #1a2800 !important;
+    --primary-bg: #222800 !important;
     --secondary: #dd00ff !important;
     --pattern-color: #1e1030;
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
@@ -510,10 +495,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #0c0100;
     --card: #1e0500;
     --text: #ffe8d0;
-    --muted: #dd5500;
+    --muted: #ee7744;
     --border: #7a1a00;
     --primary: #ff1100 !important;
-    --primary-bg: #2e0800 !important;
+    --primary-bg: #3a1508 !important;
     --secondary: #ffaa00 !important;
     --pattern-color: rgba(255, 17, 0, 0.06);
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
@@ -534,10 +519,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #050505;
     --card: #0e0e0e;
     --text: #dddddd;
-    --muted: #777777;
+    --muted: #999999;
     --border: #2e2e2e;
-    --primary: #555555 !important;
-    --primary-bg: #161616 !important;
+    --primary: #888888 !important;
+    --primary-bg: #222222 !important;
     --secondary: #cc0000 !important;
     --pattern-color: rgba(170, 0, 0, 0.07);
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
@@ -558,10 +543,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #04060e;
     --card: #090e1e;
     --text: #d8eaff;
-    --muted: #6688aa;
+    --muted: #88aacc;
     --border: #162240;
     --primary: #c0d8f8 !important;
-    --primary-bg: #080e20 !important;
+    --primary-bg: #152040 !important;
     --secondary: #5599ee !important;
     --pattern-color: rgba(192, 216, 248, 0.05);
     --body-bg-image: radial-gradient(ellipse at center, rgba(85, 153, 238, 0.07) 0%, transparent 70%),
@@ -583,10 +568,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #080600;
     --card: #120e00;
     --text: #fff0cc;
-    --muted: #997700;
+    --muted: #bbaa44;
     --border: #302000;
     --primary: #ffcc00 !important;
-    --primary-bg: #1e1600 !important;
+    --primary-bg: #2a2000 !important;
     --secondary: #ffee66 !important;
     --pattern-color: rgba(255, 204, 0, 0.06);
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
@@ -632,10 +617,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #0e0008;
     --card: #1c0014;
     --text: #ffe8ff;
-    --muted: #cc44aa;
+    --muted: #dd66bb;
     --border: #520030;
     --primary: #ff0099 !important;
-    --primary-bg: #280010 !important;
+    --primary-bg: #350020 !important;
     --secondary: #ff88dd !important;
     --pattern-color: rgba(255, 0, 153, 0.06);
     --body-bg-image: linear-gradient(135deg, var(--pattern-color) 1px, transparent 1px),
@@ -656,11 +641,11 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #040404;
     --card: #0c0c0c;
     --text: #f8f8f8;
-    --muted: #999999;
+    --muted: #aaaaaa;
     --border: #1e1e1e;
     --primary: #ffffff !important;
-    --primary-bg: #181818 !important;
-    --secondary: #444444 !important;
+    --primary-bg: #222222 !important;
+    --secondary: #666666 !important;
     --pattern-color: rgba(255, 255, 255, 0.04);
     --body-bg-image: radial-gradient(ellipse at top left, rgba(255,255,255,0.06) 0%, transparent 45%),
                      radial-gradient(ellipse at bottom right, rgba(255,255,255,0.03) 0%, transparent 45%),
@@ -683,10 +668,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --bg: #020802;
     --card: #081008;
     --text: #ccffcc;
-    --muted: #44aa44;
+    --muted: #66cc66;
     --border: #0e2a0e;
     --primary: #00ff66 !important;
-    --primary-bg: #041a08 !important;
+    --primary-bg: #122a18 !important;
     --secondary: #55dd55 !important;
     --pattern-color: rgba(0, 255, 102, 0.05);
     --body-bg-image: radial-gradient(ellipse at center, rgba(0, 255, 102, 0.06) 0%, transparent 60%),
@@ -733,18 +718,10 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
   gap: 10px;
   padding: 8px 16px;
   padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  --tw-backdrop-blur: blur(16px);
-  border-top: 1px solid rgba(128, 128, 128, 0.2);
-  box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
   animation: slideUp 0.35s ease-out;
-}
-@supports (background: color-mix(in srgb, red 50%, blue)) {
-  #install-banner {
-    background: color-mix(in srgb, var(--card) 55%, transparent);
-  }
 }
 
 .banner-icon {

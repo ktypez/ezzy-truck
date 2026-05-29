@@ -116,7 +116,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
   };
 
   const getBadgeClass = (shift: string) => {
-    if (shift === '07:00') return 'badge-07';
+    if (shift === '07:30') return 'badge-07';
     if (shift === '08:00') return 'badge-08';
     if (shift === '09:00') return 'badge-09';
     if (shift === 'หยุด') return 'badge-off';
@@ -143,7 +143,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
             const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
             const isToday = new Date().getFullYear() === currentYear && new Date().getMonth() + 1 === currentMonth && new Date().getDate() === day;
             const isSelected = selectedDay === day;
-            const shiftClass = shiftData === '07:00' ? 'has-shift-07' : shiftData === '08:00' ? 'has-shift-08' : shiftData === '09:00' ? 'has-shift-09' : shiftData === 'หยุด' ? 'has-shift-off' : '';
+            const shiftClass = shiftData === '07:30' ? 'has-shift-07' : shiftData === '08:00' ? 'has-shift-08' : shiftData === '09:00' ? 'has-shift-09' : shiftData === 'หยุด' ? 'has-shift-off' : '';
 
             const leaveBadgeColor = leaveData === 'sick' ? '#e67e22' : leaveData === 'personal' ? '#3498db' : '#e74c3c';
             const leaveLabel = leaveData === 'sick' ? 'ป่วย' : leaveData === 'personal' ? 'กิจ' : 'หยุด';
@@ -173,7 +173,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
       {/* Backdrop */}
       <div onClick={() => setSelectedDay(null)} style={{ position: 'fixed', inset: 0, zIndex: 199, display: selectedDay !== null ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
       
-      <div className={`shift-sheet backdrop-filter backdrop-blur-lg ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
+      <div className={`shift-sheet ${selectedDay !== null ? 'open' : ''}`} style={{ zIndex: 300 }}>
         <div className="shift-sheet-handle" />
         <div className="shift-sheet-header">
           <h4>วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}</h4>
@@ -181,7 +181,7 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
         </div>
         <div className="shift-sheet-body">
           <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0' }}>
-            {['07:00', '08:00', '09:00'].map(time => {
+            {['07:30', '08:00', '09:00'].map(time => {
               const sel = chosenShift === time;
               return (
                 <div key={time} onClick={() => !isSaving && handleQuickSaveActual(time)}

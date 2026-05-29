@@ -192,7 +192,7 @@ export default function Home() {
         )}
       </main>
 
-      <div className="nav-tabs backdrop-filter backdrop-blur-lg">
+      <div className="nav-tabs">
         <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => {
             const today = new Date();
             setCurrentDate(today);
