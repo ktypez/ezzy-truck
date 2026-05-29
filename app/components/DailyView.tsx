@@ -8,7 +8,8 @@ interface DailyViewProps {
   selectedDay: number;
   onSelectDay: (day: number) => void;
   onSaveSuccess: () => void;
-  currentShift: string;        
+  currentShift: string;
+  currentLeaveType?: string | null;
 }
 
 export default function DailyView({
@@ -18,6 +19,7 @@ export default function DailyView({
   onSelectDay,
   onSaveSuccess,
   currentShift,
+  currentLeaveType,
 }: DailyViewProps) {
   const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
@@ -25,6 +27,7 @@ export default function DailyView({
 
   const [isWork, setIsWork] = useState(true);
   const [dayType, setDayType] = useState('normal');
+  const [leaveType, setLeaveType] = useState<string | null>(null);
   const [odoIn, setOdoIn] = useState('');
   const [odoOut, setOdoOut] = useState('');
   const [otHours, setOtHours] = useState('');
@@ -62,13 +65,15 @@ export default function DailyView({
 
   useEffect(() => {
     async function loadDayData() {
-      setIsWork(true); setDayType('normal'); setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin(''); setRoundCount(0); setPointCount(0);
+      setIsWork(true); setDayType('normal'); setLeaveType(null); setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin(''); setRoundCount(0); setPointCount(0);
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId).eq('year', currentYear).eq('month', currentMonth).eq('day', selectedDay).maybeSingle();
       if (data) {
         const isHoliday = data.shift_time === 'หยุด' || data.day_type === 'วันหยุด' || data.is_work === false;
         setIsWork(!isHoliday);
-        if (!isHoliday) {
+        if (isHoliday) {
+          setLeaveType(data.leave_type || null);
+        } else {
           setDayType(data.day_type === 'special' ? 'special' : 'normal');
           setOdoIn(data.odo_in ? String(data.odo_in) : '');
           setOdoOut(data.odo_out ? String(data.odo_out) : '');
@@ -82,14 +87,15 @@ export default function DailyView({
     loadDayData();
   }, [selectedDay, currentDate, userId]);
 
-  const handleQuickSaveShift = async (chosenShift: string) => {
+  const handleQuickSaveShift = async (chosenShift: string, chosenLeaveType?: string | null) => {
     if (!selectedDay || !chosenShift) return;
     setIsSavingShift(true);
     const isHoliday = chosenShift === 'หยุด';
     try {
       const payload: any = {
         user_id: userId, year: currentYear, month: currentMonth, day: selectedDay,
-        shift_time: chosenShift, day_type: isHoliday ? 'วันหยุด' : 'วันทำงาน', is_work: !isHoliday
+        shift_time: chosenShift, day_type: isHoliday ? 'วันหยุด' : 'วันทำงาน', is_work: !isHoliday,
+        leave_type: isHoliday ? (chosenLeaveType || null) : null
       };
       if (isHoliday) Object.assign(payload, { odo_in: 0, odo_out: 0, ot: 0, late: 0, drivers: [], trucks: 0, odo: 0 });
       const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
@@ -109,11 +115,11 @@ export default function DailyView({
       Object.assign(payload, {
         day_type: dayType, odo_in: parseFloat(odoIn) || 0, odo_out: parseFloat(odoOut) || 0,
         ot: parseFloat(otHours) || 0, late: parseInt(lateMin) || 0, rounds: roundCount, points: pointCount,
-        trucks: roundCount, odo: distance, drivers: []
+        trucks: roundCount, odo: distance, drivers: [], leave_type: null
       });
     } else {
       Object.assign(payload, { day_type: 'วันหยุด', shift_time: 'หยุด', is_work: false,
-        odo_in: 0, odo_out: 0, ot: 0, late: 0, rounds: 0, points: 0, trucks: 0, odo: 0, drivers: [] });
+        odo_in: 0, odo_out: 0, ot: 0, late: 0, rounds: 0, points: 0, trucks: 0, odo: 0, drivers: [], leave_type: leaveType });
     }
     const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
     if (error) { alert("เกิดข้อผิดพลาด: " + error.message); setSaveStatus('idle'); }
@@ -143,9 +149,9 @@ export default function DailyView({
       {/* Shift badge + Day type */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
         <div style={{ flex: 1, background: 'var(--primary-bg)', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: '2px solid var(--border)' }} onClick={() => setShowShiftSelector(true)}>
-          <i className={`ph-duotone ${currentShift === 'หยุด' ? 'ph-prohibit' : 'ph-clock'} i-sm`} style={{ color: currentShift === 'หยุด' ? '#e74c3c' : 'var(--secondary)' }}></i>
-          <span style={{ fontSize: '16px', fontWeight: 700, color: currentShift === 'หยุด' ? '#e74c3c' : 'var(--text)' }}>
-            {currentShift ? (currentShift === 'หยุด' ? 'วันหยุด' : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
+          <i className={`ph-duotone ${currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ph-thermometer-hot' : currentLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`} style={{ color: currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? '#e67e22' : currentLeaveType === 'personal' ? '#3498db' : '#e74c3c') : 'var(--secondary)' }}></i>
+          <span style={{ fontSize: '16px', fontWeight: 700, color: currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? '#e67e22' : currentLeaveType === 'personal' ? '#3498db' : '#e74c3c') : 'var(--text)' }}>
+            {currentShift ? (currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ลาป่วย' : currentLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
           </span>
         </div>
         <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
@@ -222,9 +228,15 @@ export default function DailyView({
         </>
       ) : (
         <div className="card" style={{ textAlign: 'center', padding: '30px 20px' }}>
-          <div style={{ fontSize: '32px', marginBottom: '8px' }}>😴</div>
-          <h3 style={{ fontSize: '20px', fontWeight: 800, color: 'var(--primary)', marginBottom: '4px' }}>วันหยุดพักผ่อน</h3>
-          <p style={{ fontSize: '16px', color: 'var(--muted)' }}>พักผ่อนให้เต็มที่ หรือแตะปุ่มด้านบนเพื่อเปลี่ยนกะ</p>
+          <div style={{ fontSize: '32px', marginBottom: '8px' }}>
+            {leaveType === 'sick' ? '🤒' : leaveType === 'personal' ? '📋' : '😴'}
+          </div>
+          <h3 style={{ fontSize: '20px', fontWeight: 800, color: leaveType === 'sick' ? '#e67e22' : leaveType === 'personal' ? '#3498db' : 'var(--primary)', marginBottom: '4px' }}>
+            {leaveType === 'sick' ? 'ลาป่วย' : leaveType === 'personal' ? 'ลากิจ' : 'วันหยุดพักผ่อน'}
+          </h3>
+          <p style={{ fontSize: '16px', color: 'var(--muted)' }}>
+            {leaveType ? 'แตะปุ่มด้านบนเพื่อเปลี่ยนสถานะ' : 'พักผ่อนให้เต็มที่ หรือแตะปุ่มด้านบนเพื่อเปลี่ยนกะ'}
+          </p>
         </div>
       )}
 
@@ -257,10 +269,22 @@ export default function DailyView({
               );
             })}
           </div>
-          <div onClick={() => !isSavingShift && handleQuickSaveShift('หยุด')}
-            style={{ width: '100%', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px', marginTop: '10px',
-              border: currentShift === 'หยุด' ? '2px solid transparent' : '2px solid var(--border)', background: currentShift === 'หยุด' ? '#e74c3c' : 'transparent', color: currentShift === 'หยุด' ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
-            🛑 วันหยุด
+          <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0', marginTop: '4px' }}>
+            {[
+              { key: null, icon: '🛑', label: 'วันหยุด', color: '#e74c3c' },
+              { key: 'sick', icon: '🤒', label: 'ลาป่วย', color: '#e67e22' },
+              { key: 'personal', icon: '📋', label: 'ลากิจ', color: '#3498db' },
+            ].map(opt => {
+              const sel = currentShift === 'หยุด' && (currentLeaveType || null) === opt.key;
+              return (
+                <div key={opt.key || 'off'} onClick={() => !isSavingShift && handleQuickSaveShift('หยุด', opt.key)}
+                  style={{ display: 'table-cell', padding: '12px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
+                    border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? opt.color : 'transparent', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                  <div style={{ fontSize: '18px' }}>{opt.icon}</div>
+                  <div>{opt.label}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

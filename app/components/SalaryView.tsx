@@ -11,19 +11,33 @@ interface SalaryViewProps {
 
 export default function SalaryView({ userId, currentDate, refreshTrigger }: SalaryViewProps) {
   const [salaryResult, setSalaryResult] = useState<any>(null);
+  const [yearlySick, setYearlySick] = useState(0);
+  const [yearlyPersonal, setYearlyPersonal] = useState(0);
+
+  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
 
   useEffect(() => {
     async function loadAndCalc() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId)
-        .eq('year', currentDate.getFullYear())
-        .eq('month', currentDate.getMonth() + 1);
+        .eq('year', year)
+        .eq('month', month);
       if (data) {
-        setSalaryResult(calculateSalary(data));
+        setSalaryResult(calculateSalary(data, daysInMonth));
+      }
+      const { data: yearData } = await sb.from('logs').select('leave_type')
+        .eq('user_id', userId)
+        .eq('year', year)
+        .not('leave_type', 'is', null);
+      if (yearData) {
+        setYearlySick(yearData.filter((r: any) => r.leave_type === 'sick').length);
+        setYearlyPersonal(yearData.filter((r: any) => r.leave_type === 'personal').length);
       }
     }
     loadAndCalc();
-  }, [currentDate, userId, refreshTrigger]);
+  }, [currentDate, userId, refreshTrigger, daysInMonth]);
 
   if (!salaryResult) {
     return (
@@ -75,6 +89,22 @@ export default function SalaryView({ userId, currentDate, refreshTrigger }: Sala
         </div>
       </div>
 
+      {/* Leave Balance */}
+      {(yearlySick > 0 || yearlyPersonal > 0) && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '15px' }}>
+          <div style={{ background: yearlySick > 0 ? '#fdf2e9' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--muted)' }}>🤒 ลาป่วย</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : '#e67e22' }}>{Math.max(0, 30 - yearlySick)}</div>
+            <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 30 วัน</div>
+          </div>
+          <div style={{ background: yearlyPersonal > 0 ? '#ebf5fb' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--muted)' }}>📋 ลากิจ</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : '#3498db' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
+            <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
+          </div>
+        </div>
+      )}
+
       {/* Breakdown */}
       <div style={{ marginTop: '15px', background: 'var(--card)', borderRadius: '20px', border: '1px solid var(--border)', overflow: 'hidden' }}>
         <div style={{ background: 'var(--primary-bg)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -89,8 +119,9 @@ export default function SalaryView({ userId, currentDate, refreshTrigger }: Sala
           <SalaryRow icon="ph-duotone ph-clock" label="ค่า OT" sub={`${salaryResult.totalOT || 0} ชม.`} value={fmt(salaryResult.otInc)} />
           <SalaryRow icon="ph-duotone ph-bowl-food" label="ค่าอาหาร" sub={`${salaryResult.workDays || 0} วัน`} value={fmt(salaryResult.foodInc)} />
           <SalaryRow icon="ph-duotone ph-device-mobile" label="ค่าโทรศัพท์" sub={`${salaryResult.workDays || 0} วัน`} value={fmt(salaryResult.phoneInc)} />
-          <SalaryRow icon="ph-duotone ph-hand-heart" label="เบี้ยขยัน" value={fmt(salaryResult.diligenceInc)} />
+          <SalaryRow icon="ph-duotone ph-hand-heart" label="เบี้ยขยัน" sub={salaryResult.diligenceInc > 0 ? 'ไม่มาสาย/ลา' : salaryResult.sickDays > 0 || salaryResult.personalDays > 0 ? 'มีวันลา' : 'มีสาย'} value={fmt(salaryResult.diligenceInc)} />
           <SalaryRow icon="ph-duotone ph-warning-circle" label="หักสาย" value={fmt(salaryResult.lateDed)} negative />
+          {salaryResult.leaveDed > 0 && <SalaryRow icon="ph-duotone ph-prohibit" label="หักลาเกินสิทธิ" sub={salaryResult.sickExcess > 0 ? `ลาป่วยเกิน ${salaryResult.sickExcess} วัน` : `ลากิจเกิน ${salaryResult.personalExcess} วัน`} value={fmt(salaryResult.leaveDed)} negative />}
         </div>
       </div>
 

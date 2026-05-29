@@ -75,16 +75,21 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
               {logs.map((r) => {
                 const isOff = r.shift_time === 'หยุด' || r.day_type === 'วันหยุด' || r.is_work === false;
                 const isDouble = r.day_type === 'special' || r.day_type === 'holiday' || r.is_special === true;
-                
+                const isSickLeave = r.leave_type === 'sick';
+                const isPersonalLeave = r.leave_type === 'personal';
+                const leaveOffClass = isSickLeave ? ' row-sick' : isPersonalLeave ? ' row-personal' : '';
+
                 return (
-                  <tr key={r.day} className={(isDouble ? 'row-x2' : '') + (isOff ? ' row-off' : '')} onClick={() => onSelectDayRow(r.day)} style={{ cursor: 'pointer' }}>
+                  <tr key={r.day} className={(isDouble ? 'row-x2' : '') + (isOff ? ' row-off' : '') + leaveOffClass} onClick={() => onSelectDayRow(r.day)} style={{ cursor: 'pointer' }}>
                     <td>
                       <span className="date-cell">
                         {r.day} {isDouble && <span className="double-badge">(x2)</span>}
                       </span>
                     </td>
                     {isOff ? (
-                      <td colSpan={5} className="text-off">--- วันหยุด ---</td>
+                      <td colSpan={5} className="text-off" style={isSickLeave ? { color: '#e67e22' } : isPersonalLeave ? { color: '#3498db' } : undefined}>
+                        {isSickLeave ? '--- ลาป่วย ---' : isPersonalLeave ? '--- ลากิจ ---' : '--- วันหยุด ---'}
+                      </td>
                     ) : (
                       <>
                         <td>{r.rounds || '-'}</td>

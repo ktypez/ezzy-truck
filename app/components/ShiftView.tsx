@@ -23,16 +23,18 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
   const firstDay = new Date(currentYear, currentMonth - 1, 1).getDay(); 
 
   const [shiftDataMap, setShiftDataMap] = useState<{ [key: number]: string }>({});
+  const [leaveDataMap, setLeaveDataMap] = useState<{ [key: number]: string | null }>({});
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
   const [chosenShift, setChosenShift] = useState<string>('');
+  const [chosenLeave, setChosenLeave] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
   const fetchShiftData = async () => {
     if (!userId || !isOpen) return;
     try {
       const { data, error } = await sb
-        .from('logs') 
-        .select('day, shift_time') 
+        .from('logs')
+        .select('day, shift_time, leave_type')
         .eq('user_id', userId)
         .eq('year', currentYear)
         .eq('month', currentMonth);
@@ -41,10 +43,15 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
 
       if (data) {
         const newShiftMap: { [key: number]: string } = {};
+        const newLeaveMap: { [key: number]: string | null } = {};
         data.forEach((record: any) => {
-          if (record.day) newShiftMap[record.day] = record.shift_time;
+          if (record.day) {
+            newShiftMap[record.day] = record.shift_time;
+            newLeaveMap[record.day] = record.leave_type || null;
+          }
         });
         setShiftDataMap(newShiftMap);
+        setLeaveDataMap(newLeaveMap);
       }
     } catch (error: any) {
       console.error("Error fetching shift data:", error);
@@ -59,13 +66,14 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
 
   const handleCellClick = (day: number) => {
     setSelectedDay(day);
-    setChosenShift(shiftDataMap[day] || ''); 
+    setChosenShift(shiftDataMap[day] || '');
+    setChosenLeave(leaveDataMap[day] || null);
   };
 
   // 🟢 ปรับลอจิกให้รับค่ากะงานและยิงเซฟทันทีเมื่อคลิกเลือกปุ่มกะงาน
-  const handleQuickSaveActual = async (targetShift: string) => {
+  const handleQuickSaveActual = async (targetShift: string, targetLeave?: string | null) => {
     if (!selectedDay || !targetShift) return;
-    
+
     const currentShiftName = shiftDataMap[selectedDay];
     if (currentShiftName && currentShiftName !== targetShift) {
       const confirmChange = window.confirm(`⚠️ วันที่ ${selectedDay} มีข้อมูลเดิมคือ "${currentShiftName}" อยู่แล้ว\nคุณต้องการบันทึกเปลี่ยนเป็น "${targetShift}" ใช่หรือไม่?`);
@@ -83,7 +91,8 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
         day: selectedDay,
         shift_time: targetShift,
         day_type: isHoliday ? 'วันหยุด' : 'วันทำงาน',
-        is_work: !isHoliday 
+        is_work: !isHoliday,
+        leave_type: isHoliday ? (targetLeave || null) : null
       };
 
       if (isHoliday) {
@@ -127,25 +136,29 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
           ))}
 
           {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
-            const shiftData = shiftDataMap[day]; 
+            const shiftData = shiftDataMap[day];
+            const leaveData = leaveDataMap[day];
             const isHoliday = shiftData === "หยุด";
             const dayOfWeek = new Date(currentYear, currentMonth - 1, day).getDay();
             const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
             const isToday = new Date().getFullYear() === currentYear && new Date().getMonth() + 1 === currentMonth && new Date().getDate() === day;
             const isSelected = selectedDay === day;
             const shiftClass = shiftData === '07:00' ? 'has-shift-07' : shiftData === '08:00' ? 'has-shift-08' : shiftData === '09:00' ? 'has-shift-09' : shiftData === 'หยุด' ? 'has-shift-off' : '';
-            
+
+            const leaveBadgeColor = leaveData === 'sick' ? '#e67e22' : leaveData === 'personal' ? '#3498db' : '#e74c3c';
+            const leaveLabel = leaveData === 'sick' ? 'ป่วย' : leaveData === 'personal' ? 'กิจ' : 'หยุด';
+
             return (
-              <div 
-                key={day} 
+              <div
+                key={day}
                 className={`cal-cell ${shiftClass} ${isHoliday ? 'holiday' : ''} ${isWeekend ? 'weekend' : ''} ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}`}
                 onClick={() => handleCellClick(day)}
                 style={{ cursor: 'pointer' }}
               >
                 <span className="cal-day">{day}</span>
                 {shiftData && (
-                  <div className={`cal-shift-badge ${getBadgeClass(shiftData)}`}>
-                    {isHoliday ? 'หยุด' : shiftData}
+                  <div className={`cal-shift-badge ${getBadgeClass(shiftData)}`} style={isHoliday && leaveData ? { background: leaveBadgeColor, color: 'white' } : undefined}>
+                    {isHoliday ? leaveLabel : shiftData}
                   </div>
                 )}
               </div>
@@ -179,10 +192,22 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
               );
             })}
           </div>
-          <div onClick={() => !isSaving && handleQuickSaveActual('หยุด')}
-            style={{ width: '100%', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSaving ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px', marginTop: '10px',
-              border: chosenShift === 'หยุด' ? '2px solid transparent' : '2px solid var(--border)', background: chosenShift === 'หยุด' ? '#e74c3c' : 'transparent', color: chosenShift === 'หยุด' ? 'white' : 'var(--text)', opacity: isSaving ? 0.6 : 1 }}>
-            🛑 วันหยุด
+          <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0', marginTop: '4px' }}>
+            {[
+              { key: null as string | null, icon: '🛑', label: 'วันหยุด', color: '#e74c3c' },
+              { key: 'sick' as string | null, icon: '🤒', label: 'ลาป่วย', color: '#e67e22' },
+              { key: 'personal' as string | null, icon: '📋', label: 'ลากิจ', color: '#3498db' },
+            ].map(opt => {
+              const sel = chosenShift === 'หยุด' && chosenLeave === opt.key;
+              return (
+                <div key={opt.key || 'off'} onClick={() => !isSaving && handleQuickSaveActual('หยุด', opt.key)}
+                  style={{ display: 'table-cell', padding: '12px 0', textAlign: 'center', borderRadius: '12px', cursor: isSaving ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
+                    border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? opt.color : 'transparent', color: sel ? 'white' : 'var(--text)', opacity: isSaving ? 0.6 : 1 }}>
+                  <div style={{ fontSize: '18px' }}>{opt.icon}</div>
+                  <div>{opt.label}</div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

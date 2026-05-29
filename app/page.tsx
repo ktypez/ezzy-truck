@@ -22,6 +22,7 @@ export default function Home() {
 
   // 🚨 2. กลุ่มแชร์ State ของระบบปฏิทินกะงานลอยแก้ว
   const [currentDayShift, setCurrentDayShift] = useState<string>('');
+  const [currentLeaveType, setCurrentLeaveType] = useState<string | null>(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); 
 
   const fetchCurrentDayShift = async () => {
@@ -29,7 +30,7 @@ export default function Home() {
     try {
       const { data } = await sb
         .from('logs')
-        .select('shift_time')
+        .select('shift_time, leave_type')
         .eq('user_id', session.user.id)
         .eq('year', currentDate.getFullYear())
         .eq('month', currentDate.getMonth() + 1)
@@ -37,6 +38,7 @@ export default function Home() {
         .maybeSingle();
 
       setCurrentDayShift(data?.shift_time || '');
+      setCurrentLeaveType(data?.leave_type || null);
     } catch (err) {
       console.error(err);
     }
@@ -151,13 +153,14 @@ export default function Home() {
 
       <main className="content-area">
         {activeView === 'daily' && (
-          <DailyView 
+          <DailyView
             userId={session.user.id}
             currentDate={currentDate}
             selectedDay={selectedDay}
             onSelectDay={setSelectedDay}
             onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
-            currentShift={currentDayShift} 
+            currentShift={currentDayShift}
+            currentLeaveType={currentLeaveType}
           />
         )}
         {activeView === 'monthly' && (
