@@ -2,7 +2,7 @@
 const CACHE_NAME = "ezzy-truck-v1";
 const STATIC_ASSETS = [
   "/",
-  "/manifest.webmanifest",
+  "/manifest.json",
 ];
 
 // Install: precache app shell
@@ -39,8 +39,8 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Next.js static assets (_next/static) — cache-first
-  if (url.pathname.startsWith("/_next/static")) {
+  // Vite static assets (/assets/) — cache-first
+  if (url.pathname.startsWith("/assets/")) {
     event.respondWith(cacheFirst(request));
     return;
   }

@@ -1,4 +1,3 @@
-'use client';
 import { useState, useEffect } from 'react';
 import { sb } from '@/lib/supabase';
 import { calculateSalary } from '@/utils/calculator';

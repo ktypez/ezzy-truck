@@ -1,6 +1,5 @@
-'use client';
 import { useState, KeyboardEvent } from 'react';
-import { sb } from '@/lib/supabase'; 
+import { sb } from '@/lib/supabase';
 import { APP_CONFIG } from '../config'; // 💡 เรียกใช้เวอร์ชันอัตโนมัติ
 
 export default function AuthScreen({ onAuth }: { onAuth: () => void }) {

@@ -1,4 +1,3 @@
-'use client';
 import { useState, useEffect } from 'react';
 import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
@@ -139,7 +138,7 @@ export default function Home() {
   }
 
   return (
-    <div data-theme={theme} className="min-h-screen">
+    <div data-theme={theme} style={{ minHeight: '100vh' }}>
       <Header 
         userEmail={session.user.email}
         currentDate={currentDate}

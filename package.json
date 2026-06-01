@@ -1,31 +1,25 @@
 {
-  "name": "ezzy",
-  "version": "0.1.0",
+  "name": "ezzy-truck",
+  "version": "5.5.5",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --webpack -H 0.0.0.0",
-    "build": "next build --webpack",
-    "start": "next start",
-    "lint": "eslint ."
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
     "@supabase/supabase-js": "^2.106.1",
-    "autoprefixer": "^10.5.0",
-    "next": "16.2.6",
     "phosphor-react": "^1.4.1",
-    "postcss": "^8.5.15",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.6",
-    "tailwindcss": "^4.3.0",
-    "typescript": "^5"
+    "@vitejs/plugin-react": "^4.5.2",
+    "typescript": "^5",
+    "vite": "^6.3.5"
   }
 }

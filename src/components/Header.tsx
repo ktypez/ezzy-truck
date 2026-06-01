@@ -1,5 +1,3 @@
-'use client';
-
 interface HeaderProps {
   userEmail: string;
   currentDate: Date;
