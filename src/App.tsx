@@ -10,7 +10,7 @@ import { APP_CONFIG } from "@/config";
 
 export default function Home() {
   const [session, setSession] = useState<any>(null);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState(() => localStorage.getItem('truck-theme') || 'light');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [activeView, setActiveView] = useState('daily');
@@ -59,10 +59,6 @@ export default function Home() {
     const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
-
-    // ดึงค่าธีมเดิมที่เคยเซฟไว้ในเครื่อง
-    const savedTheme = localStorage.getItem('truck-theme') || 'light';
-    setTheme(savedTheme);
 
     // ล้างตัวดักฟัง (Cleanup) เมื่อ Component ถูกทำลาย
     return () => subscription.unsubscribe();

@@ -204,15 +204,16 @@ body {
 .driver-input { flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border); outline: none; font-size: 17px; font-weight: 500; background: var(--card); color: var(--text); }
 .del-btn-small { display: flex; align-items: center; justify-content: center; background: var(--border); color: var(--primary); border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 1.2rem; }
 
-table { width: 100%; border-collapse: collapse; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 
 th { text-align: center; padding: 8px 4px; font-size: 14px; font-weight: 700; color: var(--secondary); border-bottom: 2px solid var(--border); background: var(--primary-bg); }
-thead th { border-bottom: 3px solid var(--secondary); }
+thead th { border-bottom: 3px solid var(--secondary); position: sticky; top: 0; z-index: 1; }
 th.th-sort { cursor: pointer; white-space: nowrap; }
 td { padding: 8px 4px; border-bottom: 1px solid var(--border); font-size: 14px; text-align: center; }
 .date-cell { font-weight: 700; color: var(--primary); font-size: 15px; }
 .double-badge { color: var(--secondary); font-size: 10px; font-weight: 700; margin-left: 3px; background-color: var(--primary-bg); padding: 1px 5px; border-radius: 8px; border: 1px solid var(--secondary); vertical-align: middle; }
 .total-row { background: var(--primary-bg); font-weight: 700; color: var(--primary); border-top: 2px solid var(--secondary); }
+.total-row td { position: sticky; bottom: 0; z-index: 1; background: var(--primary-bg); }
 .total-row td { padding: 10px 4px; font-size: 14px; }
 .total-row td:first-child { font-weight: 800; color: var(--primary); }
 

@@ -10,7 +10,6 @@ interface MonthlyViewProps {
 
 export default function MonthlyView({ userId, currentDate, onSelectDayRow, refreshTrigger }: MonthlyViewProps) {
   const [logs, setLogs] = useState<any[]>([]);
-  const [sortDesc, setSortDesc] = useState(false);
 
   useEffect(() => {
     async function fetchMonthlyLogs() {
@@ -18,11 +17,11 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
         .eq('user_id', userId)
         .eq('year', currentDate.getFullYear())
         .eq('month', currentDate.getMonth() + 1)
-        .order('day', { ascending: !sortDesc });
+        .order('day', { ascending: true });
       if (data) setLogs(data);
     }
     fetchMonthlyLogs();
-  }, [currentDate, userId, sortDesc, refreshTrigger]);
+  }, [currentDate, userId, refreshTrigger]);
 
   const totalRounds = logs.reduce((acc, curr) => acc + (curr.rounds || 0), 0);
   const totalPoints = logs.reduce((acc, curr) => acc + (curr.points || 0), 0);
@@ -49,7 +48,7 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
       </div>
 
       {/* Table */}
-      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+      <div className="card" style={{ padding: 0, overflow: 'auto', maxHeight: '500px' }}>
         {logs.length === 0 ? (
           <div style={{ textAlign: 'center', padding: '30px 20px', color: 'var(--muted)' }}>
             <i className="ph-duotone ph-database" style={{ fontSize: '28px', marginBottom: '8px', display: 'block' }}></i>
@@ -60,9 +59,7 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
           <table>
             <thead>
               <tr>
-                <th className="th-sort" onClick={() => setSortDesc(!sortDesc)}>
-                  วันที่ <i className={`ph-duotone ${sortDesc ? 'ph-sort-descending' : 'ph-sort-ascending'} i-sm`} style={{ margin: 0 }}></i>
-                </th>
+                <th>วันที่</th>
                 <th>รอบ</th>
                 <th>จุด</th>
                 <th>กม.</th>

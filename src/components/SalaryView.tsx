@@ -91,14 +91,14 @@ export default function SalaryView({ userId, currentDate, refreshTrigger }: Sala
       {/* Leave Balance */}
       {(yearlySick > 0 || yearlyPersonal > 0) && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '15px' }}>
-          <div style={{ background: yearlySick > 0 ? '#fdf2e9' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+          <div style={{ background: yearlySick > 0 ? 'var(--primary-bg)' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>🤒 ลาป่วย</div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : '#e67e22' }}>{Math.max(0, 30 - yearlySick)}</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : 'var(--primary)' }}>{Math.max(0, 30 - yearlySick)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 30 วัน</div>
           </div>
-          <div style={{ background: yearlyPersonal > 0 ? '#ebf5fb' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+          <div style={{ background: yearlyPersonal > 0 ? 'var(--primary-bg)' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>📋 ลากิจ</div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : '#3498db' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
+            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : 'var(--secondary)' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
           </div>
         </div>
