@@ -156,6 +156,7 @@ export default function Home() {
             onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
             currentShift={currentDayShift}
             currentLeaveType={currentLeaveType}
+            onChangeMonth={handleChangeMonth}
           />
         )}
         {activeView === 'monthly' && (
@@ -167,6 +168,7 @@ export default function Home() {
               setSelectedDay(day);
               setActiveView('daily');
             }}
+            onChangeMonth={handleChangeMonth}
           />
         )}
         {activeView === 'salary' && (
@@ -174,6 +176,7 @@ export default function Home() {
             userId={session.user.id}
             currentDate={currentDate}
             refreshTrigger={refreshTrigger}
+            onChangeMonth={handleChangeMonth}
           />
         )}
         {activeView === 'calendar' && (
@@ -183,6 +186,7 @@ export default function Home() {
             isOpen={true} 
             onClose={() => setActiveView('daily')}
             onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
+            onChangeMonth={handleChangeMonth}
           />
         )}
       </main>

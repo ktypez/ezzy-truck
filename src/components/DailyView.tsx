@@ -1,3 +1,4 @@
+import MonthYearSelector from './MonthYearSelector';
 import { useState, useEffect, useRef } from 'react';
 import { sb } from '@/lib/supabase';
 
@@ -9,6 +10,7 @@ interface DailyViewProps {
   onSaveSuccess: () => void;
   currentShift: string;
   currentLeaveType?: string | null;
+  onChangeMonth: (diff: number) => void;
 }
 
 export default function DailyView({
@@ -19,6 +21,7 @@ export default function DailyView({
   onSaveSuccess,
   currentShift,
   currentLeaveType,
+  onChangeMonth,
 }: DailyViewProps) {
   const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
@@ -127,6 +130,10 @@ export default function DailyView({
 
   return (
     <div id="view-daily" className="view active">
+      {/* Month/Year Selector */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
+      </div>
       
       {/* Date Slider */}
       <div className="date-slider-container" ref={sliderRef}>

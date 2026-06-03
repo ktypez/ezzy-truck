@@ -19,8 +19,6 @@ export default function Header({
   onLogout,
   onOpenCalendar 
 }: HeaderProps) {
-  const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-
   return (
     <>
       <div className="sticky-header">
@@ -33,32 +31,6 @@ export default function Header({
           </div>
           <div style={{ cursor: 'pointer', color: 'var(--muted)', display: 'flex', alignItems: 'center' }} onClick={onLogout}>
             <i className="ph-duotone ph-sign-out i-sm"></i> ออกจากระบบ
-          </div>
-        </div>
-        
-        <div className="header">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '600px', margin: '0 auto' }}>
-            <button className="del-btn-small" style={{ width: '35px', height: '35px' }} onClick={() => onChangeMonth(-1)}>
-              <i className="ph-duotone ph-caret-left"></i>
-            </button>
-            
-            {/* 🟢 ปรับสไตล์ตัวหนังสือชื่อเดือนให้หนาขึ้น */}
-            <h2 
-              style={{ 
-                fontSize: '22px', /* ปรับลงมานิดนึงเพื่อให้ไม่เบียดกับปุ่มลูกศรในมือถือจอแคบ */
-                fontWeight: 800,
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '6px',
-                userSelect: 'none',
-              }}
-            >
-              {`${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`} 
-            </h2>
-            
-            <button className="del-btn-small" style={{ width: '35px', height: '35px' }} onClick={() => onChangeMonth(1)}>
-              <i className="ph-duotone ph-caret-right"></i>
-            </button>
           </div>
         </div>
       </div>

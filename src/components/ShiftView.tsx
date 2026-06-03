@@ -1,3 +1,4 @@
+import MonthYearSelector from './MonthYearSelector';
 import { useState, useEffect } from 'react';
 import { sb } from '@/lib/supabase'; 
 
@@ -6,7 +7,8 @@ interface ShiftViewProps {
   currentDate: Date;
   isOpen: boolean;       
   onClose: () => void;   
-  onSaveSuccess?: () => void; // 💡 เพิ่มตัวส่งสัญญาณกลับไปบอกหน้าหลักให้รีเฟรชข้อมูล
+  onSaveSuccess?: () => void;
+  onChangeMonth: (diff: number) => void; // 💡 เพิ่มตัวส่งสัญญาณกลับไปบอกหน้าหลักให้รีเฟรชข้อมูล
 }
 
 const months = [
@@ -14,7 +16,7 @@ const months = [
   "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"
 ];
 
-export default function ShiftView({ userId, currentDate, isOpen, onClose, onSaveSuccess }: ShiftViewProps) {
+export default function ShiftView({ userId, currentDate, isOpen, onClose, onSaveSuccess, onChangeMonth }: ShiftViewProps) {
   const currentYear = currentDate.getFullYear();
   const currentMonth = currentDate.getMonth() + 1;
   
@@ -124,6 +126,10 @@ export default function ShiftView({ userId, currentDate, isOpen, onClose, onSave
 
   return (
     <div className="view active" style={{ paddingBottom: '80px' }}>
+      {/* Month/Year Selector */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
+      </div>
       <div className="card" style={{ background: 'var(--card)', border: '1px solid var(--border)', padding: '15px' }}>
         <div className="calendar-grid">
           {['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'].map(d => (
