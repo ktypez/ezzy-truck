@@ -22,7 +22,6 @@ export default function Home() {
   // 🚨 2. กลุ่มแชร์ State ของระบบปฏิทินกะงานลอยแก้ว
   const [currentDayShift, setCurrentDayShift] = useState<string>('');
   const [currentLeaveType, setCurrentLeaveType] = useState<string | null>(null);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false); 
 
   const fetchCurrentDayShift = async () => {
     if (!session?.user?.id) return;
@@ -143,7 +142,6 @@ export default function Home() {
         onSwitchView={setActiveView}
         onOpenModal={setActiveModal}
         onLogout={handleLogout}
-        onOpenCalendar={() => setIsCalendarOpen(true)} 
       />
 
       <main className="content-area">
@@ -179,16 +177,6 @@ export default function Home() {
             onChangeMonth={handleChangeMonth}
           />
         )}
-        {activeView === 'calendar' && (
-          <ShiftView 
-            userId={session.user.id} 
-            currentDate={currentDate} 
-            isOpen={true} 
-            onClose={() => setActiveView('daily')}
-            onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
       </main>
 
       <div className="nav-tabs">
@@ -205,9 +193,6 @@ export default function Home() {
         </div>
         <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => setActiveView('salary')}>
           <i className="ph-duotone ph-wallet i-icon"></i> รายได้
-        </div>
-        <div className={`tab ${activeView === 'calendar' ? 'active' : ''}`} onClick={() => setActiveView('calendar')}>
-          <i className="ph-duotone ph-calendar-blank i-icon"></i> ปฏิทิน
         </div>
       </div>
 

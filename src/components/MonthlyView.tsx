@@ -20,6 +20,11 @@ const DAYS_TH = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'];
 export default function MonthlyView({ userId, currentDate, onSelectDayRow, refreshTrigger, onChangeMonth }: MonthlyViewProps) {
   const [logs, setLogs] = useState<any[]>([]);
   const [selDay, setSelDay] = useState<number | null>(null);
+const [showShiftPicker, setShowShiftPicker] = useState(false);
+const [shiftPickerDay, setShiftPickerDay] = useState<number | null>(null);
+const [chosenShift, setChosenShift] = useState("");
+const [chosenLeave, setChosenLeave] = useState<string | null>(null);
+const [isSavingShift, setIsSavingShift] = useState(false);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -41,6 +46,35 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
     fetchMonthlyLogs();
   }, [currentDate, userId, refreshTrigger]);
 
+    const months = MONTHS_TH;
+
+  const handleQuickSaveShift = async (targetShift: string, targetLeave?: string | null) => {
+    if (!shiftPickerDay) return;
+    setIsSavingShift(true);
+    const isHoliday = targetShift === "หยุด";
+    try {
+      const payload: any = {
+        user_id: userId, year, month: monthNum, day: shiftPickerDay,
+        shift_time: targetShift,
+        day_type: isHoliday ? "วันหยุด" : "วันทำงาน",
+        is_work: !isHoliday,
+        leave_type: isHoliday ? (targetLeave || null) : null
+      };
+      if (isHoliday) Object.assign(payload, { odo_in: 0, odo_out: 0, ot: 0, late: 0, odo: 0 });
+      const { error } = await sb.from("logs").upsert(payload, { onConflict: "user_id,year,month,day" });
+      if (error) throw error;
+      setShowShiftPicker(false);
+      setShiftPickerDay(null);
+      // Refresh data
+      const { data } = await sb.from("logs").select("*").eq("user_id", userId).eq("year", year).eq("month", monthNum).order("day", { ascending: true });
+      if (data) setLogs(data);
+    } catch (error: any) {
+      alert("เกิดข้อผิดพลาดในการบันทึก: " + error.message);
+    } finally {
+      setIsSavingShift(false);
+    }
+  };
+
   const dayMap: Record<number, any> = {};
   logs.forEach((r) => {
     dayMap[r.day] = r;
@@ -58,6 +92,8 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
       ot: isOff ? 0 : r?.ot || 0,
       late: isOff ? 0 : r?.late || 0,
       hasData: !!r,
+      shift_time: r?.shift_time || null,
+      leave_type: r?.leave_type || null,
       isOff,
       isSick: r?.leave_type === 'sick',
       isPersonal: r?.leave_type === 'personal',
@@ -80,7 +116,7 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
   const selected = selDay ? merged.find((m) => m.day === selDay) : null;
   const maxKm = Math.max(...merged.map((r) => r.km), 1);
 
-  return (
+  return (<>
     <div id="view-monthly" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
@@ -191,7 +227,7 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
               if (r.isOff) {
                 bg = 'var(--primary-bg)';
                 borderColor = 'var(--border)';
-                textColor = 'var(--muted)';
+                textColor = 'var(--primary)';
               } else if (hasData) {
                 bg = `color-mix(in srgb, var(--primary) ${Math.round(8 + intensity * 20)}%, var(--card))`;
                 borderColor = 'var(--primary)';
@@ -294,12 +330,43 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
                   </div>
                 </div>
               ))}
+              {/* Shift Action Button */}
+              <div style={{ gridColumn: '1 / -1', marginTop: 4 }}>
+                <button
+                  onClick={() => {
+                    const dayData = merged.find(m => m.day === selected.day);
+                    setShiftPickerDay(selected.day);
+                    setChosenShift(dayData?.shift_time || "");
+                    setChosenLeave(dayData?.leave_type || null);
+                    setShowShiftPicker(true);
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '10px 0',
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: chosenShift && selected.day === shiftPickerDay && showShiftPicker ? 'var(--active-date-text)' : 'var(--primary)',
+                    background: chosenShift && selected.day === shiftPickerDay && showShiftPicker ? 'var(--primary)' : 'var(--primary-bg)',
+                    border: '2px solid var(--border)',
+                    borderRadius: 10,
+                    cursor: 'pointer',
+                    fontFamily: 'inherit',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 6,
+                  }}
+                >
+                  <i className="ph-duotone ph-clock i-sm"></i>
+                  {selected.shift_time ? selected.shift_time : 'เข้ากะ'}
+                </button>
+              </div>
             </div>
           )}
 
           <div style={{ marginTop: 6, textAlign: 'center' }}>
             <span style={{ fontSize: 10, color: 'var(--muted)' }}>
-              💡 คลิกดูรายละเอียด · ดับเบิลคลิกไปบันทึกวันนั้น
+              💡 คลิกวันที่เพื่อดูรายละเอียด · ดับเบิลคลิกไปบันทึกวันนั้น
             </span>
           </div>
         </div>
@@ -562,7 +629,97 @@ export default function MonthlyView({ userId, currentDate, onSelectDayRow, refre
         </div>
       </div>
     </div>
-  );
+
+      {/* -- Shift Picker Dialog -- */}
+      {showShiftPicker && (
+        <>
+          <div
+            onClick={() => setShowShiftPicker(false)}
+            style={{
+              position: "fixed", inset: 0, zIndex: 500,
+              background: "rgba(0,0,0,0.35)",
+            }}
+          />
+          <div
+            style={{
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 501,
+              background: "var(--card)",
+              border: "2px solid var(--border)",
+              borderRadius: 16,
+              padding: "20px",
+              width: "calc(100% - 40px)",
+              maxWidth: 360,
+              boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+            }}
+          >
+            <div
+              style={{
+                fontSize: 16,
+                fontWeight: 800,
+                color: "var(--text)",
+                marginBottom: 14,
+                textAlign: "center",
+              }}
+            >
+              วันที่ {shiftPickerDay} {shiftPickerDay !== null && months[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
+            </div>
+            <div style={{ display: "table", width: "100%", tableLayout: "fixed", borderSpacing: "8px 0" }}>
+              {["07:30", "08:00", "09:00"].map(time => {
+                const sel = chosenShift === time;
+                return (
+                  <div
+                    key={time}
+                    onClick={() => !isSavingShift && handleQuickSaveShift(time)}
+                    style={{
+                      display: "table-cell", padding: "14px 0", textAlign: "center",
+                      borderRadius: 12, cursor: isSavingShift ? "default" : "pointer",
+                      fontWeight: 700, fontSize: 16,
+                      border: sel ? "2px solid transparent" : "2px solid var(--border)",
+                      background: sel ? "var(--primary)" : "transparent",
+                      color: sel ? "var(--active-date-text, white)" : "var(--text)",
+                      opacity: isSavingShift ? 0.6 : 1,
+                    }}
+                  >
+                    {time}
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{ display: "table", width: "100%", tableLayout: "fixed", borderSpacing: "8px 0", marginTop: 4 }}>
+              {[
+                { key: null, icon: "🛑", label: "วันหยุด", color: "#e74c3c" },
+                { key: "sick", icon: "🤒", label: "ลาป่วย", color: "#e67e22" },
+                { key: "personal", icon: "📋", label: "ลากิจ", color: "#3498db" },
+              ].map(opt => {
+                const sel = chosenShift === "หยุด" && chosenLeave === opt.key;
+                return (
+                  <div
+                    key={opt.key || "off"}
+                    onClick={() => !isSavingShift && handleQuickSaveShift("หยุด", opt.key)}
+                    style={{
+                      display: "table-cell", padding: "12px 0", textAlign: "center",
+                      borderRadius: 12, cursor: isSavingShift ? "default" : "pointer",
+                      fontWeight: 700, fontSize: 14,
+                      border: sel ? "2px solid transparent" : "2px solid var(--border)",
+                      background: sel ? opt.color : "transparent",
+                      color: sel ? "white" : "var(--text)",
+                      opacity: isSavingShift ? 0.6 : 1,
+                    }}
+                  >
+                    <div style={{ fontSize: 18 }}>{opt.icon}</div>
+                    <div>{opt.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      )}
+  </>);
 }
 
 /* ── KpiCard inline component ── */

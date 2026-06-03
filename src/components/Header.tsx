@@ -6,7 +6,6 @@ interface HeaderProps {
   onSwitchView: (view: string) => void;
   onOpenModal: (modalName: 'profile' | 'theme' | null) => void;
   onLogout: () => void;
-  onOpenCalendar: () => void; 
 }
 
 export default function Header({
@@ -17,7 +16,6 @@ export default function Header({
   onSwitchView,
   onOpenModal,
   onLogout,
-  onOpenCalendar 
 }: HeaderProps) {
   return (
     <>
