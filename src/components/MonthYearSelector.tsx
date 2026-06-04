@@ -5,10 +5,10 @@ const MONTHS_TH = [
   'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
 ];
 
-export default function MonthYearSelector({ currentDate, onChangeMonth }: { currentDate: Date; onChangeMonth: (diff: number) => void }) {
+export default function MonthYearSelector({ currentDate, onChangeMonth, availableYears }: { currentDate: Date; onChangeMonth: (diff: number) => void; availableYears?: number[] }) {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
-  const years = Array.from({ length: 9 }, (_, i) => year - 3 + i);
+  const years = (availableYears && availableYears.length > 0) ? [...availableYears].sort((a, b) => a - b) : [year];
 
   const handleMonthChange = (val: string | number) => {
     const newMonth = Number(val);

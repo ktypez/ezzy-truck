@@ -19,6 +19,7 @@ const DAYS_TH = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'];
 
 export default function MonthlyView({ userId, currentDate, onSelectDayRow, refreshTrigger, onChangeMonth }: MonthlyViewProps) {
   const [logs, setLogs] = useState<any[]>([]);
+  const [availableYears, setAvailableYears] = useState<number[]>([]);
   const [selDay, setSelDay] = useState<number | null>(null);
 const [showShiftPicker, setShowShiftPicker] = useState(false);
 const [shiftPickerDay, setShiftPickerDay] = useState<number | null>(null);
@@ -45,6 +46,21 @@ const [isSavingShift, setIsSavingShift] = useState(false);
     }
     fetchMonthlyLogs();
   }, [currentDate, userId, refreshTrigger]);
+
+  useEffect(() => {
+    async function fetchYears() {
+      const { data } = await sb
+        .from("logs")
+        .select("year")
+        .eq("user_id", userId)
+        .order("year", { ascending: false });
+      if (data) {
+        const years = [...new Set(data.map(r => r.year))] as number[];
+        setAvailableYears(years);
+      }
+    }
+    fetchYears();
+  }, [userId, refreshTrigger]);
 
     const months = MONTHS_TH;
 
@@ -120,40 +136,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
     <div id="view-monthly" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
-        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
-      </div>
-      {/* ── KPI Cards ── */}
-      <div style={{ padding: '0' }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 5,
-            marginBottom: 5,
-          }}
-        >
-          <KpiCard icon="ph-arrows-clockwise" label="รอบรวม" value={tot.rounds} unit="รอบ" />
-          <KpiCard icon="ph-map-pin" label="จุดรวม" value={tot.points} unit="จุด" />
-          <KpiCard icon="ph-road" label="ระยะทาง" value={tot.km.toLocaleString()} unit="km" />
-        </div>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gap: 5,
-            marginBottom: 8,
-          }}
-        >
-          <KpiCard icon="ph-clock" label="OT รวม" value={tot.ot.toFixed(1)} unit="ชม." />
-          <KpiCard
-            icon="ph-warning"
-            label="มาสาย"
-            value={`${tot.late}`}
-            unit="นาที"
-            accent={tot.late > 0 ? 'var(--primary)' : 'var(--muted)'}
-          />
-          <KpiCard icon="ph-briefcase" label="ทำงาน" value={tot.workDays} unit="วัน" />
-        </div>
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} />
       </div>
 
       {/* ── Calendar Grid ── */}
@@ -721,81 +704,4 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       )}
   </>);
 }
-
-/* ── KpiCard inline component ── */
-function KpiCard({
-  icon,
-  label,
-  value,
-  unit,
-  accent,
-}: {
-  icon: string;
-  label: string;
-  value: string | number;
-  unit: string;
-  accent?: string;
-}) {
-  return (
-    <div
-      className="card"
-      style={{
-        padding: '12px 8px',
-        marginBottom: 0,
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          bottom: -4,
-          right: -4,
-          fontSize: 32,
-          opacity: 0.06,
-          lineHeight: 1,
-          pointerEvents: 'none',
-        }}
-      >
-        <i className={`ph-duotone ${icon} i-icon`}></i>
-      </div>
-      <div
-        style={{
-          fontSize: 26,
-          fontWeight: 800,
-          color: accent || 'var(--primary)',
-          lineHeight: 1.2,
-        }}
-      >
-        {value}
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 600,
-            color: 'var(--muted)',
-            marginLeft: 2,
-          }}
-        >
-          {unit}
-        </span>
-      </div>
-      <div
-        style={{
-          fontSize: 11,
-          color: 'var(--muted)',
-          fontWeight: 600,
-          marginTop: 2,
-        }}
-      >
-        <i
-          className={`ph-duotone ${icon} i-icon`}
-          style={{ fontSize: 11, marginRight: 3, verticalAlign: 'middle' }}
-        ></i>
-        {label}
-      </div>
-    </div>
-  );
-}
-
 
