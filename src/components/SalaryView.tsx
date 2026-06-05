@@ -72,9 +72,8 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
       </div>
       
       {/* Hero Net Income Card */}
-      <div style={{ 
+      <div className="card" style={{ 
         background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-        borderRadius: '16px',
         padding: '18px 20px',
         marginBottom: '15px'
       }}>
@@ -98,12 +97,12 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
       {/* Leave Balance */}
       {(yearlySick > 0 || yearlyPersonal > 0) && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '15px' }}>
-          <div style={{ background: yearlySick > 0 ? 'var(--primary-bg)' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+          <div className="card" style={{ padding: '12px', textAlign: 'center', marginBottom: 0, background: yearlySick > 0 ? 'var(--primary-bg)' : undefined }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>🤒 ลาป่วย</div>
             <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : 'var(--primary)' }}>{Math.max(0, 30 - yearlySick)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 30 วัน</div>
           </div>
-          <div style={{ background: yearlyPersonal > 0 ? 'var(--primary-bg)' : 'var(--card)', borderRadius: '12px', padding: '12px', textAlign: 'center', border: '1px solid var(--border)' }}>
+          <div className="card" style={{ padding: '12px', textAlign: 'center', marginBottom: 0, background: yearlyPersonal > 0 ? 'var(--primary-bg)' : undefined }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>📋 ลากิจ</div>
             <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : 'var(--secondary)' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
@@ -112,9 +111,9 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
       )}
 
       {/* Breakdown */}
-      <div style={{ marginTop: '15px', background: 'var(--card)', borderRadius: '20px', border: '1px solid var(--border)', overflow: 'hidden' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden', marginTop: '15px' }}>
         <div style={{ background: 'var(--primary-bg)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <i className="ph-duotone ph-list-numbers" style={{ color: 'var(--secondary)', fontSize: '16px' }}></i>
+          <i className="ph-duotone ph-list-numbers" style={{ color: 'var(--muted)', fontSize: '16px' }}></i>
           <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.5px' }}>รายละเอียดรายได้</span>
         </div>
         <div className="salary-breakdown" style={{ padding: '6px 16px' }}>
@@ -132,9 +131,9 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
       </div>
 
       {/* Tax Summary */}
-      <div style={{ marginTop: '15px', background: 'var(--card)', borderRadius: '20px', border: '1px solid var(--border)', overflow: 'hidden' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden', marginTop: '15px' }}>
         <div style={{ background: 'var(--primary-bg)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <i className="ph-duotone ph-receipt" style={{ color: 'var(--secondary)', fontSize: '16px' }}></i>
+          <i className="ph-duotone ph-receipt" style={{ color: 'var(--muted)', fontSize: '16px' }}></i>
           <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.5px' }}>ภาษีหัก ณ ที่จ่าย 3%</span>
         </div>
         <div style={{ padding: '10px 16px' }}>

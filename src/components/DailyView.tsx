@@ -154,19 +154,31 @@ export default function DailyView({
 
       {/* Shift badge + Day type */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
-        <div style={{ flex: 1, background: 'var(--primary-bg)', borderRadius: '10px', padding: '8px 12px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', border: '2px solid var(--border)' }} onClick={() => setShowShiftSelector(true)}>
-          <i className={`ph-duotone ${currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ph-thermometer-hot' : currentLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`} style={{ color: currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? '#e67e22' : currentLeaveType === 'personal' ? '#3498db' : '#e74c3c') : 'var(--secondary)' }}></i>
-          <span style={{ fontSize: '16px', fontWeight: 700, color: currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? '#e67e22' : currentLeaveType === 'personal' ? '#3498db' : '#e74c3c') : 'var(--text)' }}>
-            {currentShift ? (currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ลาป่วย' : currentLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
-          </span>
-        </div>
+        <button type="button" onClick={() => setShowShiftSelector(true)}
+          style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+            background: currentShift ? 'var(--primary)' : 'var(--border)',
+            color: currentShift ? 'var(--active-date-text, white)' : 'var(--muted)',
+            border: currentShift ? '2px solid var(--primary)' : '2px solid transparent' }}>
+          <i className={`ph-duotone ${currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ph-thermometer-hot' : currentLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`}></i>
+          {currentShift ? (currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ลาป่วย' : currentLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
+        </button>
         <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
-          <button type="button" onClick={() => setDayType('normal')}
-            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'normal' ? 'var(--primary)' : 'var(--border)', color: dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)', border: dayType === 'normal' ? '2px solid var(--primary)' : '2px solid transparent' }}>
+          <button type="button" onClick={() => { if (currentShift !== 'หยุด') setDayType('normal'); }}
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
+              cursor: currentShift === 'หยุด' ? 'default' : 'pointer',
+              background: currentShift === 'หยุด' ? 'var(--border)' : (dayType === 'normal' ? 'var(--primary)' : 'var(--border)'),
+              color: currentShift === 'หยุด' ? 'var(--muted)' : (dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)'),
+              border: currentShift === 'หยุด' ? '2px solid transparent' : (dayType === 'normal' ? '2px solid var(--primary)' : '2px solid transparent'),
+              opacity: currentShift === 'หยุด' ? 0.35 : 1 }}>
             ปกติ
           </button>
-          <button type="button" onClick={() => setDayType('special')}
-            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, background: dayType === 'special' ? 'var(--primary)' : 'var(--border)', color: dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)', border: dayType === 'special' ? '2px solid var(--primary)' : '2px solid transparent' }}>
+          <button type="button" onClick={() => { if (currentShift !== 'หยุด') setDayType('special'); }}
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
+              cursor: currentShift === 'หยุด' ? 'default' : 'pointer',
+              background: currentShift === 'หยุด' ? 'var(--border)' : (dayType === 'special' ? 'var(--primary)' : 'var(--border)'),
+              color: currentShift === 'หยุด' ? 'var(--muted)' : (dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)'),
+              border: currentShift === 'หยุด' ? '2px solid transparent' : (dayType === 'special' ? '2px solid var(--primary)' : '2px solid transparent'),
+              opacity: currentShift === 'หยุด' ? 0.35 : 1 }}>
             x2
           </button>
         </div>
@@ -194,9 +206,7 @@ export default function DailyView({
 
           {/* Odometer Card */}
           <div className="card" style={{ padding: '12px 16px' }}>
-            <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--muted)', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <i className="ph-duotone ph-speedometer" style={{ color: 'var(--secondary)' }}></i> ไมล์รถ
-            </div>
+
             <div className="input-group"><span>ไมล์เข้า</span><input type="number" id="odoIn" className="input-field input-field-accent" value={odoIn} onChange={e => setOdoIn(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('odoOut')?.focus() }} /></div>
             <div className="input-group"><span>ไมล์ออก</span><input type="number" id="odoOut" className="input-field input-field-accent" value={odoOut} onChange={e => setOdoOut(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('otHours')?.focus() }} /></div>
             <div className="input-group"><span>ชั่วโมง OT</span><input type="number" step="0.5" id="otHours" className="input-field input-field-accent" value={otHours} onChange={e => setOtHours(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('lateMin')?.focus() }} /></div>
@@ -207,7 +217,7 @@ export default function DailyView({
           <div className="card" style={{ display: 'flex', gap: '10px', padding: '12px 10px' }}>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <i className="ph-duotone ph-arrows-clockwise i-sm" style={{ color: 'var(--secondary)' }}></i> รอบ
+                <i className="ph-duotone ph-arrows-clockwise i-sm" style={{ color: 'var(--muted)' }}></i> รอบ
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button type="button" className="del-btn-small" onClick={() => setRoundCount(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
@@ -220,7 +230,7 @@ export default function DailyView({
             <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <i className="ph-duotone ph-map-trifold i-sm" style={{ color: 'var(--secondary)' }}></i> จุด
+                <i className="ph-duotone ph-map-trifold i-sm" style={{ color: 'var(--muted)' }}></i> จุด
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button type="button" className="del-btn-small" onClick={() => setPointCount(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>

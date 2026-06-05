@@ -10,7 +10,11 @@ import { APP_CONFIG } from "@/config";
 
 export default function Home() {
   const [session, setSession] = useState<any>(null);
-  const [theme, setTheme] = useState(() => localStorage.getItem('truck-theme') || 'light');
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('truck-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'retro-dark' : 'light';
+  });
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [activeView, setActiveView] = useState('daily');
@@ -199,6 +203,11 @@ export default function Home() {
       <Modals 
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
+        onResetTheme={() => {
+          localStorage.removeItem('truck-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          setTheme(prefersDark ? 'retro-dark' : 'light');
+        }}
         onSelectTheme={setTheme}
       />
     </div>

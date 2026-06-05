@@ -5,9 +5,10 @@ interface ModalsProps {
   activeModal: 'profile' | 'theme' | null;
   onClose: () => void;
   onSelectTheme: (theme: string) => void;
+  onResetTheme?: () => void;
 }
 
-export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsProps) {
+export default function Modals({ activeModal, onClose, onSelectTheme, onResetTheme }: ModalsProps) {
   const [newPassword, setNewPassword] = useState('');
 
   if (!activeModal) return null;
@@ -49,13 +50,20 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
           maxHeight: '90vh', 
           overflowY: 'auto',
-          ...(activeModal === 'theme' ? { paddingTop: '40px' } : {})
+          ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
         }}
       >
-        {/* 🟢 2. ปรับปุ่มกากบาทมุมบนขวาให้เป็นวงกลมสีแดงแบบพรีเมียมตามมาตรฐานแอปตัวใหม่ */}
-        <button className="modal-close-red" onClick={onClose} style={{ top: '15px', right: '15px' }}>
-          <i className="ph-bold ph-x"></i>
-        </button>
+        {/* Top bar: Reset (left) / ปิด (right) */}
+        <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <button onClick={() => { onResetTheme?.(); onClose(); }}
+            style={{ background: 'var(--border)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)', fontSize: '12px', fontWeight: 700, padding: '4px 12px', height: '32px', borderRadius: '20px' }}>
+            <i className="ph-duotone ph-arrow-counter-clockwise" style={{ fontSize: '13px' }}></i> Reset
+          </button>
+          <button onClick={onClose}
+            style={{ background: 'var(--border)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)', fontSize: '12px', fontWeight: 700, padding: '4px 12px', height: '32px', borderRadius: '20px' }}>
+            ปิด <i className="ph-bold ph-x" style={{ fontSize: '13px' }}></i>
+          </button>
+        </div>
 
         {activeModal === 'profile' && (
           <div>
@@ -80,29 +88,32 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
         )}
 
         {activeModal === 'theme' && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <div style={{ position: 'relative' }}>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             {/* Light Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>&nbsp;</p>
+              <p style={{ fontSize: '13px', color: 'transparent', fontWeight: 800, marginBottom: '2px', textAlign: 'center', userSelect: 'none' }}>&nbsp;</p>
               <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
               <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva00')} style={{ background: '#071828', color: '#00aacc', borderColor: '#0e2a40' }}>🔵 EVA-00</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva02')} style={{ background: '#1c0a00', color: '#ff8c00', borderColor: '#cc1100' }}>EVA-02</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva04')} style={{ background: '#0d1120', color: '#4a90d9', borderColor: '#1e2d45' }}>EVA-04</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva06')} style={{ background: '#ffffff', color: '#c8a840', borderColor: '#e0d4b8' }}>🤍 EVA-06</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva-mark09')} style={{ background: '#111811', color: '#88cc88', borderColor: '#1a2e1a' }}>👻 Mark.09</button>
+              
+              
+              
+              
+              
               </div>
 
             {/* Dark Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <p style={{ fontSize: '13px', color: 'var(--muted)', fontWeight: 800, marginBottom: '-5px', textAlign: 'center' }}>&nbsp;</p>
+              <p style={{ fontSize: '13px', color: 'transparent', fontWeight: 800, marginBottom: '2px', textAlign: 'center', userSelect: 'none' }}>&nbsp;</p>
               <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: '#2D2D2D', color: '#FDF6E3', borderColor: '#FDF6E3' }}>Retro Dark</button>
               <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva01')} style={{ background: '#0e0c15', color: '#7cff00', borderColor: '#cc00ff' }}>EVA-01</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva03')} style={{ background: '#111111', color: '#8b0000', borderColor: '#3a3a3a' }}>EVA-03</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva05')} style={{ background: '#141414', color: '#c8a000', borderColor: '#2a2416' }}>🟡 EVA-05</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva08')} style={{ background: '#1e0418', color: '#ff66cc', borderColor: '#4a1040' }}>🩷 EVA-08</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('eva13')} style={{ background: '#111111', color: '#f0f0f0', borderColor: '#222222' }}>☯️ EVA-13</button>
+              
+              
+              
+              
+              
+            </div>
             </div>
           </div>
         )}
