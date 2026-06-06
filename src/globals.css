@@ -482,6 +482,80 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     box-shadow: none !important;
 }
 
+/* 🖍️ Theme: Crayon Shin-chan */
+[data-theme="crayon"] {
+    --bg: #FFF9C4;
+    --body-bg-image: url("/files/001.jpeg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    
+    --card: #FFFFFF;
+    --text: #3D2B1F;
+    --muted: #8C7E7A;
+    --border: #FF6B35;
+    --primary: #FF6B35 !important;
+    --primary-bg: #FFE4D6 !important;
+    --secondary: #4ECDC4 !important;
+    --pattern-color: rgba(255, 107, 53, 0.06);
+    --body-bg-image: linear-gradient(135deg, #FFF9C4 0%, #FFE4D6 50%, #FFF9C4 100%);
+    --body-bg-size: 100% 100%;
+    --active-date-text: #FFFFFF;
+}
+
+[data-theme="crayon"] .card,
+[data-theme="crayon"] .tab,
+[data-theme="crayon"] .seg-btn,
+[data-theme="crayon"] .main-save-btn,
+[data-theme="crayon"] .cal-cell,
+[data-theme="crayon"] .date-bar-item {
+    border-radius: 20px 30px 20px 30px / 25px 20px 30px 25px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 4px 4px 0px rgba(255, 107, 53, 0.2) !important;
+}
+
+[data-theme="crayon"] .tab.active,
+[data-theme="crayon"] .main-save-btn,
+[data-theme="crayon"] .auth-btn,
+[data-theme="crayon"] .seg-btn.active {
+    background: linear-gradient(135deg, #FF6B35, #FF8C5A) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
+    border: none !important;
+}
+
+[data-theme="crayon"] .input-field {
+    background-color: #FFE4D6 !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 15px !important;
+}
+
+[data-theme="crayon"] .main-save-btn:hover {
+    animation: crayonBounce 0.4s ease-in-out;
+}
+
+@keyframes crayonBounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08) rotate(-2deg); }
+    100% { transform: scale(1); }
+}
+
+/* 🎨 Crayon doodle accents */
+[data-theme="crayon"] .summary-banner,
+[data-theme="crayon"] .card {
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(4px);
+    box-shadow: 4px 4px 0px rgba(255, 107, 53, 0.15), 0 0 0 2px var(--border) !important;
+}
+
+[data-theme="crayon"] th {
+    color: var(--secondary) !important;
+    font-weight: 800 !important;
+}
+
+[data-theme="crayon"] .date-slider-item.active {
+    background: linear-gradient(135deg, #FF6B35, #FF8C5A) !important;
+}
+
 #offline-toast {
   position: fixed;
   top: 0;
