@@ -551,63 +551,7 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 
 [data-theme="crayon"] .date-slider-item.active {
     background: linear-gradient(135deg, #E53935, #FF7043) !important;
-
-
-/* 🎨 Shin-chan decorative elements */
-[data-theme="crayon"] .content-area {
-    position: relative;
 }
-
-[data-theme="crayon"] .content-area::before {
-    content: '';
-    position: fixed;
-    top: 20px;
-    right: 10px;
-    width: 80px;
-    height: 80px;
-    background: url('/files/star.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 0;
-    animation: floatStar 4s ease-in-out infinite;
-}
-
-[data-theme="crayon"] .content-area::after {
-    content: '';
-    position: fixed;
-    bottom: 80px;
-    left: 10px;
-    width: 120px;
-    height: 60px;
-    background: url('/files/cloud.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.12;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes floatStar {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(15deg); }
-}
-
-[data-theme="crayon"] .tab.active::after {
-    content: '⭐';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    font-size: 12px;
-    animation: sparkle 1.5s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    50% { transform: scale(1.3) rotate(20deg); opacity: 0.7; }
-}
-
-}
-
 [data-theme="crayon"] .summary-banner {
     border-left: 4px solid #FFD54F !important;
 }
@@ -763,38 +707,6 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     position: relative;
 }
 
-/* Shin-chan face — floating top-left */
-[data-theme="crayon"] .content-area::before {
-    content: '';
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    width: 60px;
-    height: 60px;
-    background: url('/files/shinchan-face.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.18;
-    pointer-events: none;
-    z-index: 0;
-    animation: shinchanFloat 5s ease-in-out infinite;
-}
-
-/* Chibi Shin-chan — bottom-right corner */
-[data-theme="crayon"] .content-area::after {
-    content: '';
-    position: fixed;
-    bottom: 70px;
-    right: 10px;
-    width: 70px;
-    height: 140px;
-    background: url('/files/shinchan-chibi.svg') no-repeat center bottom;
-    background-size: contain;
-    opacity: 0.15;
-    pointer-events: none;
-    z-index: 0;
-    animation: chibiDance 6s ease-in-out infinite;
-}
-
 /* Action Kamen star — rotating top-right area */
 [data-theme="crayon"] .header::after {
     content: '';
@@ -854,24 +766,6 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     z-index: 1;
 }
 
-/* Shin-chan badge on cards */
-[data-theme="crayon"] .card::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 32px;
-    height: 32px;
-    background: url('/files/badge.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.2;
-    pointer-events: none;
-}
-
-[data-theme="crayon"] .card {
-    position: relative;
-    overflow: visible !important;
-}
 
 /* Character thumbnail on summary banner */
 [data-theme="crayon"] .summary-banner::after {
@@ -894,20 +788,6 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 /* ===================================================
    ✏️ Animations
    =================================================== */
-
-@keyframes shinchanFloat {
-    0%, 100% { transform: translateY(0) rotate(-3deg); }
-    25% { transform: translateY(-6px) rotate(0deg); }
-    50% { transform: translateY(-2px) rotate(3deg); }
-    75% { transform: translateY(-8px) rotate(0deg); }
-}
-
-@keyframes chibiDance {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-5px) rotate(-5deg); }
-    50% { transform: translateY(0) rotate(0deg); }
-    75% { transform: translateY(-3px) rotate(5deg); }
-}
 
 @keyframes heroSpin {
     0% { transform: rotate(0deg) scale(1); }
