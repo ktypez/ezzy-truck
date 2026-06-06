@@ -111,6 +111,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       shift_time: r?.shift_time || null,
       leave_type: r?.leave_type || null,
       isOff,
+      isHoliday: r?.shift_time === 'หยุด' && !r?.leave_type,
       isSick: r?.leave_type === 'sick',
       isPersonal: r?.leave_type === 'personal',
       isDouble: r?.day_type === 'special' || r?.day_type === 'holiday' || r?.is_special === true,
@@ -125,8 +126,11 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       km: a.km + r.km,
       ot: a.ot + r.ot,
       late: a.late + r.late,
+      holiday: a.holiday + (r.isHoliday ? 1 : 0),
+      sickLeave: a.sickLeave + (r.leave_type === 'sick' ? 1 : 0),
+      personalLeave: a.personalLeave + (r.leave_type === 'personal' ? 1 : 0),
     }),
-    { workDays: 0, rounds: 0, points: 0, km: 0, ot: 0, late: 0 },
+    { workDays: 0, rounds: 0, points: 0, km: 0, ot: 0, late: 0, holiday: 0, sickLeave: 0, personalLeave: 0 },
   );
 
   const selected = selDay ? merged.find((m) => m.day === selDay) : null;
@@ -189,7 +193,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   textAlign: 'center',
                   fontSize: 13,
                   fontWeight: 700,
-                  color: 'var(--muted)',
+                  color: ['var(--primary)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--secondary)'][DAYS_TH.indexOf(d)] || 'var(--muted)',
                   paddingBottom: 4,
                 }}
               >
@@ -217,6 +221,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               }
 
               const isSelected = selDay === r.day;
+              const isToday = new Date().getDate() === r.day && new Date().getMonth() === month && new Date().getFullYear() === year;
 
               return (
                 <button
@@ -225,19 +230,17 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   onDoubleClick={() => onSelectDayRow(r.day)}
                   style={{
                     background: bg,
-                    border: `${isSelected ? 2 : 1}px solid ${isSelected ? 'var(--primary)' : borderColor}`,
+                    border: `${isSelected ? 2 : isToday ? 2 : 1}px solid ${isSelected ? 'var(--primary)' : isToday ? 'var(--primary)' : borderColor}`,
                     borderRadius: 8,
                     padding: '4px 0',
                     cursor: 'pointer',
                     position: 'relative',
+                    boxShadow: isToday ? '0 0 0 2px var(--primary)' : 'none',
                     transition: 'transform 0.15s, box-shadow 0.15s',
                     outline: 'none',
                     fontFamily: 'inherit',
                     textAlign: 'center',
-                    minHeight: 32,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    height: 76,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.08)';
@@ -248,15 +251,25 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  <div
-                    style={{
-                      fontSize: 16,
-                      fontWeight: 700,
-                      color: textColor,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {r.day}
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 1, justifyContent: 'space-between', height: '100%' }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: textColor, lineHeight: 1.1 }}>{r.day}</div>
+                    {hasData && !r.isOff && (
+                      <>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>รอบ</span><span>{r.rounds}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>จุด</span><span>{r.points}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>KM</span><span>{r.km}</span></div>
+                      </>
+                    )}
+                    {r.shift_time && !r.isOff && (
+                      <div style={{ fontSize: 8, fontWeight: 700, color: 'white', background: 'var(--primary)', borderRadius: 99, padding: '1px 3px', lineHeight: 1.4, marginTop: 1 , alignSelf: 'center' }}>
+                        {r.shift_time}
+                      </div>
+                    )}
+                    {r.isOff && (
+                      <div style={{ fontSize: 8, fontWeight: 700, color: 'white', background: 'var(--muted)', borderRadius: 99, padding: '1px 3px', lineHeight: 1.4, marginTop: 1 , alignSelf: 'center' }}>
+                        หยุด
+                      </div>
+                    )}
                   </div>
                 </button>
               );
@@ -355,262 +368,50 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         </div>
       </div>
 
-      {/* ── Daily Details Table ── */}
-      <div style={{ padding: '0', marginTop: 10 }}>
+      {/* ── Summary Card ── */}
+      <div
+        className="card"
+        style={{
+          padding: '12px',
+          marginTop: 10,
+        }}
+      >
         <div
-          className="card"
           style={{
-            padding: '10px',
-            marginBottom: 0,
+            fontSize: 15,
+            fontWeight: 800,
+            color: 'var(--text)',
+            marginBottom: 10,
           }}
         >
-          <div
-            style={{
-              fontSize: 15,
-              fontWeight: 800,
-              color: 'var(--text)',
-              marginBottom: 8,
-            }}
-          >
-            <i className="ph-duotone ph-list-numbers i-icon" style={{ marginRight: 6 }}></i>
-            ตารางรายวัน
-          </div>
-
-          {merged.length === 0 ? (
-            <div
-              style={{
-                textAlign: 'center',
-                padding: '20px 0',
-                color: 'var(--muted)',
-                fontWeight: 600,
-              }}
-            >
-              <i className="ph-duotone ph-database i-icon" style={{ fontSize: 24, display: 'block', marginBottom: 6 }}></i>
-              ยังไม่มีข้อมูลในเดือนนี้
-              <div style={{ fontSize: 12, marginTop: 4 }}>
-                เริ่มบันทึกข้อมูลประจำวันกันเลย!
-              </div>
+          <i className="ph-duotone ph-chart-bar i-icon" style={{ marginRight: 6 }}></i>
+          สรุปเดือนนี้
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 8,
+          }}
+        >
+          {[
+            { label: 'รอบ', value: tot.rounds },
+            { label: 'จุด', value: tot.points },
+            { label: 'KM', value: tot.km.toLocaleString() },
+            { label: 'OT', value: tot.ot.toFixed(1) },
+            { label: 'สาย', value: tot.late + "'" },
+            { label: 'วันทำงาน', value: tot.workDays },
+            { label: 'วันหยุด', value: tot.holiday },
+            { label: 'ลา', value: tot.sickLeave + tot.personalLeave },
+          ].map((item, i) => (
+            <div key={i} style={{ textAlign: 'center', padding: '6px 0', background: 'var(--primary-bg)', borderRadius: 8 }}>
+              <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--primary)', lineHeight: 1.3 }}>{item.value}</div>
+              <div style={{ fontSize: 12, color: 'var(--muted)', fontWeight: 600 }}>{item.label}</div>
             </div>
-          ) : (
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
-                <thead>
-                  <tr>
-                    {['วัน', 'รอบ', 'จุด', 'km', 'OT', 'สาย'].map((h) => (
-                      <th
-                        key={h}
-                        style={{
-                          padding: '6px 6px',
-                          textAlign: 'right',
-                          fontSize: 12,
-                          fontWeight: 700,
-                          color: 'var(--muted)',
-                          textTransform: 'uppercase',
-                          letterSpacing: 0.5,
-                          borderBottom: '1.5px solid var(--border)',
-                        }}
-                      >
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {merged.map((r, i) => {
-                    const isOffRow = r.isOff;
-                    return (
-                      <tr
-                        key={r.day}
-                        onClick={() => onSelectDayRow(r.day)}
-                        style={{
-                          background: i % 2 ? 'color-mix(in srgb, var(--primary) 3%, transparent)' : 'transparent',
-                          cursor: 'pointer',
-                          transition: 'background 0.15s',
-                          borderTop: isOffRow ? '1px dashed var(--border)' : 'none',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'var(--primary-bg)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = i % 2 ? 'color-mix(in srgb, var(--primary) 3%, transparent)' : 'transparent';
-                        }}
-                      >
-                        <td
-                          style={{
-                            padding: '7px 6px',
-                            fontWeight: 700,
-                            color: isOffRow ? 'var(--muted)' : 'var(--text)',
-                            textAlign: 'right',
-                            opacity: isOffRow ? 0.5 : 1,
-                          }}
-                        >
-                          {isOffRow ? (
-                            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>{r.day}</span>
-                          ) : (
-                            <span style={{ fontWeight: 800, fontSize: 16 }}>{r.day}</span>
-                          )}
-                        </td>
-                        {isOffRow ? (
-                          <td
-                            colSpan={5}
-                            style={{
-                              padding: '7px 6px',
-                              textAlign: 'center',
-                              color: 'var(--muted)',
-                              fontWeight: 700,
-                              fontSize: 15,
-                              opacity: 0.7,
-                              letterSpacing: 2,
-                            }}
-                          >
-                            {'--- ' + (r.isSick ? 'ลาป่วย' : r.isPersonal ? 'ลากิจ' : 'วันหยุด') + ' ---'}
-                          </td>
-                        ) : (
-                          <>
-                            <td
-                              style={{
-                                padding: '7px 6px',
-                                fontWeight: 700,
-                                color: 'var(--primary)',
-                                textAlign: 'right',
-                                fontSize: 15,
-                              }}
-                            >
-                              {r.rounds}
-                            </td>
-                            <td
-                              style={{
-                                padding: '7px 6px',
-                                color: 'var(--secondary)',
-                                textAlign: 'right',
-                              }}
-                            >
-                              {r.points}
-                            </td>
-                            <td
-                              style={{
-                                padding: '7px 6px',
-                                fontWeight: 700,
-                                color: 'var(--text)',
-                                textAlign: 'right',
-                              }}
-                            >
-                              {r.km}
-                            </td>
-                            <td
-                              style={{
-                                padding: '7px 6px',
-                                color: r.ot > 0 ? 'var(--primary)' : 'var(--border)',
-                                textAlign: 'right',
-                              }}
-                            >
-                              {r.ot > 0 ? (
-                                <span style={{ fontWeight: 700 }}>{r.ot}</span>
-                              ) : (
-                                <span style={{ color: 'var(--border)' }}>—</span>
-                              )}
-                            </td>
-                            <td
-                              style={{
-                                padding: '7px 6px',
-                                textAlign: 'right',
-                              }}
-                            >
-                              {r.late > 0 ? (
-                                <span
-                                  style={{
-                                    color: 'var(--primary)',
-                                    fontWeight: 700,
-                                    fontSize: 13,
-                                  }}
-                                >
-                                  {r.late}′
-                                </span>
-                              ) : (
-                                <span style={{ color: 'var(--border)' }}>—</span>
-                              )}
-                            </td>
-                          </>
-                        )}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-                <tfoot>
-                  <tr
-                    style={{
-                      borderTop: '1.5px solid var(--border)',
-                      background: 'color-mix(in srgb, var(--primary) 6%, transparent)',
-                    }}
-                  >
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontSize: 11,
-                        fontWeight: 700,
-                        color: 'var(--muted)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      รวม
-                    </td>
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontWeight: 900,
-                        color: 'var(--primary)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {tot.rounds}
-                    </td>
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontWeight: 900,
-                        color: 'var(--secondary)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {tot.points}
-                    </td>
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontWeight: 900,
-                        color: 'var(--text)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {tot.km.toLocaleString()}
-                    </td>
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontWeight: 900,
-                        color: 'var(--primary)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {tot.ot.toFixed(1)}
-                    </td>
-                    <td
-                      style={{
-                        padding: '8px 6px',
-                        fontWeight: 900,
-                        color: tot.late > 0 ? 'var(--primary)' : 'var(--muted)',
-                        textAlign: 'right',
-                      }}
-                    >
-                      {tot.late}′
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          )}
+          ))}
         </div>
       </div>
+
     </div>
 
       {/* -- Shift Picker Dialog -- */}

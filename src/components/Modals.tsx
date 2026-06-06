@@ -96,6 +96,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme, onResetThe
               <p style={{ fontSize: '13px', color: 'transparent', fontWeight: 800, marginBottom: '2px', textAlign: 'center', userSelect: 'none' }}>&nbsp;</p>
               <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
               <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
               
               
               

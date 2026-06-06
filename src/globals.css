@@ -13,6 +13,10 @@
                      linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
     --body-bg-size: 24px 24px;
     --active-date-text: #ffffff;
+    /* Modern font variables */
+    --font-sans: "Outfit", sans-serif;
+    --font-serif: "Merriweather", serif;
+    --font-mono: "Fira Code", monospace;
 }
 
 /* 🌙 Dark mode: auto-apply retro-dark when system prefers dark */
@@ -141,7 +145,6 @@
     --primary: #f48f68 !important;
     --primary-bg: #ffe394 !important;
     --secondary: #8bdfdd !important;
-    --active-date-text: #ffffff;
 }
 
 [data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
@@ -454,11 +457,31 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     --active-date-text: #ffffff;
 }
 
-/* ===================================================
-   📲 PWA Install Banner & Offline Toast
-   =================================================== */
+/* 🎨 Theme: Modern */
+[data-theme="modern"] {
+    --bg: #FAF7F2;
+    --card: #FFFFFF;
+    --text: #2C2C2C;
+    --muted: #6B6B6B;
+    --border: #D4C9BE;
+    --primary: #C76B5D !important;
+    --primary-bg: #F5E6DE !important;
+    --secondary: #7A9E8D;
+    --body-bg-image: none;
+    --active-date-text: #FFFFFF;
+}
 
-/* Offline toast — fixed top */
+[data-theme="modern"] .card,
+[data-theme="modern"] .tab,
+[data-theme="modern"] .seg-btn,
+[data-theme="modern"] .main-save-btn,
+[data-theme="modern"] .cal-cell,
+[data-theme="modern"] .date-bar-item {
+    border-radius: 12px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
 #offline-toast {
   position: fixed;
   top: 0;
@@ -473,6 +496,7 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
   font-weight: 500;
   animation: slideDown 0.3s ease-out;
 }
+
 
 /* Install banner — fixed bottom */
 #install-banner {
