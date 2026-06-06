@@ -265,9 +265,19 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                         {r.shift_time}
                       </div>
                     )}
-                    {r.isOff && (
-                      <div style={{ fontSize: 8, fontWeight: 700, color: 'white', background: 'var(--muted)', borderRadius: 99, padding: '1px 3px', lineHeight: 1.4, marginTop: 1 , alignSelf: 'center' }}>
+                    {r.isHoliday && (
+                      <div style={{ fontSize: 8, fontWeight: 700, color: "white", background: "var(--muted)", borderRadius: 99, padding: "1px 3px", lineHeight: 1.4, marginTop: 1, alignSelf: "center" }}>
                         หยุด
+                      </div>
+                    )}
+                    {r.isSick && (
+                      <div style={{ fontSize: 8, fontWeight: 700, color: "white", background: "#e67e22", borderRadius: 99, padding: "1px 3px", lineHeight: 1.4, marginTop: 1, alignSelf: "center" }}>
+                        ป่วย
+                      </div>
+                    )}
+                    {r.isPersonal && (
+                      <div style={{ fontSize: 8, fontWeight: 700, color: "white", background: "#3498db", borderRadius: 99, padding: "1px 3px", lineHeight: 1.4, marginTop: 1, alignSelf: "center" }}>
+                        กิจ
                       </div>
                     )}
                   </div>
