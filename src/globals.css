@@ -539,7 +539,7 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 
 [data-theme="crayon"] .summary-banner,
 [data-theme="crayon"] .card {
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(4px);
     box-shadow: 4px 4px 0px rgba(229, 57, 53, 0.12), 0 0 0 2px var(--border) !important;
 }
@@ -707,105 +707,8 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
     position: relative;
 }
 
-/* Action Kamen star — rotating top-right area */
-[data-theme="crayon"] .header::after {
-    content: '';
-    position: fixed;
-    top: 80px;
-    right: 15px;
-    width: 50px;
-    height: 50px;
-    background: url('/files/action-kamen.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.12;
-    pointer-events: none;
-    z-index: 0;
-    animation: heroSpin 8s linear infinite;
-}
-
-/* Main Shin-chan character — large semi-transparent decoration */
-[data-theme="crayon"] body::after {
-    content: '';
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 280px;
-    height: 280px;
-    background: url('/files/shinchan-main.png') no-repeat center;
-    background-size: contain;
-    opacity: 0.06;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Cloud SVG decoration — left side */
-[data-theme="crayon"] .user-bar::after {
-    content: '';
-    position: fixed;
-    bottom: 200px;
-    left: 0;
-    width: 100px;
-    height: 50px;
-    background: url('/files/cloud.svg') no-repeat center;
-    background-size: contain;
-    opacity: 0.08;
-    pointer-events: none;
-    z-index: 0;
-    animation: cloudDrift 12s ease-in-out infinite;
-}
-
-/* Star sparkle on active tab */
-[data-theme="crayon"] .tab.active::after {
-    content: '⭐';
-    position: absolute;
-    top: -10px;
-    right: -6px;
-    font-size: 14px;
-    animation: sparkle 1.5s ease-in-out infinite;
-    z-index: 1;
-}
-
-
-/* Character thumbnail on summary banner */
-[data-theme="crayon"] .summary-banner::after {
-    content: '';
-    position: absolute;
-    right: 8px;
-    top: -15px;
-    width: 40px;
-    height: 40px;
-    background: url('/files/shinchan-thumb1.png') no-repeat center;
-    background-size: contain;
-    opacity: 0.25;
-    pointer-events: none;
-}
-
-[data-theme="crayon"] .summary-banner {
-    position: relative;
-}
 
 /* ===================================================
    ✏️ Animations
    =================================================== */
 
-@keyframes heroSpin {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.2); }
-    100% { transform: rotate(360deg) scale(1); }
-}
-
-@keyframes cloudDrift {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(30px); }
-}
-
-@keyframes floatStar {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(15deg); }
-}
-
-@keyframes sparkle {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    50% { transform: scale(1.4) rotate(20deg); opacity: 0.7; }
-}
