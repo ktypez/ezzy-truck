@@ -1,9 +1,18 @@
 import DropdownSelect from './DropdownSelect';
+import { useCallback } from 'react';
 
 const MONTHS_TH = [
   'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
   'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
 ];
+
+const arrowStyle: React.CSSProperties = {
+  display: 'flex', alignItems: 'center', justifyContent: 'center',
+  width: 40, minWidth: 40, height: 40, cursor: 'pointer', flexShrink: 0,
+  background: 'var(--card)', border: '1.5px solid var(--border)', borderRadius: 8,
+  color: 'var(--text)', fontSize: 20, fontWeight: 700, fontFamily: 'inherit',
+  transition: 'border-color 0.15s', lineHeight: 1,
+};
 
 export default function MonthYearSelector({ currentDate, onChangeMonth, availableYears }: { currentDate: Date; onChangeMonth: (diff: number) => void; availableYears?: number[] }) {
   const month = currentDate.getMonth();
@@ -22,8 +31,16 @@ export default function MonthYearSelector({ currentDate, onChangeMonth, availabl
     else for (let i = 0; i < Math.abs(diff); i++) onChangeMonth(-1);
   };
 
+  const prevMonth = useCallback(() => onChangeMonth(-1), [onChangeMonth]);
+  const nextMonth = useCallback(() => onChangeMonth(1), [onChangeMonth]);
+
   return (
-    <div style={{ display: 'flex', gap: 8, width: '100%' }}>
+    <div style={{ display: 'flex', gap: 8, width: '100%', alignItems: 'center' }}>
+      <button onClick={prevMonth} style={arrowStyle}
+        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+        onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+        aria-label="เดือนก่อนหน้า"
+      >‹</button>
       <DropdownSelect
         options={MONTHS_TH.map((m, i) => ({ label: m, value: i }))}
         value={month}
@@ -36,6 +53,11 @@ export default function MonthYearSelector({ currentDate, onChangeMonth, availabl
         onChange={handleYearChange}
         style={{ flex: 0, minWidth: 90, maxWidth: 110 }}
       />
+      <button onClick={nextMonth} style={arrowStyle}
+        onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+        onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+        aria-label="เดือนถัดไป"
+      >›</button>
     </div>
   );
 }
