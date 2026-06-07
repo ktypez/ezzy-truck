@@ -27,7 +27,7 @@ export default function DailyView({
   const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
   
   // Shared style constants
-  const counterInputStyle = counterInputStyle as const;
+  const counterInputStyle = { width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' } as const;
 const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -83,7 +83,7 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
 
   useEffect(() => {
     if (dayData) {
-      const isHoliday = dayData.shift_time === 'หยุด' || dayData.day_type === 'วันอยุด' || dayData.is_work === false;
+      const isHoliday = dayData.shift_time === 'หยุด' || dayData.day_type === 'วันหยุด' || dayData.is_work === false;
       setIsWork(!isHoliday);
       if (isHoliday) {
         setLeaveType(dayData.leave_type || null);
