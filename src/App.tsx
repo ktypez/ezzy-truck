@@ -5,8 +5,6 @@ import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
 import Modals from '@/components/Modals';
 import AuthScreen from '@/components/AuthScreen';
-import ShiftView from '@/components/ShiftView';
-import { APP_CONFIG } from "@/config";
 
 const DailyView = lazy(() => import('@/components/DailyView'));
 const MonthlyView = lazy(() => import('@/components/MonthlyView'));
