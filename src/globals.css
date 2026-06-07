@@ -1,4 +1,4 @@
-@import "./themes.css";
+
 :root {
     /* Pattern + font base */
     --pattern-color: rgba(255, 107, 107, 0.04);
@@ -226,3 +226,4 @@ body {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
 }
+@import "./themes.css";
