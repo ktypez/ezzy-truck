@@ -55,7 +55,7 @@
     --muted: #8c7e7a; 
     --border: #FFD54F;
     --primary: #4CAF50 !important;
-    --primary-bg: #E8F5E9 !important;
+    --primary-bg: rgba(232, 245, 233, 0.7) !important;
     --secondary: #00897B !important;
     --active-date-text: #FFFFFF;
 }
@@ -71,8 +71,9 @@
     box-shadow: none !important; 
 }
 [data-theme="shinchan"] .input-field {
-    background-color: #FFF9E6 !important;
+    background-color: rgba(255, 249, 230, 0.8) !important;
     border: none !important;
+    backdrop-filter: blur(4px);
 }
 [data-theme="shinchan"] .tab.active, 
 [data-theme="shinchan"] .main-save-btn, 
@@ -83,14 +84,23 @@
     font-weight: 800;
 }
 [data-theme="shinchan"] #view-salary  > .card:first-of-type {
-    background: linear-gradient(135deg, #2E7D32, #004D40) !important;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(0, 77, 64, 0.9)) !important;
 }
 [data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
-    background: rgba(255, 255, 255, 1) !important; 
+    background: rgba(255, 255, 255, 0.85) !important; 
     border: none !important; 
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important; 
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.08) !important; 
+    backdrop-filter: blur(6px);
+}
+[data-theme="shinchan"] .date-bar-item {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(4px);
+}
+[data-theme="shinchan"] .nav-tabs {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px);
 }
 
 /* ===================================================
