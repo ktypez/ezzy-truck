@@ -68,7 +68,6 @@
 [data-theme="shinchan"] .date-bar-item {
     border-radius: 55px 75px 45px 85px / 65px 45px 75px 55px !important; 
     border: none !important;
-    background: transparent !important;
     box-shadow: none !important; 
 }
 [data-theme="shinchan"] .input-field {
@@ -100,9 +99,6 @@
 }
 [data-theme="shinchan"] .daily-summary {
     background: rgb(232, 245, 233) !important;
-}
-[data-theme="shinchan"] .date-bar-item {
-    background: #FFFFFF !important;
 }
 [data-theme="shinchan"] .nav-tabs {
     background: #FFFFFF !important;
