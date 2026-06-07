@@ -105,6 +105,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
               <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: '#0D1B2A', color: '#38BDF8', borderColor: '#2D4A6E' }}>Midnight Ocean</button>
               <button className="theme-btn" onClick={() => onSelectTheme('twilight')} style={{ background: '#1A0A1E', color: '#C084FC', borderColor: '#3D2A50' }}>Twilight</button>
               <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>Summer Morning</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('glass')} style={{ background: 'rgba(255,255,255,0.6)', color: '#007AFF', borderColor: 'rgba(0,122,255,0.3)' }}>🫧 Liquid Glass</button>
             </div>
             </div>
           </div>
