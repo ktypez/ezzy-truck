@@ -199,8 +199,7 @@ export default function Home() {
         onClose={() => setActiveModal(null)}
         onResetTheme={() => {
           localStorage.removeItem('truck-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          setTheme(prefersDark ? 'retro-dark' : 'light');
+          setTheme('retro-pastel');
         }}
         onSelectTheme={setTheme}
       />

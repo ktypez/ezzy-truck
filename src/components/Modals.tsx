@@ -107,6 +107,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme, onResetThe
               <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: '#2D2D2D', color: '#FDF6E3', borderColor: '#FDF6E3' }}>Retro Dark</button>
               <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
               <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: '#0D1B2A', color: '#38BDF8', borderColor: '#2D4A6E' }}>🌊 Midnight Ocean</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('twilight')} style={{ background: '#1A0A1E', color: '#C084FC', borderColor: '#3D2A50' }}>🌙 Twilight</button>
               <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>☀️ Summer Morning</button>
             </div>
             </div>
