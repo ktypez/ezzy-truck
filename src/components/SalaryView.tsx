@@ -1,47 +1,57 @@
 import MonthYearSelector from './MonthYearSelector';
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 import { calculateSalary } from '@/utils/calculator';
 
 interface SalaryViewProps {
   userId: string;
   currentDate: Date;
-  refreshTrigger: boolean;
   onChangeMonth: (diff: number) => void;
 }
 
-export default function SalaryView({ userId, currentDate, refreshTrigger, onChangeMonth }: SalaryViewProps) {
+export default function SalaryView({ userId, currentDate, onChangeMonth }: SalaryViewProps) {
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-  const [salaryResult, setSalaryResult] = useState<any>(null);
-  const [yearlySick, setYearlySick] = useState(0);
-  const [yearlyPersonal, setYearlyPersonal] = useState(0);
 
-  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+  const daysInMonth = new Date(year, month, 0).getDate();
 
-  useEffect(() => {
-    async function loadAndCalc() {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
+  // Fetch monthly logs for salary calculation
+  const { data: salaryResult, isLoading } = useQuery({
+    queryKey: ['salary', userId, year, month],
+    queryFn: async () => {
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId)
         .eq('year', year)
         .eq('month', month);
-      if (data) {
-        setSalaryResult(calculateSalary(data, daysInMonth));
-      }
-      const { data: yearData } = await sb.from('logs').select('leave_type')
+      return data ? calculateSalary(data, daysInMonth) : null;
+    },
+    enabled: !!userId,
+  });
+
+  // Fetch yearly leave totals
+  const { data: leaveData } = useQuery({
+    queryKey: ['yearly-leave', userId, year],
+    queryFn: async () => {
+      const { data } = await sb.from('logs').select('leave_type')
         .eq('user_id', userId)
         .eq('year', year)
         .not('leave_type', 'is', null);
-      if (yearData) {
-        setYearlySick(yearData.filter((r: any) => r.leave_type === 'sick').length);
-        setYearlyPersonal(yearData.filter((r: any) => r.leave_type === 'personal').length);
+      if (data) {
+        return {
+          sick: data.filter((r: any) => r.leave_type === 'sick').length,
+          personal: data.filter((r: any) => r.leave_type === 'personal').length,
+        };
       }
-    }
-    loadAndCalc();
-  }, [currentDate, userId, refreshTrigger, daysInMonth]);
+      return { sick: 0, personal: 0 };
+    },
+    enabled: !!userId,
+  });
 
-  if (!salaryResult) {
+  const yearlySick = leaveData?.sick ?? 0;
+  const yearlyPersonal = leaveData?.personal ?? 0;
+
+  if (isLoading || !salaryResult) {
     return (
       <div style={{ textAlign: 'center', padding: '30px', color: 'var(--muted)', fontWeight: 500 }}>
         <i className="ph-duotone ph-spinner-gap spin" style={{ fontSize: '24px', marginBottom: '8px', display: 'block', margin: '0 auto' }}></i>
@@ -66,17 +76,11 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
 
   return (
     <div id="view-salary" className="view active">
-      {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
       </div>
       
-      {/* Hero Net Income Card */}
-      <div className="card" style={{ 
-        background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-        padding: '18px 20px',
-        marginBottom: '15px'
-      }}>
+      <div className="card" style={{ background: 'linear-gradient(135deg, var(--primary), var(--secondary))', padding: '18px 20px', marginBottom: '15px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div style={{ fontSize: '14px', fontWeight: 700, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.5px' }}>
@@ -94,29 +98,31 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
         </div>
       </div>
 
-      {/* Leave Balance */}
       {(yearlySick > 0 || yearlyPersonal > 0) && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '15px' }}>
-          <div className="card" style={{ padding: '12px', textAlign: 'center', marginBottom: 0, background: yearlySick > 0 ? 'var(--primary-bg)' : undefined }}>
-            <div style={{ fontSize: '12px', color: 'var(--muted)' }}>🤒 ลาป่วย</div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : 'var(--primary)' }}>{Math.max(0, 30 - yearlySick)}</div>
-            <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 30 วัน</div>
+        <div className="card" style={{ padding: '10px 16px', marginBottom: '15px', display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '16px' }}>🤒</span>
+            <div>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: '#e67e22' }}>{yearlySick}</div>
+              <div style={{ fontSize: '11px', color: 'var(--muted)' }}>ลาป่วย / 30 วัน</div>
+            </div>
           </div>
-          <div className="card" style={{ padding: '12px', textAlign: 'center', marginBottom: 0, background: yearlyPersonal > 0 ? 'var(--primary-bg)' : undefined }}>
-            <div style={{ fontSize: '12px', color: 'var(--muted)' }}>📋 ลากิจ</div>
-            <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : 'var(--secondary)' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
-            <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '16px' }}>📋</span>
+            <div>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: '#3498db' }}>{yearlyPersonal}</div>
+              <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
+            </div>
           </div>
         </div>
       )}
 
-      {/* Breakdown */}
       <div className="card" style={{ padding: 0, overflow: 'hidden', marginTop: '15px' }}>
         <div style={{ background: 'var(--primary-bg)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
           <i className="ph-duotone ph-list-numbers" style={{ color: 'var(--muted)', fontSize: '16px' }}></i>
           <span style={{ fontSize: '15px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.5px' }}>รายละเอียดรายได้</span>
         </div>
-        <div className="salary-breakdown" style={{ padding: '6px 16px' }}>
+        <div style={{ padding: '6px 16px' }}>
           <SalaryRow icon="ph-duotone ph-currency-circle-dollar" label="เงินเดือน" value={fmt(salaryResult.base)} />
           <SalaryRow icon="ph-duotone ph-copy" label="X2" sub={`${salaryResult.x2Days || 0} วัน`} value={fmt(salaryResult.extraInc)} />
           <SalaryRow icon="ph-duotone ph-arrows-clockwise" label="รอบวิ่ง" sub={`${salaryResult.totalRounds || 0} รอบ`} value={fmt(salaryResult.roundInc)} />
@@ -130,7 +136,6 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
         </div>
       </div>
 
-      {/* Tax Summary */}
       <div className="card" style={{ padding: 0, overflow: 'hidden', marginTop: '15px' }}>
         <div style={{ background: 'var(--primary-bg)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: '6px' }}>
           <i className="ph-duotone ph-receipt" style={{ color: 'var(--muted)', fontSize: '16px' }}></i>
@@ -153,7 +158,6 @@ export default function SalaryView({ userId, currentDate, refreshTrigger, onChan
           </div>
         </div>
       </div>
-
     </div>
   );
 }
