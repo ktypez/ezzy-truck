@@ -473,6 +473,101 @@
     background: rgba(255, 255, 255, 0.25) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
+   🥃 THEME: Dark Glass
+   =================================================== */
+[data-theme="dark-glass"] {
+    --bg: #0A0A0F;
+    --card: rgba(30, 30, 40, 0.5);
+    --text: #F0F0F5;
+    --muted: #8E8E99;
+    --border: rgba(255, 255, 255, 0.1);
+    --primary: #0A84FF !important;
+    --primary-bg: rgba(10, 132, 255, 0.15) !important;
+    --secondary: #30D158 !important;
+    --body-bg-image: url("/files/glass-bg-dark.jpg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    --pattern-color: rgba(255, 255, 255, 0.03);
+    --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, #0A84FF, #30D158);
+}
+[data-theme="dark-glass"] .card,
+[data-theme="dark-glass"] .tab,
+[data-theme="dark-glass"] .seg-btn,
+[data-theme="dark-glass"] .main-save-btn,
+[data-theme="dark-glass"] .cal-cell,
+[data-theme="dark-glass"] .date-bar-item {
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+[data-theme="dark-glass"] .tab.active,
+[data-theme="dark-glass"] .main-save-btn,
+[data-theme="dark-glass"] .auth-btn,
+[data-theme="dark-glass"] .seg-btn.active {
+    background: linear-gradient(135deg, #0A84FF, #30D158) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(10, 132, 255, 0.25) !important;
+}
+[data-theme="dark-glass"] .input-field {
+    background: rgba(40, 40, 55, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    color: var(--text) !important;
+    backdrop-filter: blur(10px);
+}
+[data-theme="dark-glass"] .summary-banner,
+[data-theme="dark-glass"] .card {
+    background: rgba(30, 30, 40, 0.5) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+[data-theme="dark-glass"] .date-bar-item {
+    background: rgba(30, 30, 40, 0.4) !important;
+}
+[data-theme="dark-glass"] .nav-tabs {
+    background: rgba(30, 30, 40, 0.5) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+[data-theme="dark-glass"] .date-slider-item.active {
+    background: linear-gradient(135deg, #0A84FF, #30D158) !important;
+    box-shadow: 0 4px 20px rgba(10, 132, 255, 0.25) !important;
+}
+[data-theme="dark-glass"] .daily-summary {
+    background: rgba(30, 30, 40, 0.4) !important;
+    backdrop-filter: blur(16px);
+    border-radius: 14px;
+}
+[data-theme="dark-glass"] .segmented-control {
+    background: rgba(30, 30, 40, 0.3) !important;
+}
+[data-theme="dark-glass"] .user-bar {
+    background: rgba(30, 30, 40, 0.25) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+[data-theme="dark-glass"] .driver-input {
+    background: rgba(40, 40, 55, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text) !important;
+}
+[data-theme="dark-glass"] .shift-sheet {
+    background: rgba(20, 20, 30, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+[data-theme="dark-glass"] .shift-sheet-close {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+[data-theme="dark-glass"] .tab:not(.active) {
+    color: var(--muted) !important;
+}
+
 
 
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
