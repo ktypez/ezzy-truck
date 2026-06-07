@@ -129,10 +129,6 @@ export default function Home() {
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
       <Header
         userEmail={session.user.email}
-        currentDate={currentDate}
-        onChangeMonth={handleChangeMonth}
-        activeView={activeView}
-        onSwitchView={navigate}
         onOpenModal={setActiveModal}
         onLogout={handleLogout}
       />

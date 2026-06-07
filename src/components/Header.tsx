@@ -1,19 +1,11 @@
 interface HeaderProps {
   userEmail: string;
-  currentDate: Date;
-  onChangeMonth: (diff: number) => void;
-  activeView: string;
-  onSwitchView: (view: string) => void;
   onOpenModal: (modalName: 'profile' | 'theme' | null) => void;
   onLogout: () => void;
 }
 
 export default function Header({
   userEmail,
-  currentDate,
-  onChangeMonth,
-  activeView,
-  onSwitchView,
   onOpenModal,
   onLogout,
 }: HeaderProps) {
