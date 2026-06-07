@@ -93,6 +93,10 @@
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type {
     background: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64)) !important;
+    color: #FFFFFF !important;
+}
+[data-theme="shinchan"] #view-salary > .card:first-of-type div {
+    color: #FFFFFF !important;
 }
 [data-theme="shinchan"] .daily-summary {
     background: rgb(232, 245, 233) !important;
