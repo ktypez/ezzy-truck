@@ -25,7 +25,10 @@ export default function DailyView({
   onChangeMonth,
 }: DailyViewProps) {
   const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
-  const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+  
+  // Shared style constants
+  const counterInputStyle = counterInputStyle as const;
+const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const [isWork, setIsWork] = useState(true);
@@ -234,7 +237,7 @@ export default function DailyView({
                 <button type="button" className="del-btn-small" onClick={() => setRoundCount(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
                 <input type="number" inputMode="numeric" value={roundCount === 0 ? '' : roundCount} placeholder="0"
                   onChange={e => setRoundCount(Math.max(0, parseInt(e.target.value) || 0))}
-                  style={{ width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' }} />
+                  style={counterInputStyle} />
                 <button type="button" className="del-btn-small" onClick={() => setRoundCount(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
