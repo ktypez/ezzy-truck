@@ -95,7 +95,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
               <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
               <button className="theme-btn" onClick={() => onSelectTheme('blue-sky')} style={{ background: '#E8F4FD', color: '#2C3E50', borderColor: '#AED6F1' }}>Blue Sky</button>
               <button className="theme-btn" onClick={() => onSelectTheme('cotton-candy')} style={{ background: '#FDF2F8', color: '#EC4899', borderColor: '#F9A8D4' }}>Cotton Candy</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('glass')} style={{ background: 'rgba(255,255,255,0.6)', color: '#007AFF', borderColor: 'rgba(0,122,255,0.3)' }}>🫧 Liquid Glass</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>Summer Morning</button>
               </div>
 
             {/* Dark Column */}
@@ -105,8 +105,6 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
               <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
               <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: '#0D1B2A', color: '#38BDF8', borderColor: '#2D4A6E' }}>Midnight Ocean</button>
               <button className="theme-btn" onClick={() => onSelectTheme('twilight')} style={{ background: '#1A0A1E', color: '#C084FC', borderColor: '#3D2A50' }}>Twilight</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>Summer Morning</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('dark-glass')} style={{ background: 'rgba(30,30,40,0.5)', color: '#0A84FF', borderColor: 'rgba(255,255,255,0.15)' }}>🥃 Dark Glass</button>
             </div>
             </div>
           </div>

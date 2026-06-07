@@ -396,6 +396,172 @@
 
 
 /* ===================================================
+
+
+/* ===================================================
+   🌊 THEME: Midnight Ocean
+   =================================================== */
+[data-theme="midnight-ocean"] {
+    --bg: #030A14;
+    --card: #0C1A2E;
+    --text: #E0F0FF;
+    --muted: #7A9AB8;
+    --border: #1A304A;
+    --primary: #38BDF8 !important;
+    --primary-bg: #0C2D48 !important;
+    --secondary: #2DD4BF !important;
+    --body-bg-image: none;
+    --pattern-color: rgba(56, 189, 248, 0.04);
+    --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
+}
+[data-theme="midnight-ocean"] .card,
+[data-theme="midnight-ocean"] .tab,
+[data-theme="midnight-ocean"] .seg-btn,
+[data-theme="midnight-ocean"] .main-save-btn,
+[data-theme="midnight-ocean"] .cal-cell,
+[data-theme="midnight-ocean"] .date-bar-item {
+    border-radius: 14px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+[data-theme="midnight-ocean"] .tab.active,
+[data-theme="midnight-ocean"] .main-save-btn,
+[data-theme="midnight-ocean"] .auth-btn,
+[data-theme="midnight-ocean"] .seg-btn.active {
+    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
+    color: #0D1B2A !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="midnight-ocean"] .input-field {
+    background-color: #1B2F44 !important;
+    border: 2px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: 10px !important;
+}
+[data-theme="midnight-ocean"] .main-save-btn:hover {
+    animation: pulseGlow 1s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+}
+[data-theme="midnight-ocean"] .summary-banner,
+[data-theme="midnight-ocean"] .card,
+[data-theme="midnight-ocean"] .shift-sheet {
+    background: rgba(27, 47, 68, 0.95) !important;
+    backdrop-filter: blur(8px);
+}
+[data-theme="midnight-ocean"] .date-slider-item.active {
+    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
+    color: #0D1B2A !important;
+}
+
+
+/* ===================================================
+   🌙 THEME: Twilight (Dark Purple)
+   =================================================== */
+[data-theme="twilight"] {
+    --bg: #0E0312;
+    --card: #1E0A26;
+    --text: #F0E4F8;
+    --muted: #9A82AA;
+    --border: #2E1A3E;
+    --primary: #C084FC !important;
+    --primary-bg: #2D1B3E !important;
+    --secondary: #F472B6 !important;
+    --body-bg-image: none;
+    --pattern-color: rgba(192, 132, 252, 0.04);
+    --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
+}
+[data-theme="twilight"] .card,
+[data-theme="twilight"] .tab,
+[data-theme="twilight"] .seg-btn,
+[data-theme="twilight"] .main-save-btn,
+[data-theme="twilight"] .cal-cell,
+[data-theme="twilight"] .date-bar-item {
+    border-radius: 16px !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+}
+[data-theme="twilight"] .tab.active,
+[data-theme="twilight"] .main-save-btn,
+[data-theme="twilight"] .auth-btn,
+[data-theme="twilight"] .seg-btn.active {
+    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
+    color: #1A0A1E !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="twilight"] .input-field {
+    background-color: #2D1B3E !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: 12px !important;
+}
+[data-theme="twilight"] .summary-banner,
+[data-theme="twilight"] .card {
+    background: rgba(45, 27, 62, 0.95) !important;
+    backdrop-filter: blur(8px);
+}
+[data-theme="twilight"] .date-slider-item.active {
+    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
+    color: #1A0A1E !important;
+}
+
+/* ===================================================
+   🍬 THEME: Cotton Candy
+   =================================================== */
+[data-theme="cotton-candy"] {
+    --bg: #FDF2F8;
+    --card: #FFFFFF;
+    --text: #4A2040;
+    --muted: #9D6B8A;
+    --border: #F9A8D4;
+    --primary: #EC4899 !important;
+    --primary-bg: #FCE7F3 !important;
+    --secondary: #A78BFA !important;
+    --body-bg-image: none;
+    --active-date-text: #FFFFFF;
+}
+[data-theme="cotton-candy"] .card,
+[data-theme="cotton-candy"] .tab,
+[data-theme="cotton-candy"] .seg-btn,
+[data-theme="cotton-candy"] .main-save-btn,
+[data-theme="cotton-candy"] .cal-cell,
+[data-theme="cotton-candy"] .date-bar-item {
+    border-radius: 20px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
+}
+[data-theme="cotton-candy"] .tab.active,
+[data-theme="cotton-candy"] .main-save-btn,
+[data-theme="cotton-candy"] .auth-btn,
+[data-theme="cotton-candy"] .seg-btn.active {
+    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="cotton-candy"] .input-field {
+    background-color: #FDF2F8 !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 14px !important;
+}
+[data-theme="cotton-candy"] .summary-banner,
+[data-theme="cotton-candy"] .card {
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(4px);
+}
+[data-theme="cotton-candy"] .date-slider-item.active {
+    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+}
+
+
+
+/* ===================================================
    🫧 THEME: Liquid Glass (glasscn-inspired)
    =================================================== */
 [data-theme="glass"] {
@@ -473,101 +639,6 @@
     background: rgba(255, 255, 255, 0.25) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
-   🥃 THEME: Dark Glass
-   =================================================== */
-[data-theme="dark-glass"] {
-    --bg: #0A0A0F;
-    --card: rgba(30, 30, 40, 0.5);
-    --text: #F0F0F5;
-    --muted: #8E8E99;
-    --border: rgba(255, 255, 255, 0.1);
-    --primary: #0A84FF !important;
-    --primary-bg: rgba(10, 132, 255, 0.15) !important;
-    --secondary: #30D158 !important;
-    --body-bg-image: url("/files/glass-bg-dark.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --pattern-color: rgba(255, 255, 255, 0.03);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #0A84FF, #30D158);
-}
-[data-theme="dark-glass"] .card,
-[data-theme="dark-glass"] .tab,
-[data-theme="dark-glass"] .seg-btn,
-[data-theme="dark-glass"] .main-save-btn,
-[data-theme="dark-glass"] .cal-cell,
-[data-theme="dark-glass"] .date-bar-item {
-    border-radius: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-[data-theme="dark-glass"] .tab.active,
-[data-theme="dark-glass"] .main-save-btn,
-[data-theme="dark-glass"] .auth-btn,
-[data-theme="dark-glass"] .seg-btn.active {
-    background: linear-gradient(135deg, #0A84FF, #30D158) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
-    box-shadow: 0 4px 20px rgba(10, 132, 255, 0.25) !important;
-}
-[data-theme="dark-glass"] .input-field {
-    background: rgba(40, 40, 55, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
-    color: var(--text) !important;
-    backdrop-filter: blur(10px);
-}
-[data-theme="dark-glass"] .summary-banner,
-[data-theme="dark-glass"] .card {
-    background: rgba(30, 30, 40, 0.5) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-}
-[data-theme="dark-glass"] .date-bar-item {
-    background: rgba(30, 30, 40, 0.4) !important;
-}
-[data-theme="dark-glass"] .nav-tabs {
-    background: rgba(30, 30, 40, 0.5) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-[data-theme="dark-glass"] .date-slider-item.active {
-    background: linear-gradient(135deg, #0A84FF, #30D158) !important;
-    box-shadow: 0 4px 20px rgba(10, 132, 255, 0.25) !important;
-}
-[data-theme="dark-glass"] .daily-summary {
-    background: rgba(30, 30, 40, 0.4) !important;
-    backdrop-filter: blur(16px);
-    border-radius: 14px;
-}
-[data-theme="dark-glass"] .segmented-control {
-    background: rgba(30, 30, 40, 0.3) !important;
-}
-[data-theme="dark-glass"] .user-bar {
-    background: rgba(30, 30, 40, 0.25) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-[data-theme="dark-glass"] .driver-input {
-    background: rgba(40, 40, 55, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: var(--text) !important;
-}
-[data-theme="dark-glass"] .shift-sheet {
-    background: rgba(20, 20, 30, 0.95) !important;
-    backdrop-filter: blur(20px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-[data-theme="dark-glass"] .shift-sheet-close {
-    background: rgba(255, 255, 255, 0.1) !important;
-}
-[data-theme="dark-glass"] .tab:not(.active) {
-    color: var(--muted) !important;
-}
-
 
 
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
