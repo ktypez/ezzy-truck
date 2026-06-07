@@ -82,6 +82,9 @@
     color: #FFFFFF !important;
     font-weight: 800;
 }
+[data-theme="shinchan"] #view-salary .card:first-child {
+    background: linear-gradient(135deg, #2E7D32, #004D40) !important;
+}
 [data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
