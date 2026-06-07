@@ -1,45 +1,52 @@
 import MonthYearSelector from './MonthYearSelector';
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 import { calculateSalary } from '@/utils/calculator';
 
 interface SalaryViewProps {
   userId: string;
   currentDate: Date;
-  refreshTrigger: boolean;
   onChangeMonth: (diff: number) => void;
 }
 
-export default function SalaryView({ userId, currentDate, refreshTrigger, onChangeMonth }: SalaryViewProps) {
+export default function SalaryView({ userId, currentDate, onChangeMonth }: SalaryViewProps) {
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-  const [salaryResult, setSalaryResult] = useState<any>(null);
-  const [yearlySick, setYearlySick] = useState(0);
-  const [yearlyPersonal, setYearlyPersonal] = useState(0);
+  // salaryResult & leaveTotals from useQuery below
 
   const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
 
-  useEffect(() => {
-    async function loadAndCalc() {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
+  const { data: salaryResult } = useQuery({
+    queryKey: ['salary', userId, year, month],
+    queryFn: async () => {
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId)
         .eq('year', year)
         .eq('month', month);
-      if (data) {
-        setSalaryResult(calculateSalary(data, daysInMonth));
-      }
-      const { data: yearData } = await sb.from('logs').select('leave_type')
+      return data ? calculateSalary(data, daysInMonth) : null;
+    },
+    enabled: !!userId,
+  });
+
+  const { data: leaveTotals } = useQuery({
+    queryKey: ['yearly-leave', userId, year],
+    queryFn: async () => {
+      const { data } = await sb.from('logs').select('leave_type')
         .eq('user_id', userId)
         .eq('year', year)
         .not('leave_type', 'is', null);
-      if (yearData) {
-        setYearlySick(yearData.filter((r: any) => r.leave_type === 'sick').length);
-        setYearlyPersonal(yearData.filter((r: any) => r.leave_type === 'personal').length);
+      if (data) {
+        return {
+          sick: data.filter((r: any) => r.leave_type === 'sick').length,
+          personal: data.filter((r: any) => r.leave_type === 'personal').length,
+        };
       }
-    }
-    loadAndCalc();
-  }, [currentDate, userId, refreshTrigger, daysInMonth]);
+      return { sick: 0, personal: 0 };
+    },
+    enabled: !!userId,
+  });
+
+  const yearlySick = leaveTotals?.sick ?? 0;
+  const yearlyPersonal = leaveTotals?.personal ?? 0;
 
   if (!salaryResult) {
     return (

@@ -1,9 +1,8 @@
-// Ezzy Truck - Service Worker
+// Ezzy Truck - Service Worker (managed by vite-plugin-pwa)
 const CACHE_NAME = "ezzy-truck-v1";
-const STATIC_ASSETS = [
-  "/",
-  "/manifest.json",
-];
+
+// Precache manifest will be injected here by vite-plugin-pwa
+const STATIC_ASSETS = self.__WB_MANIFEST || [];
 
 // Install: precache app shell
 self.addEventListener("install", (event) => {

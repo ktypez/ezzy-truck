@@ -1,5 +1,6 @@
 import MonthYearSelector from './MonthYearSelector';
 import { useState, useEffect, useRef } from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 
 interface DailyViewProps {
@@ -65,29 +66,39 @@ export default function DailyView({
     }
   }, [selectedDay]);
 
-  useEffect(() => {
-    async function loadDayData() {
-      setIsWork(true); setDayType('normal'); setLeaveType(null); setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin(''); setRoundCount(0); setPointCount(0);
+  // Load day log via TanStack Query
+  const queryClient = useQueryClient();
+  const { data: dayData } = useQuery({
+    queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay],
+    queryFn: async () => {
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId).eq('year', currentYear).eq('month', currentMonth).eq('day', selectedDay).maybeSingle();
-      if (data) {
-        const isHoliday = data.shift_time === 'หยุด' || data.day_type === 'วันหยุด' || data.is_work === false;
-        setIsWork(!isHoliday);
-        if (isHoliday) {
-          setLeaveType(data.leave_type || null);
-        } else {
-          setDayType(data.day_type === 'special' ? 'special' : 'normal');
-          setOdoIn(data.odo_in ? String(data.odo_in) : '');
-          setOdoOut(data.odo_out ? String(data.odo_out) : '');
-          setOtHours(data.ot ? String(data.ot) : '');
-          setLateMin(data.late ? String(data.late) : '');
-          setRoundCount(data.rounds || 0);
-          setPointCount(data.points || 0);
-        }
+      return data || null;
+    },
+    enabled: !!userId,
+  });
+
+  useEffect(() => {
+    if (dayData) {
+      const isHoliday = dayData.shift_time === 'หยุด' || dayData.day_type === 'วันอยุด' || dayData.is_work === false;
+      setIsWork(!isHoliday);
+      if (isHoliday) {
+        setLeaveType(dayData.leave_type || null);
+      } else {
+        setDayType(dayData.day_type === 'special' ? 'special' : 'normal');
+        setOdoIn(dayData.odo_in ? String(dayData.odo_in) : '');
+        setOdoOut(dayData.odo_out ? String(dayData.odo_out) : '');
+        setOtHours(dayData.ot ? String(dayData.ot) : '');
+        setLateMin(dayData.late ? String(dayData.late) : '');
+        setRoundCount(dayData.rounds || 0);
+        setPointCount(dayData.points || 0);
       }
+    } else {
+      setIsWork(true); setDayType('normal'); setLeaveType(null);
+      setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin('');
+      setRoundCount(0); setPointCount(0);
     }
-    loadDayData();
-  }, [selectedDay, currentDate, userId]);
+  }, [dayData]);
 
   const handleQuickSaveShift = async (chosenShift: string, chosenLeaveType?: string | null) => {
     if (!selectedDay || !chosenShift) return;
@@ -101,7 +112,7 @@ export default function DailyView({
       };
       if (isHoliday) Object.assign(payload, { odo_in: 0, odo_out: 0, ot: 0, late: 0, drivers: [], trucks: 0, odo: 0 });
       const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
-      if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } else { setShowShiftSelector(false); onSaveSuccess(); }
+      if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } else { setShowShiftSelector(false); onSaveSuccess(); queryClient.invalidateQueries({ queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay] }); }
     } catch (err: any) { alert(err.message); } finally { setIsSavingShift(false); }
   };
 

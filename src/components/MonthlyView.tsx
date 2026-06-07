@@ -1,12 +1,12 @@
 import MonthYearSelector from './MonthYearSelector';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 
 interface MonthlyViewProps {
   userId: string;
   currentDate: Date;
   onSelectDayRow: (day: number) => void;
-  refreshTrigger: boolean;
   onChangeMonth: (diff: number) => void;
 }
 
@@ -17,9 +17,8 @@ const MONTHS_TH = [
 
 const DAYS_TH = ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'];
 
-export default function MonthlyView({ userId, currentDate, onSelectDayRow, refreshTrigger, onChangeMonth }: MonthlyViewProps) {
-  const [logs, setLogs] = useState<any[]>([]);
-  const [availableYears, setAvailableYears] = useState<number[]>([]);
+export default function MonthlyView({ userId, currentDate, onSelectDayRow, onChangeMonth }: MonthlyViewProps) {
+  // logs & availableYears from useQuery below
   const [selDay, setSelDay] = useState<number | null>(null);
 const [showShiftPicker, setShowShiftPicker] = useState(false);
 const [shiftPickerDay, setShiftPickerDay] = useState<number | null>(null);
@@ -33,8 +32,10 @@ const [isSavingShift, setIsSavingShift] = useState(false);
   const daysInMonth = new Date(year, monthNum, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay();
 
-  useEffect(() => {
-    async function fetchMonthlyLogs() {
+  const queryClient = useQueryClient();
+  const { data: logs = [] } = useQuery({
+    queryKey: ['monthly-logs', userId, year, monthNum],
+    queryFn: async () => {
       const { data } = await sb
         .from('logs')
         .select('*')
@@ -42,25 +43,26 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         .eq('year', year)
         .eq('month', monthNum)
         .order('day', { ascending: true });
-      if (data) setLogs(data);
-    }
-    fetchMonthlyLogs();
-  }, [currentDate, userId, refreshTrigger]);
+      return data || [];
+    },
+    enabled: !!userId,
+  });
 
-  useEffect(() => {
-    async function fetchYears() {
+  const { data: availableYears = [] } = useQuery({
+    queryKey: ['available-years', userId],
+    queryFn: async () => {
       const { data } = await sb
-        .from("logs")
-        .select("year")
-        .eq("user_id", userId)
-        .order("year", { ascending: false });
+        .from('logs')
+        .select('year')
+        .eq('user_id', userId)
+        .order('year', { ascending: false });
       if (data) {
-        const years = [...new Set(data.map(r => r.year))] as number[];
-        setAvailableYears(years);
+        return [...new Set(data.map(r => r.year))] as number[];
       }
-    }
-    fetchYears();
-  }, [userId, refreshTrigger]);
+      return [];
+    },
+    enabled: !!userId,
+  });
 
     const months = MONTHS_TH;
 
@@ -81,9 +83,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       if (error) throw error;
       setShowShiftPicker(false);
       setShiftPickerDay(null);
-      // Refresh data
-      const { data } = await sb.from("logs").select("*").eq("user_id", userId).eq("year", year).eq("month", monthNum).order("day", { ascending: true });
-      if (data) setLogs(data);
+      queryClient.invalidateQueries({ queryKey: ['monthly-logs', userId, year, monthNum] });
     } catch (error: any) {
       alert("เกิดข้อผิดพลาดในการบันทึก: " + error.message);
     } finally {

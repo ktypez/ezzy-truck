@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
-import DailyView from '@/components/DailyView';
-import MonthlyView from '@/components/MonthlyView';
-import SalaryView from '@/components/SalaryView';
+
 import Modals from '@/components/Modals';
+
+const DailyView = lazy(() => import('@/components/DailyView'));
+const MonthlyView = lazy(() => import('@/components/MonthlyView'));
+const SalaryView = lazy(() => import('@/components/SalaryView'));
 import ShiftView from '@/components/ShiftView';
 import { APP_CONFIG } from "@/config";
 
@@ -20,16 +23,16 @@ export default function Home() {
   const [activeView, setActiveView] = useState('daily');
   const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
 
-  // 💡 1. ตัวแปรนี้อยู่ตรงนี้ตามเดิม
-  const [refreshTrigger, setRefreshTrigger] = useState(false);
+  const queryClient = useQueryClient();
 
   // 🚨 2. กลุ่มแชร์ State ของระบบปฏิทินกะงานลอยแก้ว
   const [currentDayShift, setCurrentDayShift] = useState<string>('');
   const [currentLeaveType, setCurrentLeaveType] = useState<string | null>(null);
 
-  const fetchCurrentDayShift = async () => {
-    if (!session?.user?.id) return;
-    try {
+  const { refetch: refetchShift } = useQuery({
+    queryKey: ['day-shift', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay],
+    queryFn: async () => {
+      if (!session?.user?.id) return { shift_time: '', leave_type: null };
       const { data } = await sb
         .from('logs')
         .select('shift_time, leave_type')
@@ -38,18 +41,12 @@ export default function Home() {
         .eq('month', currentDate.getMonth() + 1)
         .eq('day', selectedDay)
         .maybeSingle();
-
       setCurrentDayShift(data?.shift_time || '');
       setCurrentLeaveType(data?.leave_type || null);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchCurrentDayShift();
-  }, [selectedDay, currentDate, session, refreshTrigger]); 
-
+      return { shift_time: data?.shift_time || '', leave_type: data?.leave_type || null };
+    },
+    enabled: !!session?.user?.id,
+  });
 
   // 🟢 3. [แก้ไขใหม่] ระบบ Real-time Auth Check ปลอดภัยและแม่นยำกว่าเดิม 100%
   useEffect(() => {
@@ -112,6 +109,13 @@ export default function Home() {
     sb.auth.signOut().then(() => setSession(null));
   };
 
+  const handleSaveSuccess = () => {
+    refetchShift();
+    queryClient.invalidateQueries({ queryKey: ['monthly-logs', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1] });
+    queryClient.invalidateQueries({ queryKey: ['salary', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1] });
+    queryClient.invalidateQueries({ queryKey: ['day-log', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay] });
+  };
+
   if (!session) {
     return (
       <div id="auth-screen">
@@ -149,13 +153,14 @@ export default function Home() {
       />
 
       <main className="content-area">
+        <Suspense fallback={<div className="card" style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--muted)', fontWeight: 500 }}>Loading...</div>}>
         {activeView === 'daily' && (
           <DailyView
             userId={session.user.id}
             currentDate={currentDate}
             selectedDay={selectedDay}
             onSelectDay={setSelectedDay}
-            onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
+            onSaveSuccess={handleSaveSuccess}
             currentShift={currentDayShift}
             currentLeaveType={currentLeaveType}
             onChangeMonth={handleChangeMonth}
@@ -165,7 +170,6 @@ export default function Home() {
           <MonthlyView 
             userId={session.user.id}
             currentDate={currentDate}
-            refreshTrigger={refreshTrigger}
             onSelectDayRow={(day) => {
               setSelectedDay(day);
               setActiveView('daily');
@@ -177,10 +181,10 @@ export default function Home() {
           <SalaryView 
             userId={session.user.id}
             currentDate={currentDate}
-            refreshTrigger={refreshTrigger}
             onChangeMonth={handleChangeMonth}
           />
         )}
+        </Suspense>
       </main>
 
       <div className="nav-tabs">
