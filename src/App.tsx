@@ -1,17 +1,22 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
-
 import Modals from '@/components/Modals';
+import AuthScreen from '@/components/AuthScreen';
+import ShiftView from '@/components/ShiftView';
+import { APP_CONFIG } from "@/config";
 
 const DailyView = lazy(() => import('@/components/DailyView'));
 const MonthlyView = lazy(() => import('@/components/MonthlyView'));
 const SalaryView = lazy(() => import('@/components/SalaryView'));
-import ShiftView from '@/components/ShiftView';
-import { APP_CONFIG } from "@/config";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeView = location.pathname.replace('/', '') || 'daily';
+
   const [session, setSession] = useState<any>(null);
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('truck-theme');
@@ -20,7 +25,6 @@ export default function Home() {
   });
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const [activeView, setActiveView] = useState('daily');
   const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
 
   const queryClient = useQueryClient();
@@ -48,19 +52,15 @@ export default function Home() {
     enabled: !!session?.user?.id,
   });
 
-  // 🟢 3. [แก้ไขใหม่] ระบบ Real-time Auth Check ปลอดภัยและแม่นยำกว่าเดิม 100%
   useEffect(() => {
-    // โหลดเซสชันปัจจุบันมารอไว้ก่อน
     sb.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
-    // คอยตรวจจับถ้ามีการล็อกเอาต์ หรือ เซสชันหมดอายุ ระบบจะดีดกลับหน้า Login ทันที
     const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
-    // ล้างตัวดักฟัง (Cleanup) เมื่อ Component ถูกทำลาย
     return () => subscription.unsubscribe();
   }, []);
 
@@ -102,7 +102,7 @@ export default function Home() {
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1);
     setCurrentDate(newDate);
-    setSelectedDay(1); 
+    setSelectedDay(1);
   };
 
   const handleLogout = () => {
@@ -116,95 +116,91 @@ export default function Home() {
     queryClient.invalidateQueries({ queryKey: ['day-log', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay] });
   };
 
+  const goToDaily = () => {
+    const today = new Date();
+    setCurrentDate(today);
+    setSelectedDay(today.getDate());
+    navigate('/daily');
+  };
+
   if (!session) {
-    return (
-      <div id="auth-screen">
-        <div className="auth-card">
-          <h1 id="auth-title-text" style={{ color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="ph-duotone ph-truck i-icon" style={{ fontSize: '40px', marginRight: '10px' }}></i> Ezzy Truck
-          </h1>
-          <p id="auth-sub-text" style={{ color: 'var(--muted)', fontWeight: 500, marginBottom: '25px', textAlign: 'center' }}>เข้าสู่ระบบเพื่อบันทึกงาน</p>
-          <input type="email" id="auth-email" placeholder="อีเมลของคุณ" className="driver-input" style={{ width: '100%', marginBottom: '15px' }} />
-          <input type="password" id="auth-password" placeholder="รหัสผ่าน" className="driver-input" style={{ width: '100%', marginBottom: '25px' }} />
-          <button className="auth-btn" style={{ width: '100%', borderRadius: '18px', border: 'none', background: 'var(--primary)', color: 'white', fontWeight: 700, padding: '15px', cursor: 'pointer' }} onClick={async () => {
-            const email = (document.getElementById('auth-email') as HTMLInputElement).value;
-            const password = (document.getElementById('auth-password') as HTMLInputElement).value;
-            const { data, error } = await sb.auth.signInWithPassword({ email, password });
-            if (error) alert(error.message);
-            else setSession(data.session);
-          }}>
-            <i className="ph-duotone ph-sign-in i-icon" style={{ marginRight: '10px' }}></i> เข้าสู่ระบบ
-          </button>
-        </div>
-      </div>
-    );
+    return <AuthScreen onAuth={() => {}} />;
   }
 
   return (
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
-      <Header 
+      <Header
         userEmail={session.user.email}
         currentDate={currentDate}
         onChangeMonth={handleChangeMonth}
         activeView={activeView}
-        onSwitchView={setActiveView}
+        onSwitchView={navigate}
         onOpenModal={setActiveModal}
         onLogout={handleLogout}
       />
 
       <main className="content-area">
         <Suspense fallback={<div className="card" style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--muted)', fontWeight: 500 }}>Loading...</div>}>
-        {activeView === 'daily' && (
-          <DailyView
-            userId={session.user.id}
-            currentDate={currentDate}
-            selectedDay={selectedDay}
-            onSelectDay={setSelectedDay}
-            onSaveSuccess={handleSaveSuccess}
-            currentShift={currentDayShift}
-            currentLeaveType={currentLeaveType}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
-        {activeView === 'monthly' && (
-          <MonthlyView 
-            userId={session.user.id}
-            currentDate={currentDate}
-            onSelectDayRow={(day) => {
-              setSelectedDay(day);
-              setActiveView('daily');
-            }}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
-        {activeView === 'salary' && (
-          <SalaryView 
-            userId={session.user.id}
-            currentDate={currentDate}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
+          <Routes>
+            <Route path="/daily" element={
+              <DailyView
+                userId={session.user.id}
+                currentDate={currentDate}
+                selectedDay={selectedDay}
+                onSelectDay={setSelectedDay}
+                onSaveSuccess={handleSaveSuccess}
+                currentShift={currentDayShift}
+                currentLeaveType={currentLeaveType}
+                onChangeMonth={handleChangeMonth}
+              />
+            } />
+            <Route path="/monthly" element={
+              <MonthlyView
+                userId={session.user.id}
+                currentDate={currentDate}
+                onSelectDayRow={(day) => {
+                  setSelectedDay(day);
+                  navigate('/daily');
+                }}
+                onChangeMonth={handleChangeMonth}
+              />
+            } />
+            <Route path="/salary" element={
+              <SalaryView
+                userId={session.user.id}
+                currentDate={currentDate}
+                onChangeMonth={handleChangeMonth}
+              />
+            } />
+            <Route path="/" element={
+              <DailyView
+                userId={session.user.id}
+                currentDate={currentDate}
+                selectedDay={selectedDay}
+                onSelectDay={setSelectedDay}
+                onSaveSuccess={handleSaveSuccess}
+                currentShift={currentDayShift}
+                currentLeaveType={currentLeaveType}
+                onChangeMonth={handleChangeMonth}
+              />
+            } />
+          </Routes>
         </Suspense>
       </main>
 
       <div className="nav-tabs">
-        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => {
-            const today = new Date();
-            setCurrentDate(today);
-            setSelectedDay(today.getDate());
-            setActiveView('daily');
-          }}>
+        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={goToDaily}>
           <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
         </div>
-        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => setActiveView('monthly')}>
+        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => navigate('/monthly')}>
           <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
         </div>
-        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => setActiveView('salary')}>
+        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => navigate('/salary')}>
           <i className="ph-duotone ph-wallet i-icon"></i> รายได้
         </div>
       </div>
 
-      <Modals 
+      <Modals
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
         onResetTheme={() => {
