@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
@@ -10,7 +11,9 @@ const MonthlyView = lazy(() => import('@/components/MonthlyView'));
 const SalaryView = lazy(() => import('@/components/SalaryView'));
 
 export default function Home() {
-  const [activeView, setActiveView] = useState('daily');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activeView = location.pathname.replace('/', '') || 'daily';
 
   const [session, setSession] = useState<any>(null);
   const [theme, setTheme] = useState(() => {
@@ -115,7 +118,7 @@ export default function Home() {
     const today = new Date();
     setCurrentDate(today);
     setSelectedDay(today.getDate());
-    setActiveView('daily');
+    navigate('/daily');
   };
 
   if (!session) {
@@ -129,43 +132,57 @@ export default function Home() {
         currentDate={currentDate}
         onChangeMonth={handleChangeMonth}
         activeView={activeView}
-        onSwitchView={setActiveView}
+        onSwitchView={navigate}
         onOpenModal={setActiveModal}
         onLogout={handleLogout}
       />
 
       <main className="content-area">
         <Suspense fallback={<div className="card" style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--muted)', fontWeight: 500 }}>Loading...</div>}>
-        {activeView === 'daily' && (
-          <DailyView
-            userId={session.user.id}
-            currentDate={currentDate}
-            selectedDay={selectedDay}
-            onSelectDay={setSelectedDay}
-            onSaveSuccess={handleSaveSuccess}
-            currentShift={currentDayShift}
-            currentLeaveType={currentLeaveType}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
-        {activeView === 'monthly' && (
-          <MonthlyView
-            userId={session.user.id}
-            currentDate={currentDate}
-            onSelectDayRow={(day) => {
-              setSelectedDay(day);
-              setActiveView('daily');
-            }}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
-        {activeView === 'salary' && (
-          <SalaryView
-            userId={session.user.id}
-            currentDate={currentDate}
-            onChangeMonth={handleChangeMonth}
-          />
-        )}
+        <Routes>
+          <Route path="/daily" element={
+            <DailyView
+              userId={session.user.id}
+              currentDate={currentDate}
+              selectedDay={selectedDay}
+              onSelectDay={setSelectedDay}
+              onSaveSuccess={handleSaveSuccess}
+              currentShift={currentDayShift}
+              currentLeaveType={currentLeaveType}
+              onChangeMonth={handleChangeMonth}
+            />
+          } />
+          <Route path="/monthly" element={
+            <MonthlyView
+              userId={session.user.id}
+              currentDate={currentDate}
+              onSelectDayRow={(day) => {
+                setSelectedDay(day);
+                navigate('/daily');
+              }}
+              onChangeMonth={handleChangeMonth}
+            />
+          } />
+          <Route path="/salary" element={
+            <SalaryView
+              userId={session.user.id}
+              currentDate={currentDate}
+              onChangeMonth={handleChangeMonth}
+            />
+          } />
+          <Route path="/" element={
+            <DailyView
+              userId={session.user.id}
+              currentDate={currentDate}
+              selectedDay={selectedDay}
+              onSelectDay={setSelectedDay}
+              onSaveSuccess={handleSaveSuccess}
+              currentShift={currentDayShift}
+              currentLeaveType={currentLeaveType}
+              onChangeMonth={handleChangeMonth}
+            />
+          } />
+        </Routes>
         </Suspense>
       </main>
 
@@ -173,10 +190,10 @@ export default function Home() {
         <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={goToDaily}>
           <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
         </div>
-        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => setActiveView('monthly')}>
+        <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => navigate('/monthly')}>
           <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
         </div>
-        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => setActiveView('salary')}>
+        <div className={`tab ${activeView === 'salary' ? 'active' : ''}`} onClick={() => navigate('/salary')}>
           <i className="ph-duotone ph-wallet i-icon"></i> รายได้
         </div>
       </div>
