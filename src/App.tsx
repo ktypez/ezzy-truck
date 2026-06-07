@@ -15,7 +15,7 @@ const SalaryView = lazy(() => import('@/components/SalaryView'));
 export default function Home() {
   const navigate = useNavigate();
   const location = useLocation();
-  const activeView = location.pathname.replace('/', '') || 'daily';
+  const activeView = (location.hash || location.pathname).replace(/[/#]/g, '') || 'daily';
 
   const [session, setSession] = useState<any>(null);
   const [theme, setTheme] = useState(() => {
