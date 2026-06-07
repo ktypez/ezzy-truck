@@ -1,6 +1,5 @@
 import MonthYearSelector from './MonthYearSelector';
 import { useState, useEffect, useRef } from 'react';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
 
 interface DailyViewProps {
@@ -24,7 +23,6 @@ export default function DailyView({
   currentLeaveType,
   onChangeMonth,
 }: DailyViewProps) {
-  const queryClient = useQueryClient();
   const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -38,6 +36,7 @@ export default function DailyView({
   const [lateMin, setLateMin] = useState('');
   const [roundCount, setRoundCount] = useState(0);
   const [pointCount, setPointCount] = useState(0);
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success'>('idle');
   const [showShiftSelector, setShowShiftSelector] = useState(false);
   const [isSavingShift, setIsSavingShift] = useState(false);
 
@@ -66,45 +65,35 @@ export default function DailyView({
     }
   }, [selectedDay]);
 
-  // Fetch day log data via TanStack Query
-  const { data: dayData, isFetching } = useQuery({
-    queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay],
-    queryFn: async () => {
+  useEffect(() => {
+    async function loadDayData() {
+      setIsWork(true); setDayType('normal'); setLeaveType(null); setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin(''); setRoundCount(0); setPointCount(0);
       const { data } = await sb.from('logs').select('*')
         .eq('user_id', userId).eq('year', currentYear).eq('month', currentMonth).eq('day', selectedDay).maybeSingle();
-      return data || null;
-    },
-    enabled: !!userId,
-  });
-
-  // Sync local state from fetched data
-  useEffect(() => {
-    if (dayData) {
-      const isHoliday = dayData.shift_time === 'หยุด' || dayData.day_type === 'วันหยุด' || dayData.is_work === false;
-      setIsWork(!isHoliday);
-      if (isHoliday) {
-        setLeaveType(dayData.leave_type || null);
-      } else {
-        setDayType(dayData.day_type === 'special' ? 'special' : 'normal');
-        setOdoIn(dayData.odo_in ? String(dayData.odo_in) : '');
-        setOdoOut(dayData.odo_out ? String(dayData.odo_out) : '');
-        setOtHours(dayData.ot ? String(dayData.ot) : '');
-        setLateMin(dayData.late ? String(dayData.late) : '');
-        setRoundCount(dayData.rounds || 0);
-        setPointCount(dayData.points || 0);
+      if (data) {
+        const isHoliday = data.shift_time === 'หยุด' || data.day_type === 'วันหยุด' || data.is_work === false;
+        setIsWork(!isHoliday);
+        if (isHoliday) {
+          setLeaveType(data.leave_type || null);
+        } else {
+          setDayType(data.day_type === 'special' ? 'special' : 'normal');
+          setOdoIn(data.odo_in ? String(data.odo_in) : '');
+          setOdoOut(data.odo_out ? String(data.odo_out) : '');
+          setOtHours(data.ot ? String(data.ot) : '');
+          setLateMin(data.late ? String(data.late) : '');
+          setRoundCount(data.rounds || 0);
+          setPointCount(data.points || 0);
+        }
       }
-    } else {
-      setIsWork(true); setDayType('normal'); setLeaveType(null);
-      setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin('');
-      setRoundCount(0); setPointCount(0);
     }
-  }, [dayData]);
+    loadDayData();
+  }, [selectedDay, currentDate, userId]);
 
-  // Mutation: quick save shift (from shift selector)
-  const quickShiftMutation = useMutation({
-    mutationFn: async ({ chosenShift, chosenLeaveType }: { chosenShift: string; chosenLeaveType?: string | null }) => {
-      if (!selectedDay || !chosenShift) return;
-      const isHoliday = chosenShift === 'หยุด';
+  const handleQuickSaveShift = async (chosenShift: string, chosenLeaveType?: string | null) => {
+    if (!selectedDay || !chosenShift) return;
+    setIsSavingShift(true);
+    const isHoliday = chosenShift === 'หยุด';
+    try {
       const payload: any = {
         user_id: userId, year: currentYear, month: currentMonth, day: selectedDay,
         shift_time: chosenShift, day_type: isHoliday ? 'วันหยุด' : 'วันทำงาน', is_work: !isHoliday,
@@ -112,138 +101,141 @@ export default function DailyView({
       };
       if (isHoliday) Object.assign(payload, { odo_in: 0, odo_out: 0, ot: 0, late: 0, drivers: [], trucks: 0, odo: 0 });
       const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay] });
-      setShowShiftSelector(false);
-      onSaveSuccess();
-    },
-    onError: (err: any) => { alert('เกิดข้อผิดพลาด: ' + err.message); },
-  });
+      if (error) { alert('เกิดข้อผิดพลาด: ' + error.message); } else { setShowShiftSelector(false); onSaveSuccess(); }
+    } catch (err: any) { alert(err.message); } finally { setIsSavingShift(false); }
+  };
 
   const distance = Math.max(0, (parseFloat(odoOut) || 0) - (parseFloat(odoIn) || 0));
 
-  // Mutation: full save
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success'>('idle');
-
   const handleSave = async () => {
     setSaveStatus('saving');
-    try {
-      const payload: any = {
-        user_id: userId,
-        year: currentYear,
-        month: currentMonth,
-        day: selectedDay,
-        shift_time: currentShift || null,
-        day_type: dayType === 'special' ? 'special' : 'วันทำงาน',
-        is_work: true,
-        odo_in: parseInt(odoIn) || 0,
-        odo_out: parseInt(odoOut) || 0,
-        odo: distance,
-        ot: parseFloat(otHours) || 0,
-        late: parseInt(lateMin) || 0,
-        rounds: roundCount,
-        points: pointCount,
-        drivers: [],
-        trucks: 0,
-        leave_type: null,
-      };
-      const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
-      if (error) throw error;
-      setSaveStatus('success');
-      queryClient.invalidateQueries({ queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay] });
-      onSaveSuccess();
-      setTimeout(() => setSaveStatus('idle'), 2000);
-    } catch (err: any) {
-      alert('เกิดข้อผิดพลาด: ' + err.message);
-      setSaveStatus('idle');
+    const payload: any = {
+      user_id: userId, year: currentYear, month: currentMonth, day: selectedDay,
+      is_work: isWork, shift_time: currentShift || null
+    };
+    if (isWork) {
+      Object.assign(payload, {
+        day_type: dayType, odo_in: parseFloat(odoIn) || 0, odo_out: parseFloat(odoOut) || 0,
+        ot: parseFloat(otHours) || 0, late: parseInt(lateMin) || 0, rounds: roundCount, points: pointCount,
+        trucks: roundCount, odo: distance, drivers: [], leave_type: null
+      });
+    } else {
+      Object.assign(payload, { day_type: 'วันหยุด', shift_time: 'หยุด', is_work: false,
+        odo_in: 0, odo_out: 0, ot: 0, late: 0, rounds: 0, points: 0, trucks: 0, odo: 0, drivers: [], leave_type: leaveType });
     }
-  };
-
-  const handleQuickSaveShift = async (chosenShift: string, chosenLeaveType?: string | null) => {
-    setIsSavingShift(true);
-    await quickShiftMutation.mutateAsync({ chosenShift, chosenLeaveType });
-    setIsSavingShift(false);
+    const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
+    if (error) { alert("เกิดข้อผิดพลาด: " + error.message); setSaveStatus('idle'); }
+    else { setSaveStatus('success'); onSaveSuccess(); setTimeout(() => setSaveStatus('idle'), 2000); }
   };
 
   return (
-    <div id="view-daily">
-      {/* Date Month/Year Selector */}
-      <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
-
+    <div id="view-daily" className="view active">
+      {/* Month/Year Selector */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
+      </div>
+      
       {/* Date Slider */}
-      <div ref={sliderRef} className="date-bar" style={{ display: 'flex', gap: '4px', overflowX: 'auto', padding: '8px 0', marginBottom: '12px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-        {allDaysArray.map(({ dayNum, dayName }) => (
-          <div key={dayNum} data-day={dayNum}
-            className={`date-bar-item ${dayNum === selectedDay ? 'active' : ''} ${isToday(dayNum) ? 'today' : ''}`}
-            onClick={() => onSelectDay(dayNum)}
-            style={{ flex: '0 0 48px', textAlign: 'center', padding: '6px 0', borderRadius: '12px', cursor: 'pointer', background: dayNum === selectedDay ? 'var(--primary)' : 'var(--card)', color: dayNum === selectedDay ? 'var(--active-date-text)' : 'var(--text)', border: isToday(dayNum) ? '2px solid var(--primary)' : '1px solid var(--border)', fontWeight: dayNum === selectedDay ? 800 : 500, fontSize: '12px' }}>
-            <div style={{ fontSize: '10px', opacity: 0.7 }}>{dayName}</div>
-            <div style={{ fontSize: '18px', lineHeight: 1.2 }}>{dayNum}</div>
-          </div>
-        ))}
+      <div className="date-slider-container" ref={sliderRef}>
+        {allDaysArray.map(item => {
+          const isActive = selectedDay === item.dayNum;
+          const today = isToday(item.dayNum);
+          return (
+            <div key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
+              className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
+              data-day={item.dayNum}
+            >
+              <span className="slider-day-name">{item.dayName}</span>
+              <span className="slider-day-num">{item.dayNum}</span>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Shift Toggle + Work Status */}
-      <div className="card" style={{ marginBottom: '15px' }}>
-        <div className="controls-row">
-          <div className="segmented-control" style={{ flex: 1 }}>
-            <button className="seg-btn active" onClick={() => setShowShiftSelector(true)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
-              <i className="ph-duotone ph-clock i-sm"></i> {currentShift || 'เลือกกะ'}
-            </button>
-          </div>
+      {/* Shift badge + Day type */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
+        <button type="button" onClick={() => setShowShiftSelector(true)}
+          style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+            background: currentShift ? 'var(--primary)' : 'var(--border)',
+            color: currentShift ? 'var(--active-date-text, white)' : 'var(--muted)',
+            border: currentShift ? '2px solid var(--primary)' : '2px solid transparent' }}>
+          <i className={`ph-duotone ${currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ph-thermometer-hot' : currentLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`}></i>
+          {currentShift ? (currentShift === 'หยุด' ? (currentLeaveType === 'sick' ? 'ลาป่วย' : currentLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${currentShift}`) : 'แตะเพื่อเข้ากะ'}
+        </button>
+        <div style={{ display: 'flex', gap: '4px', flex: 1 }}>
+          <button type="button" onClick={() => { if (currentShift !== 'หยุด') setDayType('normal'); }}
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
+              cursor: currentShift === 'หยุด' ? 'default' : 'pointer',
+              background: currentShift === 'หยุด' ? 'var(--border)' : (dayType === 'normal' ? 'var(--primary)' : 'var(--border)'),
+              color: currentShift === 'หยุด' ? 'var(--muted)' : (dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)'),
+              border: currentShift === 'หยุด' ? '2px solid transparent' : (dayType === 'normal' ? '2px solid var(--primary)' : '2px solid transparent'),
+              opacity: currentShift === 'หยุด' ? 0.35 : 1 }}>
+            ปกติ
+          </button>
+          <button type="button" onClick={() => { if (currentShift !== 'หยุด') setDayType('special'); }}
+            style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
+              cursor: currentShift === 'หยุด' ? 'default' : 'pointer',
+              background: currentShift === 'หยุด' ? 'var(--border)' : (dayType === 'special' ? 'var(--primary)' : 'var(--border)'),
+              color: currentShift === 'หยุด' ? 'var(--muted)' : (dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)'),
+              border: currentShift === 'หยุด' ? '2px solid transparent' : (dayType === 'special' ? '2px solid var(--primary)' : '2px solid transparent'),
+              opacity: currentShift === 'หยุด' ? 0.35 : 1 }}>
+            x2
+          </button>
         </div>
       </div>
 
       {isWork ? (
         <>
-          {/* Odometer Section */}
-          <div className="card">
-            <div className="input-group">
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '16px', fontWeight: 700, color: 'var(--text)' }}>
-                <i className="ph-duotone ph-speedometer i-sm" style={{ color: 'var(--primary)' }}></i> ระยะทาง
-              </span>
-              <div style={{ fontSize: '24px', fontWeight: 900, color: 'var(--primary)' }}>{distance.toLocaleString()} km</div>
+          {/* Summary Banner */}
+          <div style={{ display: 'flex', justifyContent: 'space-around', background: 'var(--primary-bg)', borderRadius: '14px', padding: '12px', marginBottom: '12px', border: '1px solid var(--border)' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>ระยะทาง</div>
+              <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{distance} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>กม.</span></div>
             </div>
-            <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-              <input type="number" placeholder="เลขไมล์เข้า" className="driver-input" value={odoIn} onChange={e => setOdoIn(e.target.value)} style={{ flex: 1 }} />
-              <input type="number" placeholder="เลขไมล์ออก" className="driver-input" value={odoOut} onChange={e => setOdoOut(e.target.value)} style={{ flex: 1 }} />
+            <div style={{ width: '1px', background: 'var(--border)' }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>รอบ</div>
+              <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{roundCount} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>รอบ</span></div>
+            </div>
+            <div style={{ width: '1px', background: 'var(--border)' }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>จุดส่ง</div>
+              <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{pointCount} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>จุด</span></div>
             </div>
           </div>
 
-          {/* OT, Late, Round, Point Section */}
-          <div className="card">
-            <div className="input-group">
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '16px', fontWeight: 700, color: 'var(--text)' }}>
-                <i className="ph-duotone ph-clock-afternoon i-sm" style={{ color: 'var(--primary)' }}></i> OT (ชม.)
-              </span>
-              <input type="number" placeholder="0" className="driver-input" value={otHours} onChange={e => setOtHours(e.target.value)} style={{ width: '80px', textAlign: 'center' }} />
-            </div>
-            <div className="input-group">
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '16px', fontWeight: 700, color: 'var(--text)' }}>
-                <i className="ph-duotone ph-alarm i-sm" style={{ color: 'var(--primary)' }}></i> สาย (นาที)
-              </span>
-              <input type="number" placeholder="0" className="driver-input" value={lateMin} onChange={e => setLateMin(e.target.value)} style={{ width: '80px', textAlign: 'center' }} />
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--border)' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '16px', fontWeight: 700, color: 'var(--text)' }}>
-                <i className="ph-duotone ph-arrows-clockwise i-sm" style={{ color: 'var(--primary)' }}></i> รอบ
-              </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          {/* Odometer Card */}
+          <div className="card" style={{ padding: '12px 16px' }}>
+
+            <div className="input-group"><span>ไมล์เข้า</span><input type="number" id="odoIn" className="input-field input-field-accent" value={odoIn} onChange={e => setOdoIn(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('odoOut')?.focus() }} /></div>
+            <div className="input-group"><span>ไมล์ออก</span><input type="number" id="odoOut" className="input-field input-field-accent" value={odoOut} onChange={e => setOdoOut(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('otHours')?.focus() }} /></div>
+            <div className="input-group"><span>ชั่วโมง OT</span><input type="number" step="0.5" id="otHours" className="input-field input-field-accent" value={otHours} onChange={e => setOtHours(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('lateMin')?.focus() }} /></div>
+            <div className="input-group"><span>สาย (นาที)</span><input type="number" id="lateMin" className="input-field input-field-accent" value={lateMin} onChange={e => setLateMin(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }} /></div>
+          </div>
+
+          {/* Rounds & Points Card */}
+          <div className="card" style={{ display: 'flex', gap: '10px', padding: '12px 10px' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <i className="ph-duotone ph-arrows-clockwise i-sm" style={{ color: 'var(--muted)' }}></i> รอบ
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button type="button" className="del-btn-small" onClick={() => setRoundCount(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
-                <input type="number" value={roundCount} onChange={e => setRoundCount(Math.max(0, parseInt(e.target.value) || 0))}
+                <input type="number" inputMode="numeric" value={roundCount === 0 ? '' : roundCount} placeholder="0"
+                  onChange={e => setRoundCount(Math.max(0, parseInt(e.target.value) || 0))}
                   style={{ width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' }} />
                 <button type="button" className="del-btn-small" onClick={() => setRoundCount(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '16px', fontWeight: 700, color: 'var(--text)' }}>
-                <i className="ph-duotone ph-map-trifold i-sm" style={{ color: 'var(--primary)' }}></i> จุด
-              </span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <i className="ph-duotone ph-map-trifold i-sm" style={{ color: 'var(--muted)' }}></i> จุด
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button type="button" className="del-btn-small" onClick={() => setPointCount(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
-                <input type="number" value={pointCount} onChange={e => setPointCount(Math.max(0, parseInt(e.target.value) || 0))}
+                <input type="number" inputMode="numeric" value={pointCount === 0 ? '' : pointCount} placeholder="0"
+                  onChange={e => setPointCount(Math.max(0, parseInt(e.target.value) || 0))}
                   style={{ width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' }} />
                 <button type="button" className="del-btn-small" onClick={() => setPointCount(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
               </div>
@@ -271,7 +263,9 @@ export default function DailyView({
       </button>
 
       {/* Bottom Sheet Shift Selector */}
+      {/* Backdrop */}
       <div onClick={() => setShowShiftSelector(false)} style={{ position: 'fixed', inset: 0, zIndex: 250, display: showShiftSelector ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
+      
       <div className={`shift-sheet ${showShiftSelector ? 'open' : ''}`} style={{ zIndex: 300 }}>
         <div className="shift-sheet-handle" />
         <div className="shift-sheet-header">

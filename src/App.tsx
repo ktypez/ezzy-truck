@@ -1,49 +1,94 @@
-import { useState, useEffect, lazy, Suspense, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { sb } from '@/lib/supabase';
 import Header from '@/components/Header';
+import DailyView from '@/components/DailyView';
+import MonthlyView from '@/components/MonthlyView';
+import SalaryView from '@/components/SalaryView';
 import Modals from '@/components/Modals';
+import ShiftView from '@/components/ShiftView';
+import { APP_CONFIG } from "@/config";
 
-const ALLOWED_THEMES = ["retro-pastel", "retro-dark", "shinchan", "modern", "crayon", "sunset"];
-
-const DailyView = lazy(() => import('@/components/DailyView'));
-const MonthlyView = lazy(() => import('@/components/MonthlyView'));
-const SalaryView = lazy(() => import('@/components/SalaryView'));
-
-function useSession() {
+export default function Home() {
   const [session, setSession] = useState<any>(null);
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('truck-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'retro-dark' : 'light';
+  });
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
+  const [activeView, setActiveView] = useState('daily');
+  const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
+
+  // 💡 1. ตัวแปรนี้อยู่ตรงนี้ตามเดิม
+  const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+  // 🚨 2. กลุ่มแชร์ State ของระบบปฏิทินกะงานลอยแก้ว
+  const [currentDayShift, setCurrentDayShift] = useState<string>('');
+  const [currentLeaveType, setCurrentLeaveType] = useState<string | null>(null);
+
+  const fetchCurrentDayShift = async () => {
+    if (!session?.user?.id) return;
+    try {
+      const { data } = await sb
+        .from('logs')
+        .select('shift_time, leave_type')
+        .eq('user_id', session.user.id)
+        .eq('year', currentDate.getFullYear())
+        .eq('month', currentDate.getMonth() + 1)
+        .eq('day', selectedDay)
+        .maybeSingle();
+
+      setCurrentDayShift(data?.shift_time || '');
+      setCurrentLeaveType(data?.leave_type || null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
+    fetchCurrentDayShift();
+  }, [selectedDay, currentDate, session, refreshTrigger]); 
+
+
+  // 🟢 3. [แก้ไขใหม่] ระบบ Real-time Auth Check ปลอดภัยและแม่นยำกว่าเดิม 100%
+  useEffect(() => {
+    // โหลดเซสชันปัจจุบันมารอไว้ก่อน
     sb.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
     });
 
+    // คอยตรวจจับถ้ามีการล็อกเอาต์ หรือ เซสชันหมดอายุ ระบบจะดีดกลับหน้า Login ทันที
     const { data: { subscription } } = sb.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
 
+    // ล้างตัวดักฟัง (Cleanup) เมื่อ Component ถูกทำลาย
     return () => subscription.unsubscribe();
   }, []);
 
-  return { session, setSession };
-}
-
-function useTheme() {
-  const [theme, setTheme] = useState(() => {
-    const saved = localStorage.getItem('truck-theme');
-    if (saved && ALLOWED_THEMES.includes(saved)) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'retro-dark' : 'retro-pastel';
-  });
-
-  // Particle effect for Shin-chan theme
+  // Effect จัดการ Particle เอฟเฟกต์ (ซากุระ และ ช็อกโกบี) ตามธีมที่กดเลือก
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('truck-theme', theme);
 
+    const oldSakura = document.querySelector('.sakura-fall');
     const oldChocobi = document.querySelector('.chocobi-fall');
+    if (oldSakura) oldSakura.remove();
     if (oldChocobi) oldChocobi.remove();
 
-    if (theme === 'shinchan') {
+    if (theme === 'sakura') {
+      const container = document.createElement('div');
+      container.className = 'sakura-fall';
+      document.body.appendChild(container);
+      for (let i = 0; i < 15; i++) {
+        const p = document.createElement('div'); p.className = 'petal';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        p.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(p);
+      }
+    } else if (theme === 'shinchan') {
       const container = document.createElement('div');
       container.className = 'chocobi-fall';
       document.body.appendChild(container);
@@ -57,40 +102,11 @@ function useTheme() {
     }
   }, [theme]);
 
-  return { theme, setTheme };
-}
-
-export default function Home() {
-  const { session, setSession } = useSession();
-  const { theme, setTheme } = useTheme();
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const [activeView, setActiveView] = useState('daily');
-  const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
-
-  // Fetch current day's shift info via TanStack Query
-  const { data: shiftData, refetch: refetchShift } = useQuery({
-    queryKey: ['day-shift', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay],
-    queryFn: async () => {
-      if (!session?.user?.id) return { shift_time: '', leave_type: null };
-      const { data } = await sb
-        .from('logs')
-        .select('shift_time, leave_type')
-        .eq('user_id', session.user.id)
-        .eq('year', currentDate.getFullYear())
-        .eq('month', currentDate.getMonth() + 1)
-        .eq('day', selectedDay)
-        .maybeSingle();
-      return { shift_time: data?.shift_time || '', leave_type: data?.leave_type || null };
-    },
-    enabled: !!session?.user?.id,
-  });
-
-  const handleChangeMonth = useCallback((diff: number) => {
+  const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1);
     setCurrentDate(newDate);
-    setSelectedDay(1);
-  }, [currentDate]);
+    setSelectedDay(1); 
+  };
 
   const handleLogout = () => {
     sb.auth.signOut().then(() => setSession(null));
@@ -122,7 +138,7 @@ export default function Home() {
 
   return (
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
-      <Header
+      <Header 
         userEmail={session.user.email}
         currentDate={currentDate}
         onChangeMonth={handleChangeMonth}
@@ -133,38 +149,38 @@ export default function Home() {
       />
 
       <main className="content-area">
-        <Suspense fallback={<div className="card" style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--muted)' }}>⏳ กำลังโหลด...</div>}>
-          {activeView === 'daily' && (
-            <DailyView
-              userId={session.user.id}
-              currentDate={currentDate}
-              selectedDay={selectedDay}
-              onSelectDay={setSelectedDay}
-              onSaveSuccess={() => refetchShift()}
-              currentShift={shiftData?.shift_time || ''}
-              currentLeaveType={shiftData?.leave_type || null}
-              onChangeMonth={handleChangeMonth}
-            />
-          )}
-          {activeView === 'monthly' && (
-            <MonthlyView
-              userId={session.user.id}
-              currentDate={currentDate}
-              onSelectDayRow={(day) => {
-                setSelectedDay(day);
-                setActiveView('daily');
-              }}
-              onChangeMonth={handleChangeMonth}
-            />
-          )}
-          {activeView === 'salary' && (
-            <SalaryView
-              userId={session.user.id}
-              currentDate={currentDate}
-              onChangeMonth={handleChangeMonth}
-            />
-          )}
-        </Suspense>
+        {activeView === 'daily' && (
+          <DailyView
+            userId={session.user.id}
+            currentDate={currentDate}
+            selectedDay={selectedDay}
+            onSelectDay={setSelectedDay}
+            onSaveSuccess={() => setRefreshTrigger(!refreshTrigger)}
+            currentShift={currentDayShift}
+            currentLeaveType={currentLeaveType}
+            onChangeMonth={handleChangeMonth}
+          />
+        )}
+        {activeView === 'monthly' && (
+          <MonthlyView 
+            userId={session.user.id}
+            currentDate={currentDate}
+            refreshTrigger={refreshTrigger}
+            onSelectDayRow={(day) => {
+              setSelectedDay(day);
+              setActiveView('daily');
+            }}
+            onChangeMonth={handleChangeMonth}
+          />
+        )}
+        {activeView === 'salary' && (
+          <SalaryView 
+            userId={session.user.id}
+            currentDate={currentDate}
+            refreshTrigger={refreshTrigger}
+            onChangeMonth={handleChangeMonth}
+          />
+        )}
       </main>
 
       <div className="nav-tabs">
@@ -184,13 +200,13 @@ export default function Home() {
         </div>
       </div>
 
-      <Modals
+      <Modals 
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
         onResetTheme={() => {
           localStorage.removeItem('truck-theme');
           const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          setTheme(prefersDark ? 'retro-dark' : 'retro-pastel');
+          setTheme(prefersDark ? 'retro-dark' : 'light');
         }}
         onSelectTheme={setTheme}
       />
