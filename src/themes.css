@@ -85,7 +85,12 @@
 }
 [data-theme="shinchan"] #view-salary  > .card:first-of-type {
     background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(0, 77, 64, 0.9)) !important;
+    color: #2D2D2D !important;
 }
+[data-theme="shinchan"] #view-salary > .card:first-of-type div {
+    color: #2D2D2D !important;
+}
+
 [data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
