@@ -93,6 +93,9 @@
     box-shadow: 4px 4px 0px rgba(0,0,0,0.08) !important; 
     backdrop-filter: blur(6px);
 }
+[data-theme="shinchan"] #view-salary > .card:first-of-type {
+    backdrop-filter: none !important;
+}
 [data-theme="shinchan"] .daily-summary {
     background: rgba(232, 245, 233, 1) !important;
     backdrop-filter: none !important;
