@@ -396,20 +396,21 @@
 
 
 /* ===================================================
-   🫧 THEME: Liquid Glass
+   🫧 THEME: Liquid Glass (glasscn-inspired)
    =================================================== */
 [data-theme="glass"] {
     --bg: #F2F5F9;
-    --card: rgba(255, 255, 255, 0.6);
+    --card: rgba(255, 255, 255, 0.55);
     --text: #1C1C1E;
     --muted: #8E8E93;
-    --border: rgba(255, 255, 255, 0.8);
+    --border: rgba(255, 255, 255, 0.6);
     --primary: #007AFF !important;
-    --primary-bg: rgba(0, 122, 255, 0.1) !important;
+    --primary-bg: rgba(0, 122, 255, 0.12) !important;
     --secondary: #34C759 !important;
-    --body-bg-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --body-bg-image: url("/files/glass-bg-light.jpg");
     --body-bg-size: cover;
-    --pattern-color: rgba(255, 255, 255, 0.08);
+    --body-bg-attachment: fixed;
+    --pattern-color: rgba(255, 255, 255, 0.05);
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #007AFF, #34C759);
 }
@@ -419,11 +420,11 @@
 [data-theme="glass"] .main-save-btn,
 [data-theme="glass"] .cal-cell,
 [data-theme="glass"] .date-bar-item {
-    border-radius: 16px !important;
+    border-radius: 14px !important;
     border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 [data-theme="glass"] .tab.active,
 [data-theme="glass"] .main-save-btn,
@@ -433,6 +434,7 @@
     color: #FFFFFF !important;
     font-weight: 800;
     border: none !important;
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
 }
 [data-theme="glass"] .input-field {
     background: rgba(255, 255, 255, 0.7) !important;
@@ -443,25 +445,35 @@
 [data-theme="glass"] .summary-banner,
 [data-theme="glass"] .card {
     background: rgba(255, 255, 255, 0.55) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 [data-theme="glass"] .date-bar-item {
-    background: rgba(255, 255, 255, 0.5) !important;
+    background: rgba(255, 255, 255, 0.45) !important;
 }
 [data-theme="glass"] .nav-tabs {
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 [data-theme="glass"] .date-slider-item.active {
     background: linear-gradient(135deg, #007AFF, #34C759) !important;
+    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
 }
 [data-theme="glass"] .daily-summary {
-    background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(12px);
     border-radius: 14px;
 }
+[data-theme="glass"] .segmented-control {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+[data-theme="glass"] .user-bar {
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
 
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
 #view-salary > .card:first-of-type {
