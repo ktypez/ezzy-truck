@@ -13,7 +13,9 @@ export default function SalaryView({ userId, currentDate, onChangeMonth }: Salar
   const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
   // salaryResult & leaveTotals from useQuery below
 
-  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+  const year = currentDate.getFullYear();
+const month = currentDate.getMonth() + 1;
+  const daysInMonth = new Date(year, month, 0).getDate();
 
   const { data: salaryResult } = useQuery({
     queryKey: ['salary', userId, year, month],
