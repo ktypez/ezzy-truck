@@ -83,21 +83,19 @@
     color: #FFFFFF !important;
     font-weight: 800;
 }
-[data-theme="shinchan"] #view-salary  > .card:first-of-type {
-    background: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(0, 77, 64, 0.9)) !important;
+[data-theme="shinchan"] #view-salary > .card:first-of-type {
     color: #2D2D2D !important;
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type div {
-    color: #2D2D2D !important;
+    color: #4a3f3b !important;
 }
 
 [data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
-    background: rgba(255, 255, 255, 0.85) !important; 
+    background: #FFFFFF !important; 
     border: none !important; 
     box-shadow: 4px 4px 0px rgba(0,0,0,0.08) !important; 
-    backdrop-filter: blur(6px);
 }
 [data-theme="shinchan"] .date-bar-item {
     background: rgba(255, 255, 255, 0.75) !important;
