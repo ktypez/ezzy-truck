@@ -82,7 +82,7 @@ const month = currentDate.getMonth() + 1;
       
       {/* Hero Net Income Card */}
       <div className="card" style={{ 
-        background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+        background: 'var(--hero-gradient, linear-gradient(135deg, var(--primary), var(--secondary)))',
         padding: '18px 20px',
         marginBottom: '15px'
       }}>

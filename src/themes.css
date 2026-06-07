@@ -230,6 +230,7 @@
     --body-bg-image: none;
     --pattern-color: rgba(56, 189, 248, 0.04);
     --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
 }
 [data-theme="midnight-ocean"] .card,
 [data-theme="midnight-ocean"] .tab,
@@ -290,6 +291,7 @@
     --body-bg-image: none;
     --pattern-color: rgba(192, 132, 252, 0.04);
     --active-date-text: #1A0A1E;
+    --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
 }
 [data-theme="twilight"] .card,
 [data-theme="twilight"] .tab,
