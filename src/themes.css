@@ -58,6 +58,7 @@
     --primary-bg: rgba(232, 245, 233, 0.7) !important;
     --secondary: #00897B !important;
     --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(0, 77, 64, 0.9));
 }
 [data-theme="shinchan"] .card, 
 [data-theme="shinchan"] .tab, 
@@ -82,10 +83,6 @@
     background: var(--primary) !important;
     color: #FFFFFF !important;
     font-weight: 800;
-}
-[data-theme="shinchan"] #view-salary > .card:first-of-type,
-[data-theme="shinchan"] #view-salary > .card:first-of-type div {
-    color: var(--primary) !important;
 }
 
 [data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
@@ -393,4 +390,10 @@
 }
 [data-theme="cotton-candy"] .date-slider-item.active {
     background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+}
+
+
+/* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
+#view-salary > .card:first-of-type {
+    background: var(--hero-gradient, linear-gradient(135deg, var(--primary), var(--secondary))) !important;
 }
