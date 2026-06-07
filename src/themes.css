@@ -49,10 +49,9 @@
     --body-bg-image: url("/files/001.jpeg");
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
-    
-    --card: #FFFFFF !important; 
-    --text: #4a3f3b; 
-    --muted: #8c7e7a; 
+    --card: #FFFFFF;
+    --text: #4a3f3b;
+    --muted: #8c7e7a;
     --border: #FFD54F;
     --primary: #4CAF50 !important;
     --primary-bg: rgb(232, 245, 233) !important;
@@ -60,38 +59,40 @@
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64));
 }
-[data-theme="shinchan"] .card, 
-[data-theme="shinchan"] .tab, 
+[data-theme="shinchan"] .card,
+[data-theme="shinchan"] .tab,
 [data-theme="shinchan"] .seg-btn,
 [data-theme="shinchan"] .main-save-btn,
 [data-theme="shinchan"] .cal-cell,
 [data-theme="shinchan"] .date-bar-item {
-    border-radius: 55px 75px 45px 85px / 65px 45px 75px 55px !important; 
+    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15) !important;
+}
+[data-theme="shinchan"] .tab.active,
+[data-theme="shinchan"] .main-save-btn,
+[data-theme="shinchan"] .auth-btn,
+[data-theme="shinchan"] .seg-btn.active {
+    background: linear-gradient(135deg, #4CAF50, #00897B) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
     border: none !important;
-    box-shadow: none !important; 
 }
 [data-theme="shinchan"] .input-field {
     background-color: rgb(255, 249, 230) !important;
-    border: none !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 12px !important;
 }
-[data-theme="shinchan"] .tab.active, 
-[data-theme="shinchan"] .main-save-btn, 
-[data-theme="shinchan"] .auth-btn,
-[data-theme="shinchan"] .seg-btn.active {
-    background: var(--primary) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
+[data-theme="shinchan"] .main-save-btn:hover {
+    animation: wobble 0.5s ease-in-out;
 }
-
-[data-theme="shinchan"] .main-save-btn:hover { animation: wobble 0.5s ease-in-out; }
-[data-theme="shinchan"] .summary-banner, 
-[data-theme="shinchan"] .card { 
-    background: #FFFFFF !important; 
-    border: none !important; 
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.08) !important; 
+[data-theme="shinchan"] .summary-banner,
+[data-theme="shinchan"] .card {
+    background: #FFFFFF !important;
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type {
-    background: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64)) !important;
+    background: var(--hero-gradient) !important;
+    border: none !important;
     color: #FFFFFF !important;
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type div {
@@ -99,11 +100,14 @@
 }
 [data-theme="shinchan"] .daily-summary {
     background: rgb(232, 245, 233) !important;
+    border-left: 4px solid #4CAF50 !important;
 }
 [data-theme="shinchan"] .nav-tabs {
     background: #FFFFFF !important;
 }
-
+[data-theme="shinchan"] .date-slider-item.active {
+    background: linear-gradient(135deg, #4CAF50, #00897B) !important;
+}
 /* ===================================================
    🌆 THEME: Neon Sunset
    =================================================== */
