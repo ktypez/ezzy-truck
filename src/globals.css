@@ -85,6 +85,7 @@ body {
 
 .date-bar-item { flex: 0 0 48px; text-align: center; padding: 6px 0; border-radius: 12px; cursor: pointer; background: var(--card); color: var(--text); border: 1px solid var(--border); font-weight: 500; font-size: 12px; }
 .date-bar-item.today { border: 2px solid var(--primary); }
+.date-slider-item.today { border: 2px solid var(--primary); }
 .date-bar-item.active { background: var(--primary) !important; color: var(--active-date-text) !important; border: none !important; }
 .date-bar-item.active .day-name { opacity: 0.9 !important; color: var(--active-date-text) !important; }
 .date-bar-item.active .day-num { color: var(--active-date-text) !important; }

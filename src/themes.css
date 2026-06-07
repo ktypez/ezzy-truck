@@ -74,7 +74,6 @@
 [data-theme="shinchan"] .input-field {
     background-color: rgba(255, 249, 230, 0.8) !important;
     border: none !important;
-    backdrop-filter: blur(4px);
 }
 [data-theme="shinchan"] .tab.active, 
 [data-theme="shinchan"] .main-save-btn, 
@@ -91,24 +90,18 @@
     background: rgba(255, 255, 255, 0.85) !important; 
     border: none !important; 
     box-shadow: 4px 4px 0px rgba(0,0,0,0.08) !important; 
-    backdrop-filter: blur(6px);
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type {
     background: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64)) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
 }
 [data-theme="shinchan"] .daily-summary {
     background: rgba(232, 245, 233, 1) !important;
-    backdrop-filter: none !important;
 }
 [data-theme="shinchan"] .date-bar-item {
     background: rgba(255, 255, 255, 0.75) !important;
-    backdrop-filter: blur(4px);
 }
 [data-theme="shinchan"] .nav-tabs {
     background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(8px);
 }
 
 /* ===================================================
