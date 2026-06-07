@@ -12,7 +12,6 @@
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
                      linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
     --body-bg-size: 24px 24px;
-    --active-date-text: #ffffff;
 }
 
 /* 🌙 Dark mode: auto-apply retro-dark when system prefers dark */
