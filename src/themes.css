@@ -1,11 +1,6 @@
-/* 🧡 Theme: Shin-chan (Crayon) */
-/* 🎨 Theme: Modern */
-/* 🌆 Theme: Neon Sunset */
-/* ☀️ Theme: Summer Morning */
-/* ☁️ บังคับรูปทรงก้อนเมฆชินจัง */
-/* 🧸 Theme: Shin-chan (Cloudy Shape v.4.7.1) */
-/* 📟 Theme: Retro Dark */
-/* 🎨 Retro Pastel (explicit, same as root) */
+/* ===================================================
+   🎨 THEME: Retro Pastel (Default)
+   =================================================== */
 [data-theme="retro-pastel"] {
     --bg: #F9F7F2;
     --card: #FFFFFF;
@@ -27,6 +22,10 @@
     border: 4px solid var(--border) !important;
     box-shadow: none !important;
 }
+
+/* ===================================================
+   📟 THEME: Retro Dark
+   =================================================== */
 [data-theme="retro-dark"] {
     --bg: #121212;
     --card: #1F1F1F;
@@ -41,8 +40,12 @@
 [data-theme="retro-dark"] .card, [data-theme="retro-dark"] .tab, [data-theme="retro-dark"] .seg-btn, [data-theme="retro-dark"] .main-save-btn, [data-theme="retro-dark"] .cal-cell, [data-theme="retro-dark"] .date-bar-item {
     border-radius: 8px !important; border: 4px solid var(--border) !important; box-shadow: none !important;
 }
+
+/* ===================================================
+   🧸 THEME: Shin-chan
+   =================================================== */
 [data-theme="shinchan"] {
-    --bg: #FFF9C4; /* Soft yellow background */
+    --bg: #FFF9C4;
     --body-bg-image: url("/files/001.jpeg");
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
@@ -50,10 +53,10 @@
     --card: #FFFFFF !important; 
     --text: #4a3f3b; 
     --muted: #8c7e7a; 
-    --border: #FFD54F; /* Vibrant yellow border */
-    --primary: #4CAF50 !important; /* Leaf Green */
-    --primary-bg: #E8F5E9 !important; /* Light Leaf Green */
-    --secondary: #00897B !important; /* Teal secondary */
+    --border: #FFD54F;
+    --primary: #4CAF50 !important;
+    --primary-bg: #E8F5E9 !important;
+    --secondary: #00897B !important;
     --active-date-text: #FFFFFF;
 }
 [data-theme="shinchan"] .card, 
@@ -86,22 +89,10 @@
     border: 3px solid var(--border) !important; 
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important; 
 }
-[data-theme="summer-morning"] {
-    --bg: #fff6de;
-    --card: #ffffff;
-    --text: #5D4037;
-    --muted: #8c7e7a;
-    --border: #8bdfdd;
-    --primary: #f48f68 !important;
-    --primary-bg: #ffe394 !important;
-    --secondary: #8bdfdd !important;
-}
-[data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
-    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: none !important;
-}
-[data-theme="summer-morning"] .seg-btn {
-    color: #5D4037 !important;
-}
+
+/* ===================================================
+   🌆 THEME: Neon Sunset
+   =================================================== */
 [data-theme="sunset"] {
     --bg: #1a0b2e;
     --card: #271744;
@@ -114,6 +105,10 @@
     --body-bg-image: none;
     --active-date-text: #ffffff;
 }
+
+/* ===================================================
+   🎨 THEME: Modern
+   =================================================== */
 [data-theme="modern"] {
     --bg: #FAF7F2;
     --card: #FFFFFF;
@@ -136,65 +131,193 @@
     border: 2px solid var(--border) !important;
     box-shadow: none !important;
 }
-[data-theme="crayon"] {
-    --bg: #FFF9C4;
-    --body-bg-image: linear-gradient(135deg, rgba(255, 249, 196, 0.92) 0%, rgba(255, 224, 130, 0.92) 50%, rgba(255, 249, 196, 0.92) 100%), url("/files/001.jpeg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    
+
+/* ===================================================
+   ☀️ THEME: Summer Morning
+   =================================================== */
+[data-theme="summer-morning"] {
+    --bg: #fff6de;
+    --card: #ffffff;
+    --text: #5D4037;
+    --muted: #8c7e7a;
+    --border: #8bdfdd;
+    --primary: #f48f68 !important;
+    --primary-bg: #ffe394 !important;
+    --secondary: #8bdfdd !important;
+}
+[data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
+    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: none !important;
+}
+[data-theme="summer-morning"] .seg-btn {
+    color: #5D4037 !important;
+}
+
+/* ===================================================
+   ☀️ THEME: Blue Sky (remake of Crayon)
+   =================================================== */
+[data-theme="blue-sky"] {
+    --bg: #E8F4FD;
     --card: #FFFFFF;
-    --text: #3D2B1F;
-    --muted: #8C7E7A;
-    --border: #FFD54F;
-    --primary: #E53935 !important;
-    --primary-bg: #FFEBEE !important;
-    --secondary: #7B1FA2 !important;
-    --pattern-color: rgba(229, 57, 53, 0.05);
+    --text: #2C3E50;
+    --muted: #7F8C9B;
+    --border: #AED6F1;
+    --primary: #F39C12 !important;
+    --primary-bg: #FEF5E7 !important;
+    --secondary: #3498DB !important;
+    --body-bg-image: none;
     --active-date-text: #FFFFFF;
 }
-[data-theme="crayon"] .card,
-[data-theme="crayon"] .tab,
-[data-theme="crayon"] .seg-btn,
-[data-theme="crayon"] .main-save-btn,
-[data-theme="crayon"] .cal-cell,
-[data-theme="crayon"] .date-bar-item {
+[data-theme="blue-sky"] .card,
+[data-theme="blue-sky"] .tab,
+[data-theme="blue-sky"] .seg-btn,
+[data-theme="blue-sky"] .main-save-btn,
+[data-theme="blue-sky"] .cal-cell,
+[data-theme="blue-sky"] .date-bar-item {
     border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
     border: 3px solid var(--border) !important;
-    box-shadow: 4px 4px 0px rgba(229, 57, 53, 0.15) !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.15) !important;
 }
-[data-theme="crayon"] .tab.active,
-[data-theme="crayon"] .main-save-btn,
-[data-theme="crayon"] .auth-btn,
-[data-theme="crayon"] .seg-btn.active {
-    background: linear-gradient(135deg, #E53935, #FF7043) !important;
+[data-theme="blue-sky"] .tab.active,
+[data-theme="blue-sky"] .main-save-btn,
+[data-theme="blue-sky"] .auth-btn,
+[data-theme="blue-sky"] .seg-btn.active {
+    background: linear-gradient(135deg, #F39C12, #F1C40F) !important;
     color: #FFFFFF !important;
     font-weight: 800;
     border: none !important;
 }
-[data-theme="crayon"] .input-field {
-    background-color: #FFF9C4 !important;
+[data-theme="blue-sky"] .input-field {
+    background-color: #F0F8FF !important;
     border: 3px solid var(--border) !important;
-    border-radius: 15px !important;
+    border-radius: 12px !important;
 }
-[data-theme="crayon"] .main-save-btn:hover {
-    animation: shinchanBounce 0.4s ease-in-out;
+[data-theme="blue-sky"] .main-save-btn:hover {
+    animation: floatUp 0.4s ease-in-out;
 }
-[data-theme="crayon"] .summary-banner,
-[data-theme="crayon"] .card {
-    background: rgba(255, 255, 255, 0.92);
+@keyframes floatUp {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+[data-theme="blue-sky"] .summary-banner,
+[data-theme="blue-sky"] .card {
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(4px);
-    box-shadow: 4px 4px 0px rgba(229, 57, 53, 0.12), 0 0 0 2px var(--border) !important;
 }
-[data-theme="crayon"] th {
+[data-theme="blue-sky"] th {
     color: var(--secondary) !important;
     font-weight: 800 !important;
 }
-[data-theme="crayon"] .date-slider-item.active {
-    background: linear-gradient(135deg, #E53935, #FF7043) !important;
+[data-theme="blue-sky"] .date-slider-item.active {
+    background: linear-gradient(135deg, #F39C12, #F1C40F) !important;
 }
-[data-theme="crayon"] .summary-banner {
-    border-left: 4px solid #FFD54F !important;
+[data-theme="blue-sky"] .summary-banner {
+    border-left: 4px solid #F39C12 !important;
 }
-[data-theme="crayon"] .content-area {
-    position: relative;
+
+/* ===================================================
+   🌊 THEME: Midnight Ocean
+   =================================================== */
+[data-theme="midnight-ocean"] {
+    --bg: #0D1B2A;
+    --card: #1B2F44;
+    --text: #E0F2FE;
+    --muted: #94A3B8;
+    --border: #2D4A6E;
+    --primary: #38BDF8 !important;
+    --primary-bg: #0C2D48 !important;
+    --secondary: #2DD4BF !important;
+    --body-bg-image: none;
+    --pattern-color: rgba(56, 189, 248, 0.04);
+    --active-date-text: #0D1B2A;
+}
+[data-theme="midnight-ocean"] .card,
+[data-theme="midnight-ocean"] .tab,
+[data-theme="midnight-ocean"] .seg-btn,
+[data-theme="midnight-ocean"] .main-save-btn,
+[data-theme="midnight-ocean"] .cal-cell,
+[data-theme="midnight-ocean"] .date-bar-item {
+    border-radius: 14px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+[data-theme="midnight-ocean"] .tab.active,
+[data-theme="midnight-ocean"] .main-save-btn,
+[data-theme="midnight-ocean"] .auth-btn,
+[data-theme="midnight-ocean"] .seg-btn.active {
+    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
+    color: #0D1B2A !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="midnight-ocean"] .input-field {
+    background-color: #1B2F44 !important;
+    border: 2px solid var(--border) !important;
+    color: var(--text) !important;
+    border-radius: 10px !important;
+}
+[data-theme="midnight-ocean"] .main-save-btn:hover {
+    animation: pulseGlow 1s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+}
+[data-theme="midnight-ocean"] .summary-banner,
+[data-theme="midnight-ocean"] .card,
+[data-theme="midnight-ocean"] .shift-sheet {
+    background: rgba(27, 47, 68, 0.95) !important;
+    backdrop-filter: blur(8px);
+}
+[data-theme="midnight-ocean"] .date-slider-item.active {
+    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
+    color: #0D1B2A !important;
+}
+
+/* ===================================================
+   🍬 THEME: Cotton Candy
+   =================================================== */
+[data-theme="cotton-candy"] {
+    --bg: #FDF2F8;
+    --card: #FFFFFF;
+    --text: #4A2040;
+    --muted: #9D6B8A;
+    --border: #F9A8D4;
+    --primary: #EC4899 !important;
+    --primary-bg: #FCE7F3 !important;
+    --secondary: #A78BFA !important;
+    --body-bg-image: none;
+    --active-date-text: #FFFFFF;
+}
+[data-theme="cotton-candy"] .card,
+[data-theme="cotton-candy"] .tab,
+[data-theme="cotton-candy"] .seg-btn,
+[data-theme="cotton-candy"] .main-save-btn,
+[data-theme="cotton-candy"] .cal-cell,
+[data-theme="cotton-candy"] .date-bar-item {
+    border-radius: 20px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
+}
+[data-theme="cotton-candy"] .tab.active,
+[data-theme="cotton-candy"] .main-save-btn,
+[data-theme="cotton-candy"] .auth-btn,
+[data-theme="cotton-candy"] .seg-btn.active {
+    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="cotton-candy"] .input-field {
+    background-color: #FDF2F8 !important;
+    border: 2px solid var(--border) !important;
+    border-radius: 14px !important;
+}
+[data-theme="cotton-candy"] .summary-banner,
+[data-theme="cotton-candy"] .card {
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(4px);
+}
+[data-theme="cotton-candy"] .date-slider-item.active {
+    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
 }

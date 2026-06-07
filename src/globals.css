@@ -21,38 +21,12 @@
 }
 
 /* 🌙 Dark mode: auto-apply retro-dark when system prefers dark */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121212;
-    --card: #1F1F1F;
-    --text: #E0E0E0;
-    --muted: #888888;
-    --border: #333333;
-    --primary: #FF6B6B !important;
-    --primary-bg: #3D2E2E !important;
-    --secondary: #06D6A0 !important;
-    --active-date-text: #121212;
-  }
-}
-
-
-
-
-
-
-
 @keyframes wobble {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(-5deg); }
     75% { transform: rotate(5deg); }
     100% { transform: rotate(0deg); }
 }
-
-
-
-
-
-
 
 
 /* ===================================================
@@ -144,8 +118,6 @@ tr.row-personal { background: repeating-linear-gradient(-45deg, transparent, tra
 tr.row-personal td { color: #3498db; opacity: 0.8; }
 
 .row-x2 { background: linear-gradient(90deg, transparent 0%, rgba(255,215,0,0.06) 30%, rgba(255,215,0,0.1) 50%, rgba(255,215,0,0.06) 70%, transparent 100%); border-left: 3px solid gold; }
-
-
 
 
 .salary-breakdown > div:last-child { border-bottom: none !important; }
@@ -344,22 +316,6 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 .slider-day-num { font-size: 18px; font-weight: 800; line-height: 1.1; }
 
 
-
-
-
-
-
-
-
-@keyframes shinchanBounce {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.08) rotate(-2deg); }
-    100% { transform: scale(1); }
-}
-
-
-
-
 #offline-toast {
   position: fixed;
   top: 0;
@@ -506,7 +462,6 @@ tr.row-personal td { color: #3498db; opacity: 0.8; }
 /* ===================================================
    ✏️ CRAYON SHIN-CHAN THEME — Decorative Elements
    =================================================== */
-
 
 
 /* ===================================================

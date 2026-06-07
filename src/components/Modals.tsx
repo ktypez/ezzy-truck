@@ -97,12 +97,8 @@ export default function Modals({ activeModal, onClose, onSelectTheme, onResetThe
               <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
               <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
               <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('crayon')} style={{ background: '#FFF9C4', color: '#E53935', borderColor: '#7B1FA2' }}>🧡 Crayon Shin</button>
-              
-              
-              
-              
-              
+              <button className="theme-btn" onClick={() => onSelectTheme('blue-sky')} style={{ background: '#E8F4FD', color: '#2C3E50', borderColor: '#AED6F1' }}>☀️ Blue Sky</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('cotton-candy')} style={{ background: '#FDF2F8', color: '#EC4899', borderColor: '#F9A8D4' }}>🍬 Cotton Candy</button>
               </div>
 
             {/* Dark Column */}
@@ -110,11 +106,8 @@ export default function Modals({ activeModal, onClose, onSelectTheme, onResetThe
               <p style={{ fontSize: '13px', color: 'transparent', fontWeight: 800, marginBottom: '2px', textAlign: 'center', userSelect: 'none' }}>&nbsp;</p>
               <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: '#2D2D2D', color: '#FDF6E3', borderColor: '#FDF6E3' }}>Retro Dark</button>
               <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
-              
-              
-              
-              
-              
+              <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: '#0D1B2A', color: '#38BDF8', borderColor: '#2D4A6E' }}>🌊 Midnight Ocean</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>☀️ Summer Morning</button>
             </div>
             </div>
           </div>
