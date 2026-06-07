@@ -88,7 +88,7 @@
 }
 [data-theme="shinchan"] .summary-banner,
 [data-theme="shinchan"] .card {
-    background: #FFFFFF !important;
+    background: #FFFFFF;
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type {
     background: var(--hero-gradient) !important;
@@ -100,7 +100,6 @@
 }
 [data-theme="shinchan"] .daily-summary {
     background: rgb(232, 245, 233) !important;
-    border-left: 4px solid #4CAF50 !important;
 }
 [data-theme="shinchan"] .nav-tabs {
     background: #FFFFFF !important;
