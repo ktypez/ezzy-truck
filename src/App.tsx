@@ -19,7 +19,7 @@ export default function Home() {
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('truck-theme');
     if (saved) return saved;
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'retro-dark' : 'light';
+    return 'retro-pastel';
   });
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
@@ -197,10 +197,7 @@ export default function Home() {
       <Modals
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
-        onResetTheme={() => {
-          localStorage.removeItem('truck-theme');
-          setTheme('retro-pastel');
-        }}
+
         onSelectTheme={setTheme}
       />
     </div>

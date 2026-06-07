@@ -5,10 +5,9 @@ interface ModalsProps {
   activeModal: 'profile' | 'theme' | null;
   onClose: () => void;
   onSelectTheme: (theme: string) => void;
-  onResetTheme?: () => void;
 }
 
-export default function Modals({ activeModal, onClose, onSelectTheme, onResetTheme }: ModalsProps) {
+export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsProps) {
   const [newPassword, setNewPassword] = useState('');
 
   if (!activeModal) return null;
@@ -55,10 +54,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme, onResetThe
       >
         {/* Top bar: Reset (left) / ปิด (right) */}
         <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button onClick={() => { onResetTheme?.(); onClose(); }}
-            style={{ background: 'var(--border)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)', fontSize: '12px', fontWeight: 700, padding: '4px 12px', height: '32px', borderRadius: '20px' }}>
-            <i className="ph-duotone ph-arrow-counter-clockwise" style={{ fontSize: '13px' }}></i> Reset
-          </button>
+          {/* reset removed */}
           <button onClick={onClose}
             style={{ background: 'var(--border)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)', fontSize: '12px', fontWeight: 700, padding: '4px 12px', height: '32px', borderRadius: '20px' }}>
             ปิด <i className="ph-bold ph-x" style={{ fontSize: '13px' }}></i>

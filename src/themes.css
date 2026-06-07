@@ -27,11 +27,11 @@
    📟 THEME: Retro Dark
    =================================================== */
 [data-theme="retro-dark"] {
-    --bg: #0F0F0F;
-    --card: #1A1A2E;
-    --text: #E0E0E0;
-    --muted: #9CA3AF;
-    --border: #2A2A4A;
+    --bg: #0A0A0A;
+    --card: #1A1A1E;
+    --text: #EDE0CC;
+    --muted: #8B8173;
+    --border: #2E2E2E;
     --primary: #FF6B6B !important;
     --primary-bg: #3D2E2E !important;
     --secondary: #06D6A0 !important;
@@ -107,16 +107,16 @@
    🌆 THEME: Neon Sunset
    =================================================== */
 [data-theme="sunset"] {
-    --bg: #1a0b2e;
-    --card: #271744;
-    --text: #f8e5ff;
-    --muted: #b8a0d8;
-    --border: #432c7a;
-    --primary: #ff477e !important;
-    --primary-bg: #3a2560 !important;
-    --secondary: #00f5d4;     
+    --bg: #0A0212;
+    --card: #1A0830;
+    --text: #F0E6FF;
+    --muted: #A892C8;
+    --border: #3A1F60;
+    --primary: #FF477E !important;
+    --primary-bg: #2E1040 !important;
+    --secondary: #00F5D4;     
     --body-bg-image: none;
-    --active-date-text: #ffffff;
+    --active-date-text: #FFFFFF;
 }
 
 /* ===================================================
@@ -232,11 +232,11 @@
    🌊 THEME: Midnight Ocean
    =================================================== */
 [data-theme="midnight-ocean"] {
-    --bg: #0D1B2A;
-    --card: #1B2F44;
-    --text: #E0F2FE;
-    --muted: #94A3B8;
-    --border: #2D4A6E;
+    --bg: #030A14;
+    --card: #0C1A2E;
+    --text: #E0F0FF;
+    --muted: #7A9AB8;
+    --border: #1A304A;
     --primary: #38BDF8 !important;
     --primary-bg: #0C2D48 !important;
     --secondary: #2DD4BF !important;
@@ -293,17 +293,17 @@
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
 [data-theme="twilight"] {
-    --bg: #1A0A1E;
-    --card: #2D1B3E;
-    --text: #E8DDF0;
-    --muted: #A890B8;
-    --border: #3D2A50;
+    --bg: #0E0312;
+    --card: #1E0A26;
+    --text: #F0E4F8;
+    --muted: #9A82AA;
+    --border: #2E1A3E;
     --primary: #C084FC !important;
     --primary-bg: #2D1B3E !important;
     --secondary: #F472B6 !important;
     --body-bg-image: none;
     --pattern-color: rgba(192, 132, 252, 0.04);
-    --active-date-text: #1A0A1E;
+    --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
 }
 [data-theme="twilight"] .card,
