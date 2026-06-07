@@ -58,7 +58,7 @@
     --primary-bg: rgba(232, 245, 233, 0.7) !important;
     --secondary: #00897B !important;
     --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, rgba(46, 125, 50, 0.9), rgba(0, 77, 64, 0.9));
+    --hero-gradient: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64));
 }
 [data-theme="shinchan"] .card, 
 [data-theme="shinchan"] .tab, 
