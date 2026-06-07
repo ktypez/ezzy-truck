@@ -66,13 +66,13 @@
 [data-theme="shinchan"] .cal-cell,
 [data-theme="shinchan"] .date-bar-item {
     border-radius: 55px 75px 45px 85px / 65px 45px 75px 55px !important; 
-    border: 3px solid var(--border) !important;
+    border: none !important;
     background: transparent !important;
     box-shadow: none !important; 
 }
 [data-theme="shinchan"] .input-field {
     background-color: #FFF9E6 !important;
-    border: 3px solid var(--border) !important;
+    border: none !important;
 }
 [data-theme="shinchan"] .tab.active, 
 [data-theme="shinchan"] .main-save-btn, 
@@ -89,7 +89,7 @@
 [data-theme="shinchan"] .summary-banner, 
 [data-theme="shinchan"] .card { 
     background: rgba(255, 255, 255, 1) !important; 
-    border: 3px solid var(--border) !important; 
+    border: none !important; 
     box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important; 
 }
 
