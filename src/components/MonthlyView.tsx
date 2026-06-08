@@ -303,7 +303,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               }}
             >
-              {/* 🎨 Gradient Header with Stats */}
+              {/* 🎨 Gradient Header with Frosted Stats + Shift */}
               <div style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
                 padding: '18px 16px 16px',
@@ -312,13 +312,13 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 <div style={{ fontSize: 38, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
                   {selected.day}
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 14 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 12 }}>
                   {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
                 </div>
 
                 {/* Frosted Stats Grid */}
                 <div style={{
-                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6,
+                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, marginBottom: 10,
                 }}>
                   {[
                     { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
@@ -339,10 +339,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     </div>
                   ))}
                 </div>
-              </div>
 
-              {/* 🔘 Shift Action Button */}
-              <div style={{ padding: '0 12px 12px' }}>
+                {/* Frosted Shift Button */}
                 <button
                   onClick={() => {
                     const dayData = merged.find(m => m.day === selected.day);
@@ -353,13 +351,15 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   }}
                   style={{
                     width: '100%',
-                    padding: '11px 0',
+                    padding: '10px 0',
                     fontSize: 14,
                     fontWeight: 700,
-                    color: 'var(--primary)',
-                    background: 'color-mix(in srgb, var(--primary) 10%, var(--primary-bg))',
-                    border: '1.5px solid color-mix(in srgb, var(--primary) 25%, transparent)',
-                    borderRadius: 10,
+                    color: 'white',
+                    background: 'rgba(255,255,255,0.15)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(255,255,255,0.25)',
+                    borderRadius: 12,
                     cursor: 'pointer',
                     fontFamily: 'inherit',
                     display: 'flex',
@@ -368,10 +368,12 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     gap: 6,
                   }}
                 >
-                  <i className="ph-duotone ph-clock i-sm"></i>
+                  <i className="ph-duotone ph-clock" style={{ fontSize: 14 }}></i>
                   {selected.shift_time ? `กะ ${selected.shift_time}` : 'แตะเพื่อเข้ากะ'}
                 </button>
               </div>
+
+
             </div>
           )}
 
