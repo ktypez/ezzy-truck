@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { sb } from '@/lib/supabase';
@@ -24,6 +24,7 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
+  const lastTapRef = useRef(0);
 
   const queryClient = useQueryClient();
 
@@ -185,7 +186,16 @@ export default function Home() {
       </main>
 
       <div className="nav-tabs">
-        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={goToDaily}>
+        <div className={`tab ${activeView === 'daily' ? 'active' : ''}`} onClick={() => {
+            const now = Date.now();
+            if (now - lastTapRef.current < 300) {
+              const today = new Date();
+              setCurrentDate(today);
+              setSelectedDay(today.getDate());
+            }
+            lastTapRef.current = now;
+            goToDaily();
+          }}>
           <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
         </div>
         <div className={`tab ${activeView === 'monthly' ? 'active' : ''}`} onClick={() => navigate('/monthly')}>
