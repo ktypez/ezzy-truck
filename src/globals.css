@@ -98,19 +98,17 @@ body {
 .date-bar-item.active .day-name { opacity: 0.9 !important; color: var(--active-date-text) !important; }
 .date-bar-item.active .day-num { color: var(--active-date-text) !important; }
 
-.date-slider-container {
+.date-slider-embla {
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+}
+.date-slider-embla .date-slider-container {
   display: flex !important;
   gap: 8px;
   padding: 10px 0;
-  width: 100%;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.date-slider-container::-webkit-scrollbar {
-  display: none;
+  backface-visibility: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 
 .date-slider-item {
@@ -234,4 +232,88 @@ body {
 @keyframes slideDown {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
+}
+
+/* ===================================================
+   🎠 EMBLA CAROUSEL (matches date-slider style)
+   =================================================== */
+.embla {
+  position: relative;
+  width: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.embla__container {
+  display: flex;
+  gap: 8px;
+  backface-visibility: hidden;
+  touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+/* ── Buttons ── */
+.embla__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  transition: all 0.15s ease;
+  opacity: 0.9;
+}
+.embla__btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  opacity: 1;
+}
+.embla__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+  border-color: var(--border);
+  color: var(--muted);
+}
+.embla__btn--prev  { left: -14px; }
+.embla__btn--next  { right: -14px; }
+
+/* ── Dots ── */
+.embla__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
+}
+.embla__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+.embla__dot--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  width: 20px;
+  border-radius: 4px;
 }

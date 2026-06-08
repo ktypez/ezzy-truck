@@ -1,6 +1,7 @@
 import MonthYearSelector from './MonthYearSelector';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import useEmblaCarousel from 'embla-carousel-react';
 import { sb } from '@/lib/supabase';
 
 interface DailyViewProps {
@@ -20,13 +21,10 @@ export default function DailyView({
   onSaveSuccess,
   onChangeMonth,
 }: DailyViewProps) {
-  const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
   
   // Shared style constants
   const counterInputStyle = { width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' } as const;
 const months = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
-  const sliderRef = useRef<HTMLDivElement>(null);
-
   const [isWork, setIsWork] = useState(true);
   const [dayType, setDayType] = useState('normal');
   const [leaveType, setLeaveType] = useState<string | null>(null);
@@ -48,6 +46,8 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
   const currentMonth = currentDate.getMonth() + 1;
   const totalDaysInMonth = new Date(currentYear, currentMonth, 0).getDate();
 
+  const daysShort = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
+
   const allDaysArray = Array.from({ length: totalDaysInMonth }, (_, i) => {
     const d = new Date(currentYear, currentMonth - 1, i + 1);
     return { dayNum: i + 1, dayName: daysShort[d.getDay()] };
@@ -58,16 +58,16 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     return day === now.getDate() && currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear();
   };
 
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', dragFree: true });
+
+  const scrollToDay = useCallback((day: number) => {
+    const index = allDaysArray.findIndex(d => d.dayNum === day);
+    if (index >= 0) emblaApi?.scrollTo(index);
+  }, [emblaApi]);
+
   useEffect(() => {
-    if (sliderRef.current) {
-      const activeElement = sliderRef.current.querySelector(`[data-day="${selectedDay}"]`) as HTMLElement;
-      if (activeElement) {
-        const slider = sliderRef.current;
-        const scrollLeft = activeElement.offsetLeft - (slider.clientWidth / 2) + (activeElement.clientWidth / 2);
-        slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-      }
-    }
-  }, [selectedDay]);
+    scrollToDay(selectedDay);
+  }, [selectedDay, scrollToDay]);
 
   // Load day log via TanStack Query
   const queryClient = useQueryClient();
@@ -156,21 +156,22 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
       </div>
       
-      {/* Date Slider */}
-      <div className="date-slider-container" ref={sliderRef}>
-        {allDaysArray.map(item => {
-          const isActive = selectedDay === item.dayNum;
-          const today = isToday(item.dayNum);
-          return (
-            <div key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
-              className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
-              data-day={item.dayNum}
-            >
-              <span className="slider-day-name">{item.dayName}</span>
-              <span className="slider-day-num">{item.dayNum}</span>
-            </div>
-          );
-        })}
+      {/* Date Slider (Embla) */}
+      <div className="date-slider-embla" ref={emblaRef}>
+        <div className="date-slider-container">
+          {allDaysArray.map(item => {
+            const isActive = selectedDay === item.dayNum;
+            const today = isToday(item.dayNum);
+            return (
+              <button key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
+                className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
+              >
+                <span className="slider-day-name">{item.dayName}</span>
+                <span className="slider-day-num">{item.dayNum}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Shift badge + Day type */}
@@ -179,7 +180,8 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
           style={{ padding: '10px 16px', borderRadius: '10px', fontWeight: 700, fontSize: '16px', cursor: 'pointer', flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
             background: derivedShift ? 'var(--primary)' : 'var(--border)',
             color: derivedShift ? 'var(--active-date-text, white)' : 'var(--muted)',
-            border: derivedShift ? '2px solid var(--primary)' : '2px solid transparent' }}>
+            border: derivedShift ? '2px solid var(--primary)' : '2px solid transparent',
+        }}>
           <i className={`ph-duotone ${derivedShift === 'หยุด' ? (derivedLeaveType === 'sick' ? 'ph-thermometer-hot' : derivedLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`}></i>
           {derivedShift ? (derivedShift === 'หยุด' ? (derivedLeaveType === 'sick' ? 'ลาป่วย' : derivedLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${derivedShift}`) : 'แตะเพื่อเข้ากะ'}
         </button>
