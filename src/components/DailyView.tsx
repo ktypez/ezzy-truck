@@ -321,48 +321,56 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
         {saveStatus === 'success' ? ' บันทึกเรียบร้อย ✨' : saveStatus === 'saving' ? ' กำลังบันทึก...' : ' บันทึกข้อมูลวันนี้'}
       </button>
 
-      {/* Bottom Sheet Shift Selector */}
-      {/* Backdrop */}
-      <div onClick={() => setShowShiftSelector(false)} style={{ position: 'fixed', inset: 0, zIndex: 250, display: showShiftSelector ? 'block' : 'none', background: 'rgba(0,0,0,0.3)' }} />
-      
-      <div className={`shift-sheet ${showShiftSelector ? 'open' : ''}`} style={{ zIndex: 300 }}>
-        <div className="shift-sheet-handle" />
-        <div className="shift-sheet-header">
-          <h4>วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear}</h4>
-          <button className="shift-sheet-close" onClick={() => setShowShiftSelector(false)}><i className="ph-bold ph-x"></i></button>
-        </div>
-        <div className="shift-sheet-body">
-          <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0' }}>
-            {['07:30', '08:00', '09:00'].map(time => {
-              const sel = derivedShift === time;
-              return (
-                <div key={time} onClick={() => !isSavingShift && handleQuickSaveShift(time)}
-                  style={{ display: 'table-cell', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px',
-                    border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? 'var(--primary)' : 'transparent', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
-                  {time}
-                </div>
-              );
-            })}
+      {/* — Shift Picker Modal (centered + blur backdrop) — */}
+      {showShiftSelector && (
+        <>
+          <div onClick={() => setShowShiftSelector(false)} style={{
+            position: 'fixed', inset: 0, zIndex: 250,
+            background: 'rgba(0,0,0,0.4)',
+            backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
+          }} />
+          <div style={{
+            position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+            zIndex: 251, background: 'var(--card)',
+            border: '2px solid var(--border)', borderRadius: 16,
+            padding: '20px', width: 'calc(100% - 40px)', maxWidth: 360,
+            boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
+          }}>
+            <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)', marginBottom: 14, textAlign: 'center' }}>
+              วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear + 543}
+            </div>
+            <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0' }}>
+              {['07:30', '08:00', '09:00'].map(time => {
+                const sel = derivedShift === time;
+                return (
+                  <div key={time} onClick={() => !isSavingShift && handleQuickSaveShift(time)}
+                    style={{ display: 'table-cell', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px',
+                      border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? 'var(--primary)' : 'transparent', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                    {time}
+                  </div>
+                );
+              })}
+            </div>
+            <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0', marginTop: '4px' }}>
+              {[
+                { key: null, icon: '🛑', label: 'วันหยุด', color: '#e74c3c' },
+                { key: 'sick', icon: '🤒', label: 'ลาป่วย', color: '#e67e22' },
+                { key: 'personal', icon: '📋', label: 'ลากิจ', color: '#3498db' },
+              ].map(opt => {
+                const sel = derivedShift === 'หยุด' && (derivedLeaveType || null) === opt.key;
+                return (
+                  <div key={opt.key || 'off'} onClick={() => !isSavingShift && handleQuickSaveShift('หยุด', opt.key)}
+                    style={{ display: 'table-cell', padding: '12px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
+                      border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? opt.color : 'transparent', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                    <div style={{ fontSize: '18px' }}>{opt.icon}</div>
+                    <div>{opt.label}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-          <div style={{ display: 'table', width: '100%', tableLayout: 'fixed', borderSpacing: '8px 0', marginTop: '4px' }}>
-            {[
-              { key: null, icon: '🛑', label: 'วันหยุด', color: '#e74c3c' },
-              { key: 'sick', icon: '🤒', label: 'ลาป่วย', color: '#e67e22' },
-              { key: 'personal', icon: '📋', label: 'ลากิจ', color: '#3498db' },
-            ].map(opt => {
-              const sel = derivedShift === 'หยุด' && (derivedLeaveType || null) === opt.key;
-              return (
-                <div key={opt.key || 'off'} onClick={() => !isSavingShift && handleQuickSaveShift('หยุด', opt.key)}
-                  style={{ display: 'table-cell', padding: '12px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
-                    border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? opt.color : 'transparent', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
-                  <div style={{ fontSize: '18px' }}>{opt.icon}</div>
-                  <div>{opt.label}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
