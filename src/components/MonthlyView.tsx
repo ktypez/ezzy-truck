@@ -259,8 +259,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     <div style={{ fontSize: 16, fontWeight: 700, color: textColor, lineHeight: 1.1 }}>{r.day}</div>
                     {hasData && !r.isOff && (
                       <>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>รอบ</span><span>{r.rounds}</span></div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>จุด</span><span>{r.points}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>รอบ</span><span>{r.rounds + r.help_work + r.fix_work}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>จุด</span><span>{r.points + r.help_work + r.fix_work}</span></div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>KM</span><span>{r.km}</span></div>
                       </>
                     )}
@@ -308,8 +308,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             >
               {[
                 { label: 'วันที่', value: selected.day, color: 'var(--text)' },
-                { label: 'รอบ', value: selected.rounds, color: 'var(--primary)' },
-                { label: 'จุด', value: selected.points, color: 'var(--secondary)' },
+                { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work, color: 'var(--primary)' },
+                { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work, color: 'var(--secondary)' },
                 { label: 'km', value: selected.km, color: 'var(--primary)' },
                 {
                   label: 'มาสาย',
