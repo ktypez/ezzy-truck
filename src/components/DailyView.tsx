@@ -261,30 +261,26 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
             </div>
           </div>
 
-          <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', textAlign: 'center', marginBottom: '4px' }}>
-          </div>
-          <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--muted)', textAlign: 'center', padding: '8px 0 2px', letterSpacing: '0.3px', opacity: 0.8 }}>
-            📌 การเพิ่มงานช่วย/งานแก้ จะนับเป็น 1 รอบ/จุด
-          </div>
           {/* Help Work & Fix Work Card */}
-          <div className="card" style={{ display: 'flex', gap: '10px', padding: '12px 10px' }}>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <i className="ph-duotone ph-hand-heart i-sm" style={{ color: 'var(--muted)' }}></i> งานช่วย
+          <div className="card" style={{ padding: '12px 10px' }}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <i className="ph-duotone ph-hand-heart i-sm" style={{ color: 'var(--muted)' }}></i> งานช่วย
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); setPointCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
+                  <input type="number" inputMode="numeric" value={helpWork === 0 ? '' : helpWork} placeholder="0"
+                    onChange={e => { const n = Math.max(0, parseInt(e.target.value) || 0); const d = n - helpWork; setHelpWork(n); if (d !== 0) { setRoundCount(prev => Math.max(0, prev + d)); setPointCount(prev => Math.max(0, prev + d)); } }}
+                    style={counterInputStyle} />
+                  <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => prev + 1); setRoundCount(prev => prev + 1); setPointCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
+                </div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); setPointCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
-                <input type="number" inputMode="numeric" value={helpWork === 0 ? '' : helpWork} placeholder="0"
-                  onChange={e => { const n = Math.max(0, parseInt(e.target.value) || 0); const d = n - helpWork; setHelpWork(n); if (d !== 0) { setRoundCount(prev => Math.max(0, prev + d)); setPointCount(prev => Math.max(0, prev + d)); } }}
-                  style={counterInputStyle} />
-                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => prev + 1); setRoundCount(prev => prev + 1); setPointCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
-              </div>
-            </div>
-            <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <i className="ph-duotone ph-wrench i-sm" style={{ color: 'var(--muted)' }}></i> งานแก้
-              </div>
+              <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
+              <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  <i className="ph-duotone ph-wrench i-sm" style={{ color: 'var(--muted)' }}></i> งานแก้
+                </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); setPointCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
                 <input type="number" inputMode="numeric" value={fixWork === 0 ? '' : fixWork} placeholder="0"
@@ -293,6 +289,9 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
                 <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => prev + 1); setRoundCount(prev => prev + 1); setPointCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '13px', fontWeight: 600, color: 'var(--muted)', opacity: 0.7, borderTop: '1px dashed var(--border)', paddingTop: '8px' }}>
+            <span style={{ background: 'var(--primary-bg)', padding: '2px 10px', borderRadius: '20px', letterSpacing: '0.3px' }}>➕ งานช่วย/งานแก้ = 1 รอบ/จุด</span>
           </div>
         </>
       ) : (
