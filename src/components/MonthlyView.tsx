@@ -143,7 +143,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
   return (<>
     <div id="view-monthly" className="view active">
       {/* Month/Year Selector */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: '0 0 var(--space-sm)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: 'var(--space-sm) 0' }}>
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} />
       </div>
 
