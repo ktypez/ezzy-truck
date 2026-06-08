@@ -38,7 +38,6 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
       }}
     >
       <div 
-        className="card" 
         onClick={e => e.stopPropagation()} 
         style={{
           width: '100%', 
@@ -49,6 +48,11 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
           maxHeight: '90vh', 
           overflowY: 'auto',
+          background: 'rgba(255,255,255,0.04)',
+          backdropFilter: 'blur(1px) saturate(1.2)',
+          WebkitBackdropFilter: 'blur(1px) saturate(1.2)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 20,
           ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
         }}
       >
