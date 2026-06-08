@@ -53,18 +53,8 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 20,
           padding: '25px 20px',
-          ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
         }}>
-        {/* Top bar: Reset (left) / ปิด (right) */}
-        <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          {/* reset removed */}
-          <button onClick={onClose}
-            style={{ background: 'var(--border)', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--muted)', fontSize: '12px', fontWeight: 700, padding: '4px 12px', height: '32px', borderRadius: '20px' }}>
-            ปิด <i className="ph-bold ph-x" style={{ fontSize: '13px' }}></i>
-          </button>
-        </div>
-
-        {activeModal === 'profile' && (
+{activeModal === 'profile' && (
           <div>
             <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--primary)' }}>
               <i className="ph-duotone ph-lock-key"></i> เปลี่ยนรหัสผ่าน
