@@ -1,7 +1,6 @@
 import MonthYearSelector from './MonthYearSelector';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import useEmblaCarousel from 'embla-carousel-react';
 import { sb } from '@/lib/supabase';
 
 interface DailyViewProps {
@@ -58,26 +57,15 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     return day === now.getDate() && currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear();
   };
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center' });
-
-  const scrollToDay = useCallback((day: number) => {
-    const index = allDaysArray.findIndex(d => d.dayNum === day);
-    if (index >= 0 && emblaApi) {
-      emblaApi.scrollTo(index, true);
-    }
-  }, [emblaApi]);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    const ready = () => scrollToDay(selectedDay);
-    emblaApi.on('init', ready);
-    emblaApi.on('reInit', ready);
-    ready();
-    return () => {
-      emblaApi.off('init', ready);
-      emblaApi.off('reInit', ready);
-    };
-  }, [selectedDay, scrollToDay, emblaApi]);
+    if (!sliderRef.current) return;
+    const el = sliderRef.current.querySelector(`[data-day="${selectedDay}"]`) as HTMLElement;
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [selectedDay]);
 
   // Load day log via TanStack Query
   const queryClient = useQueryClient();
@@ -167,24 +155,20 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
       </div>
       
       {/* Date Slider (Embla) */}
-      <div className="date-slider-embla" ref={emblaRef}>
-        <div className="date-slider-container">
-          {allDaysArray.map(item => {
-            const isActive = selectedDay === item.dayNum;
-            const today = isToday(item.dayNum);
-            return (
-              <button key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
-                className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
-                data-day={item.dayNum}
-              >
-                <div className="date-slider-item-inner">
-                  <span className="slider-day-name">{item.dayName}</span>
-                  <span className="slider-day-num">{item.dayNum}</span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+      <div className="date-slider-container" ref={sliderRef}>
+        {allDaysArray.map(item => {
+          const isActive = selectedDay === item.dayNum;
+          const today = isToday(item.dayNum);
+          return (
+            <button key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
+              className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
+              data-day={item.dayNum}
+            >
+              <span className="slider-day-name">{item.dayName}</span>
+              <span className="slider-day-num">{item.dayNum}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Shift badge + Day type */}

@@ -95,11 +95,11 @@ body {
 
 .date-bar-item { flex: 0 0 48px; text-align: center; padding: 6px 0; border-radius: 12px; cursor: pointer; background: var(--card); color: var(--text); border: 1px solid var(--border); font-weight: 500; font-size: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
 .date-bar-item.today { border: 2px solid var(--primary); }
-.date-slider-item.today .date-slider-item-inner { 
+.date-slider-item.today { 
     border: 2px solid var(--primary); 
     background: var(--primary-bg);
 }
-.date-slider-item.active .date-slider-item-inner {
+.date-slider-item.active {
     background: var(--primary) !important; 
     color: var(--active-date-text) !important; 
     border: 2px solid var(--primary) !important;
@@ -108,31 +108,20 @@ body {
 .date-bar-item.active .day-name { opacity: 0.9 !important; color: var(--active-date-text) !important; }
 .date-bar-item.active .day-num { color: var(--active-date-text) !important; }
 
-.date-slider-embla {
-  overflow: hidden;
-  width: 100%;
-  margin: 0;
-}
-.date-slider-embla .date-slider-container {
+.date-slider-container {
   display: flex;
+  gap: 8px;
   padding: var(--space-sm) 0;
-  backface-visibility: hidden;
-  touch-action: pan-y pinch-zoom;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.date-slider-container::-webkit-scrollbar {
+  display: none;
 }
 .date-slider-item {
-  flex: 0 0 64px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  border: none;
-  background: none;
-  font-family: inherit;
-  outline: none;
-}
-.date-slider-item-inner {
-  width: 56px;
+  flex: 0 0 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -142,6 +131,7 @@ body {
   background: var(--card);
   color: var(--text);
   border: 1px solid var(--border);
+  cursor: pointer;
   transition: all 0.15s ease;
   text-align: center;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
