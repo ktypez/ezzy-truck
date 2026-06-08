@@ -118,9 +118,6 @@ export default function Home() {
   };
 
   const goToDaily = () => {
-    const today = new Date();
-    setCurrentDate(today);
-    setSelectedDay(today.getDate());
     navigate('/daily');
   };
 
