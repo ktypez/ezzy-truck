@@ -346,7 +346,7 @@ background: 'rgba(255,255,255,0.12)',
               backdropFilter: 'blur(12px) saturate(1.6)',
               WebkitBackdropFilter: 'blur(12px) saturate(1.6)',
               borderRadius: 14,
-              padding: '20px',
+              padding: '12px',
               boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.45), inset 0 -4px 12px -8px rgba(255,255,255,0.30)',
             }}>
             <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)', marginBottom: 14, textAlign: 'center' }}>

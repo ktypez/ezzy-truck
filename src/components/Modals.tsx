@@ -60,7 +60,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
             backdropFilter: 'blur(12px) saturate(1.6)',
             WebkitBackdropFilter: 'blur(12px) saturate(1.6)',
             borderRadius: 14,
-            padding: '25px 20px',
+            padding: '16px 14px',
             boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.45), inset 0 -4px 12px -8px rgba(255,255,255,0.30)',
             ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
           }}>
