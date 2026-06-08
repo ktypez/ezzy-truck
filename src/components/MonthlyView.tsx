@@ -300,7 +300,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 border: '1px solid var(--border)',
                 borderRadius: 16,
                 overflow: 'hidden',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
               }}
             >
               {/* 🎨 Gradient Header — subtle glass */}
@@ -461,7 +461,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               padding: "20px",
               width: "calc(100% - 40px)",
               maxWidth: 360,
-              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
             }}
           >
             <div

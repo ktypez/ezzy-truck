@@ -12,7 +12,7 @@ const arrowStyle: React.CSSProperties = {
   background: 'var(--card)', border: '1.5px solid var(--border)', borderRadius: 8,
   color: 'var(--text)', fontSize: 20, fontWeight: 700, fontFamily: 'inherit',
   transition: 'border-color 0.15s', lineHeight: 1,
-  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
 export default function MonthYearSelector({ currentDate, onChangeMonth, availableYears }: { currentDate: Date; onChangeMonth: (diff: number) => void; availableYears?: number[] }) {
