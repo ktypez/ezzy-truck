@@ -270,11 +270,11 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
                 <i className="ph-duotone ph-hand-heart i-sm" style={{ color: 'var(--muted)' }}></i> งานช่วย
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
+                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); setPointCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
                 <input type="number" inputMode="numeric" value={helpWork === 0 ? '' : helpWork} placeholder="0"
-                  onChange={e => setHelpWork(Math.max(0, parseInt(e.target.value) || 0))}
+                  onChange={e => { const n = Math.max(0, parseInt(e.target.value) || 0); const d = n - helpWork; setHelpWork(n); if (d !== 0) { setRoundCount(prev => Math.max(0, prev + d)); setPointCount(prev => Math.max(0, prev + d)); } }}
                   style={counterInputStyle} />
-                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => prev + 1); setRoundCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
+                <button type="button" className="del-btn-small" onClick={() => { setHelpWork(prev => prev + 1); setRoundCount(prev => prev + 1); setPointCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
             <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
@@ -283,11 +283,11 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
                 <i className="ph-duotone ph-wrench i-sm" style={{ color: 'var(--muted)' }}></i> งานแก้
               </div>
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
+                <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => Math.max(0, prev - 1)); setRoundCount(prev => Math.max(0, prev - 1)); setPointCount(prev => Math.max(0, prev - 1)); }}><i className="ph-bold ph-minus"></i></button>
                 <input type="number" inputMode="numeric" value={fixWork === 0 ? '' : fixWork} placeholder="0"
-                  onChange={e => setFixWork(Math.max(0, parseInt(e.target.value) || 0))}
+                  onChange={e => { const n = Math.max(0, parseInt(e.target.value) || 0); const d = n - fixWork; setFixWork(n); if (d !== 0) { setRoundCount(prev => Math.max(0, prev + d)); setPointCount(prev => Math.max(0, prev + d)); } }}
                   style={counterInputStyle} />
-                <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => prev + 1); setRoundCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
+                <button type="button" className="del-btn-small" onClick={() => { setFixWork(prev => prev + 1); setRoundCount(prev => prev + 1); setPointCount(prev => prev + 1); }}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
           </div>
