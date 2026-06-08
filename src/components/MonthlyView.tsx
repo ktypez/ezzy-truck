@@ -301,7 +301,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 borderRadius: 10,
                 padding: '10px',
                 display: 'grid',
-                gridTemplateColumns: 'repeat(5, 1fr)',
+                gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: 6,
                 textAlign: 'center',
               }}
@@ -404,15 +404,13 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(5, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             gap: 8,
           }}
         >
           {[
             { label: 'รอบ', value: tot.rounds },
             { label: 'จุด', value: tot.points },
-            { label: 'ช่วย', value: tot.help_work },
-            { label: 'แก้', value: tot.fix_work },
             { label: 'KM', value: tot.km.toLocaleString() },
             { label: 'OT', value: tot.ot.toFixed(1) },
             { label: 'สาย', value: tot.late + "'" },
