@@ -451,28 +451,17 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               left: "50%",
               transform: "translate(-50%, -50%)",
               zIndex: 501,
-              background: "rgba(255,255,255,0.18)",
-              backdropFilter: "blur(12px) saturate(1.6)",
-              WebkitBackdropFilter: "blur(12px) saturate(1.6)",
-              border: "1px solid rgba(255,255,255,0.18)",
+              background: "rgba(255,255,255,0.06)",
+              backdropFilter: "blur(4px) saturate(1.5)",
+              WebkitBackdropFilter: "blur(4px) saturate(1.5)",
+              border: "1px solid rgba(255,255,255,0.08)",
               borderRadius: 20,
-              padding: "16px",
+              padding: "20px",
               width: "calc(100% - 40px)",
               maxWidth: 360,
-              boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
             }}
           >
-            {/* liquid surface */}
-            <div
-              style={{
-                background: "rgba(0,0,0,0.20)",
-                backdropFilter: "blur(4px) saturate(1.5)",
-                WebkitBackdropFilter: "blur(4px) saturate(1.5)",
-                borderRadius: 14,
-                border: "1px solid rgba(255,255,255,0.08)",
-                padding: "12px",
-              }}
-            >
             <div
               style={{
                 fontSize: 16,
@@ -533,7 +522,6 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 );
               })}
             </div>
-          </div>
           </div>
         </>
       )}

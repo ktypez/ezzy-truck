@@ -44,26 +44,17 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           maxWidth: '440px', 
           margin: 0, 
           position: 'relative', 
-          boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
           maxHeight: '90vh', 
           overflowY: 'auto',
-          background: 'rgba(255,255,255,0.18)',
-          backdropFilter: 'blur(12px) saturate(1.6)',
-          WebkitBackdropFilter: 'blur(12px) saturate(1.6)',
-          border: '1px solid rgba(255,255,255,0.18)',
+          background: 'rgba(255,255,255,0.06)',
+          backdropFilter: 'blur(4px) saturate(1.5)',
+          WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
+          border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 20,
-          padding: '16px',
+          padding: '25px 20px',
+          ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
         }}>
-          {/* liquid surface */}
-          <div style={{
-            background: 'rgba(0,0,0,0.20)',
-            backdropFilter: 'blur(4px) saturate(1.5)',
-            WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
-            borderRadius: 14,
-            border: '1px solid rgba(255,255,255,0.08)',
-            padding: '16px 14px',
-            ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
-          }}>
         {/* Top bar: Reset (left) / ปิด (right) */}
         <div style={{ position: 'absolute', top: '15px', left: '15px', right: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           {/* reset removed */}
@@ -121,7 +112,6 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
             </div>
           </div>
         )}
-        </div>
       </div>
     </div>
   );
