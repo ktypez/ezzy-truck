@@ -47,10 +47,10 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
           maxHeight: '90vh', 
           overflowY: 'auto',
-          background: 'rgba(255,255,255,0.30)',
+          background: 'rgba(255,255,255,0.06)',
           backdropFilter: 'blur(4px) saturate(1.5)',
           WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
-          border: '1px solid rgba(0,0,0,0.05)',
+          border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 20,
           padding: '25px 20px',
           ...(activeModal === 'theme' ? { paddingTop: '55px' } : {})
