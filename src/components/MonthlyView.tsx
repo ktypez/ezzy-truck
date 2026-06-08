@@ -465,12 +465,12 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             {/* liquid surface */}
             <div
               style={{
-                background: "rgba(255,255,255,0.10)",
-                backdropFilter: "blur(12px) saturate(1.6)",
-                WebkitBackdropFilter: "blur(12px) saturate(1.6)",
+                background: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(4px) saturate(1.5)",
+                WebkitBackdropFilter: "blur(4px) saturate(1.5)",
                 borderRadius: 14,
+                border: "1px solid rgba(255,255,255,0.08)",
                 padding: "12px",
-                boxShadow: "inset 0 1px 0 0 rgba(255,255,255,0.45), inset 0 -4px 12px -8px rgba(255,255,255,0.30)",
               }}
             >
             <div
