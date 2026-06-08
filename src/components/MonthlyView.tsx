@@ -303,22 +303,23 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               }}
             >
-              {/* 🎨 Gradient Header with Frosted Stats + Shift */}
+              {/* 🎨 Gradient Header — subtle glass */}
               <div style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                padding: '18px 16px 16px',
+                padding: '22px 18px 18px',
                 textAlign: 'center',
               }}>
-                <div style={{ fontSize: 38, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
+                {/* Date */}
+                <div style={{ fontSize: 40, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
                   {selected.day}
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 12 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 14 }}>
                   {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
                 </div>
 
-                {/* Frosted Stats Grid */}
+                {/* subtle glass Stats Grid */}
                 <div style={{
-                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6, marginBottom: 10,
+                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 12,
                 }}>
                   {[
                     { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
@@ -327,20 +328,20 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     { label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
                   ].map((x) => (
                     <div key={x.label} style={{
-                      textAlign: 'center', padding: '6px 4px',
-                      background: 'rgba(255,255,255,0.15)',
-                      backdropFilter: 'blur(8px)',
-                      WebkitBackdropFilter: 'blur(8px)',
-                      borderRadius: 12,
-                      border: '1px solid rgba(255,255,255,0.2)',
+                      textAlign: 'center', padding: '7px 4px',
+                      background: 'rgba(255,255,255,0.08)',
+                      backdropFilter: 'blur(2px) saturate(1.3)',
+                      WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
+                      borderRadius: 14,
+                      border: '1px solid rgba(255,255,255,0.08)',
                     }}>
-                      <div style={{ fontSize: 18, fontWeight: 800, color: 'white', lineHeight: 1.2 }}>{x.value}</div>
-                      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>{x.label}</div>
+                      <div style={{ fontSize: 19, fontWeight: 800, color: 'white', lineHeight: 1.2 }}>{x.value}</div>
+                      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.6)', fontWeight: 600, marginTop: 1 }}>{x.label}</div>
                     </div>
                   ))}
                 </div>
 
-                {/* Frosted Shift Button */}
+                {/* subtle glass Shift Button */}
                 <button
                   onClick={() => {
                     const dayData = merged.find(m => m.day === selected.day);
@@ -351,21 +352,22 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   }}
                   style={{
                     width: '100%',
-                    padding: '10px 0',
+                    padding: '11px 0',
                     fontSize: 14,
                     fontWeight: 700,
                     color: 'white',
-                    background: 'rgba(255,255,255,0.15)',
-                    backdropFilter: 'blur(8px)',
-                    WebkitBackdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(255,255,255,0.25)',
-                    borderRadius: 12,
+                    background: 'rgba(255,255,255,0.08)',
+                    backdropFilter: 'blur(2px) saturate(1.3)',
+                    WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: 14,
                     cursor: 'pointer',
                     fontFamily: 'inherit',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 6,
+                    transition: 'all 0.2s',
                   }}
                 >
                   <i className="ph-duotone ph-clock" style={{ fontSize: 14 }}></i>
