@@ -298,50 +298,46 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 marginTop: 10,
                 background: 'var(--primary-bg)',
                 border: '1px solid color-mix(in srgb, var(--primary) 30%, transparent)',
-                borderRadius: 10,
-                padding: '10px',
+                borderRadius: 12,
+                padding: '14px',
+              }}
+            >
+              {/* Hero Date */}
+              <div style={{ textAlign: 'center', marginBottom: '12px' }}>
+                <div style={{ fontSize: '32px', fontWeight: 900, color: 'var(--text)', lineHeight: 1.1 }}>
+                  {selected.day}
+                </div>
+                <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', letterSpacing: '0.5px', marginTop: '1px' }}>
+                  {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
+                </div>
+              </div>
+
+              {/* Stats Grid */}
+              <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
                 gap: 6,
                 textAlign: 'center',
-              }}
-            >
-              {[
-                { label: 'วันที่', value: selected.day, color: 'var(--text)' },
-                { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work, color: 'var(--primary)' },
-                { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work, color: 'var(--secondary)' },
-                { label: 'km', value: selected.km, color: 'var(--primary)' },
-                {
-                  label: 'มาสาย',
-                  value: selected.late ? `${selected.late}′` : '—',
-                  color: selected.late ? 'var(--primary)' : 'var(--muted)',
-                },
-              ].map((x) => (
-                <div key={x.label}>
-                  <div
-                    style={{
-                      fontSize: 20,
-                      fontWeight: 800,
-                      color: x.color,
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {x.value}
+              }}>
+                {[
+                  { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work, color: 'var(--primary)' },
+                  { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work, color: 'var(--secondary)' },
+                  { label: 'KM', value: selected.km, color: 'var(--primary)' },
+                  {
+                    label: 'สาย',
+                    value: selected.late ? `${selected.late}′` : '—',
+                    color: selected.late ? 'var(--primary)' : 'var(--muted)',
+                  },
+                ].map((x) => (
+                  <div key={x.label}>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: x.color, lineHeight: 1.2 }}>{x.value}</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600, marginTop: 1 }}>{x.label}</div>
                   </div>
-                  <div
-                    style={{
-                      fontSize: 10,
-                      color: 'var(--muted)',
-                      fontWeight: 600,
-                      marginTop: 1,
-                    }}
-                  >
-                    {x.label}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
               {/* Shift Action Button */}
-              <div style={{ gridColumn: '1 / -1', marginTop: 4 }}>
+              <div style={{ marginTop: 10 }}>
                 <button
                   onClick={() => {
                     const dayData = merged.find(m => m.day === selected.day);
