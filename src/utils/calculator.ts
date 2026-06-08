@@ -45,7 +45,7 @@ export const calculateSalary = (logs: any[], daysInMonth?: number) => {
   const phoneInc = workDays * 15;
   const diligenceInc = (totalLate > 0 || sickDays > 0 || personalDays > 0) ? 0 : 600;
   const extraInc = x2Days * 400;
-  const lateDed = totalLate;
+  const lateDed = totalLate * 5;
 
   const sickExcess = Math.max(0, sickDays - 30);
   const personalExcess = Math.max(0, personalDays - 3);
