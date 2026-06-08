@@ -8,6 +8,16 @@
     --font-sans: "Outfit", sans-serif;
     --font-serif: "Merriweather", serif;
     --font-mono: "Fira Code", monospace;
+
+    /* Spacing scale */
+    --space-2xs: 2px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 24px;
+    --space-3xl: 30px;
 }
 
 /* Default theme values (applied to <html data-theme="...">) */
@@ -56,11 +66,11 @@ body {
 
 [data-theme] { display: flex; flex-direction: column; min-height: 100vh; }
 
-.content-area { flex: 1; padding: 10px 10px; max-width: 100%; margin: 0 auto; width: 100%; }
+.content-area { flex: 1; padding: var(--space-md) var(--space-lg); max-width: 100%; margin: 0 auto; width: 100%; }
 .view { display: none; }
 .view.active { display: block; }
 
-.card { background: var(--card); border-radius: 20px; padding: 15px; margin-bottom: 15px; border: 1px solid var(--border); }
+.card { background: var(--card); border-radius: 20px; padding: var(--space-lg); margin-bottom: var(--space-lg); border: 1px solid var(--border); }
 
 .controls-row { display: flex; gap: 8px; margin-bottom: 15px; }
 .segmented-control { flex: 1; display: flex; background: var(--border); padding: 4px; border-radius: 15px; transition: 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }

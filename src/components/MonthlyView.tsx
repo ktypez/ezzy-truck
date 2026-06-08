@@ -143,7 +143,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
   return (<>
     <div id="view-monthly" className="view active">
       {/* Month/Year Selector */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '0 0 8px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: '0 0 var(--space-sm)' }}>
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} />
       </div>
 
@@ -152,7 +152,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         <div
           className="card"
           style={{
-            padding: '10px',
+            padding: 'var(--space-md)',
             marginBottom: 0,
           }}
         >
@@ -161,14 +161,14 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               fontSize: 15,
               fontWeight: 800,
               color: 'var(--text)',
-              marginBottom: 8,
+              marginBottom: 'var(--space-sm)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
             }}
           >
             <span>
-              <i className="ph-duotone ph-calendar-blank i-icon" style={{ marginRight: 6 }}></i>
+              <i className="ph-duotone ph-calendar-blank i-icon" style={{ marginRight: 'var(--space-xs)' }}></i>
               ปฏิทินรายวัน
             </span>
             <span style={{
@@ -176,7 +176,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               fontWeight: 700,
               color: 'var(--primary)',
               background: 'var(--primary-bg)',
-              padding: '3px 10px',
+              padding: '2px var(--space-sm)',
               borderRadius: 99,
             }}>
               {tot.workDays} วัน
@@ -187,7 +187,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(7, 1fr)',
-              gap: 3,
+              gap: 'var(--space-2xs)',
             }}
           >
             {DAYS_TH.map((d) => (
@@ -198,7 +198,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   fontSize: 13,
                   fontWeight: 700,
                   color: ['var(--primary)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--muted)', 'var(--secondary)'][DAYS_TH.indexOf(d)] || 'var(--muted)',
-                  paddingBottom: 4,
+                  paddingBottom: 'var(--space-xs)',
                 }}
               >
                 {d}
@@ -236,7 +236,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     background: bg,
                     border: `${isSelected ? 2 : isToday ? 2 : 1}px solid ${isSelected ? 'var(--primary)' : isToday ? 'var(--primary)' : borderColor}`,
                     borderRadius: 8,
-                    padding: '4px 0',
+                    padding: 'var(--space-xs) 0',
                     cursor: 'pointer',
                     position: 'relative',
                     boxShadow: isToday ? '0 0 0 2px var(--primary)' : 'none',
@@ -255,13 +255,13 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: 1, justifyContent: 'space-between', height: '100%' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '1px', justifyContent: 'space-between', height: '100%' }}>
                     <div style={{ fontSize: 16, fontWeight: 700, color: textColor, lineHeight: 1.1 }}>{r.day}</div>
                     {hasData && !r.isOff && (
                       <>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>รอบ</span><span>{r.rounds + r.help_work + r.fix_work}</span></div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>จุด</span><span>{r.points + r.help_work + r.fix_work}</span></div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 4px', fontSize: 8, fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>KM</span><span>{r.km}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 var(--space-xs)', fontSize: '8px', fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>รอบ</span><span>{r.rounds + r.help_work + r.fix_work}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 var(--space-xs)', fontSize: '8px', fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>จุด</span><span>{r.points + r.help_work + r.fix_work}</span></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '0 var(--space-xs)', fontSize: '8px', fontWeight: 600, color: 'var(--muted)', lineHeight: 1.3 }}><span>KM</span><span>{r.km}</span></div>
                       </>
                     )}
                     {r.shift_time && !r.isOff && (
@@ -295,7 +295,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             <div
               className="slide-in"
               style={{
-                marginTop: 10,
+                marginTop: 'var(--space-sm)',
                 background: 'var(--card)',
                 border: '1px solid var(--border)',
                 borderRadius: 16,
@@ -306,11 +306,11 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               {/* 🎨 Gradient Header — subtle glass */}
               <div style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                padding: '22px 18px 18px',
+                padding: 'var(--space-xl) var(--space-lg) var(--space-lg)',
                 textAlign: 'center',
               }}>
                 {/* Date + Month Year on same line */}
-                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 10, marginBottom: 14 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 'var(--space-sm)', marginBottom: 'var(--space-md)' }}>
                   <span style={{ fontSize: 20, fontWeight: 800, color: 'white', lineHeight: 1 }}>
                     {selected.day}
                   </span>
@@ -321,7 +321,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
 
                 {/* subtle glass Stats Grid */}
                 <div style={{
-                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, marginBottom: 12,
+                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-sm)', marginBottom: 'var(--space-md)',
                 }}>
                   {[
                     { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
@@ -330,7 +330,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     { label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
                   ].map((x) => (
                     <div key={x.label} style={{
-                      textAlign: 'center', padding: '7px 4px',
+                      textAlign: 'center', padding: '6px var(--space-xs)',
                       background: 'rgba(255,255,255,0.06)',
                       backdropFilter: 'blur(4px) saturate(1.5)',
                       WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
@@ -354,7 +354,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   }}
                   style={{
                     width: '100%',
-                    padding: '11px 0',
+                    padding: 'var(--space-sm) 0',
                     fontSize: 14,
                     fontWeight: 700,
                     color: 'white',
@@ -368,7 +368,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: 6,
+                    gap: 'var(--space-xs)',
                     transition: 'all 0.2s',
                   }}
                 >
@@ -381,7 +381,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             </div>
           )}
 
-          <div style={{ marginTop: 6, textAlign: 'center' }}>
+          <div style={{ marginTop: 'var(--space-xs)', textAlign: 'center' }}>
             <span style={{ fontSize: 10, color: 'var(--muted)' }}>
               💡 คลิกวันที่เพื่อดูรายละเอียด · ดับเบิลคลิกไปบันทึกวันนั้น
             </span>
@@ -393,8 +393,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       <div
         className="card"
         style={{
-          padding: '12px',
-          marginTop: 10,
+          padding: 'var(--space-md)',
+          marginTop: 'var(--space-sm)',
         }}
       >
         <div
@@ -402,17 +402,17 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             fontSize: 15,
             fontWeight: 800,
             color: 'var(--text)',
-            marginBottom: 10,
+            marginBottom: 'var(--space-sm)',
           }}
         >
-          <i className="ph-duotone ph-chart-bar i-icon" style={{ marginRight: 6 }}></i>
+          <i className="ph-duotone ph-chart-bar i-icon" style={{ marginRight: 'var(--space-xs)' }}></i>
           สรุปเดือนนี้
         </div>
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
-            gap: 8,
+            gap: 'var(--space-sm)',
           }}
         >
           {[
@@ -425,7 +425,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             { label: 'วันหยุด', value: tot.holiday },
             { label: 'ลา', value: tot.sickLeave + tot.personalLeave },
           ].map((item, i) => (
-            <div key={i} style={{ textAlign: 'center', padding: '6px 0', background: 'var(--primary-bg)', borderRadius: 8 }}>
+            <div key={i} style={{ textAlign: 'center', padding: 'var(--space-xs) 0', background: 'var(--primary-bg)', borderRadius: 8 }}>
               <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--primary)', lineHeight: 1.3 }}>{item.value}</div>
               <div style={{ fontSize: 12, color: 'var(--muted)', fontWeight: 600 }}>{item.label}</div>
             </div>
@@ -458,7 +458,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               WebkitBackdropFilter: "blur(4px) saturate(1.5)",
               border: "1px solid rgba(255,255,255,0.08)",
               borderRadius: 20,
-              padding: "20px",
+              padding: "var(--space-xl)",
               width: "calc(100% - 40px)",
               maxWidth: 360,
               boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
@@ -469,7 +469,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 fontSize: 16,
                 fontWeight: 800,
                 color: "var(--text)",
-                marginBottom: 14,
+                marginBottom: 'var(--space-md)',
                 textAlign: "center",
               }}
             >
@@ -483,7 +483,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     key={time}
                     onClick={() => !isSavingShift && handleQuickSaveShift(time)}
                     style={{
-                      display: "table-cell", padding: "14px 0", textAlign: "center",
+                      display: "table-cell", padding: "var(--space-md) 0", textAlign: "center",
                       borderRadius: 12, cursor: isSavingShift ? "default" : "pointer",
                       fontWeight: 700, fontSize: 16,
                       border: sel ? "2px solid transparent" : "1px solid rgba(255,255,255,0.12)",
@@ -511,7 +511,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     key={opt.key || "off"}
                     onClick={() => !isSavingShift && handleQuickSaveShift("หยุด", opt.key)}
                     style={{
-                      display: "table-cell", padding: "12px 0", textAlign: "center",
+                      display: "table-cell", padding: "var(--space-md) 0", textAlign: "center",
                       borderRadius: 12, cursor: isSavingShift ? "default" : "pointer",
                       fontWeight: 700, fontSize: 14,
                       border: sel ? "2px solid transparent" : "1px solid rgba(255,255,255,0.12)",
