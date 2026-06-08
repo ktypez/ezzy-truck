@@ -35,7 +35,7 @@
     --primary: #FF6B6B !important;
     --primary-bg: #3D2E2E !important;
     --secondary: #06D6A0 !important;
-    --pattern-color: rgba(255, 255, 255, 0.06);
+    --pattern-color: rgba(255, 255, 255, 0.20);
     --active-date-text: #FFFFFF;
 }
 [data-theme="retro-dark"] .card, [data-theme="retro-dark"] .tab, [data-theme="retro-dark"] .seg-btn, [data-theme="retro-dark"] .main-save-btn, [data-theme="retro-dark"] .cal-cell, [data-theme="retro-dark"] .date-bar-item {
@@ -173,7 +173,7 @@
     --primary: #f48f68 !important;
     --primary-bg: #ffe394 !important;
     --secondary: #8bdfdd !important;
-    --pattern-color: rgba(244, 143, 104, 0.08);
+    --pattern-color: rgba(244, 143, 104, 0.20);
 }
 [data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
     border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: 0 4px 16px rgba(244, 143, 104, 0.12), 0 1px 4px rgba(0,0,0,0.04) !important;
