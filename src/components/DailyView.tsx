@@ -185,25 +185,41 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
           <i className={`ph-duotone ${derivedShift === 'หยุด' ? (derivedLeaveType === 'sick' ? 'ph-thermometer-hot' : derivedLeaveType === 'personal' ? 'ph-briefcase' : 'ph-prohibit') : 'ph-clock'} i-sm`}></i>
           {derivedShift ? (derivedShift === 'หยุด' ? (derivedLeaveType === 'sick' ? 'ลาป่วย' : derivedLeaveType === 'personal' ? 'ลากิจ' : 'วันหยุด') : `เข้ากะ ${derivedShift}`) : 'แตะเพื่อเข้ากะ'}
         </button>
-        <div style={{ display: 'flex', gap: 'var(--space-xs)', flex: 1 }}>
-          <button type="button" onClick={() => { if (derivedShift !== 'หยุด') setDayType('normal'); }}
-            style={{ padding: 'var(--space-sm) var(--space-lg)', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
-              cursor: derivedShift === 'หยุด' ? 'default' : 'pointer',
-              background: derivedShift === 'หยุด' ? 'var(--border)' : (dayType === 'normal' ? 'var(--primary)' : 'var(--border)'),
-              color: derivedShift === 'หยุด' ? 'var(--muted)' : (dayType === 'normal' ? 'var(--active-date-text, white)' : 'var(--muted)'),
-              border: derivedShift === 'หยุด' ? '2px solid transparent' : (dayType === 'normal' ? '2px solid var(--primary)' : '2px solid transparent'),
-              opacity: derivedShift === 'หยุด' ? 0.35 : 1 }}>
-            ปกติ
-          </button>
-          <button type="button" onClick={() => { if (derivedShift !== 'หยุด') setDayType('special'); }}
-            style={{ padding: 'var(--space-sm) var(--space-lg)', borderRadius: '10px', fontWeight: 700, fontSize: '16px', flex: 1, transition: 'opacity 0.2s',
-              cursor: derivedShift === 'หยุด' ? 'default' : 'pointer',
-              background: derivedShift === 'หยุด' ? 'var(--border)' : (dayType === 'special' ? 'var(--primary)' : 'var(--border)'),
-              color: derivedShift === 'หยุด' ? 'var(--muted)' : (dayType === 'special' ? 'var(--active-date-text, white)' : 'var(--muted)'),
-              border: derivedShift === 'หยุด' ? '2px solid transparent' : (dayType === 'special' ? '2px solid var(--primary)' : '2px solid transparent'),
-              opacity: derivedShift === 'หยุด' ? 0.35 : 1 }}>
-            x2
-          </button>
+        <div style={{ display: 'flex', gap: 'var(--space-md)', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', cursor: derivedShift === 'หยุด' ? 'default' : 'pointer', opacity: derivedShift === 'หยุด' ? 0.35 : 1, userSelect: 'none' }}
+            onClick={() => { if (derivedShift !== 'หยุด') setDayType('normal'); }}>
+            <span style={{ fontSize: '15px', fontWeight: 700, color: dayType === 'normal' ? 'var(--primary)' : 'var(--muted)' }}>ปกติ</span>
+            <div style={{
+              position: 'relative', width: '40px', height: '22px', borderRadius: '11px',
+              background: dayType === 'normal' ? 'var(--primary)' : 'var(--border)',
+              transition: 'background 0.2s',
+            }}>
+              <div style={{
+                position: 'absolute', top: '2px', left: dayType === 'normal' ? '18px' : '2px',
+                width: '18px', height: '18px', borderRadius: '50%',
+                background: 'white',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                transition: 'left 0.2s ease',
+              }} />
+            </div>
+          </label>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-xs)', cursor: derivedShift === 'หยุด' ? 'default' : 'pointer', opacity: derivedShift === 'หยุด' ? 0.35 : 1, userSelect: 'none' }}
+            onClick={() => { if (derivedShift !== 'หยุด') setDayType('special'); }}>
+            <span style={{ fontSize: '15px', fontWeight: 700, color: dayType === 'special' ? 'var(--primary)' : 'var(--muted)' }}>x2</span>
+            <div style={{
+              position: 'relative', width: '40px', height: '22px', borderRadius: '11px',
+              background: dayType === 'special' ? 'var(--primary)' : 'var(--border)',
+              transition: 'background 0.2s',
+            }}>
+              <div style={{
+                position: 'absolute', top: '2px', left: dayType === 'special' ? '18px' : '2px',
+                width: '18px', height: '18px', borderRadius: '50%',
+                background: 'white',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                transition: 'left 0.2s ease',
+              }} />
+            </div>
+          </label>
         </div>
       </div>
 
