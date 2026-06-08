@@ -296,48 +296,69 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               className="slide-in"
               style={{
                 marginTop: 10,
-                background: 'var(--primary-bg)',
-                border: '1px solid color-mix(in srgb, var(--primary) 30%, transparent)',
-                borderRadius: 12,
-                padding: '14px',
+                background: 'var(--card)',
+                border: '1px solid var(--border)',
+                borderRadius: 16,
+                overflow: 'hidden',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               }}
             >
-              {/* Hero Date */}
-              <div style={{ textAlign: 'center', marginBottom: '12px' }}>
-                <div style={{ fontSize: '32px', fontWeight: 900, color: 'var(--text)', lineHeight: 1.1 }}>
+              {/* 🎨 Gradient Hero Header */}
+              <div style={{
+                background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
+                padding: '18px 16px 14px',
+                textAlign: 'center',
+                position: 'relative',
+              }}>
+                <div style={{
+                  position: 'absolute', top: 10, right: 12,
+                  fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.5)',
+                  letterSpacing: '0.3px',
+                }}>
+                  #{selected.day}
+                </div>
+                <div style={{ fontSize: 38, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
                   {selected.day}
                 </div>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--muted)', letterSpacing: '0.5px', marginTop: '1px' }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2 }}>
                   {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
+                </div>
+                {/* Shift badge */}
+                <div style={{
+                  display: 'inline-block', marginTop: 6,
+                  background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)',
+                  padding: '3px 12px', borderRadius: 20,
+                  fontSize: 12, fontWeight: 700, color: 'white',
+                }}>
+                  <i className="ph-duotone ph-clock" style={{ fontSize: 11, marginRight: 4 }}></i>
+                  {selected.shift_time || 'ยังไม่เข้ากะ'}
                 </div>
               </div>
 
-              {/* Stats Grid */}
+              {/* 📊 Stats Grid */}
               <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 6,
-                textAlign: 'center',
+                display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 2,
+                padding: '12px 8px',
               }}>
                 {[
-                  { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work, color: 'var(--primary)' },
-                  { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work, color: 'var(--secondary)' },
-                  { label: 'KM', value: selected.km, color: 'var(--primary)' },
-                  {
-                    label: 'สาย',
-                    value: selected.late ? `${selected.late}′` : '—',
-                    color: selected.late ? 'var(--primary)' : 'var(--muted)',
-                  },
+                  { icon: 'ph-arrows-clockwise', label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
+                  { icon: 'ph-map-trifold', label: 'จุด', value: selected.points + selected.help_work + selected.fix_work },
+                  { icon: 'ph-road', label: 'KM', value: selected.km },
+                  { icon: 'ph-warning-circle', label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
                 ].map((x) => (
-                  <div key={x.label}>
-                    <div style={{ fontSize: 20, fontWeight: 800, color: x.color, lineHeight: 1.2 }}>{x.value}</div>
-                    <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600, marginTop: 1 }}>{x.label}</div>
+                  <div key={x.label} style={{
+                    textAlign: 'center', padding: '6px 0',
+                    background: 'var(--primary-bg)', borderRadius: 10,
+                  }}>
+                    <i className={`ph-duotone ${x.icon}`} style={{ fontSize: 16, color: 'var(--primary)', display: 'block', marginBottom: 2 }}></i>
+                    <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', lineHeight: 1.2 }}>{x.value}</div>
+                    <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600 }}>{x.label}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Shift Action Button */}
-              <div style={{ marginTop: 10 }}>
+              {/* 🔘 Shift Action Button */}
+              <div style={{ padding: '0 12px 12px' }}>
                 <button
                   onClick={() => {
                     const dayData = merged.find(m => m.day === selected.day);
@@ -348,12 +369,12 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   }}
                   style={{
                     width: '100%',
-                    padding: '10px 0',
-                    fontSize: 15,
+                    padding: '11px 0',
+                    fontSize: 14,
                     fontWeight: 700,
-                    color: chosenShift && selected.day === shiftPickerDay && showShiftPicker ? 'var(--active-date-text)' : 'var(--primary)',
-                    background: chosenShift && selected.day === shiftPickerDay && showShiftPicker ? 'var(--primary)' : 'var(--primary-bg)',
-                    border: '2px solid var(--border)',
+                    color: 'var(--primary)',
+                    background: 'color-mix(in srgb, var(--primary) 10%, var(--primary-bg))',
+                    border: '1.5px solid color-mix(in srgb, var(--primary) 25%, transparent)',
                     borderRadius: 10,
                     cursor: 'pointer',
                     fontFamily: 'inherit',
@@ -364,7 +385,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   }}
                 >
                   <i className="ph-duotone ph-clock i-sm"></i>
-                  {selected.shift_time ? selected.shift_time : 'เข้ากะ'}
+                  {selected.shift_time ? `กะ ${selected.shift_time}` : 'แตะเพื่อเข้ากะ'}
                 </button>
               </div>
             </div>
