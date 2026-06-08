@@ -47,6 +47,7 @@ export default function DropdownSelect({ options, value, onChange, placeholder, 
           fontFamily: 'inherit',
           outline: 'none',
           gap: 8,
+          boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
           transition: 'box-shadow 0.15s, border-color 0.15s',
           ...(open ? { boxShadow: '0 0 0 2px var(--primary-bg)' } : {}),
         }}
