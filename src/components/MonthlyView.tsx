@@ -309,12 +309,14 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 padding: '22px 18px 18px',
                 textAlign: 'center',
               }}>
-                {/* Date */}
-                <div style={{ fontSize: 40, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
-                  {selected.day}
-                </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 14 }}>
-                  {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
+                {/* Date + Month Year on same line */}
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 10, marginBottom: 14 }}>
+                  <span style={{ fontSize: 44, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-2px' }}>
+                    {selected.day}
+                  </span>
+                  <span style={{ fontSize: 15, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px' }}>
+                    {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
+                  </span>
                 </div>
 
                 {/* subtle glass Stats Grid */}
