@@ -295,7 +295,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             <div
               className="slide-in"
               style={{
-                marginTop: 'var(--space-sm)',
+                marginTop: 'var(--space-lg)',
                 background: 'var(--card)',
                 border: '1px solid var(--border)',
                 borderRadius: 16,
@@ -394,7 +394,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         className="card"
         style={{
           padding: 'var(--space-md)',
-          marginTop: 'var(--space-sm)',
+          marginTop: 'var(--space-lg)',
         }}
       >
         <div
