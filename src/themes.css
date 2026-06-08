@@ -20,7 +20,7 @@
 [data-theme="retro-pastel"] .date-bar-item {
     border-radius: 8px !important;
     border: 4px solid var(--border) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 16px rgba(212, 201, 190, 0.25), 0 1px 4px rgba(0,0,0,0.04) !important;
 }
 
 /* ===================================================
@@ -146,7 +146,7 @@
 [data-theme="modern"] .date-bar-item {
     border-radius: 12px !important;
     border: 2px solid var(--border) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 16px rgba(212, 201, 190, 0.25), 0 1px 4px rgba(0,0,0,0.04) !important;
 }
 
 /* ===================================================
