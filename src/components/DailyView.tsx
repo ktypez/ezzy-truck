@@ -58,21 +58,15 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     return day === now.getDate() && currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear();
   };
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center', dragFree: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center', containScroll: 'keepSnaps' });
 
   const scrollToDay = useCallback((day: number) => {
     const index = allDaysArray.findIndex(d => d.dayNum === day);
-    if (index >= 0) {
-      requestAnimationFrame(() => emblaApi?.scrollTo(index));
-    }
+    if (index >= 0) emblaApi?.scrollTo(index, true);
   }, [emblaApi]);
 
   useEffect(() => {
-    if (!emblaApi) return;
-    const onInit = () => scrollToDay(selectedDay);
-    emblaApi.on('init', onInit);
-    scrollToDay(selectedDay);
-    return () => { emblaApi.off('init', onInit); };
+    if (emblaApi) scrollToDay(selectedDay);
   }, [selectedDay, scrollToDay, emblaApi]);
 
   // Load day log via TanStack Query
