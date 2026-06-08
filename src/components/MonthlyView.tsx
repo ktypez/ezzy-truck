@@ -341,16 +341,15 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 padding: '12px 8px',
               }}>
                 {[
-                  { icon: 'ph-arrows-clockwise', label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
-                  { icon: 'ph-map-trifold', label: 'จุด', value: selected.points + selected.help_work + selected.fix_work },
-                  { icon: 'ph-road', label: 'KM', value: selected.km },
-                  { icon: 'ph-warning-circle', label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
+                  { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
+                  { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work },
+                  { label: 'KM', value: selected.km },
+                  { label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
                 ].map((x) => (
                   <div key={x.label} style={{
                     textAlign: 'center', padding: '6px 0',
                     background: 'var(--primary-bg)', borderRadius: 10,
                   }}>
-                    <i className={`ph-duotone ${x.icon}`} style={{ fontSize: 16, color: 'var(--primary)', display: 'block', marginBottom: 2 }}></i>
                     <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', lineHeight: 1.2 }}>{x.value}</div>
                     <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600 }}>{x.label}</div>
                   </div>
