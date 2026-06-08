@@ -440,7 +440,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             onClick={() => setShowShiftPicker(false)}
             style={{
               position: "fixed", inset: 0, zIndex: 500,
-              background: "rgba(0,0,0,0.35)",
+              background: "rgba(0,0,0,0.4)",
+              backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
             }}
           />
           <div
