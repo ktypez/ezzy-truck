@@ -40,6 +40,8 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
   const [lateMin, setLateMin] = useState('');
   const [roundCount, setRoundCount] = useState(0);
   const [pointCount, setPointCount] = useState(0);
+  const [helpWork, setHelpWork] = useState(0);
+  const [fixWork, setFixWork] = useState(0);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success'>('idle');
   const [showShiftSelector, setShowShiftSelector] = useState(false);
   const [isSavingShift, setIsSavingShift] = useState(false);
@@ -95,11 +97,13 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
         setLateMin(dayData.late ? String(dayData.late) : '');
         setRoundCount(dayData.rounds || 0);
         setPointCount(dayData.points || 0);
+        setHelpWork(dayData.help_work || 0);
+        setFixWork(dayData.fix_work || 0);
       }
     } else {
       setIsWork(true); setDayType('normal'); setLeaveType(null);
       setOdoIn(''); setOdoOut(''); setOtHours(''); setLateMin('');
-      setRoundCount(0); setPointCount(0);
+      setRoundCount(0); setPointCount(0); setHelpWork(0); setFixWork(0);
     }
   }, [dayData]);
 
@@ -131,11 +135,12 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
       Object.assign(payload, {
         day_type: dayType, odo_in: parseFloat(odoIn) || 0, odo_out: parseFloat(odoOut) || 0,
         ot: parseFloat(otHours) || 0, late: parseInt(lateMin) || 0, rounds: roundCount, points: pointCount,
+        help_work: helpWork, fix_work: fixWork,
         trucks: roundCount, odo: distance, drivers: [], leave_type: null
       });
     } else {
       Object.assign(payload, { day_type: 'วันหยุด', shift_time: 'หยุด', is_work: false,
-        odo_in: 0, odo_out: 0, ot: 0, late: 0, rounds: 0, points: 0, trucks: 0, odo: 0, drivers: [], leave_type: leaveType });
+        odo_in: 0, odo_out: 0, ot: 0, late: 0, rounds: 0, points: 0, help_work: 0, fix_work: 0, trucks: 0, odo: 0, drivers: [], leave_type: leaveType });
     }
     const { error } = await sb.from('logs').upsert(payload, { onConflict: 'user_id,year,month,day' });
     if (error) { alert("เกิดข้อผิดพลาด: " + error.message); setSaveStatus('idle'); }
@@ -216,6 +221,16 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
               <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>จุดส่ง</div>
               <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{pointCount} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>จุด</span></div>
             </div>
+            <div style={{ width: '1px', background: 'var(--border)' }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>งานช่วย</div>
+              <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{helpWork} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>ครั้ง</span></div>
+            </div>
+            <div style={{ width: '1px', background: 'var(--border)' }} />
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', letterSpacing: '0.3px' }}>งานแก้</div>
+              <div style={{ fontSize: '24px', fontWeight: 800, color: 'var(--primary)' }}>{fixWork} <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--muted)' }}>ครั้ง</span></div>
+            </div>
           </div>
 
           {/* Odometer Card */}
@@ -252,6 +267,35 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
                   onChange={e => setPointCount(Math.max(0, parseInt(e.target.value) || 0))}
                   style={{ width: '52px', height: '40px', fontSize: '32px', fontWeight: 800, margin: '0 4px', textAlign: 'center', border: 'none', outline: 'none', background: 'var(--primary-bg)', borderRadius: '10px', color: 'var(--text)' }} />
                 <button type="button" className="del-btn-small" onClick={() => setPointCount(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          {/* Help Work & Fix Work Card */}
+          <div className="card" style={{ display: 'flex', gap: '10px', padding: '12px 10px' }}>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <i className="ph-duotone ph-hand-heart i-sm" style={{ color: 'var(--muted)' }}></i> งานช่วย
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <button type="button" className="del-btn-small" onClick={() => setHelpWork(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
+                <input type="number" inputMode="numeric" value={helpWork === 0 ? '' : helpWork} placeholder="0"
+                  onChange={e => setHelpWork(Math.max(0, parseInt(e.target.value) || 0))}
+                  style={counterInputStyle} />
+                <button type="button" className="del-btn-small" onClick={() => setHelpWork(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
+              </div>
+            </div>
+            <div style={{ borderLeft: '1px dashed var(--border)', height: '55px', alignSelf: 'center' }}></div>
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <div style={{ fontSize: '16px', fontWeight: 700, color: 'var(--muted)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <i className="ph-duotone ph-wrench i-sm" style={{ color: 'var(--muted)' }}></i> งานแก้
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <button type="button" className="del-btn-small" onClick={() => setFixWork(prev => Math.max(0, prev - 1))}><i className="ph-bold ph-minus"></i></button>
+                <input type="number" inputMode="numeric" value={fixWork === 0 ? '' : fixWork} placeholder="0"
+                  onChange={e => setFixWork(Math.max(0, parseInt(e.target.value) || 0))}
+                  style={counterInputStyle} />
+                <button type="button" className="del-btn-small" onClick={() => setFixWork(prev => prev + 1)}><i className="ph-bold ph-plus"></i></button>
               </div>
             </div>
           </div>

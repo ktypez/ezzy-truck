@@ -22,8 +22,8 @@ export const calculateSalary = (logs: any[], daysInMonth?: number) => {
     if (!isRealHoliday) {
       workDays++;
 
-      totalRounds += (r.rounds || 0);
-      totalPoints += (r.points || 0);
+      totalRounds += (r.rounds || 0) + (r.help_work || 0) + (r.fix_work || 0);
+      totalPoints += (r.points || 0) + (r.help_work || 0) + (r.fix_work || 0);
 
       totalOT += (r.ot || 0);
       totalLate += (r.late || 0);

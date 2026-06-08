@@ -104,6 +104,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       day,
       rounds: isOff ? 0 : r?.rounds || 0,
       points: isOff ? 0 : r?.points || 0,
+      help_work: isOff ? 0 : r?.help_work || 0,
+      fix_work: isOff ? 0 : r?.fix_work || 0,
       km: r?.odo || 0,
       ot: isOff ? 0 : r?.ot || 0,
       late: isOff ? 0 : r?.late || 0,
@@ -123,6 +125,8 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       workDays: a.workDays + (r.isOff ? 0 : 1),
       rounds: a.rounds + r.rounds,
       points: a.points + r.points,
+      help_work: a.help_work + r.help_work,
+      fix_work: a.fix_work + r.fix_work,
       km: a.km + r.km,
       ot: a.ot + r.ot,
       late: a.late + r.late,
@@ -130,7 +134,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
       sickLeave: a.sickLeave + (r.leave_type === 'sick' ? 1 : 0),
       personalLeave: a.personalLeave + (r.leave_type === 'personal' ? 1 : 0),
     }),
-    { workDays: 0, rounds: 0, points: 0, km: 0, ot: 0, late: 0, holiday: 0, sickLeave: 0, personalLeave: 0 },
+    { workDays: 0, rounds: 0, points: 0, help_work: 0, fix_work: 0, km: 0, ot: 0, late: 0, holiday: 0, sickLeave: 0, personalLeave: 0 },
   );
 
   const selected = selDay ? merged.find((m) => m.day === selDay) : null;
@@ -400,13 +404,15 @@ const [isSavingShift, setIsSavingShift] = useState(false);
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(5, 1fr)',
             gap: 8,
           }}
         >
           {[
             { label: 'รอบ', value: tot.rounds },
             { label: 'จุด', value: tot.points },
+            { label: 'ช่วย', value: tot.help_work },
+            { label: 'แก้', value: tot.fix_work },
             { label: 'KM', value: tot.km.toLocaleString() },
             { label: 'OT', value: tot.ot.toFixed(1) },
             { label: 'สาย', value: tot.late + "'" },
