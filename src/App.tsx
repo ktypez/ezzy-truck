@@ -100,6 +100,8 @@ export default function Home() {
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1);
     setCurrentDate(newDate);
+    setCurrentDayShift('');
+    setCurrentLeaveType(null);
     setSelectedDay(1);
   };
 
