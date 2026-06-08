@@ -303,57 +303,42 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                 boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               }}
             >
-              {/* 🎨 Gradient Hero Header */}
+              {/* 🎨 Gradient Header with Stats */}
               <div style={{
                 background: 'linear-gradient(135deg, var(--primary), var(--secondary))',
-                padding: '18px 16px 14px',
+                padding: '18px 16px 16px',
                 textAlign: 'center',
-                position: 'relative',
               }}>
-                <div style={{
-                  position: 'absolute', top: 10, right: 12,
-                  fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.5)',
-                  letterSpacing: '0.3px',
-                }}>
-                  #{selected.day}
-                </div>
                 <div style={{ fontSize: 38, fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-1px' }}>
                   {selected.day}
                 </div>
-                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.5px', marginTop: 2, marginBottom: 14 }}>
                   {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
                 </div>
-                {/* Shift badge */}
-                <div style={{
-                  display: 'inline-block', marginTop: 6,
-                  background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(4px)',
-                  padding: '3px 12px', borderRadius: 20,
-                  fontSize: 12, fontWeight: 700, color: 'white',
-                }}>
-                  <i className="ph-duotone ph-clock" style={{ fontSize: 11, marginRight: 4 }}></i>
-                  {selected.shift_time || 'ยังไม่เข้ากะ'}
-                </div>
-              </div>
 
-              {/* 📊 Stats Grid */}
-              <div style={{
-                display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 2,
-                padding: '12px 8px',
-              }}>
-                {[
-                  { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
-                  { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work },
-                  { label: 'KM', value: selected.km },
-                  { label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
-                ].map((x) => (
-                  <div key={x.label} style={{
-                    textAlign: 'center', padding: '6px 0',
-                    background: 'var(--primary-bg)', borderRadius: 10,
-                  }}>
-                    <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', lineHeight: 1.2 }}>{x.value}</div>
-                    <div style={{ fontSize: 10, color: 'var(--muted)', fontWeight: 600 }}>{x.label}</div>
-                  </div>
-                ))}
+                {/* Frosted Stats Grid */}
+                <div style={{
+                  display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 6,
+                }}>
+                  {[
+                    { label: 'รอบ', value: selected.rounds + selected.help_work + selected.fix_work },
+                    { label: 'จุด', value: selected.points + selected.help_work + selected.fix_work },
+                    { label: 'KM', value: selected.km },
+                    { label: 'สาย', value: selected.late ? `${selected.late}′` : '—' },
+                  ].map((x) => (
+                    <div key={x.label} style={{
+                      textAlign: 'center', padding: '6px 4px',
+                      background: 'rgba(255,255,255,0.15)',
+                      backdropFilter: 'blur(8px)',
+                      WebkitBackdropFilter: 'blur(8px)',
+                      borderRadius: 12,
+                      border: '1px solid rgba(255,255,255,0.2)',
+                    }}>
+                      <div style={{ fontSize: 18, fontWeight: 800, color: 'white', lineHeight: 1.2 }}>{x.value}</div>
+                      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>{x.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* 🔘 Shift Action Button */}
