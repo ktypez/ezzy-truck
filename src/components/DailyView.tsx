@@ -349,7 +349,7 @@ background: 'rgba(255,255,255,0.06)',
                 return (
                   <div key={time} onClick={() => !isSavingShift && handleQuickSaveShift(time)}
                     style={{ display: 'table-cell', padding: '14px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px',
-                      border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? 'var(--primary)' : 'transparent', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                      border: sel ? '2px solid transparent' : '1px solid rgba(255,255,255,0.12)', background: sel ? 'var(--primary)' : 'rgba(255,255,255,0.06)', backdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', WebkitBackdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
                     {time}
                   </div>
                 );
@@ -365,7 +365,7 @@ background: 'rgba(255,255,255,0.06)',
                 return (
                   <div key={opt.key || 'off'} onClick={() => !isSavingShift && handleQuickSaveShift('หยุด', opt.key)}
                     style={{ display: 'table-cell', padding: '12px 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
-                      border: sel ? '2px solid transparent' : '2px solid var(--border)', background: sel ? opt.color : 'transparent', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                      border: sel ? '2px solid transparent' : '1px solid rgba(255,255,255,0.12)', background: sel ? opt.color : 'rgba(255,255,255,0.06)', backdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', WebkitBackdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
                     <div style={{ fontSize: '18px' }}>{opt.icon}</div>
                     <div>{opt.label}</div>
                   </div>
