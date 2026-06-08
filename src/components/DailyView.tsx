@@ -58,14 +58,12 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     return day === now.getDate() && currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear();
   };
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center', watchSlides: true });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center' });
 
   const scrollToDay = useCallback((day: number) => {
     const index = allDaysArray.findIndex(d => d.dayNum === day);
     if (index >= 0 && emblaApi) {
-      requestAnimationFrame(() => {
-        emblaApi.scrollTo(index);
-      });
+      emblaApi.scrollTo(index, true);
     }
   }, [emblaApi]);
 
@@ -179,8 +177,10 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
                 className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
                 data-day={item.dayNum}
               >
-                <span className="slider-day-name">{item.dayName}</span>
-                <span className="slider-day-num">{item.dayNum}</span>
+                <div className="date-slider-item-inner">
+                  <span className="slider-day-name">{item.dayName}</span>
+                  <span className="slider-day-num">{item.dayNum}</span>
+                </div>
               </button>
             );
           })}
