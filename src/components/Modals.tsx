@@ -47,7 +47,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
           maxHeight: '90vh', 
           overflowY: 'auto',
-          background: 'rgba(255,255,255,0.12)',
+          background: 'rgba(255,255,255,0.18)',
           backdropFilter: 'blur(12px) saturate(1.6)',
           WebkitBackdropFilter: 'blur(12px) saturate(1.6)',
           border: '1px solid rgba(255,255,255,0.18)',
@@ -56,7 +56,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
         }}>
           {/* liquid surface */}
           <div style={{
-            background: 'rgba(255,255,255,0.06)',
+            background: 'rgba(0,0,0,0.20)',
             backdropFilter: 'blur(4px) saturate(1.5)',
             WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
             borderRadius: 14,
