@@ -311,10 +311,10 @@ const [isSavingShift, setIsSavingShift] = useState(false);
               }}>
                 {/* Date + Month Year on same line */}
                 <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: 10, marginBottom: 14 }}>
-                  <span style={{ fontSize: 28, fontWeight: 800, color: 'white', lineHeight: 1 }}>
+                  <span style={{ fontSize: 20, fontWeight: 800, color: 'white', lineHeight: 1 }}>
                     {selected.day}
                   </span>
-                  <span style={{ fontSize: 28, fontWeight: 800, color: 'white' }}>
+                  <span style={{ fontSize: 20, fontWeight: 800, color: 'white' }}>
                     {MONTHS_TH[currentDate.getMonth()]} {currentDate.getFullYear() + 543}
                   </span>
                 </div>
