@@ -52,7 +52,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
           border: '1px solid rgba(255,255,255,0.08)',
           borderRadius: 20,
-          padding: '25px 20px',
+          padding: '20px',
         }}>
 {activeModal === 'profile' && (
           <div>
