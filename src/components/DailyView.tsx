@@ -58,11 +58,17 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     return day === now.getDate() && currentMonth === now.getMonth() + 1 && currentYear === now.getFullYear();
   };
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center', containScroll: 'keepSnaps' });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'center', dragFree: true });
 
   const scrollToDay = useCallback((day: number) => {
     const index = allDaysArray.findIndex(d => d.dayNum === day);
-    if (index >= 0) emblaApi?.scrollTo(index, true);
+    if (index >= 0) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          emblaApi?.scrollTo(index);
+        });
+      });
+    }
   }, [emblaApi]);
 
   useEffect(() => {
@@ -165,6 +171,7 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
             return (
               <button key={item.dayNum} onClick={() => onSelectDay(item.dayNum)}
                 className={`date-slider-item ${isActive ? 'active' : ''} ${today && !isActive ? 'today' : ''}`}
+                data-day={item.dayNum}
               >
                 <span className="slider-day-name">{item.dayName}</span>
                 <span className="slider-day-num">{item.dayNum}</span>
