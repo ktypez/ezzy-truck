@@ -329,9 +329,9 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                   ].map((x) => (
                     <div key={x.label} style={{
                       textAlign: 'center', padding: '7px 4px',
-                      background: 'rgba(255,255,255,0.08)',
-                      backdropFilter: 'blur(2px) saturate(1.3)',
-                      WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
+                      background: 'rgba(255,255,255,0.06)',
+                      backdropFilter: 'blur(4px) saturate(1.5)',
+                      WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
                       borderRadius: 14,
                       border: '1px solid rgba(255,255,255,0.08)',
                     }}>
@@ -356,10 +356,10 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                     fontSize: 14,
                     fontWeight: 700,
                     color: 'white',
-                    background: 'rgba(255,255,255,0.08)',
-                    backdropFilter: 'blur(2px) saturate(1.3)',
-                    WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'rgba(255,255,255,0.06)',
+                    backdropFilter: 'blur(4px) saturate(1.5)',
+                    WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
+                    border: '1px solid rgba(255,255,255,0.08)',
                     borderRadius: 14,
                     cursor: 'pointer',
                     fontFamily: 'inherit',
