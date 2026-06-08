@@ -29,27 +29,9 @@ export default function Home() {
   const queryClient = useQueryClient();
 
   // 🚨 2. กลุ่มแชร์ State ของระบบปฏิทินกะงานลอยแก้ว
-  const [currentDayShift, setCurrentDayShift] = useState<string>('');
-  const [currentLeaveType, setCurrentLeaveType] = useState<string | null>(null);
 
-  const { refetch: refetchShift } = useQuery({
-    queryKey: ['day-shift', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay],
-    queryFn: async () => {
-      if (!session?.user?.id) return { shift_time: '', leave_type: null };
-      const { data } = await sb
-        .from('logs')
-        .select('shift_time, leave_type')
-        .eq('user_id', session.user.id)
-        .eq('year', currentDate.getFullYear())
-        .eq('month', currentDate.getMonth() + 1)
-        .eq('day', selectedDay)
-        .maybeSingle();
-      setCurrentDayShift(data?.shift_time || '');
-      setCurrentLeaveType(data?.leave_type || null);
-      return { shift_time: data?.shift_time || '', leave_type: data?.leave_type || null };
-    },
-    enabled: !!session?.user?.id,
-  });
+
+
 
   useEffect(() => {
     sb.auth.getSession().then(({ data: { session } }) => {
@@ -101,8 +83,6 @@ export default function Home() {
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1);
     setCurrentDate(newDate);
-    setCurrentDayShift('');
-    setCurrentLeaveType(null);
     setSelectedDay(1);
   };
 
@@ -111,7 +91,6 @@ export default function Home() {
   };
 
   const handleSaveSuccess = () => {
-    refetchShift();
     queryClient.invalidateQueries({ queryKey: ['monthly-logs', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1] });
     queryClient.invalidateQueries({ queryKey: ['salary', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1] });
     queryClient.invalidateQueries({ queryKey: ['day-log', session?.user?.id, currentDate.getFullYear(), currentDate.getMonth() + 1, selectedDay] });
@@ -143,8 +122,6 @@ export default function Home() {
               selectedDay={selectedDay}
               onSelectDay={setSelectedDay}
               onSaveSuccess={handleSaveSuccess}
-              currentShift={currentDayShift}
-              currentLeaveType={currentLeaveType}
               onChangeMonth={handleChangeMonth}
             />
           } />
@@ -173,8 +150,6 @@ export default function Home() {
               selectedDay={selectedDay}
               onSelectDay={setSelectedDay}
               onSaveSuccess={handleSaveSuccess}
-              currentShift={currentDayShift}
-              currentLeaveType={currentLeaveType}
               onChangeMonth={handleChangeMonth}
             />
           } />
