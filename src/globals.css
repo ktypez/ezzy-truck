@@ -122,6 +122,9 @@ body {
 .date-slider-embla .date-slider-item {
   margin-right: 8px;
 }
+.date-slider-embla .date-slider-item:last-child {
+  margin-right: 0;
+}
 
 .date-slider-item {
   flex: 0 0 56px;
