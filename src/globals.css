@@ -114,11 +114,13 @@ body {
   margin: 0;
 }
 .date-slider-embla .date-slider-container {
-  display: flex !important;
-  gap: 8px;
+  display: flex;
   padding: var(--space-sm) 0;
   backface-visibility: hidden;
   touch-action: pan-y pinch-zoom;
+}
+.date-slider-embla .date-slider-item {
+  margin-right: 8px;
 }
 
 .date-slider-item {
