@@ -20,7 +20,7 @@
 [data-theme="retro-pastel"] .date-bar-item {
     border-radius: 8px !important;
     border: 4px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(212, 201, 190, 0.25), 0 1px 4px rgba(0,0,0,0.04) !important;
+    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.12), 0 1px 4px rgba(0,0,0,0.04) !important;
 }
 
 /* ===================================================
@@ -35,10 +35,11 @@
     --primary: #FF6B6B !important;
     --primary-bg: #3D2E2E !important;
     --secondary: #06D6A0 !important;
+    --pattern-color: rgba(255, 255, 255, 0.06);
     --active-date-text: #FFFFFF;
 }
 [data-theme="retro-dark"] .card, [data-theme="retro-dark"] .tab, [data-theme="retro-dark"] .seg-btn, [data-theme="retro-dark"] .main-save-btn, [data-theme="retro-dark"] .cal-cell, [data-theme="retro-dark"] .date-bar-item {
-    border-radius: 8px !important; border: 4px solid var(--border) !important; box-shadow: none !important;
+    border-radius: 8px !important; border: 4px solid var(--border) !important; box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2) !important;
 }
 
 /* ===================================================
@@ -123,6 +124,17 @@
     --active-date-text: #FFFFFF;
 }
 
+[data-theme="sunset"] .card,
+[data-theme="sunset"] .tab,
+[data-theme="sunset"] .seg-btn,
+[data-theme="sunset"] .main-save-btn,
+[data-theme="sunset"] .cal-cell,
+[data-theme="sunset"] .date-bar-item {
+    border-radius: 16px !important;
+    border: 2px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.15) !important;
+}
+
 /* ===================================================
    🎨 THEME: Modern
    =================================================== */
@@ -161,9 +173,10 @@
     --primary: #f48f68 !important;
     --primary-bg: #ffe394 !important;
     --secondary: #8bdfdd !important;
+    --pattern-color: rgba(244, 143, 104, 0.08);
 }
 [data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
-    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: none !important;
+    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: 0 4px 16px rgba(244, 143, 104, 0.12), 0 1px 4px rgba(0,0,0,0.04) !important;
 }
 [data-theme="summer-morning"] .seg-btn {
     color: #5D4037 !important;
@@ -318,6 +331,7 @@
 [data-theme="twilight"] .date-bar-item {
     border-radius: 16px !important;
     border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.15) !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
 }
 [data-theme="twilight"] .tab.active,
@@ -368,6 +382,7 @@
 [data-theme="cotton-candy"] .date-bar-item {
     border-radius: 20px !important;
     border: 2px solid var(--border) !important;
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.1), 0 1px 4px rgba(0,0,0,0.04) !important;
     box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
 }
 [data-theme="cotton-candy"] .tab.active,
@@ -484,6 +499,7 @@
 [data-theme="twilight"] .date-bar-item {
     border-radius: 16px !important;
     border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.15) !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
 }
 [data-theme="twilight"] .tab.active,
@@ -534,6 +550,7 @@
 [data-theme="cotton-candy"] .date-bar-item {
     border-radius: 20px !important;
     border: 2px solid var(--border) !important;
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.1), 0 1px 4px rgba(0,0,0,0.04) !important;
     box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
 }
 [data-theme="cotton-candy"] .tab.active,

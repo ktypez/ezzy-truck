@@ -1,7 +1,7 @@
 
 :root {
     /* Pattern + font base */
-    --pattern-color: rgba(255, 107, 107, 0.04);
+    --pattern-color: rgba(255, 107, 107, 0.08);
     --body-bg-image: linear-gradient(var(--pattern-color) 1px, transparent 1px),
                      linear-gradient(90deg, var(--pattern-color) 1px, transparent 1px);
     --body-bg-size: 24px 24px;
