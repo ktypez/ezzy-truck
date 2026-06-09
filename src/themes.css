@@ -200,20 +200,21 @@
    ☀️ THEME: Blue Sky (remake of Crayon)
    =================================================== */
 [data-theme="blue-sky"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: linear-gradient(rgba(232, 244, 253, 0.7), rgba(232, 244, 253, 0.7)), url('/blue-sky-bg.jpg') center/cover fixed no-repeat #E8F4FD;
-    --body-bg-image: linear-gradient(rgba(232, 244, 253, 0.7), rgba(232, 244, 253, 0.7)), url('/blue-sky-bg.jpg');
+    --glass-bg: rgba(255,255,255,0.45);
+    --glass-border: rgba(255,255,255,0.20);
+    --bg: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg') center/cover fixed no-repeat #5B92C5;
+    --body-bg-image: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg');
     --body-bg-size: cover;
-    --card: #FFFFFF;
-    --text: #2C3E50;
-    --muted: #7F8C9B;
-    --border: #AED6F1;
-    --primary: #F39C12 !important;
-    --primary-bg: #FEF5E7 !important;
-    --secondary: #3498DB !important;
-
+    --card: rgba(255, 255, 255, 0.88);
+    --text: #1B2A3E;
+    --muted: #5A7C99;
+    --border: rgba(74, 123, 159, 0.30);
+    --primary: #D47A3E !important;
+    --primary-bg: rgba(212, 122, 62, 0.12) !important;
+    --secondary: #3A7BBF !important;
     --active-date-text: #FFFFFF;
+    --card-shadow: 0 4px 12px rgba(26, 43, 62, 0.12);
+    --drop-shadow: drop-shadow(0 2px 4px rgba(26, 43, 62, 0.10));
 }
 [data-theme="blue-sky"] .card,
 [data-theme="blue-sky"] .tab,
@@ -705,4 +706,82 @@
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
 #view-salary > .card:first-of-type {
     background: var(--hero-gradient, linear-gradient(135deg, var(--primary), var(--secondary))) !important;
+}
+/* ===================================================
+   🌙 THEME: ชินจัง : สลีป (Shin-chan Sleep)
+   =================================================== */
+[data-theme="shinchan-sleep"] {
+    --glass-bg: rgba(0,0,0,0.4);
+    --glass-border: rgba(255,255,255,0.08);
+    --bg: #0D1321;
+    --body-bg-image: url("/files/shinchan-sleep-bg.jpg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    --card: #1A2035;
+    --text: #E8E0D0;
+    --muted: #9A8E80;
+    --border: #3A4A6A;
+    --primary: #F5C542 !important;
+    --primary-bg: rgba(245, 197, 66, 0.15) !important;
+    --secondary: #7EB8DA !important;
+    --active-date-text: #0D1321;
+    --hero-gradient: linear-gradient(135deg, #2A3F5F, #1A2035);
+}
+[data-theme="shinchan-sleep"] .card,
+[data-theme="shinchan-sleep"] .tab,
+[data-theme="shinchan-sleep"] .seg-btn,
+[data-theme="shinchan-sleep"] .main-save-btn,
+[data-theme="shinchan-sleep"] .cal-cell,
+[data-theme="shinchan-sleep"] .date-bar-item {
+    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 0 4px 15px rgba(245, 197, 66, 0.12) !important;
+}
+[data-theme="shinchan-sleep"] .tab.active,
+[data-theme="shinchan-sleep"] .main-save-btn,
+[data-theme="shinchan-sleep"] .auth-btn,
+[data-theme="shinchan-sleep"] .seg-btn.active {
+    background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
+    color: #0D1321 !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="shinchan-sleep"] .input-field {
+    background-color: rgba(26, 32, 53, 0.8) !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 12px !important;
+    color: var(--text);
+}
+[data-theme="shinchan-sleep"] .main-save-btn:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+[data-theme="shinchan-sleep"] .summary-banner,
+[data-theme="shinchan-sleep"] .card {
+    background: #1A2035;
+}
+[data-theme="shinchan-sleep"] #view-salary > .card:first-of-type {
+    background: linear-gradient(135deg, #2A3F5F, #1A2035) !important;
+    border: none !important;
+    color: #E8E0D0 !important;
+}
+[data-theme="shinchan-sleep"] #view-salary > .card:first-of-type div {
+    color: #E8E0D0 !important;
+}
+[data-theme="shinchan-sleep"] .daily-summary {
+    background: rgba(245, 197, 66, 0.08) !important;
+}
+[data-theme="shinchan-sleep"] .nav-tabs {
+    background: #1A2035 !important;
+}
+[data-theme="shinchan-sleep"] .date-slider-item.active {
+    background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
+    color: #0D1321 !important;
+}
+[data-theme="shinchan-sleep"] .user-bar {
+    background: rgba(26, 32, 53, 0.9) !important;
+}
+[data-theme="shinchan-sleep"] .modal-content,
+[data-theme="shinchan-sleep"] .month-bar {
+    background: #1A2035 !important;
+    border: 3px solid var(--border) !important;
 }
