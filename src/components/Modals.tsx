@@ -29,6 +29,27 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
 
   return (
     /* 🟢 1. อัปเกรดฉากหลังโมดอลหลักให้โปร่งใส+เบลอกระจกแก้ว ล้อไปกับปฏิทินกะงาน */
+    <>
+      <style>{`
+  .theme-btn {
+    background: var(--glass-bg, rgba(255,255,255,0.7));
+    backdrop-filter: blur(4px) saturate(1.4);
+    -webkit-backdrop-filter: blur(4px) saturate(1.4);
+    border: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 8px 0;
+    color: var(--text);
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .theme-btn:hover {
+    background: var(--primary-bg);
+    border-color: var(--primary);
+  }
+`}</style>
     <div 
       onClick={onClose}
       style={{
@@ -44,11 +65,13 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           maxWidth: '440px', 
           margin: 0, 
           position: 'relative', 
-          boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
           maxHeight: '90vh', 
           overflowY: 'auto',
+          background: 'var(--glass-bg, rgba(255,255,255,0.7))',
           backdropFilter: 'blur(4px) saturate(1.5)',
           WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
+          border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
           borderRadius: 20,
           padding: '20px',
         }}>
@@ -80,26 +103,27 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
             {/* Light Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง - กางเกง</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('blue-sky')} style={{ background: '#E8F4FD', color: '#2C3E50', borderColor: '#AED6F1' }}>ชินจัง - Blue</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('cotton-candy')} style={{ background: '#FDF2F8', color: '#EC4899', borderColor: '#F9A8D4' }}>Cotton Candy</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>Summer Morning</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Retro Pastel</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>ชินจัง - กางเกง</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('blue-sky')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>ชินจัง - Blue</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Modern</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('cotton-candy')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Cotton Candy</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Summer Morning</button>
               </div>
 
             {/* Dark Column */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: '#2D2D2D', color: '#FDF6E3', borderColor: '#FDF6E3' }}>Retro Dark</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('shinchan-sleep')} style={{ background: '#0D1321', color: '#F5C542', borderColor: '#3A4A6A' }}>ชินจัง - สลีป</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: '#0D1B2A', color: '#38BDF8', borderColor: '#2D4A6E' }}>Midnight Ocean</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('twilight')} style={{ background: '#1A0A1E', color: '#C084FC', borderColor: '#3D2A50' }}>Twilight</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: '#1a0b2e', color: '#ff477e', borderColor: '#432c7a' }}>Neon Sunset</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('retro-dark')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Retro Dark</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('shinchan-sleep')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>ชินจัง - สลีป</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('midnight-ocean')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Midnight Ocean</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('twilight')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Twilight</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('sunset')} style={{ background: 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: 'blur(4px) saturate(1.4)', WebkitBackdropFilter: 'blur(4px) saturate(1.4)', border: '1px solid var(--glass-border, rgba(0,0,0,0.08))', borderRadius: 14, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>Neon Sunset</button>
             </div>
             </div>
           </div>
         )}
       </div>
     </div>
+    </>
   );
 }

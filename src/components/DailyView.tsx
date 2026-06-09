@@ -346,13 +346,13 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
           <div style={{
             position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
             zIndex: 251,
-background: 'rgba(255,255,255,0.06)',
+background: 'var(--glass-bg, rgba(255,255,255,0.7))',
             backdropFilter: 'blur(4px) saturate(1.5)',
             WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
             borderRadius: 20,
             padding: 'var(--space-xl)', width: 'calc(100% - 40px)', maxWidth: 360,
-            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
           }}>
             <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--text)', marginBottom: 14, textAlign: 'center' }}>
               วันที่ {selectedDay} {months[currentMonth - 1]} {currentYear + 543}
@@ -363,7 +363,7 @@ background: 'rgba(255,255,255,0.06)',
                 return (
                   <div key={time} onClick={() => !isSavingShift && handleQuickSaveShift(time)}
                     style={{ display: 'table-cell', padding: 'var(--space-md) 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '16px',
-                      border: sel ? '2px solid transparent' : '1px solid rgba(255,255,255,0.12)', background: sel ? 'var(--primary)' : 'rgba(255,255,255,0.06)', backdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', WebkitBackdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                      border: sel ? '2px solid var(--primary)' : '1px solid var(--glass-border, rgba(0,0,0,0.08))', background: sel ? 'var(--primary)' : 'var(--glass-bg, rgba(255,255,255,0.7))', backdropFilter: sel ? 'none' : 'blur(4px) saturate(1.4)', WebkitBackdropFilter: sel ? 'none' : 'blur(4px) saturate(1.4)', color: sel ? 'var(--active-date-text, white)' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
                     {time}
                   </div>
                 );
@@ -379,7 +379,7 @@ background: 'rgba(255,255,255,0.06)',
                 return (
                   <div key={opt.key || 'off'} onClick={() => !isSavingShift && handleQuickSaveShift('หยุด', opt.key)}
                     style={{ display: 'table-cell', padding: 'var(--space-md) 0', textAlign: 'center', borderRadius: '12px', cursor: isSavingShift ? 'default' : 'pointer', fontWeight: 700, fontSize: '14px',
-                      border: sel ? '2px solid transparent' : '1px solid rgba(255,255,255,0.12)', background: sel ? opt.color : 'rgba(255,255,255,0.06)', backdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', WebkitBackdropFilter: sel ? 'none' : 'blur(2px) saturate(1.3)', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
+                      border: sel ? '2px solid var(--primary)' : '1px solid var(--glass-border, rgba(0,0,0,0.08))', background: sel ? opt.color : 'rgba(255,255,255,0.06)', backdropFilter: sel ? 'none' : 'blur(4px) saturate(1.4)', WebkitBackdropFilter: sel ? 'none' : 'blur(4px) saturate(1.4)', color: sel ? 'white' : 'var(--text)', opacity: isSavingShift ? 0.6 : 1 }}>
                     <div style={{ fontSize: '18px' }}>{opt.icon}</div>
                     <div>{opt.label}</div>
                   </div>
