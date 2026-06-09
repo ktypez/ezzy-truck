@@ -77,7 +77,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
         }}>
 {activeModal === 'profile' && (
           <div>
-            <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--primary)' }}>
+            <h3 style={{ fontSize: '18px', fontWeight: 800, marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--text)' }}>
               <i className="ph-duotone ph-lock-key"></i> เปลี่ยนรหัสผ่าน
             </h3>
             <input 
@@ -86,11 +86,11 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
               className="driver-input" /* ใช้คลาสอินพุตมาตรฐานเพื่อให้แสดงผลตามธีมชินจัง/เอวาได้ถูกต้อง */
               value={newPassword} 
               onChange={e => setNewPassword(e.target.value)} 
-              style={{ width: '100%', padding: '12px', marginBottom: '15px', borderRadius: '12px' }} 
+              style={{ width: '100%', padding: '12px', marginBottom: '15px', borderRadius: '12px', background: 'var(--card)' }} 
             />
             <button 
               onClick={handleUpdatePassword} 
-              style={{ width: '100%', padding: '14px', borderRadius: '15px', border: 'none', background: 'var(--primary)', color: 'white', fontWeight: 700, cursor: 'pointer', fontSize: '15px' }}
+              style={{ width: '100%', padding: '14px', borderRadius: '15px', border: '1px solid var(--border)', background: 'var(--card)', color: 'var(--text)', fontWeight: 700, cursor: 'pointer', fontSize: '15px' }}
             >
               ยืนยันเปลี่ยนรหัสผ่าน
             </button>
