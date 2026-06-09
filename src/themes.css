@@ -121,6 +121,9 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #0A0212;
+    --body-bg-image: linear-gradient(160deg, #0A0212 0%, #2D0A2E 25%, #4A1020 50%, #2D0A2E 75%, #0A0212 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #1A0830;
     --text: #F0E6FF;
     --muted: #A892C8;
@@ -266,6 +269,9 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
+    --body-bg-image: linear-gradient(160deg, #030A14 0%, #0A1A30 25%, #0D2840 50%, #0A1A30 75%, #030A14 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #0C1A2E;
     --text: #E0F0FF;
     --muted: #7A9AB8;
@@ -329,6 +335,9 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
+    --body-bg-image: linear-gradient(160deg, #0E0312 0%, #1A0828 25%, #2D1040 50%, #1A0828 75%, #0E0312 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #1E0A26;
     --text: #F0E4F8;
     --muted: #9A82AA;
@@ -440,6 +449,9 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
+    --body-bg-image: linear-gradient(160deg, #030A14 0%, #0A1A30 25%, #0D2840 50%, #0A1A30 75%, #030A14 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #0C1A2E;
     --text: #E0F0FF;
     --muted: #7A9AB8;
@@ -503,6 +515,9 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
+    --body-bg-image: linear-gradient(160deg, #0E0312 0%, #1A0828 25%, #2D1040 50%, #1A0828 75%, #0E0312 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #1E0A26;
     --text: #F0E4F8;
     --muted: #9A82AA;
