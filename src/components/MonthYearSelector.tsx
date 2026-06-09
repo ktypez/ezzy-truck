@@ -5,6 +5,11 @@ const MONTHS_TH = [
   'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
 ];
 
+const MONTHS_SHORT = [
+  'ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
+  'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.',
+];
+
 const MIN_YEAR = 2026;
 const MAX_YEAR = 2045;
 
@@ -32,7 +37,6 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
 
-  // Generate year options from MIN_YEAR to MAX_YEAR
   const yearOptions = useMemo(() => {
     const years = [];
     for (let y = MIN_YEAR; y <= MAX_YEAR; y++) years.push(y);
@@ -144,84 +148,94 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: 20,
             padding: '24px',
-            width: 'calc(100% - 32px)', maxWidth: 420,
+            width: 'calc(100% - 32px)', maxWidth: 360,
             boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
           }}>
-            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 20, textAlign: 'center' }}>
-              เลือกเดือน / ปี
+            {/* Year selector at top */}
+            <div style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              gap: 8, marginBottom: 16,
+            }}>
+              <button
+                onClick={() => setPickYear(p => p > MIN_YEAR ? p - 1 : p)}
+                style={{
+                  ...glassBtn, width: 30, minWidth: 30, height: 30, fontSize: 18,
+                  opacity: pickYear > MIN_YEAR ? 1 : 0.25,
+                  pointerEvents: pickYear > MIN_YEAR ? 'auto' : 'none',
+                }}
+              >‹</button>
+              <span style={{
+                fontSize: 22, fontWeight: 800, color: 'var(--text)',
+                minWidth: 70, textAlign: 'center',
+              }}>
+                {pickYear + 543}
+              </span>
+              <button
+                onClick={() => setPickYear(p => p < MAX_YEAR ? p + 1 : p)}
+                style={{
+                  ...glassBtn, width: 30, minWidth: 30, height: 30, fontSize: 18,
+                  opacity: pickYear < MAX_YEAR ? 1 : 0.25,
+                  pointerEvents: pickYear < MAX_YEAR ? 'auto' : 'none',
+                }}
+              >›</button>
             </div>
 
-            {/* Month & Year picker side by side */}
-            <div style={{ display: 'flex', gap: 16, marginBottom: 20 }}>
-              {/* Month picker */}
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--muted)', marginBottom: 8, textAlign: 'center' }}>
-                  เดือน
+            {/* Month grid 3x4 */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6,
+              marginBottom: 12,
+            }}>
+              {MONTHS_SHORT.map((m, i) => (
+                <div
+                  key={i}
+                  onClick={() => setPickMonth(i)}
+                  style={{
+                    padding: '8px 0', cursor: 'pointer', textAlign: 'center',
+                    fontSize: 15, fontWeight: i === pickMonth ? 700 : 500,
+                    color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
+                    background: i === pickMonth ? 'var(--primary-bg)' : 'transparent',
+                    borderRadius: 10,
+                    transition: 'background 0.1s',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (i !== pickMonth) e.currentTarget.style.background = 'transparent';
+                  }}
+                >
+                  {m}
                 </div>
-                <div style={{
-                  maxHeight: 280, overflowY: 'auto', borderRadius: 12,
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'var(--card-bg)',
-                }}>
-                  {MONTHS_TH.map((m, i) => (
-                    <div
-                      key={i}
-                      onClick={() => setPickMonth(i)}
-                      style={{
-                        padding: '10px 12px', cursor: 'pointer', textAlign: 'center',
-                        fontSize: 17, fontWeight: i === pickMonth ? 700 : 500,
-                        color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
-                        background: i === pickMonth ? 'var(--primary-bg)' : 'transparent',
-                        borderBottom: i < 11 ? '1px solid rgba(255,255,255,0.04)' : 'none',
-                        transition: 'background 0.1s',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                      }}
-                      onMouseLeave={(e) => {
-                        if (i !== pickMonth) e.currentTarget.style.background = 'transparent';
-                      }}
-                    >
-                      {m}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
+            </div>
 
-              {/* Year picker */}
-              <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--muted)', marginBottom: 8, textAlign: 'center' }}>
-                  ปี
+            {/* Day dots - simple calendar hint */}
+            <div style={{
+              display: 'flex', flexDirection: 'column', gap: 2,
+              alignItems: 'center', marginBottom: 16,
+            }}>
+              {[0,1,2,3,4].map(row => (
+                <div key={row} style={{ display: 'flex', gap: 2 }}>
+                  {[0,1,2,3,4,5,6].map(col => {
+                    const day = row * 7 + col + 1;
+                    const isFilled = day <= 28;
+                    const isHighlighted = isFilled && day === 15;
+                    return (
+                      <div
+                        key={col}
+                        style={{
+                          width: 8, height: 8, borderRadius: '50%',
+                          background: isHighlighted
+                            ? 'var(--primary)'
+                            : isFilled
+                              ? 'rgba(255,255,255,0.15)'
+                              : 'transparent',
+                        }}
+                      />
+                    );
+                  })}
                 </div>
-                <div style={{
-                  maxHeight: 280, overflowY: 'auto', borderRadius: 12,
-                  border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'var(--card-bg)',
-                }}>
-                  {yearOptions.map((y) => (
-                    <div
-                      key={y}
-                      onClick={() => setPickYear(y)}
-                      style={{
-                        padding: '10px 12px', cursor: 'pointer', textAlign: 'center',
-                        fontSize: 17, fontWeight: y === pickYear ? 700 : 500,
-                        color: y === pickYear ? 'var(--primary)' : 'var(--text)',
-                        background: y === pickYear ? 'var(--primary-bg)' : 'transparent',
-                        borderBottom: y < MAX_YEAR ? '1px solid rgba(255,255,255,0.04)' : 'none',
-                        transition: 'background 0.1s',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (y !== pickYear) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                      }}
-                      onMouseLeave={(e) => {
-                        if (y !== pickYear) e.currentTarget.style.background = 'transparent';
-                      }}
-                    >
-                      {y + 543}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Confirm button */}
@@ -231,7 +245,8 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
                 width: '100%', padding: '14px', border: 'none', borderRadius: 14,
                 background: 'var(--primary)', color: 'white', fontWeight: 800,
                 fontSize: 18, cursor: 'pointer', fontFamily: 'inherit',
-                transition: 'opacity 0.15s', boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                transition: 'opacity 0.15s',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
