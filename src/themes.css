@@ -694,10 +694,6 @@
 [data-theme="glass"] .segmented-control {
     background: rgba(255, 255, 255, 0.3) !important;
 }
-[data-theme="glass"] .user-bar {
-    background: rgba(255, 255, 255, 0.25) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
 
 
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
@@ -770,9 +766,6 @@
 [data-theme="shinchan-sleep"] .date-slider-item.active {
     background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
     color: #0D1321 !important;
-}
-[data-theme="shinchan-sleep"] .user-bar {
-    background: rgba(26, 32, 53, 0.9) !important;
 }
 [data-theme="shinchan-sleep"] .modal-content,
 [data-theme="shinchan-sleep"] .month-bar {
