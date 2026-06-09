@@ -131,7 +131,6 @@
     --primary: #FF477E !important;
     --primary-bg: #2E1040 !important;
     --secondary: #00F5D4;     
-    --body-bg-image: none;
     --active-date-text: #FFFFFF;
 }
 
@@ -160,7 +159,7 @@
     --primary: #C76B5D !important;
     --primary-bg: #F5E6DE !important;
     --secondary: #7A9E8D;
-    --body-bg-image: none;
+
     --active-date-text: #FFFFFF;
 }
 [data-theme="modern"] .card,
@@ -211,7 +210,7 @@
     --primary: #F39C12 !important;
     --primary-bg: #FEF5E7 !important;
     --secondary: #3498DB !important;
-    --body-bg-image: none;
+
     --active-date-text: #FFFFFF;
 }
 [data-theme="blue-sky"] .card,
@@ -279,7 +278,7 @@
     --primary: #38BDF8 !important;
     --primary-bg: #0C2D48 !important;
     --secondary: #2DD4BF !important;
-    --body-bg-image: none;
+
     --pattern-color: rgba(56, 189, 248, 0.04);
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
@@ -345,7 +344,7 @@
     --primary: #C084FC !important;
     --primary-bg: #2D1B3E !important;
     --secondary: #F472B6 !important;
-    --body-bg-image: none;
+
     --pattern-color: rgba(192, 132, 252, 0.04);
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
@@ -400,7 +399,7 @@
     --primary: #EC4899 !important;
     --primary-bg: #FCE7F3 !important;
     --secondary: #A78BFA !important;
-    --body-bg-image: none;
+
     --active-date-text: #FFFFFF;
 }
 [data-theme="cotton-candy"] .card,
@@ -459,7 +458,7 @@
     --primary: #38BDF8 !important;
     --primary-bg: #0C2D48 !important;
     --secondary: #2DD4BF !important;
-    --body-bg-image: none;
+
     --pattern-color: rgba(56, 189, 248, 0.04);
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
@@ -525,7 +524,7 @@
     --primary: #C084FC !important;
     --primary-bg: #2D1B3E !important;
     --secondary: #F472B6 !important;
-    --body-bg-image: none;
+
     --pattern-color: rgba(192, 132, 252, 0.04);
     --active-date-text: #FFFFFF;
     --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
@@ -580,7 +579,7 @@
     --primary: #EC4899 !important;
     --primary-bg: #FCE7F3 !important;
     --secondary: #A78BFA !important;
-    --body-bg-image: none;
+
     --active-date-text: #FFFFFF;
 }
 [data-theme="cotton-candy"] .card,
