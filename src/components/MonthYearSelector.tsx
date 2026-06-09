@@ -43,31 +43,22 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
     if (canPrevMonth) onChangeMonth(-1);
   }, [canPrevMonth, onChangeMonth]);
   const nextMonth = useCallback(() => onChangeMonth(1), [onChangeMonth]);
-  const prevYear = useCallback(() => {
-    if (canPrevYear) onChangeMonth(-12);
-  }, [canPrevYear, onChangeMonth]);
   const nextYear = useCallback(() => onChangeMonth(12), [onChangeMonth]);
 
   const hoverIn = (e: React.MouseEvent<HTMLElement>) => e.currentTarget.style.borderColor = 'var(--primary)';
   const hoverOut = (e: React.MouseEvent<HTMLElement>) => e.currentTarget.style.borderColor = 'var(--border)';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', alignItems: 'center' }}>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <button onClick={prevMonth} style={canPrevMonth ? smallBtn : smallBtnDisabled} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนก่อนหน้า">‹</button>
-        <DropdownSelect
-          options={monthOptions}
-          value={month}
-          onChange={handleMonthChange}
-          style={{ minWidth: 140 }}
-        />
-        <button onClick={nextMonth} style={smallBtn} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนถัดไป">›</button>
-      </div>
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-        <button onClick={prevYear} style={canPrevYear ? smallBtn : smallBtnDisabled} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="ปีก่อนหน้า">‹</button>
-        <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', textAlign: 'center', whiteSpace: 'nowrap' }}>{year + 543}</span>
-        <button onClick={nextYear} style={smallBtn} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="ปีถัดไป">›</button>
-      </div>
+    <div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center' }}>
+      <button onClick={prevMonth} style={canPrevMonth ? smallBtn : smallBtnDisabled} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนก่อนหน้า">‹</button>
+      <DropdownSelect
+        options={monthOptions}
+        value={month}
+        onChange={handleMonthChange}
+        style={{ minWidth: 140 }}
+      />
+      <button onClick={nextMonth} style={smallBtn} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนถัดไป">›</button>
+      <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', whiteSpace: 'nowrap', marginLeft: 4 }}>{year + 543}</span>
     </div>
   );
 }
