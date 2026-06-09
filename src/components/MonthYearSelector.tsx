@@ -145,19 +145,22 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             onClick={() => setShowPopup(false)}
             style={{
               position: 'fixed', inset: 0, zIndex: 500,
-              background: 'rgba(0,0,0,0.65)',
+              background: 'rgba(0,0,0,0.4)',
+              backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
             }}
           />
           <div style={{
             position: 'fixed', top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 501,
-            background: 'var(--card-bg)',
+            background: 'rgba(255,255,255,0.06)',
+            backdropFilter: 'blur(4px) saturate(1.5)',
+            WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: 20,
-            padding: '24px',
-            width: 'calc(100% - 32px)', maxWidth: 360,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            padding: 'var(--space-xl)',
+            width: 'calc(100% - 40px)', maxWidth: 420,
+            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
           }}>
             {/* Year selector at top */}
             <div style={{
@@ -188,87 +191,89 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
               >›</button>
             </div>
 
-            {/* Month grid 3x4 */}
+            {/* Month grid 3x4 with mini calendar dots */}
             <div style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6,
-              marginBottom: 12,
+              display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8,
+              marginBottom: 16,
             }}>
-              {MONTHS_TH.map((m, i) => (
-                <div
-                  key={i}
-                  onClick={() => setPickMonth(i)}
-                  style={{
-                    padding: '8px 0', cursor: 'pointer', textAlign: 'center',
-                    fontSize: 15, fontWeight: i === pickMonth ? 700 : 500,
-                    color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
-                    background: i === pickMonth ? 'var(--primary-bg)' : 'transparent',
-                    borderRadius: 10,
-                    transition: 'background 0.1s',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (i !== pickMonth) e.currentTarget.style.background = 'transparent';
-                  }}
-                >
-                  {m}
-                </div>
-              ))}
-            </div>
-
-            {/* Calendar dots - actual days in selected month */}
-            {(() => {
-              const daysInMonth = new Date(pickYear, pickMonth + 1, 0).getDate();
-              const firstDay = new Date(pickYear, pickMonth, 1).getDay();
-              const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
-              const today = new Date();
-              const cells = [];
-              for (let i = 0; i < totalCells; i++) {
-                const dayNum = i - firstDay + 1;
-                const isValid = dayNum >= 1 && dayNum <= daysInMonth;
-                const isToday = isValid && pickYear === today.getFullYear() && pickMonth === today.getMonth() && dayNum === today.getDate();
-                cells.push(
+              {MONTHS_TH.map((m, i) => {
+                const daysInMonth = new Date(pickYear, i + 1, 0).getDate();
+                const firstDay = new Date(pickYear, i, 1).getDay();
+                const today = new Date();
+                const miniRows = [];
+                const totalMiniCells = Math.ceil((firstDay + Math.min(daysInMonth, 21)) / 7) * 7;
+                for (let c = 0; c < totalMiniCells; c++) {
+                  const dayNum = c - firstDay + 1;
+                  const isValid = dayNum >= 1 && dayNum <= daysInMonth;
+                  const isToday = isValid && pickYear === today.getFullYear() && i === today.getMonth() && dayNum === today.getDate();
+                  if (c % 7 === 0) {
+                    const rowCells = [];
+                    for (let cc = c; cc < c + 7 && cc < totalMiniCells; cc++) {
+                      const d = cc - firstDay + 1;
+                      const v = d >= 1 && d <= daysInMonth;
+                      const t = v && pickYear === today.getFullYear() && i === today.getMonth() && d === today.getDate();
+                      rowCells.push(
+                        <div key={cc}
+                          style={{
+                            width: 4, height: 4, borderRadius: '50%',
+                            background: t ? 'var(--primary)' : v ? 'rgba(255,255,255,0.20)' : 'transparent',
+                          }}
+                        />
+                      );
+                    }
+                    miniRows.push(
+                      <div key={c} style={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
+                        {rowCells}
+                      </div>
+                    );
+                  }
+                }
+                return (
                   <div
                     key={i}
+                    onClick={() => setPickMonth(i)}
                     style={{
-                      width: 7, height: 7, borderRadius: '50%',
-                      background: isToday
-                        ? 'var(--primary)'
-                        : isValid
-                          ? 'rgba(255,255,255,0.15)'
-                          : 'transparent',
+                      padding: '6px 0', cursor: 'pointer', textAlign: 'center',
+                      fontSize: 14, fontWeight: i === pickMonth ? 700 : 500,
+                      color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
+                      background: i === pickMonth
+                        ? 'rgba(255,255,255,0.12)'
+                        : 'rgba(255,255,255,0.03)',
+                      borderRadius: 12,
+                      border: i === pickMonth
+                        ? '1px solid var(--primary)'
+                        : '1px solid transparent',
+                      transition: 'all 0.1s',
                     }}
-                  />
-                );
-              }
-              const rows = [];
-              for (let r = 0; r < cells.length; r += 7) {
-                rows.push(
-                  <div key={r} style={{ display: 'flex', gap: 2 }}>
-                    {cells.slice(r, r + 7)}
+                    onMouseEnter={(e) => {
+                      if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                    }}
+                  >
+                    <div style={{ marginBottom: 4 }}>{m}</div>
+                    <div style={{
+                      display: 'flex', flexDirection: 'column', gap: 1,
+                      alignItems: 'center',
+                    }}>
+                      {miniRows}
+                    </div>
                   </div>
                 );
-              }
-              return (
-                <div style={{
-                  display: 'flex', flexDirection: 'column', gap: 2,
-                  alignItems: 'center', marginBottom: 16,
-                }}>
-                  {rows}
-                </div>
-              );
-            })()}
+              })}
+            </div>
 
             {/* Confirm button */}
             <button
               onClick={confirmPick}
               style={{
-                width: '100%', padding: '14px', border: 'none', borderRadius: 14,
+                width: '100%', padding: '12px', border: 'none', borderRadius: 14,
                 background: 'var(--primary)', color: 'white', fontWeight: 800,
-                fontSize: 18, cursor: 'pointer', fontFamily: 'inherit',
+                fontSize: 17, cursor: 'pointer', fontFamily: 'inherit',
                 transition: 'opacity 0.15s',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                backdropFilter: 'blur(2px) saturate(1.3)',
+                WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
