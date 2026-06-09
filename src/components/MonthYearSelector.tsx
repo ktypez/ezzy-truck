@@ -234,7 +234,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
                         <div key={cc}
                           style={{
                             width: 4, height: 4, borderRadius: '50%',
-                            background: t ? 'var(--primary)' : v ? 'rgba(255,255,255,0.20)' : 'transparent',
+                            background: t ? 'var(--primary)' : v ? 'var(--muted)' : 'transparent',
                           }}
                         />
                       );
