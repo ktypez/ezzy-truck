@@ -105,9 +105,6 @@
 [data-theme="shinchan"] #view-salary > .card:first-of-type div {
     color: #FFFFFF !important;
 }
-[data-theme="shinchan"] .daily-summary {
-    background: rgb(232, 245, 233) !important;
-}
 [data-theme="shinchan"] .nav-tabs {
     background: rgba(255, 255, 255, 0.85) !important;
     backdrop-filter: blur(16px);
@@ -269,9 +266,6 @@
 
 [data-theme="blue-sky"] .input-field {
     background: #F0F8FF !important;
-}
-[data-theme="blue-sky"] .daily-summary {
-    background: rgba(255, 255, 255, 0.92) !important;
 }
 [data-theme="blue-sky"] .input-field-accent {
     background: #F0F8FF !important;
@@ -698,11 +692,6 @@
     background: linear-gradient(135deg, #007AFF, #34C759) !important;
     box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
 }
-[data-theme="glass"] .daily-summary {
-    background: rgba(255, 255, 255, 0.45) !important;
-    backdrop-filter: blur(12px);
-    border-radius: 14px;
-}
 [data-theme="glass"] .segmented-control {
     background: rgba(255, 255, 255, 0.3) !important;
 }
@@ -775,9 +764,6 @@
 }
 [data-theme="shinchan-sleep"] #view-salary > .card:first-of-type div {
     color: #E8E0D0 !important;
-}
-[data-theme="shinchan-sleep"] .daily-summary {
-    background: rgba(245, 197, 66, 0.08) !important;
 }
 [data-theme="shinchan-sleep"] .nav-tabs {
     background: #1A2035 !important;
