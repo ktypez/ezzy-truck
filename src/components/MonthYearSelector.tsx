@@ -15,14 +15,12 @@ const MAX_YEAR = 2045;
 
 const glassBtn: React.CSSProperties = {
   display: 'flex', alignItems: 'center', justifyContent: 'center',
-  width: 34, minWidth: 34, height: 34, cursor: 'pointer',
-  background: 'rgba(255,255,255,0.08)',
-  backdropFilter: 'blur(6px) saturate(1.4)',
-  WebkitBackdropFilter: 'blur(6px) saturate(1.4)',
-  border: '1px solid rgba(255,255,255,0.12)',
-  borderRadius: 12,
+  width: 44, minWidth: 44, height: 44, cursor: 'pointer',
+  background: 'rgba(255,255,255,0.06)',
+  border: '1px solid rgba(255,255,255,0.10)',
+  borderRadius: 14,
   color: 'var(--text)',
-  fontSize: 20, fontWeight: 500, fontFamily: 'inherit',
+  fontSize: 26, fontWeight: 500, fontFamily: 'inherit',
   transition: 'all 0.2s', lineHeight: 1, flexShrink: 0,
 };
 
@@ -69,21 +67,21 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
 
   const hoverIn = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.style.pointerEvents !== 'none') {
-      e.currentTarget.style.background = 'rgba(255,255,255,0.14)';
-      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+      e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
+      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)';
     }
   };
   const hoverOut = (e: React.MouseEvent<HTMLElement>) => {
-    e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+    e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
   };
 
   return (
     <>
       {/* Main selector bar */}
       <div style={{
-        display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center',
-        padding: '4px 10px', width: '100%',
+        display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'center',
+        padding: '6px 12px', width: '100%',
       }}>
         <button
           onClick={prevMonth}
@@ -96,10 +94,10 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
         <div
           onClick={openPopup}
           style={{
-            display: 'flex', gap: 6, alignItems: 'center', cursor: 'pointer',
-            padding: '6px 16px', borderRadius: 12,
+            display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer',
+            padding: '10px 20px', borderRadius: 14,
             background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            border: '1px solid rgba(255,255,255,0.10)',
             transition: 'background 0.2s',
             flex: 1, justifyContent: 'center',
             userSelect: 'none', WebkitUserSelect: 'none',
@@ -108,13 +106,13 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
           onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
         >
           <span style={{
-            fontSize: 17, fontWeight: 700, color: 'var(--text)',
+            fontSize: 22, fontWeight: 800, color: 'var(--text)',
             whiteSpace: 'nowrap',
           }}>
             {MONTHS_TH[month]}
           </span>
           <span style={{
-            fontSize: 16, fontWeight: 600, color: 'var(--muted)',
+            fontSize: 20, fontWeight: 700, color: 'var(--muted)',
             whiteSpace: 'nowrap',
           }}>
             {year + 543}
