@@ -133,46 +133,43 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             onClick={() => setShowPopup(false)}
             style={{
               position: 'fixed', inset: 0, zIndex: 500,
-              background: 'rgba(0,0,0,0.5)',
-              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+              background: 'rgba(0,0,0,0.65)',
             }}
           />
           <div style={{
             position: 'fixed', top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 501,
-            background: 'rgba(255,255,255,0.07)',
-            backdropFilter: 'blur(16px) saturate(1.5)',
-            WebkitBackdropFilter: 'blur(16px) saturate(1.5)',
-            border: '1px solid rgba(255,255,255,0.10)',
-            borderRadius: 24,
-            padding: 'var(--space-lg)',
-            width: 'calc(100% - 48px)', maxWidth: 340,
-            boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+            background: 'var(--card-bg)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: 20,
+            padding: '24px',
+            width: 'calc(100% - 32px)', maxWidth: 420,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
           }}>
-            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text)', marginBottom: 16, textAlign: 'center' }}>
+            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--text)', marginBottom: 20, textAlign: 'center' }}>
               เลือกเดือน / ปี
             </div>
 
             {/* Month & Year picker side by side */}
-            <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>
+            <div style={{ display: 'flex', gap: 16, marginBottom: 20 }}>
               {/* Month picker */}
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--muted)', marginBottom: 6, textAlign: 'center' }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--muted)', marginBottom: 8, textAlign: 'center' }}>
                   เดือน
                 </div>
                 <div style={{
-                  maxHeight: 220, overflowY: 'auto', borderRadius: 12,
+                  maxHeight: 280, overflowY: 'auto', borderRadius: 12,
                   border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--card-bg)',
                 }}>
                   {MONTHS_TH.map((m, i) => (
                     <div
                       key={i}
                       onClick={() => setPickMonth(i)}
                       style={{
-                        padding: '8px 10px', cursor: 'pointer', textAlign: 'center',
-                        fontSize: 15, fontWeight: i === pickMonth ? 700 : 500,
+                        padding: '10px 12px', cursor: 'pointer', textAlign: 'center',
+                        fontSize: 17, fontWeight: i === pickMonth ? 700 : 500,
                         color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
                         background: i === pickMonth ? 'var(--primary-bg)' : 'transparent',
                         borderBottom: i < 11 ? '1px solid rgba(255,255,255,0.04)' : 'none',
@@ -193,21 +190,21 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
 
               {/* Year picker */}
               <div style={{ flex: 1 }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--muted)', marginBottom: 6, textAlign: 'center' }}>
+                <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--muted)', marginBottom: 8, textAlign: 'center' }}>
                   ปี
                 </div>
                 <div style={{
-                  maxHeight: 220, overflowY: 'auto', borderRadius: 12,
+                  maxHeight: 280, overflowY: 'auto', borderRadius: 12,
                   border: '1px solid rgba(255,255,255,0.06)',
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--card-bg)',
                 }}>
                   {yearOptions.map((y) => (
                     <div
                       key={y}
                       onClick={() => setPickYear(y)}
                       style={{
-                        padding: '8px 10px', cursor: 'pointer', textAlign: 'center',
-                        fontSize: 15, fontWeight: y === pickYear ? 700 : 500,
+                        padding: '10px 12px', cursor: 'pointer', textAlign: 'center',
+                        fontSize: 17, fontWeight: y === pickYear ? 700 : 500,
                         color: y === pickYear ? 'var(--primary)' : 'var(--text)',
                         background: y === pickYear ? 'var(--primary-bg)' : 'transparent',
                         borderBottom: y < MAX_YEAR ? '1px solid rgba(255,255,255,0.04)' : 'none',
@@ -231,10 +228,10 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             <button
               onClick={confirmPick}
               style={{
-                width: '100%', padding: '12px', border: 'none', borderRadius: 14,
-                background: 'var(--primary)', color: 'white', fontWeight: 700,
-                fontSize: 16, cursor: 'pointer', fontFamily: 'inherit',
-                transition: 'opacity 0.15s',
+                width: '100%', padding: '14px', border: 'none', borderRadius: 14,
+                background: 'var(--primary)', color: 'white', fontWeight: 800,
+                fontSize: 18, cursor: 'pointer', fontFamily: 'inherit',
+                transition: 'opacity 0.15s', boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
               onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
