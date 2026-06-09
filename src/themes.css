@@ -106,9 +106,8 @@
     color: #FFFFFF !important;
 }
 [data-theme="shinchan"] .nav-tabs {
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(4px) saturate(1.5);
+    -webkit-backdrop-filter: blur(4px) saturate(1.5);
 }
 [data-theme="shinchan"] .date-slider-item.active {
     background: linear-gradient(135deg, #4CAF50, #00897B) !important;
