@@ -21,8 +21,8 @@ export default function Home() {
     if (saved) return saved;
     return 'retro-pastel';
   });
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 1));
-  const [selectedDay, setSelectedDay] = useState(1);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [activeModal, setActiveModal] = useState<'profile' | 'theme' | null>(null);
   const lastTapRef = useRef(0);
 
