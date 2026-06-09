@@ -202,7 +202,9 @@
 [data-theme="blue-sky"] {
     --glass-bg: rgba(255,255,255,0.7);
     --glass-border: rgba(0,0,0,0.08);
-    --bg: #E8F4FD;
+    --bg: linear-gradient(rgba(232, 244, 253, 0.7), rgba(232, 244, 253, 0.7)), url('/blue-sky-bg.jpg') center/cover fixed no-repeat #E8F4FD;
+    --body-bg-image: linear-gradient(rgba(232, 244, 253, 0.7), rgba(232, 244, 253, 0.7)), url('/blue-sky-bg.jpg');
+    --body-bg-size: cover;
     --card: #FFFFFF;
     --text: #2C3E50;
     --muted: #7F8C9B;

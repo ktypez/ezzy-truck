@@ -84,8 +84,8 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <button className="theme-btn" onClick={() => onSelectTheme('retro-pastel')} style={{ background: '#FFADAD', color: '#1B263B', borderColor: '#2D3A5D' }}>Retro Pastel</button>
               <button className="theme-btn" onClick={() => onSelectTheme('shinchan')} style={{ background: 'rgba(255, 253, 238, 0.9)', color: '#417e2c', borderColor: '#feca57' }}>ชินจัง</button>
-              <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
               <button className="theme-btn" onClick={() => onSelectTheme('blue-sky')} style={{ background: '#E8F4FD', color: '#2C3E50', borderColor: '#AED6F1' }}>Blue Sky</button>
+              <button className="theme-btn" onClick={() => onSelectTheme('modern')} style={{ background: '#FAF7F2', color: '#C76B5D', borderColor: '#D4C9BE' }}>Modern</button>
               <button className="theme-btn" onClick={() => onSelectTheme('cotton-candy')} style={{ background: '#FDF2F8', color: '#EC4899', borderColor: '#F9A8D4' }}>Cotton Candy</button>
               <button className="theme-btn" onClick={() => onSelectTheme('summer-morning')} style={{ background: '#fff6de', color: '#f48f68', borderColor: '#8bdfdd' }}>Summer Morning</button>
               </div>
