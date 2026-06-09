@@ -203,7 +203,7 @@
     --bg: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg') center/cover fixed no-repeat #5B92C5;
     --body-bg-image: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg');
     --body-bg-size: cover;
-    --card: rgba(255, 255, 255, 0.88);
+    --card: rgba(255, 255, 255, 0.95);
     --text: #1B2A3E;
     --muted: #5A7C99;
     --border: rgba(74, 123, 159, 0.30);
@@ -234,7 +234,7 @@
     border: none !important;
 }
 [data-theme="blue-sky"] .input-field {
-    background-color: #F0F8FF !important;
+    background: #F0F8FF !important;
     border: 3px solid var(--border) !important;
     border-radius: 12px !important;
 }
