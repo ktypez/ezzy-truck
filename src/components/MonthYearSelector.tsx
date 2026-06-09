@@ -102,6 +102,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
         WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
         border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
         borderRadius: 20,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
       }}>
         <button
           onClick={prevMonth}
