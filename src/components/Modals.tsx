@@ -14,11 +14,13 @@ const themeColors: Record<string, { bg: string; text: string; accent?: string }>
   'modern':          { bg: '#1A1A1E', text: '#FFFFFF', accent: '#3A3A3E' },
   'cotton-candy':    { bg: '#FFF0F5', text: '#2D2D2D', accent: '#FF69B4' },
   'summer-morning':  { bg: '#FFF7E0', text: '#2D2D2D', accent: '#FF9F43' },
+  'shinchan-bath':   { bg: '#FFF8F0', text: '#3D2B1F', accent: '#FF8A65' },
   'retro-dark':      { bg: '#1A1A1E', text: '#EDE0CC', accent: '#FF6B6B' },
   'shinchan-sleep':  { bg: '#1A2035', text: '#E8E0D0', accent: '#F5C542' },
   'midnight-ocean':  { bg: '#1A2744', text: '#E0F0FF', accent: '#4FC3F7' },
   'twilight':        { bg: '#2D1B4E', text: '#F0E6FF', accent: '#C084FC' },
   'sunset':          { bg: '#1A0830', text: '#F0E6FF', accent: '#FF477E' },
+  'shinchan-cute':   { bg: '#2A1530', text: '#F0D6E0', accent: '#FF9EB5' },
 };
 
 export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsProps) {
@@ -66,15 +68,15 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
     }
   };
 
-  const commonInputStyle: React.CSSProperties = {
-    width: '100%', padding: '8px', borderRadius: '10px',
+  const inputStyle: React.CSSProperties = {
+    width: '100%', padding: '10px 12px', borderRadius: '10px',
     background: 'var(--card)', border: '1px solid var(--border)',
     color: 'var(--text)', fontSize: '14px', outline: 'none',
     boxSizing: 'border-box',
   };
 
-  const commonBtnStyle: React.CSSProperties = {
-    width: '100%', padding: '8px', borderRadius: '12px',
+  const btnStyle: React.CSSProperties = {
+    width: '100%', padding: '10px', borderRadius: '12px',
     border: '1px solid var(--border)', background: 'var(--card)',
     color: 'var(--text)', fontWeight: 700, cursor: 'pointer', fontSize: '14px',
   };
@@ -93,10 +95,10 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
           onClick={e => e.stopPropagation()}
           style={{
             width: '100%',
-            maxWidth: '320px',
+            maxWidth: '360px',
             margin: 0,
             position: 'relative',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
             maxHeight: '90vh',
             overflowY: 'auto',
             background: 'var(--glass-bg, rgba(255,255,255,0.7))',
@@ -104,53 +106,75 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
             WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
             border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
             borderRadius: 20,
-            padding: '14px',
+            padding: '22px',
           }}>
           {activeModal === 'profile' && (
-            <div style={{ margin: '-10px' }}>
-              <div style={{ maxWidth: '300px', margin: '0 auto' }}>
+            <div>
+              <div style={{ maxWidth: '320px', margin: '0 auto' }}>
                 {/* Current email display */}
                 <div style={{
-                  textAlign: 'center', marginBottom: '14px',
-                  fontSize: '13px', color: 'var(--muted)',
-                  wordBreak: 'break-all',
+                  textAlign: 'center', marginBottom: '20px',
                 }}>
-                  <span style={{ display: 'block', fontWeight: 600, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>อีเมลปัจจุบัน</span>
-                  {currentEmail || '...'}
+                  <div style={{
+                    fontWeight: 600, fontSize: '12px', textTransform: 'uppercase',
+                    letterSpacing: '1px', color: 'var(--muted)', marginBottom: '4px',
+                  }}>
+                    อีเมลปัจจุบัน
+                  </div>
+                  <div style={{
+                    fontSize: '15px', color: 'var(--text)', fontWeight: 600,
+                    wordBreak: 'break-all',
+                  }}>
+                    {currentEmail || '...'}
+                  </div>
                 </div>
 
                 {/* Change email */}
-                <h3 style={{ fontSize: '14px', fontWeight: 800, marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--text)' }}>
-                  <i className="ph-duotone ph-envelope"></i> เปลี่ยนอีเมล
-                </h3>
-                <input
-                  type="email"
-                  placeholder="อีเมลใหม่"
-                  value={newEmail}
-                  onChange={e => setNewEmail(e.target.value)}
-                  style={{ ...commonInputStyle, marginBottom: '8px' }}
-                />
-                <button onClick={handleUpdateEmail} style={{ ...commonBtnStyle, marginBottom: '16px' }}>
-                  ยืนยันเปลี่ยนอีเมล
-                </button>
+                <div style={{ marginBottom: '20px' }}>
+                  <h3 style={{
+                    fontSize: '15px', fontWeight: 800, marginBottom: '10px',
+                    color: 'var(--text)',
+                  }}>
+                    <i className="ph-duotone ph-envelope" style={{ marginRight: '6px' }}></i>
+                    เปลี่ยนอีเมล
+                  </h3>
+                  <input
+                    type="email"
+                    placeholder="อีเมลใหม่"
+                    value={newEmail}
+                    onChange={e => setNewEmail(e.target.value)}
+                    style={{ ...inputStyle, marginBottom: '8px' }}
+                  />
+                  <button onClick={handleUpdateEmail} style={btnStyle}>
+                    ยืนยัน
+                  </button>
+                </div>
 
-                {/* Divider */}
-                <div style={{ height: '1px', background: 'var(--border)', opacity: 0.3, marginBottom: '14px' }} />
+                <div style={{
+                  height: '1px', background: 'var(--border)', opacity: 0.15,
+                  marginBottom: '20px',
+                }} />
 
                 {/* Change password */}
-                <h3 style={{ fontSize: '14px', fontWeight: 800, marginBottom: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: 'var(--text)' }}>
-                  <i className="ph-duotone ph-lock-key"></i> เปลี่ยนรหัสผ่าน
-                </h3>
-                <input
-                  type="password"
-                  placeholder="รหัสผ่านใหม่"
-                  value={newPassword}
-                  onChange={e => setNewPassword(e.target.value)}
-                  style={{ ...commonInputStyle, marginBottom: '8px' }}
-                />
-                <button onClick={handleUpdatePassword} style={commonBtnStyle}>
-                  ยืนยันเปลี่ยนรหัสผ่าน
-                </button>
+                <div>
+                  <h3 style={{
+                    fontSize: '15px', fontWeight: 800, marginBottom: '10px',
+                    color: 'var(--text)',
+                  }}>
+                    <i className="ph-duotone ph-lock-key" style={{ marginRight: '6px' }}></i>
+                    เปลี่ยนรหัสผ่าน
+                  </h3>
+                  <input
+                    type="password"
+                    placeholder="รหัสผ่านใหม่"
+                    value={newPassword}
+                    onChange={e => setNewPassword(e.target.value)}
+                    style={{ ...inputStyle, marginBottom: '8px' }}
+                  />
+                  <button onClick={handleUpdatePassword} style={btnStyle}>
+                    ยืนยัน
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -167,6 +191,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
                     ['modern', 'Modern'],
                     ['cotton-candy', 'Cotton Candy'],
                     ['summer-morning', 'Summer Morning'],
+                    ['shinchan-bath', 'ชินจัง - อาบน้ำ'],
                   ].map(([key, label]) => {
                     const c = themeColors[key];
                     return (
@@ -199,6 +224,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
                   {[
                     ['retro-dark', 'Retro Dark'],
                     ['shinchan-sleep', 'ชินจัง - สลีป'],
+                    ['shinchan-cute', 'ชินจัง - น่ารัก'],
                     ['midnight-ocean', 'Midnight Ocean'],
                     ['twilight', 'Twilight'],
                     ['sunset', 'Neon Sunset'],

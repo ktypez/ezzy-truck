@@ -258,6 +258,9 @@
 [data-theme="blue-sky"] .date-slider-item.active {
     background: linear-gradient(135deg, #F39C12, #F1C40F) !important;
 }
+[data-theme="blue-sky"] .date-slider-item.today {
+    background: rgba(212, 122, 62, 0.35) !important;
+}
 [data-theme="blue-sky"] .summary-banner {
     border-left: 4px solid #F39C12 !important;
 }
@@ -767,8 +770,161 @@
     background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
     color: #0D1321 !important;
 }
+[data-theme="shinchan-sleep"] .date-slider-item.today {
+    background: rgba(245, 197, 66, 0.35) !important;
+}
 [data-theme="shinchan-sleep"] .modal-content,
 [data-theme="shinchan-sleep"] .month-bar {
     background: #1A2035 !important;
+    border: 3px solid var(--border) !important;
+}
+
+/* ===================================================
+   🛁 THEME: ชินจัง - อาบน้ำ (Shin-chan Bath) Light
+   =================================================== */
+[data-theme="shinchan-bath"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
+    --bg: #FFF8F0;
+    --body-bg-image: url("/files/shinchan-bath-bg.jpg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    --card: #FFFFFF;
+    --text: #3D2B1F;
+    --muted: #8C7A6B;
+    --border: #D4A066;
+    --primary: #FF8A65 !important;
+    --primary-bg: #FFEADE !important;
+    --secondary: #7EC8E3 !important;
+    --active-date-text: #FFFFFF;
+    --hero-gradient: linear-gradient(135deg, #FF8A65, #7EC8E3);
+}
+[data-theme="shinchan-bath"] .card,
+[data-theme="shinchan-bath"] .tab,
+[data-theme="shinchan-bath"] .seg-btn,
+[data-theme="shinchan-bath"] .main-save-btn,
+[data-theme="shinchan-bath"] .cal-cell,
+[data-theme="shinchan-bath"] .date-bar-item {
+    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 0 4px 15px rgba(255, 138, 101, 0.15) !important;
+}
+[data-theme="shinchan-bath"] .tab.active,
+[data-theme="shinchan-bath"] .main-save-btn,
+[data-theme="shinchan-bath"] .auth-btn,
+[data-theme="shinchan-bath"] .seg-btn.active {
+    background: linear-gradient(135deg, #FF8A65, #7EC8E3) !important;
+    color: #FFFFFF !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="shinchan-bath"] .input-field {
+    background-color: #FFF5EB !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 12px !important;
+}
+[data-theme="shinchan-bath"] .main-save-btn:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+[data-theme="shinchan-bath"] .summary-banner,
+[data-theme="shinchan-bath"] .card {
+    background: #FFFFFF;
+}
+[data-theme="shinchan-bath"] #view-salary > .card:first-of-type {
+    background: var(--hero-gradient) !important;
+    border: none !important;
+    color: #FFFFFF !important;
+}
+[data-theme="shinchan-bath"] #view-salary > .card:first-of-type div {
+    color: #FFFFFF !important;
+}
+[data-theme="shinchan-bath"] .nav-tabs {
+    backdrop-filter: blur(4px) saturate(1.5);
+    -webkit-backdrop-filter: blur(4px) saturate(1.5);
+}
+[data-theme="shinchan-bath"] .date-slider-item.active {
+    background: linear-gradient(135deg, #FF8A65, #7EC8E3) !important;
+}
+[data-theme="shinchan-bath"] .date-slider-item.today {
+    background: rgba(255, 138, 101, 0.35) !important;
+}
+[data-theme="shinchan-bath"] .modal-content,
+[data-theme="shinchan-bath"] .month-bar {
+    background: #FFFFFF !important;
+}
+
+/* ===================================================
+   🌸 THEME: ชินจัง - น่ารัก (Shin-chan Cute) Dark
+   =================================================== */
+[data-theme="shinchan-cute"] {
+    --glass-bg: rgba(31,17,35,0.6);
+    --glass-border: rgba(255,255,255,0.08);
+    --bg: #1F1123;
+    --body-bg-image: url("/files/shinchan-cute-bg.jpg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    --card: #2A1530;
+    --text: #F0D6E0;
+    --muted: #B898AE;
+    --border: #6A4A6A;
+    --primary: #FF9EB5 !important;
+    --primary-bg: rgba(255, 158, 181, 0.15) !important;
+    --secondary: #C084FC !important;
+    --active-date-text: #1F1123;
+    --hero-gradient: linear-gradient(135deg, #FF9EB5, #C084FC);
+}
+[data-theme="shinchan-cute"] .card,
+[data-theme="shinchan-cute"] .tab,
+[data-theme="shinchan-cute"] .seg-btn,
+[data-theme="shinchan-cute"] .main-save-btn,
+[data-theme="shinchan-cute"] .cal-cell,
+[data-theme="shinchan-cute"] .date-bar-item {
+    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 0 4px 15px rgba(255, 158, 181, 0.12) !important;
+}
+[data-theme="shinchan-cute"] .tab.active,
+[data-theme="shinchan-cute"] .main-save-btn,
+[data-theme="shinchan-cute"] .auth-btn,
+[data-theme="shinchan-cute"] .seg-btn.active {
+    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
+    color: #1F1123 !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="shinchan-cute"] .input-field {
+    background-color: rgba(42, 21, 48, 0.8) !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 12px !important;
+    color: var(--text);
+}
+[data-theme="shinchan-cute"] .main-save-btn:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+[data-theme="shinchan-cute"] .summary-banner,
+[data-theme="shinchan-cute"] .card {
+    background: #2A1530;
+}
+[data-theme="shinchan-cute"] #view-salary > .card:first-of-type {
+    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
+    border: none !important;
+    color: #1F1123 !important;
+}
+[data-theme="shinchan-cute"] #view-salary > .card:first-of-type div {
+    color: #1F1123 !important;
+}
+[data-theme="shinchan-cute"] .nav-tabs {
+    background: #2A1530 !important;
+}
+[data-theme="shinchan-cute"] .date-slider-item.active {
+    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
+    color: #1F1123 !important;
+}
+[data-theme="shinchan-cute"] .date-slider-item.today {
+    background: rgba(255, 158, 181, 0.35) !important;
+}
+[data-theme="shinchan-cute"] .modal-content,
+[data-theme="shinchan-cute"] .month-bar {
+    background: #2A1530 !important;
     border: 3px solid var(--border) !important;
 }
