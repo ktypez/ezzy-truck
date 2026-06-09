@@ -21,10 +21,10 @@ const MAX_YEAR = 2045;
 const glassBtn: React.CSSProperties = {
   display: 'flex', alignItems: 'center', justifyContent: 'center',
   width: 48, minWidth: 48, cursor: 'pointer',
-  background: 'rgba(255,255,255,0.08)',
+  background: 'var(--glass-bg, rgba(255,255,255,0.7))',
   backdropFilter: 'blur(6px) saturate(1.4)',
   WebkitBackdropFilter: 'blur(6px) saturate(1.4)',
-  border: '1px solid rgba(255,255,255,0.12)',
+  border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
   borderRadius: 14,
   color: 'var(--text)',
   fontSize: 24, fontWeight: 500, fontFamily: 'inherit',
@@ -81,13 +81,13 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
 
   const hoverIn = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.style.pointerEvents !== 'none') {
-      e.currentTarget.style.background = 'rgba(255,255,255,0.14)';
-      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
+      e.currentTarget.style.background = 'var(--primary-bg)';
+      e.currentTarget.style.borderColor = 'var(--primary)';
     }
   };
   const hoverOut = (e: React.MouseEvent<HTMLElement>) => {
-    e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
+    e.currentTarget.style.background = 'var(--glass-bg, rgba(255,255,255,0.7))';
+    e.currentTarget.style.borderColor = 'var(--glass-border, rgba(0,0,0,0.08))';
   };
 
   return (
@@ -97,10 +97,10 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
       <div style={{
         display: 'flex', gap: 'var(--space-sm)', alignItems: 'stretch', justifyContent: 'center',
         padding: 'var(--space-md)', width: '100%',
-        background: 'rgba(255,255,255,0.06)',
+        background: 'var(--glass-bg, rgba(255,255,255,0.7))',
         backdropFilter: 'blur(4px) saturate(1.5)',
         WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
         borderRadius: 20,
       }}>
         <button
@@ -117,19 +117,19 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
           style={{
             display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer',
             padding: 'var(--space-xs) var(--space-lg)', borderRadius: 14,
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            background: 'var(--glass-bg, rgba(255,255,255,0.7))',
+            border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
             transition: 'all 0.2s',
             flex: 1, justifyContent: 'center',
             userSelect: 'none', WebkitUserSelect: 'none',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)';
+            e.currentTarget.style.background = 'var(--glass-bg, rgba(255,255,255,0.7))';
+            e.currentTarget.style.borderColor = 'var(--primary)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+            e.currentTarget.style.background = 'var(--glass-bg, rgba(255,255,255,0.7))';
+            e.currentTarget.style.borderColor = 'var(--glass-border, rgba(0,0,0,0.08))';
           }}
         >
           <span style={{
@@ -139,7 +139,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             {MONTHS_TH[month]}
           </span>
           <span style={{
-            fontSize: 20, fontWeight: 700, color: 'var(--muted)',
+            fontSize: 20, fontWeight: 800, color: 'var(--primary)',
             whiteSpace: 'nowrap',
           }}>
             {year + 543}

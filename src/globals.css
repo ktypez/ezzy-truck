@@ -136,7 +136,7 @@ body {
 .slider-day-name { font-size: 11px; opacity: 0.6; font-weight: 500; margin-bottom: 2px; }
 .slider-day-num { font-size: 18px; font-weight: 800; line-height: 1.1; }
 
-.nav-tabs { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 8px; padding: 8px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 100; background: rgba(255,255,255,0.06); backdrop-filter: blur(4px) saturate(1.5); -webkit-backdrop-filter: blur(4px) saturate(1.5); border-top: 1px solid rgba(255,255,255,0.08); box-shadow: 0 -2px 8px rgba(0,0,0,0.12); }
+.nav-tabs { position: sticky; bottom: 0; left: 0; right: 0; display: flex; gap: 8px; padding: 8px 16px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 100; background: var(--glass-bg, rgba(255,255,255,0.7)); backdrop-filter: blur(4px) saturate(1.5); -webkit-backdrop-filter: blur(4px) saturate(1.5); border-top: 1px solid var(--glass-border, rgba(0,0,0,0.08)); box-shadow: 0 -2px 8px rgba(0,0,0,0.12); }
 .auth-card { padding: 25px 20px; }
 .auth-btn { width: 100%; padding: 15px; border: none; background: var(--primary); color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; border-radius: 18px; }
 .auth-btn:disabled { opacity: 0.5; }

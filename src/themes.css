@@ -2,6 +2,8 @@
    🎨 THEME: Retro Pastel (Default)
    =================================================== */
 [data-theme="retro-pastel"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #F9F7F2;
     --card: #FFFFFF;
     --text: #2D2D2D;
@@ -27,6 +29,8 @@
    📟 THEME: Retro Dark
    =================================================== */
 [data-theme="retro-dark"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #0A0A0A;
     --card: #1A1A1E;
     --text: #EDE0CC;
@@ -46,6 +50,8 @@
    🧸 THEME: Shin-chan
    =================================================== */
 [data-theme="shinchan"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #FFF9C4;
     --body-bg-image: url("/files/001.jpeg");
     --body-bg-size: cover;
@@ -112,6 +118,8 @@
    🌆 THEME: Neon Sunset
    =================================================== */
 [data-theme="sunset"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #0A0212;
     --card: #1A0830;
     --text: #F0E6FF;
@@ -139,6 +147,8 @@
    🎨 THEME: Modern
    =================================================== */
 [data-theme="modern"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #FAF7F2;
     --card: #FFFFFF;
     --text: #2C2C2C;
@@ -165,6 +175,8 @@
    ☀️ THEME: Summer Morning
    =================================================== */
 [data-theme="summer-morning"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #fff6de;
     --card: #ffffff;
     --text: #5D4037;
@@ -186,6 +198,8 @@
    ☀️ THEME: Blue Sky (remake of Crayon)
    =================================================== */
 [data-theme="blue-sky"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #E8F4FD;
     --card: #FFFFFF;
     --text: #2C3E50;
@@ -249,6 +263,8 @@
    🌊 THEME: Midnight Ocean
    =================================================== */
 [data-theme="midnight-ocean"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
     --card: #0C1A2E;
     --text: #E0F0FF;
@@ -310,6 +326,8 @@
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
 [data-theme="twilight"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
     --card: #1E0A26;
     --text: #F0E4F8;
@@ -363,6 +381,8 @@
    🍬 THEME: Cotton Candy
    =================================================== */
 [data-theme="cotton-candy"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #FDF2F8;
     --card: #FFFFFF;
     --text: #4A2040;
@@ -417,6 +437,8 @@
    🌊 THEME: Midnight Ocean
    =================================================== */
 [data-theme="midnight-ocean"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
     --card: #0C1A2E;
     --text: #E0F0FF;
@@ -478,6 +500,8 @@
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
 [data-theme="twilight"] {
+    --glass-bg: rgba(255,255,255,0.08);
+    --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
     --card: #1E0A26;
     --text: #F0E4F8;
@@ -531,6 +555,8 @@
    🍬 THEME: Cotton Candy
    =================================================== */
 [data-theme="cotton-candy"] {
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.08);
     --bg: #FDF2F8;
     --card: #FFFFFF;
     --text: #4A2040;
@@ -582,6 +608,8 @@
    🫧 THEME: Liquid Glass (glasscn-inspired)
    =================================================== */
 [data-theme="glass"] {
+    --glass-bg: rgba(255,255,255,0.45);
+    --glass-border: rgba(255,255,255,0.3);
     --bg: #F2F5F9;
     --card: rgba(255, 255, 255, 0.55);
     --text: #1C1C1E;
