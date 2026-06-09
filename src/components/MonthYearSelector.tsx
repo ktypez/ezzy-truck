@@ -183,7 +183,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
               display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 6,
               marginBottom: 12,
             }}>
-              {MONTHS_SHORT.map((m, i) => (
+              {MONTHS_TH.map((m, i) => (
                 <div
                   key={i}
                   onClick={() => setPickMonth(i)}
@@ -207,34 +207,48 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
               ))}
             </div>
 
-            {/* Day dots - simple calendar hint */}
-            <div style={{
-              display: 'flex', flexDirection: 'column', gap: 2,
-              alignItems: 'center', marginBottom: 16,
-            }}>
-              {[0,1,2,3,4].map(row => (
-                <div key={row} style={{ display: 'flex', gap: 2 }}>
-                  {[0,1,2,3,4,5,6].map(col => {
-                    const day = row * 7 + col + 1;
-                    const isFilled = day <= 28;
-                    const isHighlighted = isFilled && day === 15;
-                    return (
-                      <div
-                        key={col}
-                        style={{
-                          width: 8, height: 8, borderRadius: '50%',
-                          background: isHighlighted
-                            ? 'var(--primary)'
-                            : isFilled
-                              ? 'rgba(255,255,255,0.15)'
-                              : 'transparent',
-                        }}
-                      />
-                    );
-                  })}
+            {/* Calendar dots - actual days in selected month */}
+            {(() => {
+              const daysInMonth = new Date(pickYear, pickMonth + 1, 0).getDate();
+              const firstDay = new Date(pickYear, pickMonth, 1).getDay();
+              const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+              const today = new Date();
+              const cells = [];
+              for (let i = 0; i < totalCells; i++) {
+                const dayNum = i - firstDay + 1;
+                const isValid = dayNum >= 1 && dayNum <= daysInMonth;
+                const isToday = isValid && pickYear === today.getFullYear() && pickMonth === today.getMonth() && dayNum === today.getDate();
+                cells.push(
+                  <div
+                    key={i}
+                    style={{
+                      width: 7, height: 7, borderRadius: '50%',
+                      background: isToday
+                        ? 'var(--primary)'
+                        : isValid
+                          ? 'rgba(255,255,255,0.15)'
+                          : 'transparent',
+                    }}
+                  />
+                );
+              }
+              const rows = [];
+              for (let r = 0; r < cells.length; r += 7) {
+                rows.push(
+                  <div key={r} style={{ display: 'flex', gap: 2 }}>
+                    {cells.slice(r, r + 7)}
+                  </div>
+                );
+              }
+              return (
+                <div style={{
+                  display: 'flex', flexDirection: 'column', gap: 2,
+                  alignItems: 'center', marginBottom: 16,
+                }}>
+                  {rows}
                 </div>
-              ))}
-            </div>
+              );
+            })()}
 
             {/* Confirm button */}
             <button
