@@ -21,6 +21,7 @@ const themeColors: Record<string, { bg: string; text: string; accent?: string }>
   'twilight':        { bg: '#2D1B4E', text: '#F0E6FF', accent: '#C084FC' },
   'sunset':          { bg: '#1A0830', text: '#F0E6FF', accent: '#FF477E' },
   'shinchan-cute':   { bg: '#2A1530', text: '#F0D6E0', accent: '#FF9EB5' },
+  'shinchan-white':  { bg: '#2D201C', text: '#F5E8E0', accent: '#E8836C' },
 };
 
 export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsProps) {
@@ -225,6 +226,7 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
                     ['retro-dark', 'Retro Dark'],
                     ['shinchan-sleep', 'ชินจัง - สลีป'],
                     ['shinchan-cute', 'ชินจัง - น่ารัก'],
+                    ['shinchan-white', 'ชินจัง - ขาว'],
                     ['midnight-ocean', 'Midnight Ocean'],
                     ['twilight', 'Twilight'],
                     ['sunset', 'Neon Sunset'],

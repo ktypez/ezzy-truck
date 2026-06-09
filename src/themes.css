@@ -928,3 +928,79 @@
     background: #2A1530 !important;
     border: 3px solid var(--border) !important;
 }
+
+/* ===================================================
+   👕 THEME: Shin-chan White (Dark)
+   =================================================== */
+[data-theme="shinchan-white"] {
+    --glass-bg: rgba(40,30,25,0.6);
+    --glass-border: rgba(255,255,255,0.08);
+    --bg: #1E1410;
+    --body-bg-image: url("/files/shinchan-white-bg.jpg");
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
+    --card: #2D201C;
+    --text: #F5E8E0;
+    --muted: #B09890;
+    --border: #5A4038;
+    --primary: #E8836C !important;
+    --primary-bg: rgba(232, 131, 108, 0.15) !important;
+    --secondary: #F0B090 !important;
+    --active-date-text: #1E1410;
+    --hero-gradient: linear-gradient(135deg, #E8836C, #F0B090);
+}
+[data-theme="shinchan-white"] .card,
+[data-theme="shinchan-white"] .tab,
+[data-theme="shinchan-white"] .seg-btn,
+[data-theme="shinchan-white"] .main-save-btn,
+[data-theme="shinchan-white"] .cal-cell,
+[data-theme="shinchan-white"] .date-bar-item {
+    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+    border: 3px solid var(--border) !important;
+    box-shadow: 0 4px 15px rgba(232, 131, 108, 0.12) !important;
+}
+[data-theme="shinchan-white"] .tab.active,
+[data-theme="shinchan-white"] .main-save-btn,
+[data-theme="shinchan-white"] .auth-btn,
+[data-theme="shinchan-white"] .seg-btn.active {
+    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
+    color: #1E1410 !important;
+    font-weight: 800;
+    border: none !important;
+}
+[data-theme="shinchan-white"] .input-field {
+    background-color: rgba(45, 32, 28, 0.8) !important;
+    border: 3px solid var(--border) !important;
+    border-radius: 12px !important;
+    color: var(--text);
+}
+[data-theme="shinchan-white"] .main-save-btn:hover {
+    animation: wobble 0.5s ease-in-out;
+}
+[data-theme="shinchan-white"] .summary-banner,
+[data-theme="shinchan-white"] .card {
+    background: #2D201C;
+}
+[data-theme="shinchan-white"] #view-salary > .card:first-of-type {
+    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
+    border: none !important;
+    color: #1E1410 !important;
+}
+[data-theme="shinchan-white"] #view-salary > .card:first-of-type div {
+    color: #1E1410 !important;
+}
+[data-theme="shinchan-white"] .nav-tabs {
+    background: #2D201C !important;
+}
+[data-theme="shinchan-white"] .date-slider-item.active {
+    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
+    color: #1E1410 !important;
+}
+[data-theme="shinchan-white"] .date-slider-item.today {
+    background: rgba(232, 131, 108, 0.35) !important;
+}
+[data-theme="shinchan-white"] .modal-content,
+[data-theme="shinchan-white"] .month-bar {
+    background: #2D201C !important;
+    border: 3px solid var(--border) !important;
+}
