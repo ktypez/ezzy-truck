@@ -259,7 +259,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
                       </div>
                     )}
                     {r.isSick && (
-                      <div style={{ fontSize: 8, fontWeight: 700, color: "white", background: "#3498db", borderRadius: 99, padding: "1px 3px", lineHeight: 1.4, marginTop: 1, alignSelf: "center" }}>
+                      <div style={{ fontSize: 8, fontWeight: 700, color: "white", background: "#f1c40f", borderRadius: 99, padding: "1px 3px", lineHeight: 1.4, marginTop: 1, alignSelf: "center" }}>
                         ป่วย
                       </div>
                     )}
@@ -486,7 +486,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
             <div style={{ display: "table", width: "100%", tableLayout: "fixed", borderSpacing: "8px 0", marginTop: 4 }}>
               {[
                 { key: null, icon: "🛑", label: "วันหยุด", color: "#e74c3c" },
-                { key: "sick", icon: "🤒", label: "ลาป่วย", color: "#3498db" },
+                { key: "sick", icon: "🤒", label: "ลาป่วย", color: "#f1c40f" },
                 { key: "personal", icon: "📋", label: "ลากิจ", color: "#3498db" },
               ].map(opt => {
                 const sel = chosenShift === "หยุด" && chosenLeave === opt.key;
