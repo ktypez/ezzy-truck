@@ -106,12 +106,12 @@ const month = currentDate.getMonth() + 1;
       {/* Leave Balance */}
       {(yearlySick > 0 || yearlyPersonal > 0) && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-sm)', marginBottom: 'var(--space-lg)' }}>
-          <div className="card" style={{ padding: 'var(--space-md)', textAlign: 'center', marginBottom: 0, background: yearlySick > 0 ? 'var(--primary-bg)' : undefined }}>
+          <div className="card" style={{ padding: 'var(--space-md)', textAlign: 'center', marginBottom: 0 }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>🤒 ลาป่วย</div>
             <div style={{ fontSize: '22px', fontWeight: 800, color: yearlySick > 25 ? '#e74c3c' : 'var(--secondary)' }}>{Math.max(0, 30 - yearlySick)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 30 วัน</div>
           </div>
-          <div className="card" style={{ padding: 'var(--space-md)', textAlign: 'center', marginBottom: 0, background: yearlyPersonal > 0 ? 'var(--primary-bg)' : undefined }}>
+          <div className="card" style={{ padding: 'var(--space-md)', textAlign: 'center', marginBottom: 0 }}>
             <div style={{ fontSize: '12px', color: 'var(--muted)' }}>📋 ลากิจ</div>
             <div style={{ fontSize: '22px', fontWeight: 800, color: yearlyPersonal >= 3 ? '#e74c3c' : 'var(--secondary)' }}>{Math.max(0, 3 - yearlyPersonal)}</div>
             <div style={{ fontSize: '11px', color: 'var(--muted)' }}>คงเหลือ / 3 วัน</div>
