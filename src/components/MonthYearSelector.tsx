@@ -171,14 +171,14 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
             position: 'fixed', top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 501,
-            background: 'rgba(255,255,255,0.06)',
+            background: 'var(--glass-bg, rgba(255,255,255,0.7))',
             backdropFilter: 'blur(4px) saturate(1.5)',
             WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
-            border: '1px solid rgba(255,255,255,0.08)',
+            border: '1px solid var(--glass-border, rgba(0,0,0,0.08))',
             borderRadius: 20,
             padding: 'var(--space-xl)',
             width: 'calc(100% - 40px)', maxWidth: 420,
-            boxShadow: '0 1px 3px rgba(0,0,0,0.15)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
           }}>
             {/* Year selector at top */}
             <div style={{
@@ -255,19 +255,19 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
                       fontSize: 14, fontWeight: i === pickMonth ? 700 : 500,
                       color: i === pickMonth ? 'var(--primary)' : 'var(--text)',
                       background: i === pickMonth
-                        ? 'rgba(255,255,255,0.12)'
-                        : 'rgba(255,255,255,0.03)',
-                      borderRadius: 12,
+                        ? 'var(--primary-bg)'
+                        : 'var(--glass-bg, rgba(255,255,255,0.7))',
+                      borderRadius: 14,
                       border: i === pickMonth
                         ? '1px solid var(--primary)'
-                        : '1px solid transparent',
+                        : '1px solid var(--glass-border, rgba(0,0,0,0.08))',
                       transition: 'all 0.1s',
                     }}
                     onMouseEnter={(e) => {
-                      if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+                      if (i !== pickMonth) e.currentTarget.style.background = 'var(--primary-bg)';
                     }}
                     onMouseLeave={(e) => {
-                      if (i !== pickMonth) e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
+                      if (i !== pickMonth) e.currentTarget.style.background = 'var(--glass-bg, rgba(255,255,255,0.7))';
                     }}
                   >
                     <div style={{ marginBottom: 4 }}>{m}</div>
