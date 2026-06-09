@@ -201,7 +201,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
                 const firstDay = new Date(pickYear, i, 1).getDay();
                 const today = new Date();
                 const miniRows = [];
-                const totalMiniCells = Math.ceil((firstDay + Math.min(daysInMonth, 21)) / 7) * 7;
+                const totalMiniCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
                 for (let c = 0; c < totalMiniCells; c++) {
                   const dayNum = c - firstDay + 1;
                   const isValid = dayNum >= 1 && dayNum <= daysInMonth;
