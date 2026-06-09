@@ -1,3 +1,8 @@
+/**
+ * MonthYearSelector (แถบเลือก เดือน ปี ด้านบน)
+ *   - แถบหลัก: MonthYearSelector bar
+ *   - Popup ปฏิทิน: MonthYearPicker popup
+ */
 import { useState, useCallback, useMemo } from 'react';
 
 const MONTHS_TH = [
@@ -16,8 +21,10 @@ const MAX_YEAR = 2045;
 const glassBtn: React.CSSProperties = {
   display: 'flex', alignItems: 'center', justifyContent: 'center',
   width: 48, minWidth: 48, cursor: 'pointer',
-  background: 'var(--card)',
-  border: '1px solid var(--border)',
+  background: 'rgba(255,255,255,0.08)',
+  backdropFilter: 'blur(6px) saturate(1.4)',
+  WebkitBackdropFilter: 'blur(6px) saturate(1.4)',
+  border: '1px solid rgba(255,255,255,0.12)',
   borderRadius: 14,
   color: 'var(--text)',
   fontSize: 24, fontWeight: 500, fontFamily: 'inherit',
@@ -74,23 +81,26 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
 
   const hoverIn = (e: React.MouseEvent<HTMLElement>) => {
     if (e.currentTarget.style.pointerEvents !== 'none') {
-      e.currentTarget.style.background = 'var(--primary-bg)';
-      e.currentTarget.style.borderColor = 'var(--primary)';
+      e.currentTarget.style.background = 'rgba(255,255,255,0.14)';
+      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
     }
   };
   const hoverOut = (e: React.MouseEvent<HTMLElement>) => {
-    e.currentTarget.style.background = 'var(--card)';
-    e.currentTarget.style.borderColor = 'var(--border)';
+    e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)';
   };
 
   return (
     <>
       {/* Main selector bar */}
+      {/* MonthYearSelector bar — glass outer container */}
       <div style={{
         display: 'flex', gap: 'var(--space-sm)', alignItems: 'stretch', justifyContent: 'center',
         padding: 'var(--space-md)', width: '100%',
-        background: 'var(--card)',
-        border: '1px solid var(--border)',
+        background: 'rgba(255,255,255,0.06)',
+        backdropFilter: 'blur(4px) saturate(1.5)',
+        WebkitBackdropFilter: 'blur(4px) saturate(1.5)',
+        border: '1px solid rgba(255,255,255,0.08)',
         borderRadius: 20,
       }}>
         <button
@@ -101,24 +111,25 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
           aria-label="ก่อนหน้า"
         >‹</button>
 
+        {/* MonthYearPicker popup — tap to open */}
         <div
           onClick={openPopup}
           style={{
             display: 'flex', gap: 8, alignItems: 'center', cursor: 'pointer',
             padding: 'var(--space-xs) var(--space-lg)', borderRadius: 14,
-            background: 'var(--card)',
-            border: '1px solid var(--border)',
+            background: 'rgba(255,255,255,0.06)',
+            border: '1px solid rgba(255,255,255,0.08)',
             transition: 'all 0.2s',
             flex: 1, justifyContent: 'center',
             userSelect: 'none', WebkitUserSelect: 'none',
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--primary-bg)';
-            e.currentTarget.style.borderColor = 'var(--primary)';
+            e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--card)';
-            e.currentTarget.style.borderColor = 'var(--border)';
+            e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
           }}
         >
           <span style={{
