@@ -1,31 +1,37 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react'
 
 interface Option {
-  label: string;
-  value: string | number;
+  label: string
+  value: string | number
 }
 
 interface DropdownSelectProps {
-  options: Option[];
-  value: string | number;
-  onChange: (value: string | number) => void;
-  placeholder?: string;
-  style?: React.CSSProperties;
+  options: Option[]
+  value: string | number
+  onChange: (value: string | number) => void
+  placeholder?: string
+  style?: React.CSSProperties
 }
 
-export default function DropdownSelect({ options, value, onChange, placeholder, style }: DropdownSelectProps) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+export default function DropdownSelect({
+  options,
+  value,
+  onChange,
+  placeholder,
+  style,
+}: DropdownSelectProps) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
 
-  const selected = options.find((o) => o.value === value);
+  const selected = options.find((o) => o.value === value)
 
   return (
     <div ref={ref} style={{ position: 'relative', ...style }}>
@@ -51,21 +57,34 @@ export default function DropdownSelect({ options, value, onChange, placeholder, 
           transition: 'box-shadow 0.15s, border-color 0.15s',
           ...(open ? { boxShadow: '0 0 0 2px var(--primary-bg)' } : {}),
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--primary)'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = 'var(--primary)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'var(--border)'
+        }}
       >
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {selected ? selected.label : placeholder ?? 'Select...'}
+          {selected ? selected.label : (placeholder ?? 'Select...')}
         </span>
         <svg
-          width="16" height="16" viewBox="0 0 16 16" fill="none"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
           style={{
             flexShrink: 0,
             transition: 'transform 0.2s',
             transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
           }}
         >
-          <path d="M4 6L8 10L12 6" stroke="var(--muted)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path
+            d="M4 6L8 10L12 6"
+            stroke="var(--muted)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
       {open && (
@@ -88,7 +107,10 @@ export default function DropdownSelect({ options, value, onChange, placeholder, 
           {options.map((opt) => (
             <div
               key={opt.value}
-              onClick={() => { onChange(opt.value); setOpen(false); }}
+              onClick={() => {
+                onChange(opt.value)
+                setOpen(false)
+              }}
               style={{
                 padding: '8px 12px',
                 fontSize: 15,
@@ -100,10 +122,12 @@ export default function DropdownSelect({ options, value, onChange, placeholder, 
                 whiteSpace: 'nowrap',
               }}
               onMouseEnter={(e) => {
-                if (opt.value !== value) e.currentTarget.style.background = 'color-mix(in srgb, var(--primary) 6%, transparent)';
+                if (opt.value !== value)
+                  e.currentTarget.style.background =
+                    'color-mix(in srgb, var(--primary) 6%, transparent)'
               }}
               onMouseLeave={(e) => {
-                if (opt.value !== value) e.currentTarget.style.background = 'transparent';
+                if (opt.value !== value) e.currentTarget.style.background = 'transparent'
               }}
             >
               {opt.label}
@@ -112,5 +136,5 @@ export default function DropdownSelect({ options, value, onChange, placeholder, 
         </div>
       )}
     </div>
-  );
+  )
 }

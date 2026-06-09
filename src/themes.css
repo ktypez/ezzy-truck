@@ -1,1019 +1,1115 @@
 /* ===================================================
    🎨 THEME: Retro Pastel (Default)
    =================================================== */
-[data-theme="retro-pastel"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #F9F7F2;
-    --card: #FFFFFF;
-    --text: #2D2D2D;
-    --muted: #5D5D5D;
-    --border: #2D2D2D;
-    --primary: #FF6B6B !important;
-    --primary-bg: #FFE5E5 !important;
-    --secondary: #06D6A0 !important;
-    --active-date-text: #FFFFFF;
+[data-theme='retro-pastel'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #f9f7f2;
+  --card: #ffffff;
+  --text: #2d2d2d;
+  --muted: #5d5d5d;
+  --border: #2d2d2d;
+  --primary: #ff6b6b !important;
+  --primary-bg: #ffe5e5 !important;
+  --secondary: #06d6a0 !important;
+  --active-date-text: #ffffff;
 }
-[data-theme="retro-pastel"] .card,
-[data-theme="retro-pastel"] .tab,
-[data-theme="retro-pastel"] .seg-btn,
-[data-theme="retro-pastel"] .main-save-btn,
-[data-theme="retro-pastel"] .cal-cell,
-[data-theme="retro-pastel"] .date-bar-item {
-    border-radius: 8px !important;
-    border: 4px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(255, 107, 107, 0.12), 0 1px 4px rgba(0,0,0,0.04) !important;
+[data-theme='retro-pastel'] .card,
+[data-theme='retro-pastel'] .tab,
+[data-theme='retro-pastel'] .seg-btn,
+[data-theme='retro-pastel'] .main-save-btn,
+[data-theme='retro-pastel'] .cal-cell,
+[data-theme='retro-pastel'] .date-bar-item {
+  border-radius: 8px !important;
+  border: 4px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(255, 107, 107, 0.12),
+    0 1px 4px rgba(0, 0, 0, 0.04) !important;
 }
 
 /* ===================================================
    📟 THEME: Retro Dark
    =================================================== */
-[data-theme="retro-dark"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #0A0A0A;
-    --card: #1A1A1E;
-    --text: #EDE0CC;
-    --muted: #8B8173;
-    --border: #2E2E2E;
-    --primary: #FF6B6B !important;
-    --primary-bg: #3D2E2E !important;
-    --secondary: #06D6A0 !important;
-    --pattern-color: rgba(255, 255, 255, 0.20);
-    --active-date-text: #FFFFFF;
+[data-theme='retro-dark'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #0a0a0a;
+  --card: #1a1a1e;
+  --text: #ede0cc;
+  --muted: #8b8173;
+  --border: #2e2e2e;
+  --primary: #ff6b6b !important;
+  --primary-bg: #3d2e2e !important;
+  --secondary: #06d6a0 !important;
+  --pattern-color: rgba(255, 255, 255, 0.2);
+  --active-date-text: #ffffff;
 }
-[data-theme="retro-dark"] .card, [data-theme="retro-dark"] .tab, [data-theme="retro-dark"] .seg-btn, [data-theme="retro-dark"] .main-save-btn, [data-theme="retro-dark"] .cal-cell, [data-theme="retro-dark"] .date-bar-item {
-    border-radius: 8px !important; border: 4px solid var(--border) !important; box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2) !important;
+[data-theme='retro-dark'] .card,
+[data-theme='retro-dark'] .tab,
+[data-theme='retro-dark'] .seg-btn,
+[data-theme='retro-dark'] .main-save-btn,
+[data-theme='retro-dark'] .cal-cell,
+[data-theme='retro-dark'] .date-bar-item {
+  border-radius: 8px !important;
+  border: 4px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.2) !important;
 }
 
 /* ===================================================
    🧸 THEME: Shin-chan
    =================================================== */
-[data-theme="shinchan"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #FFF9C4;
-    --body-bg-image: url("/files/001.jpeg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #FFFFFF;
-    --text: #4a3f3b;
-    --muted: #8c7e7a;
-    --border: #FFD54F;
-    --primary: #4CAF50 !important;
-    --primary-bg: rgb(232, 245, 233) !important;
-    --secondary: #00897B !important;
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64));
+[data-theme='shinchan'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #fff9c4;
+  --body-bg-image: url('/files/001.jpeg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #ffffff;
+  --text: #4a3f3b;
+  --muted: #8c7e7a;
+  --border: #ffd54f;
+  --primary: #4caf50 !important;
+  --primary-bg: rgb(232, 245, 233) !important;
+  --secondary: #00897b !important;
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, rgb(46, 125, 50), rgb(0, 77, 64));
 }
-[data-theme="shinchan"] .card,
-[data-theme="shinchan"] .tab,
-[data-theme="shinchan"] .seg-btn,
-[data-theme="shinchan"] .main-save-btn,
-[data-theme="shinchan"] .cal-cell,
-[data-theme="shinchan"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15) !important;
+[data-theme='shinchan'] .card,
+[data-theme='shinchan'] .tab,
+[data-theme='shinchan'] .seg-btn,
+[data-theme='shinchan'] .main-save-btn,
+[data-theme='shinchan'] .cal-cell,
+[data-theme='shinchan'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.15) !important;
 }
-[data-theme="shinchan"] .tab.active,
-[data-theme="shinchan"] .main-save-btn,
-[data-theme="shinchan"] .auth-btn,
-[data-theme="shinchan"] .seg-btn.active {
-    background: linear-gradient(135deg, #4CAF50, #00897B) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='shinchan'] .tab.active,
+[data-theme='shinchan'] .main-save-btn,
+[data-theme='shinchan'] .auth-btn,
+[data-theme='shinchan'] .seg-btn.active {
+  background: linear-gradient(135deg, #4caf50, #00897b) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="shinchan"] .input-field {
-    background-color: rgb(255, 249, 230) !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
+[data-theme='shinchan'] .input-field {
+  background-color: rgb(255, 249, 230) !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
 }
-[data-theme="shinchan"] .main-save-btn:hover {
-    animation: wobble 0.5s ease-in-out;
+[data-theme='shinchan'] .main-save-btn:hover {
+  animation: wobble 0.5s ease-in-out;
 }
-[data-theme="shinchan"] .summary-banner,
-[data-theme="shinchan"] .card {
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+[data-theme='shinchan'] .summary-banner,
+[data-theme='shinchan'] .card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
-[data-theme="shinchan"] #view-salary > .card:first-of-type {
-    background: var(--hero-gradient) !important;
-    border: none !important;
-    color: #FFFFFF !important;
+[data-theme='shinchan'] #view-salary > .card:first-of-type {
+  background: var(--hero-gradient) !important;
+  border: none !important;
+  color: #ffffff !important;
 }
-[data-theme="shinchan"] #view-salary > .card:first-of-type div {
-    color: #FFFFFF !important;
+[data-theme='shinchan'] #view-salary > .card:first-of-type div {
+  color: #ffffff !important;
 }
-[data-theme="shinchan"] .nav-tabs {
-    backdrop-filter: blur(4px) saturate(1.5);
-    -webkit-backdrop-filter: blur(4px) saturate(1.5);
+[data-theme='shinchan'] .nav-tabs {
+  backdrop-filter: blur(4px) saturate(1.5);
+  -webkit-backdrop-filter: blur(4px) saturate(1.5);
 }
-[data-theme="shinchan"] .date-slider-item.active {
-    background: linear-gradient(135deg, #4CAF50, #00897B) !important;
+[data-theme='shinchan'] .date-slider-item.active {
+  background: linear-gradient(135deg, #4caf50, #00897b) !important;
 }
 /* ===================================================
    🌆 THEME: Neon Sunset
    =================================================== */
-[data-theme="sunset"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #0A0212;
-    --body-bg-image: linear-gradient(160deg, #0A0212 0%, #2D0A2E 25%, #4A1020 50%, #2D0A2E 75%, #0A0212 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #1A0830;
-    --text: #F0E6FF;
-    --muted: #A892C8;
-    --border: #3A1F60;
-    --primary: #FF477E !important;
-    --primary-bg: #2E1040 !important;
-    --secondary: #00F5D4;     
-    --active-date-text: #FFFFFF;
+[data-theme='sunset'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #0a0212;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #0a0212 0%,
+    #2d0a2e 25%,
+    #4a1020 50%,
+    #2d0a2e 75%,
+    #0a0212 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #1a0830;
+  --text: #f0e6ff;
+  --muted: #a892c8;
+  --border: #3a1f60;
+  --primary: #ff477e !important;
+  --primary-bg: #2e1040 !important;
+  --secondary: #00f5d4;
+  --active-date-text: #ffffff;
 }
 
-[data-theme="sunset"] .card,
-[data-theme="sunset"] .tab,
-[data-theme="sunset"] .seg-btn,
-[data-theme="sunset"] .main-save-btn,
-[data-theme="sunset"] .cal-cell,
-[data-theme="sunset"] .date-bar-item {
-    border-radius: 16px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.15) !important;
+[data-theme='sunset'] .card,
+[data-theme='sunset'] .tab,
+[data-theme='sunset'] .seg-btn,
+[data-theme='sunset'] .main-save-btn,
+[data-theme='sunset'] .cal-cell,
+[data-theme='sunset'] .date-bar-item {
+  border-radius: 16px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.35),
+    0 1px 4px rgba(0, 0, 0, 0.15) !important;
 }
 
 /* ===================================================
    🎨 THEME: Modern
    =================================================== */
-[data-theme="modern"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #FAF7F2;
-    --card: #FFFFFF;
-    --text: #2C2C2C;
-    --muted: #6B6B6B;
-    --border: #D4C9BE;
-    --primary: #C76B5D !important;
-    --primary-bg: #F5E6DE !important;
-    --secondary: #7A9E8D;
+[data-theme='modern'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #faf7f2;
+  --card: #ffffff;
+  --text: #2c2c2c;
+  --muted: #6b6b6b;
+  --border: #d4c9be;
+  --primary: #c76b5d !important;
+  --primary-bg: #f5e6de !important;
+  --secondary: #7a9e8d;
 
-    --active-date-text: #FFFFFF;
+  --active-date-text: #ffffff;
 }
-[data-theme="modern"] .card,
-[data-theme="modern"] .tab,
-[data-theme="modern"] .seg-btn,
-[data-theme="modern"] .main-save-btn,
-[data-theme="modern"] .cal-cell,
-[data-theme="modern"] .date-bar-item {
-    border-radius: 12px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(212, 201, 190, 0.25), 0 1px 4px rgba(0,0,0,0.04) !important;
+[data-theme='modern'] .card,
+[data-theme='modern'] .tab,
+[data-theme='modern'] .seg-btn,
+[data-theme='modern'] .main-save-btn,
+[data-theme='modern'] .cal-cell,
+[data-theme='modern'] .date-bar-item {
+  border-radius: 12px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(212, 201, 190, 0.25),
+    0 1px 4px rgba(0, 0, 0, 0.04) !important;
 }
 
 /* ===================================================
    ☀️ THEME: Summer Morning
    =================================================== */
-[data-theme="summer-morning"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #fff6de;
-    --card: #ffffff;
-    --text: #5D4037;
-    --muted: #8c7e7a;
-    --border: #8bdfdd;
-    --primary: #f48f68 !important;
-    --primary-bg: #ffe394 !important;
-    --secondary: #8bdfdd !important;
-    --pattern-color: rgba(244, 143, 104, 0.20);
+[data-theme='summer-morning'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #fff6de;
+  --card: #ffffff;
+  --text: #5d4037;
+  --muted: #8c7e7a;
+  --border: #8bdfdd;
+  --primary: #f48f68 !important;
+  --primary-bg: #ffe394 !important;
+  --secondary: #8bdfdd !important;
+  --pattern-color: rgba(244, 143, 104, 0.2);
 }
-[data-theme="summer-morning"] .card, [data-theme="summer-morning"] .tab, [data-theme="summer-morning"] .seg-btn, [data-theme="summer-morning"] .main-save-btn, [data-theme="summer-morning"] .cal-cell, [data-theme="summer-morning"] .date-bar-item {
-    border-radius: 12px !important; border: 2px solid var(--border) !important; box-shadow: 0 4px 16px rgba(244, 143, 104, 0.12), 0 1px 4px rgba(0,0,0,0.04) !important;
+[data-theme='summer-morning'] .card,
+[data-theme='summer-morning'] .tab,
+[data-theme='summer-morning'] .seg-btn,
+[data-theme='summer-morning'] .main-save-btn,
+[data-theme='summer-morning'] .cal-cell,
+[data-theme='summer-morning'] .date-bar-item {
+  border-radius: 12px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(244, 143, 104, 0.12),
+    0 1px 4px rgba(0, 0, 0, 0.04) !important;
 }
-[data-theme="summer-morning"] .seg-btn {
-    color: #5D4037 !important;
+[data-theme='summer-morning'] .seg-btn {
+  color: #5d4037 !important;
 }
 
 /* ===================================================
    ☀️ THEME: Blue Sky (remake of Crayon)
    =================================================== */
-[data-theme="blue-sky"] {
-    --glass-bg: rgba(255,255,255,0.45);
-    --glass-border: rgba(255,255,255,0.20);
-    --bg: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg') center/cover fixed no-repeat #5B92C5;
-    --body-bg-image: linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)), url('/files/blue-sky-bg.jpg');
-    --body-bg-size: cover;
-    --card: rgba(255, 255, 255, 0.95);
-    --text: #1B2A3E;
-    --muted: #5A7C99;
-    --border: rgba(74, 123, 159, 0.30);
-    --primary: #D47A3E !important;
-    --primary-bg: rgba(212, 122, 62, 0.12) !important;
-    --secondary: #3A7BBF !important;
-    --active-date-text: #FFFFFF;
-    --card-shadow: 0 4px 12px rgba(26, 43, 62, 0.12);
-    --drop-shadow: drop-shadow(0 2px 4px rgba(26, 43, 62, 0.10));
+[data-theme='blue-sky'] {
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --bg:
+    linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)),
+    url('/files/blue-sky-bg.jpg') center/cover fixed no-repeat #5b92c5;
+  --body-bg-image:
+    linear-gradient(rgba(74, 123, 159, 0.45), rgba(212, 149, 106, 0.35)),
+    url('/files/blue-sky-bg.jpg');
+  --body-bg-size: cover;
+  --card: rgba(255, 255, 255, 0.95);
+  --text: #1b2a3e;
+  --muted: #5a7c99;
+  --border: rgba(74, 123, 159, 0.3);
+  --primary: #d47a3e !important;
+  --primary-bg: rgba(212, 122, 62, 0.12) !important;
+  --secondary: #3a7bbf !important;
+  --active-date-text: #ffffff;
+  --card-shadow: 0 4px 12px rgba(26, 43, 62, 0.12);
+  --drop-shadow: drop-shadow(0 2px 4px rgba(26, 43, 62, 0.1));
 }
-[data-theme="blue-sky"] .card,
-[data-theme="blue-sky"] .tab,
-[data-theme="blue-sky"] .seg-btn,
-[data-theme="blue-sky"] .main-save-btn,
-[data-theme="blue-sky"] .cal-cell,
-[data-theme="blue-sky"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.15) !important;
+[data-theme='blue-sky'] .card,
+[data-theme='blue-sky'] .tab,
+[data-theme='blue-sky'] .seg-btn,
+[data-theme='blue-sky'] .main-save-btn,
+[data-theme='blue-sky'] .cal-cell,
+[data-theme='blue-sky'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(52, 152, 219, 0.15) !important;
 }
-[data-theme="blue-sky"] .tab.active,
-[data-theme="blue-sky"] .main-save-btn,
-[data-theme="blue-sky"] .auth-btn,
-[data-theme="blue-sky"] .seg-btn.active {
-    background: linear-gradient(135deg, #F39C12, #F1C40F) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='blue-sky'] .tab.active,
+[data-theme='blue-sky'] .main-save-btn,
+[data-theme='blue-sky'] .auth-btn,
+[data-theme='blue-sky'] .seg-btn.active {
+  background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="blue-sky"] .input-field {
-    background: #F0F8FF !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
+[data-theme='blue-sky'] .input-field {
+  background: #f0f8ff !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
 }
-[data-theme="blue-sky"] .main-save-btn:hover {
-    animation: floatUp 0.4s ease-in-out;
+[data-theme='blue-sky'] .main-save-btn:hover {
+  animation: floatUp 0.4s ease-in-out;
 }
 @keyframes floatUp {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-3px); }
-    100% { transform: translateY(0); }
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
-[data-theme="blue-sky"] .summary-banner,
-[data-theme="blue-sky"] .card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(4px);
+[data-theme='blue-sky'] .summary-banner,
+[data-theme='blue-sky'] .card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
 }
-[data-theme="blue-sky"] th {
-    color: var(--secondary) !important;
-    font-weight: 800 !important;
+[data-theme='blue-sky'] th {
+  color: var(--secondary) !important;
+  font-weight: 800 !important;
 }
-[data-theme="blue-sky"] .date-slider-item.active {
-    background: linear-gradient(135deg, #F39C12, #F1C40F) !important;
+[data-theme='blue-sky'] .date-slider-item.active {
+  background: linear-gradient(135deg, #f39c12, #f1c40f) !important;
 }
-[data-theme="blue-sky"] .date-slider-item.today {
-    background: rgba(212, 122, 62, 0.35) !important;
+[data-theme='blue-sky'] .date-slider-item.today {
+  background: rgba(212, 122, 62, 0.35) !important;
 }
-[data-theme="blue-sky"] .summary-banner {
-    border-left: 4px solid #F39C12 !important;
+[data-theme='blue-sky'] .summary-banner {
+  border-left: 4px solid #f39c12 !important;
 }
 
-
-[data-theme="blue-sky"] .input-field {
-    background: #F0F8FF !important;
+[data-theme='blue-sky'] .input-field {
+  background: #f0f8ff !important;
 }
-[data-theme="blue-sky"] .input-field-accent {
-    background: #F0F8FF !important;
+[data-theme='blue-sky'] .input-field-accent {
+  background: #f0f8ff !important;
 }
 /* ===================================================
    🌊 THEME: Midnight Ocean
    =================================================== */
-[data-theme="midnight-ocean"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #030A14;
-    --body-bg-image: linear-gradient(160deg, #01060E 0%, #041220 25%, #081C32 50%, #041220 75%, #01060E 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #0C1A2E;
-    --text: #E0F0FF;
-    --muted: #7A9AB8;
-    --border: #1A304A;
-    --primary: #38BDF8 !important;
-    --primary-bg: #0C2D48 !important;
-    --secondary: #2DD4BF !important;
+[data-theme='midnight-ocean'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #030a14;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #01060e 0%,
+    #041220 25%,
+    #081c32 50%,
+    #041220 75%,
+    #01060e 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #0c1a2e;
+  --text: #e0f0ff;
+  --muted: #7a9ab8;
+  --border: #1a304a;
+  --primary: #38bdf8 !important;
+  --primary-bg: #0c2d48 !important;
+  --secondary: #2dd4bf !important;
 
-    --pattern-color: rgba(56, 189, 248, 0.04);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
+  --pattern-color: rgba(56, 189, 248, 0.04);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #0284c7, #0d9488);
 }
-[data-theme="midnight-ocean"] .card,
-[data-theme="midnight-ocean"] .tab,
-[data-theme="midnight-ocean"] .seg-btn,
-[data-theme="midnight-ocean"] .main-save-btn,
-[data-theme="midnight-ocean"] .cal-cell,
-[data-theme="midnight-ocean"] .date-bar-item {
-    border-radius: 14px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .tab,
+[data-theme='midnight-ocean'] .seg-btn,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .cal-cell,
+[data-theme='midnight-ocean'] .date-bar-item {
+  border-radius: 14px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
-[data-theme="midnight-ocean"] .tab.active,
-[data-theme="midnight-ocean"] .main-save-btn,
-[data-theme="midnight-ocean"] .auth-btn,
-[data-theme="midnight-ocean"] .seg-btn.active {
-    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
-    color: #0D1B2A !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='midnight-ocean'] .tab.active,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .auth-btn,
+[data-theme='midnight-ocean'] .seg-btn.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="midnight-ocean"] .input-field {
-    background-color: #1B2F44 !important;
-    border: 2px solid var(--border) !important;
-    color: var(--text) !important;
-    border-radius: 10px !important;
+[data-theme='midnight-ocean'] .input-field {
+  background-color: #1b2f44 !important;
+  border: 2px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 10px !important;
 }
-[data-theme="midnight-ocean"] .main-save-btn:hover {
-    animation: pulseGlow 1s ease-in-out infinite;
+[data-theme='midnight-ocean'] .main-save-btn:hover {
+  animation: pulseGlow 1s ease-in-out infinite;
 }
 @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
-    50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+  }
 }
-[data-theme="midnight-ocean"] .summary-banner,
-[data-theme="midnight-ocean"] .card,
-[data-theme="midnight-ocean"] .shift-sheet {
-    background: rgba(27, 47, 68, 0.95) !important;
-    backdrop-filter: blur(8px);
+[data-theme='midnight-ocean'] .summary-banner,
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .shift-sheet {
+  background: rgba(27, 47, 68, 0.95) !important;
+  backdrop-filter: blur(8px);
 }
-[data-theme="midnight-ocean"] .date-slider-item.active {
-    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
-    color: #0D1B2A !important;
+[data-theme='midnight-ocean'] .date-slider-item.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
 }
-
 
 /* ===================================================
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
-[data-theme="twilight"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #0E0312;
-    --body-bg-image: linear-gradient(160deg, #060110 0%, #120624 25%, #2A0E3C 50%, #120624 75%, #060110 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #1E0A26;
-    --text: #F0E4F8;
-    --muted: #9A82AA;
-    --border: #2E1A3E;
-    --primary: #C084FC !important;
-    --primary-bg: #2D1B3E !important;
-    --secondary: #F472B6 !important;
+[data-theme='twilight'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #0e0312;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #060110 0%,
+    #120624 25%,
+    #2a0e3c 50%,
+    #120624 75%,
+    #060110 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #1e0a26;
+  --text: #f0e4f8;
+  --muted: #9a82aa;
+  --border: #2e1a3e;
+  --primary: #c084fc !important;
+  --primary-bg: #2d1b3e !important;
+  --secondary: #f472b6 !important;
 
-    --pattern-color: rgba(192, 132, 252, 0.04);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
+  --pattern-color: rgba(192, 132, 252, 0.04);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #9333ea, #db2777);
 }
-[data-theme="twilight"] .card,
-[data-theme="twilight"] .tab,
-[data-theme="twilight"] .seg-btn,
-[data-theme="twilight"] .main-save-btn,
-[data-theme="twilight"] .cal-cell,
-[data-theme="twilight"] .date-bar-item {
-    border-radius: 16px !important;
-    border: 1px solid var(--border) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.15) !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+[data-theme='twilight'] .card,
+[data-theme='twilight'] .tab,
+[data-theme='twilight'] .seg-btn,
+[data-theme='twilight'] .main-save-btn,
+[data-theme='twilight'] .cal-cell,
+[data-theme='twilight'] .date-bar-item {
+  border-radius: 16px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
 }
-[data-theme="twilight"] .tab.active,
-[data-theme="twilight"] .main-save-btn,
-[data-theme="twilight"] .auth-btn,
-[data-theme="twilight"] .seg-btn.active {
-    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
-    color: #1A0A1E !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='twilight'] .tab.active,
+[data-theme='twilight'] .main-save-btn,
+[data-theme='twilight'] .auth-btn,
+[data-theme='twilight'] .seg-btn.active {
+  background: linear-gradient(135deg, #c084fc, #f472b6) !important;
+  color: #1a0a1e !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="twilight"] .input-field {
-    background-color: #2D1B3E !important;
-    border: 1px solid var(--border) !important;
-    color: var(--text) !important;
-    border-radius: 12px !important;
+[data-theme='twilight'] .input-field {
+  background-color: #2d1b3e !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 12px !important;
 }
-[data-theme="twilight"] .summary-banner,
-[data-theme="twilight"] .card {
-    background: rgba(45, 27, 62, 0.95) !important;
-    backdrop-filter: blur(8px);
+[data-theme='twilight'] .summary-banner,
+[data-theme='twilight'] .card {
+  background: rgba(45, 27, 62, 0.95) !important;
+  backdrop-filter: blur(8px);
 }
-[data-theme="twilight"] .date-slider-item.active {
-    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
-    color: #1A0A1E !important;
+[data-theme='twilight'] .date-slider-item.active {
+  background: linear-gradient(135deg, #c084fc, #f472b6) !important;
+  color: #1a0a1e !important;
 }
 
 /* ===================================================
    🍬 THEME: Cotton Candy
    =================================================== */
-[data-theme="cotton-candy"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #FFF0F5;
-    --body-bg-image: linear-gradient(160deg, #FFF0F5 0%, #FFE4F0 25%, #FCE7F3 50%, #FFE4F0 75%, #FFF0F5 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #FFFFFF;
-    --text: #4A2040;
-    --muted: #9D6B8A;
-    --border: #F9A8D4;
-    --primary: #EC4899 !important;
-    --primary-bg: #FCE7F3 !important;
-    --secondary: #A78BFA !important;
+[data-theme='cotton-candy'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #fff0f5;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #fff0f5 0%,
+    #ffe4f0 25%,
+    #fce7f3 50%,
+    #ffe4f0 75%,
+    #fff0f5 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #ffffff;
+  --text: #4a2040;
+  --muted: #9d6b8a;
+  --border: #f9a8d4;
+  --primary: #ec4899 !important;
+  --primary-bg: #fce7f3 !important;
+  --secondary: #a78bfa !important;
 
-    --active-date-text: #FFFFFF;
+  --active-date-text: #ffffff;
 }
-[data-theme="cotton-candy"] .card,
-[data-theme="cotton-candy"] .tab,
-[data-theme="cotton-candy"] .seg-btn,
-[data-theme="cotton-candy"] .main-save-btn,
-[data-theme="cotton-candy"] .cal-cell,
-[data-theme="cotton-candy"] .date-bar-item {
-    border-radius: 20px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.1), 0 1px 4px rgba(0,0,0,0.04) !important;
-    box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
+[data-theme='cotton-candy'] .card,
+[data-theme='cotton-candy'] .tab,
+[data-theme='cotton-candy'] .seg-btn,
+[data-theme='cotton-candy'] .main-save-btn,
+[data-theme='cotton-candy'] .cal-cell,
+[data-theme='cotton-candy'] .date-bar-item {
+  border-radius: 20px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(236, 72, 153, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
 }
-[data-theme="cotton-candy"] .tab.active,
-[data-theme="cotton-candy"] .main-save-btn,
-[data-theme="cotton-candy"] .auth-btn,
-[data-theme="cotton-candy"] .seg-btn.active {
-    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='cotton-candy'] .tab.active,
+[data-theme='cotton-candy'] .main-save-btn,
+[data-theme='cotton-candy'] .auth-btn,
+[data-theme='cotton-candy'] .seg-btn.active {
+  background: linear-gradient(135deg, #ec4899, #a78bfa) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="cotton-candy"] .input-field {
-    background-color: #FDF2F8 !important;
-    border: 2px solid var(--border) !important;
-    border-radius: 14px !important;
+[data-theme='cotton-candy'] .input-field {
+  background-color: #fdf2f8 !important;
+  border: 2px solid var(--border) !important;
+  border-radius: 14px !important;
 }
-[data-theme="cotton-candy"] .summary-banner,
-[data-theme="cotton-candy"] .card {
-    background: rgba(255, 255, 255, 0.93);
-    backdrop-filter: blur(4px);
+[data-theme='cotton-candy'] .summary-banner,
+[data-theme='cotton-candy'] .card {
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(4px);
 }
-[data-theme="cotton-candy"] .date-slider-item.active {
-    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+[data-theme='cotton-candy'] .date-slider-item.active {
+  background: linear-gradient(135deg, #ec4899, #a78bfa) !important;
 }
-
-
 
 /* ===================================================
    🌊 THEME: Midnight Ocean
    =================================================== */
-[data-theme="midnight-ocean"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #030A14;
-    --body-bg-image: linear-gradient(160deg, #01060E 0%, #041220 25%, #081C32 50%, #041220 75%, #01060E 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #0C1A2E;
-    --text: #E0F0FF;
-    --muted: #7A9AB8;
-    --border: #1A304A;
-    --primary: #38BDF8 !important;
-    --primary-bg: #0C2D48 !important;
-    --secondary: #2DD4BF !important;
+[data-theme='midnight-ocean'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #030a14;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #01060e 0%,
+    #041220 25%,
+    #081c32 50%,
+    #041220 75%,
+    #01060e 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #0c1a2e;
+  --text: #e0f0ff;
+  --muted: #7a9ab8;
+  --border: #1a304a;
+  --primary: #38bdf8 !important;
+  --primary-bg: #0c2d48 !important;
+  --secondary: #2dd4bf !important;
 
-    --pattern-color: rgba(56, 189, 248, 0.04);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #0284C7, #0D9488);
+  --pattern-color: rgba(56, 189, 248, 0.04);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #0284c7, #0d9488);
 }
-[data-theme="midnight-ocean"] .card,
-[data-theme="midnight-ocean"] .tab,
-[data-theme="midnight-ocean"] .seg-btn,
-[data-theme="midnight-ocean"] .main-save-btn,
-[data-theme="midnight-ocean"] .cal-cell,
-[data-theme="midnight-ocean"] .date-bar-item {
-    border-radius: 14px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .tab,
+[data-theme='midnight-ocean'] .seg-btn,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .cal-cell,
+[data-theme='midnight-ocean'] .date-bar-item {
+  border-radius: 14px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
-[data-theme="midnight-ocean"] .tab.active,
-[data-theme="midnight-ocean"] .main-save-btn,
-[data-theme="midnight-ocean"] .auth-btn,
-[data-theme="midnight-ocean"] .seg-btn.active {
-    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
-    color: #0D1B2A !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='midnight-ocean'] .tab.active,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .auth-btn,
+[data-theme='midnight-ocean'] .seg-btn.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="midnight-ocean"] .input-field {
-    background-color: #1B2F44 !important;
-    border: 2px solid var(--border) !important;
-    color: var(--text) !important;
-    border-radius: 10px !important;
+[data-theme='midnight-ocean'] .input-field {
+  background-color: #1b2f44 !important;
+  border: 2px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 10px !important;
 }
-[data-theme="midnight-ocean"] .main-save-btn:hover {
-    animation: pulseGlow 1s ease-in-out infinite;
+[data-theme='midnight-ocean'] .main-save-btn:hover {
+  animation: pulseGlow 1s ease-in-out infinite;
 }
 @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 0 8px rgba(56, 189, 248, 0.4); }
-    50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.8); }
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+  }
 }
-[data-theme="midnight-ocean"] .summary-banner,
-[data-theme="midnight-ocean"] .card,
-[data-theme="midnight-ocean"] .shift-sheet {
-    background: rgba(27, 47, 68, 0.95) !important;
-    backdrop-filter: blur(8px);
+[data-theme='midnight-ocean'] .summary-banner,
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .shift-sheet {
+  background: rgba(27, 47, 68, 0.95) !important;
+  backdrop-filter: blur(8px);
 }
-[data-theme="midnight-ocean"] .date-slider-item.active {
-    background: linear-gradient(135deg, #38BDF8, #2DD4BF) !important;
-    color: #0D1B2A !important;
+[data-theme='midnight-ocean'] .date-slider-item.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
 }
-
 
 /* ===================================================
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
-[data-theme="twilight"] {
-    --glass-bg: rgba(255,255,255,0.08);
-    --glass-border: rgba(255,255,255,0.10);
-    --bg: #0E0312;
-    --body-bg-image: linear-gradient(160deg, #060110 0%, #120624 25%, #2A0E3C 50%, #120624 75%, #060110 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #1E0A26;
-    --text: #F0E4F8;
-    --muted: #9A82AA;
-    --border: #2E1A3E;
-    --primary: #C084FC !important;
-    --primary-bg: #2D1B3E !important;
-    --secondary: #F472B6 !important;
+[data-theme='twilight'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #0e0312;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #060110 0%,
+    #120624 25%,
+    #2a0e3c 50%,
+    #120624 75%,
+    #060110 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #1e0a26;
+  --text: #f0e4f8;
+  --muted: #9a82aa;
+  --border: #2e1a3e;
+  --primary: #c084fc !important;
+  --primary-bg: #2d1b3e !important;
+  --secondary: #f472b6 !important;
 
-    --pattern-color: rgba(192, 132, 252, 0.04);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #9333EA, #DB2777);
+  --pattern-color: rgba(192, 132, 252, 0.04);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #9333ea, #db2777);
 }
-[data-theme="twilight"] .card,
-[data-theme="twilight"] .tab,
-[data-theme="twilight"] .seg-btn,
-[data-theme="twilight"] .main-save-btn,
-[data-theme="twilight"] .cal-cell,
-[data-theme="twilight"] .date-bar-item {
-    border-radius: 16px !important;
-    border: 1px solid var(--border) !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.15) !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+[data-theme='twilight'] .card,
+[data-theme='twilight'] .tab,
+[data-theme='twilight'] .seg-btn,
+[data-theme='twilight'] .main-save-btn,
+[data-theme='twilight'] .cal-cell,
+[data-theme='twilight'] .date-bar-item {
+  border-radius: 16px !important;
+  border: 1px solid var(--border) !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
 }
-[data-theme="twilight"] .tab.active,
-[data-theme="twilight"] .main-save-btn,
-[data-theme="twilight"] .auth-btn,
-[data-theme="twilight"] .seg-btn.active {
-    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
-    color: #1A0A1E !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='twilight'] .tab.active,
+[data-theme='twilight'] .main-save-btn,
+[data-theme='twilight'] .auth-btn,
+[data-theme='twilight'] .seg-btn.active {
+  background: linear-gradient(135deg, #c084fc, #f472b6) !important;
+  color: #1a0a1e !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="twilight"] .input-field {
-    background-color: #2D1B3E !important;
-    border: 1px solid var(--border) !important;
-    color: var(--text) !important;
-    border-radius: 12px !important;
+[data-theme='twilight'] .input-field {
+  background-color: #2d1b3e !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 12px !important;
 }
-[data-theme="twilight"] .summary-banner,
-[data-theme="twilight"] .card {
-    background: rgba(45, 27, 62, 0.95) !important;
-    backdrop-filter: blur(8px);
+[data-theme='twilight'] .summary-banner,
+[data-theme='twilight'] .card {
+  background: rgba(45, 27, 62, 0.95) !important;
+  backdrop-filter: blur(8px);
 }
-[data-theme="twilight"] .date-slider-item.active {
-    background: linear-gradient(135deg, #C084FC, #F472B6) !important;
-    color: #1A0A1E !important;
+[data-theme='twilight'] .date-slider-item.active {
+  background: linear-gradient(135deg, #c084fc, #f472b6) !important;
+  color: #1a0a1e !important;
 }
 
 /* ===================================================
    🍬 THEME: Cotton Candy
    =================================================== */
-[data-theme="cotton-candy"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #FFF0F5;
-    --body-bg-image: linear-gradient(160deg, #FFF0F5 0%, #FFE4F0 25%, #FCE7F3 50%, #FFE4F0 75%, #FFF0F5 100%);
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #FFFFFF;
-    --text: #4A2040;
-    --muted: #9D6B8A;
-    --border: #F9A8D4;
-    --primary: #EC4899 !important;
-    --primary-bg: #FCE7F3 !important;
-    --secondary: #A78BFA !important;
+[data-theme='cotton-candy'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #fff0f5;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #fff0f5 0%,
+    #ffe4f0 25%,
+    #fce7f3 50%,
+    #ffe4f0 75%,
+    #fff0f5 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #ffffff;
+  --text: #4a2040;
+  --muted: #9d6b8a;
+  --border: #f9a8d4;
+  --primary: #ec4899 !important;
+  --primary-bg: #fce7f3 !important;
+  --secondary: #a78bfa !important;
 
-    --active-date-text: #FFFFFF;
+  --active-date-text: #ffffff;
 }
-[data-theme="cotton-candy"] .card,
-[data-theme="cotton-candy"] .tab,
-[data-theme="cotton-candy"] .seg-btn,
-[data-theme="cotton-candy"] .main-save-btn,
-[data-theme="cotton-candy"] .cal-cell,
-[data-theme="cotton-candy"] .date-bar-item {
-    border-radius: 20px !important;
-    border: 2px solid var(--border) !important;
-    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.1), 0 1px 4px rgba(0,0,0,0.04) !important;
-    box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
+[data-theme='cotton-candy'] .card,
+[data-theme='cotton-candy'] .tab,
+[data-theme='cotton-candy'] .seg-btn,
+[data-theme='cotton-candy'] .main-save-btn,
+[data-theme='cotton-candy'] .cal-cell,
+[data-theme='cotton-candy'] .date-bar-item {
+  border-radius: 20px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow:
+    0 4px 16px rgba(236, 72, 153, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  box-shadow: 0 2px 12px rgba(236, 72, 153, 0.1) !important;
 }
-[data-theme="cotton-candy"] .tab.active,
-[data-theme="cotton-candy"] .main-save-btn,
-[data-theme="cotton-candy"] .auth-btn,
-[data-theme="cotton-candy"] .seg-btn.active {
-    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='cotton-candy'] .tab.active,
+[data-theme='cotton-candy'] .main-save-btn,
+[data-theme='cotton-candy'] .auth-btn,
+[data-theme='cotton-candy'] .seg-btn.active {
+  background: linear-gradient(135deg, #ec4899, #a78bfa) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="cotton-candy"] .input-field {
-    background-color: #FDF2F8 !important;
-    border: 2px solid var(--border) !important;
-    border-radius: 14px !important;
+[data-theme='cotton-candy'] .input-field {
+  background-color: #fdf2f8 !important;
+  border: 2px solid var(--border) !important;
+  border-radius: 14px !important;
 }
-[data-theme="cotton-candy"] .summary-banner,
-[data-theme="cotton-candy"] .card {
-    background: rgba(255, 255, 255, 0.93);
-    backdrop-filter: blur(4px);
+[data-theme='cotton-candy'] .summary-banner,
+[data-theme='cotton-candy'] .card {
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(4px);
 }
-[data-theme="cotton-candy"] .date-slider-item.active {
-    background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
+[data-theme='cotton-candy'] .date-slider-item.active {
+  background: linear-gradient(135deg, #ec4899, #a78bfa) !important;
 }
-
-
 
 /* ===================================================
    🫧 THEME: Liquid Glass (glasscn-inspired)
    =================================================== */
-[data-theme="glass"] {
-    --glass-bg: rgba(255,255,255,0.45);
-    --glass-border: rgba(255,255,255,0.3);
-    --bg: #F2F5F9;
-    --card: rgba(255, 255, 255, 0.55);
-    --text: #1C1C1E;
-    --muted: #8E8E93;
-    --border: rgba(255, 255, 255, 0.6);
-    --primary: #007AFF !important;
-    --primary-bg: rgba(0, 122, 255, 0.12) !important;
-    --secondary: #34C759 !important;
-    --body-bg-image: url("/files/glass-bg-light.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --pattern-color: rgba(255, 255, 255, 0.05);
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #007AFF, #34C759);
+[data-theme='glass'] {
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --bg: #f2f5f9;
+  --card: rgba(255, 255, 255, 0.55);
+  --text: #1c1c1e;
+  --muted: #8e8e93;
+  --border: rgba(255, 255, 255, 0.6);
+  --primary: #007aff !important;
+  --primary-bg: rgba(0, 122, 255, 0.12) !important;
+  --secondary: #34c759 !important;
+  --body-bg-image: url('/files/glass-bg-light.jpg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --pattern-color: rgba(255, 255, 255, 0.05);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #007aff, #34c759);
 }
-[data-theme="glass"] .card,
-[data-theme="glass"] .tab,
-[data-theme="glass"] .seg-btn,
-[data-theme="glass"] .main-save-btn,
-[data-theme="glass"] .cal-cell,
-[data-theme="glass"] .date-bar-item {
-    border-radius: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+[data-theme='glass'] .card,
+[data-theme='glass'] .tab,
+[data-theme='glass'] .seg-btn,
+[data-theme='glass'] .main-save-btn,
+[data-theme='glass'] .cal-cell,
+[data-theme='glass'] .date-bar-item {
+  border-radius: 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
-[data-theme="glass"] .tab.active,
-[data-theme="glass"] .main-save-btn,
-[data-theme="glass"] .auth-btn,
-[data-theme="glass"] .seg-btn.active {
-    background: linear-gradient(135deg, #007AFF, #34C759) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
-    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
+[data-theme='glass'] .tab.active,
+[data-theme='glass'] .main-save-btn,
+[data-theme='glass'] .auth-btn,
+[data-theme='glass'] .seg-btn.active {
+  background: linear-gradient(135deg, #007aff, #34c759) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
 }
-[data-theme="glass"] .input-field {
-    background: rgba(255, 255, 255, 0.7) !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    border-radius: 12px !important;
-    backdrop-filter: blur(10px);
+[data-theme='glass'] .input-field {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
 }
-[data-theme="glass"] .summary-banner,
-[data-theme="glass"] .card {
-    background: rgba(255, 255, 255, 0.55) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+[data-theme='glass'] .summary-banner,
+[data-theme='glass'] .card {
+  background: rgba(255, 255, 255, 0.55) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
-[data-theme="glass"] .date-bar-item {
-    background: rgba(255, 255, 255, 0.45) !important;
+[data-theme='glass'] .date-bar-item {
+  background: rgba(255, 255, 255, 0.45) !important;
 }
-[data-theme="glass"] .nav-tabs {
-    background: rgba(255, 255, 255, 0.5) !important;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
+[data-theme='glass'] .nav-tabs {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
-[data-theme="glass"] .date-slider-item.active {
-    background: linear-gradient(135deg, #007AFF, #34C759) !important;
-    box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
+[data-theme='glass'] .date-slider-item.active {
+  background: linear-gradient(135deg, #007aff, #34c759) !important;
+  box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3) !important;
 }
-[data-theme="glass"] .segmented-control {
-    background: rgba(255, 255, 255, 0.3) !important;
+[data-theme='glass'] .segmented-control {
+  background: rgba(255, 255, 255, 0.3) !important;
 }
-
 
 /* Force gradient on hero card for all themes (overrides .card !important backgrounds) */
 #view-salary > .card:first-of-type {
-    background: var(--hero-gradient, linear-gradient(135deg, var(--primary), var(--secondary))) !important;
+  background: var(
+    --hero-gradient,
+    linear-gradient(135deg, var(--primary), var(--secondary))
+  ) !important;
 }
 /* ===================================================
    🌙 THEME: ชินจัง : สลีป (Shin-chan Sleep)
    =================================================== */
-[data-theme="shinchan-sleep"] {
-    --glass-bg: rgba(0,0,0,0.4);
-    --glass-border: rgba(255,255,255,0.08);
-    --bg: #0D1321;
-    --body-bg-image: url("/files/shinchan-sleep-bg.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #1A2035;
-    --text: #E8E0D0;
-    --muted: #9A8E80;
-    --border: #3A4A6A;
-    --primary: #F5C542 !important;
-    --primary-bg: rgba(245, 197, 66, 0.15) !important;
-    --secondary: #7EB8DA !important;
-    --active-date-text: #0D1321;
-    --hero-gradient: linear-gradient(135deg, #2A3F5F, #1A2035);
+[data-theme='shinchan-sleep'] {
+  --glass-bg: rgba(0, 0, 0, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --bg: #0d1321;
+  --body-bg-image: url('/files/shinchan-sleep-bg.jpg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #1a2035;
+  --text: #e8e0d0;
+  --muted: #9a8e80;
+  --border: #3a4a6a;
+  --primary: #f5c542 !important;
+  --primary-bg: rgba(245, 197, 66, 0.15) !important;
+  --secondary: #7eb8da !important;
+  --active-date-text: #0d1321;
+  --hero-gradient: linear-gradient(135deg, #2a3f5f, #1a2035);
 }
-[data-theme="shinchan-sleep"] .card,
-[data-theme="shinchan-sleep"] .tab,
-[data-theme="shinchan-sleep"] .seg-btn,
-[data-theme="shinchan-sleep"] .main-save-btn,
-[data-theme="shinchan-sleep"] .cal-cell,
-[data-theme="shinchan-sleep"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(245, 197, 66, 0.12) !important;
+[data-theme='shinchan-sleep'] .card,
+[data-theme='shinchan-sleep'] .tab,
+[data-theme='shinchan-sleep'] .seg-btn,
+[data-theme='shinchan-sleep'] .main-save-btn,
+[data-theme='shinchan-sleep'] .cal-cell,
+[data-theme='shinchan-sleep'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(245, 197, 66, 0.12) !important;
 }
-[data-theme="shinchan-sleep"] .tab.active,
-[data-theme="shinchan-sleep"] .main-save-btn,
-[data-theme="shinchan-sleep"] .auth-btn,
-[data-theme="shinchan-sleep"] .seg-btn.active {
-    background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
-    color: #0D1321 !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='shinchan-sleep'] .tab.active,
+[data-theme='shinchan-sleep'] .main-save-btn,
+[data-theme='shinchan-sleep'] .auth-btn,
+[data-theme='shinchan-sleep'] .seg-btn.active {
+  background: linear-gradient(135deg, #f5c542, #7eb8da) !important;
+  color: #0d1321 !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="shinchan-sleep"] .input-field {
-    background-color: rgba(26, 32, 53, 0.8) !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
-    color: var(--text);
+[data-theme='shinchan-sleep'] .input-field {
+  background-color: rgba(26, 32, 53, 0.8) !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
+  color: var(--text);
 }
-[data-theme="shinchan-sleep"] .main-save-btn:hover {
-    animation: wobble 0.5s ease-in-out;
+[data-theme='shinchan-sleep'] .main-save-btn:hover {
+  animation: wobble 0.5s ease-in-out;
 }
-[data-theme="shinchan-sleep"] .summary-banner,
-[data-theme="shinchan-sleep"] .card {
-    background: rgba(26, 32, 53, 0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+[data-theme='shinchan-sleep'] .summary-banner,
+[data-theme='shinchan-sleep'] .card {
+  background: rgba(26, 32, 53, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
-[data-theme="shinchan-sleep"] #view-salary > .card:first-of-type {
-    background: linear-gradient(135deg, #2A3F5F, #1A2035) !important;
-    border: none !important;
-    color: #E8E0D0 !important;
+[data-theme='shinchan-sleep'] #view-salary > .card:first-of-type {
+  background: linear-gradient(135deg, #2a3f5f, #1a2035) !important;
+  border: none !important;
+  color: #e8e0d0 !important;
 }
-[data-theme="shinchan-sleep"] #view-salary > .card:first-of-type div {
-    color: #E8E0D0 !important;
+[data-theme='shinchan-sleep'] #view-salary > .card:first-of-type div {
+  color: #e8e0d0 !important;
 }
-[data-theme="shinchan-sleep"] .nav-tabs {
-    background: #1A2035 !important;
+[data-theme='shinchan-sleep'] .nav-tabs {
+  background: #1a2035 !important;
 }
-[data-theme="shinchan-sleep"] .date-slider-item.active {
-    background: linear-gradient(135deg, #F5C542, #7EB8DA) !important;
-    color: #0D1321 !important;
+[data-theme='shinchan-sleep'] .date-slider-item.active {
+  background: linear-gradient(135deg, #f5c542, #7eb8da) !important;
+  color: #0d1321 !important;
 }
-[data-theme="shinchan-sleep"] .date-slider-item.today {
-    background: rgba(245, 197, 66, 0.35) !important;
+[data-theme='shinchan-sleep'] .date-slider-item.today {
+  background: rgba(245, 197, 66, 0.35) !important;
 }
-[data-theme="shinchan-sleep"] .modal-content,
-[data-theme="shinchan-sleep"] .month-bar {
-    background: #1A2035 !important;
-    border: 3px solid var(--border) !important;
+[data-theme='shinchan-sleep'] .modal-content,
+[data-theme='shinchan-sleep'] .month-bar {
+  background: #1a2035 !important;
+  border: 3px solid var(--border) !important;
 }
 
 /* ===================================================
    🛁 THEME: ชินจัง - อาบน้ำ (Shin-chan Bath) Light
    =================================================== */
-[data-theme="shinchan-bath"] {
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.08);
-    --bg: #FFF8F0;
-    --body-bg-image: url("/files/shinchan-bath-bg.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #FFFFFF;
-    --text: #3D2B1F;
-    --muted: #8C7A6B;
-    --border: #D4A066;
-    --primary: #FF8A65 !important;
-    --primary-bg: #FFEADE !important;
-    --secondary: #7EC8E3 !important;
-    --active-date-text: #FFFFFF;
-    --hero-gradient: linear-gradient(135deg, #FF8A65, #7EC8E3);
+[data-theme='shinchan-bath'] {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --bg: #fff8f0;
+  --body-bg-image: url('/files/shinchan-bath-bg.jpg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #ffffff;
+  --text: #3d2b1f;
+  --muted: #8c7a6b;
+  --border: #d4a066;
+  --primary: #ff8a65 !important;
+  --primary-bg: #ffeade !important;
+  --secondary: #7ec8e3 !important;
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #ff8a65, #7ec8e3);
 }
-[data-theme="shinchan-bath"] .card,
-[data-theme="shinchan-bath"] .tab,
-[data-theme="shinchan-bath"] .seg-btn,
-[data-theme="shinchan-bath"] .main-save-btn,
-[data-theme="shinchan-bath"] .cal-cell,
-[data-theme="shinchan-bath"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(255, 138, 101, 0.15) !important;
+[data-theme='shinchan-bath'] .card,
+[data-theme='shinchan-bath'] .tab,
+[data-theme='shinchan-bath'] .seg-btn,
+[data-theme='shinchan-bath'] .main-save-btn,
+[data-theme='shinchan-bath'] .cal-cell,
+[data-theme='shinchan-bath'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(255, 138, 101, 0.15) !important;
 }
-[data-theme="shinchan-bath"] .tab.active,
-[data-theme="shinchan-bath"] .main-save-btn,
-[data-theme="shinchan-bath"] .auth-btn,
-[data-theme="shinchan-bath"] .seg-btn.active {
-    background: linear-gradient(135deg, #FF8A65, #7EC8E3) !important;
-    color: #FFFFFF !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='shinchan-bath'] .tab.active,
+[data-theme='shinchan-bath'] .main-save-btn,
+[data-theme='shinchan-bath'] .auth-btn,
+[data-theme='shinchan-bath'] .seg-btn.active {
+  background: linear-gradient(135deg, #ff8a65, #7ec8e3) !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="shinchan-bath"] .input-field {
-    background-color: #FFF5EB !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
+[data-theme='shinchan-bath'] .input-field {
+  background-color: #fff5eb !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
 }
-[data-theme="shinchan-bath"] .main-save-btn:hover {
-    animation: wobble 0.5s ease-in-out;
+[data-theme='shinchan-bath'] .main-save-btn:hover {
+  animation: wobble 0.5s ease-in-out;
 }
-[data-theme="shinchan-bath"] .summary-banner,
-[data-theme="shinchan-bath"] .card {
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+[data-theme='shinchan-bath'] .summary-banner,
+[data-theme='shinchan-bath'] .card {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
-[data-theme="shinchan-bath"] #view-salary > .card:first-of-type {
-    background: var(--hero-gradient) !important;
-    border: none !important;
-    color: #FFFFFF !important;
+[data-theme='shinchan-bath'] #view-salary > .card:first-of-type {
+  background: var(--hero-gradient) !important;
+  border: none !important;
+  color: #ffffff !important;
 }
-[data-theme="shinchan-bath"] #view-salary > .card:first-of-type div {
-    color: #FFFFFF !important;
+[data-theme='shinchan-bath'] #view-salary > .card:first-of-type div {
+  color: #ffffff !important;
 }
-[data-theme="shinchan-bath"] .nav-tabs {
-    backdrop-filter: blur(4px) saturate(1.5);
-    -webkit-backdrop-filter: blur(4px) saturate(1.5);
+[data-theme='shinchan-bath'] .nav-tabs {
+  backdrop-filter: blur(4px) saturate(1.5);
+  -webkit-backdrop-filter: blur(4px) saturate(1.5);
 }
-[data-theme="shinchan-bath"] .date-slider-item.active {
-    background: linear-gradient(135deg, #FF8A65, #7EC8E3) !important;
+[data-theme='shinchan-bath'] .date-slider-item.active {
+  background: linear-gradient(135deg, #ff8a65, #7ec8e3) !important;
 }
-[data-theme="shinchan-bath"] .date-slider-item.today {
-    background: rgba(255, 138, 101, 0.35) !important;
+[data-theme='shinchan-bath'] .date-slider-item.today {
+  background: rgba(255, 138, 101, 0.35) !important;
 }
-[data-theme="shinchan-bath"] .modal-content,
-[data-theme="shinchan-bath"] .month-bar {
-    background: #FFFFFF !important;
+[data-theme='shinchan-bath'] .modal-content,
+[data-theme='shinchan-bath'] .month-bar {
+  background: #ffffff !important;
 }
 
 /* ===================================================
    🌸 THEME: ชินจัง - น่ารัก (Shin-chan Cute) Dark
    =================================================== */
-[data-theme="shinchan-cute"] {
-    --glass-bg: rgba(31,17,35,0.6);
-    --glass-border: rgba(255,255,255,0.08);
-    --bg: #1F1123;
-    --body-bg-image: url("/files/shinchan-cute-bg.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #2A1530;
-    --text: #F0D6E0;
-    --muted: #B898AE;
-    --border: #6A4A6A;
-    --primary: #FF9EB5 !important;
-    --primary-bg: rgba(255, 158, 181, 0.15) !important;
-    --secondary: #C084FC !important;
-    --active-date-text: #1F1123;
-    --hero-gradient: linear-gradient(135deg, #FF9EB5, #C084FC);
+[data-theme='shinchan-cute'] {
+  --glass-bg: rgba(31, 17, 35, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --bg: #1f1123;
+  --body-bg-image: url('/files/shinchan-cute-bg.jpg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #2a1530;
+  --text: #f0d6e0;
+  --muted: #b898ae;
+  --border: #6a4a6a;
+  --primary: #ff9eb5 !important;
+  --primary-bg: rgba(255, 158, 181, 0.15) !important;
+  --secondary: #c084fc !important;
+  --active-date-text: #1f1123;
+  --hero-gradient: linear-gradient(135deg, #ff9eb5, #c084fc);
 }
-[data-theme="shinchan-cute"] .card,
-[data-theme="shinchan-cute"] .tab,
-[data-theme="shinchan-cute"] .seg-btn,
-[data-theme="shinchan-cute"] .main-save-btn,
-[data-theme="shinchan-cute"] .cal-cell,
-[data-theme="shinchan-cute"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(255, 158, 181, 0.12) !important;
+[data-theme='shinchan-cute'] .card,
+[data-theme='shinchan-cute'] .tab,
+[data-theme='shinchan-cute'] .seg-btn,
+[data-theme='shinchan-cute'] .main-save-btn,
+[data-theme='shinchan-cute'] .cal-cell,
+[data-theme='shinchan-cute'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(255, 158, 181, 0.12) !important;
 }
-[data-theme="shinchan-cute"] .tab.active,
-[data-theme="shinchan-cute"] .main-save-btn,
-[data-theme="shinchan-cute"] .auth-btn,
-[data-theme="shinchan-cute"] .seg-btn.active {
-    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
-    color: #1F1123 !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='shinchan-cute'] .tab.active,
+[data-theme='shinchan-cute'] .main-save-btn,
+[data-theme='shinchan-cute'] .auth-btn,
+[data-theme='shinchan-cute'] .seg-btn.active {
+  background: linear-gradient(135deg, #ff9eb5, #c084fc) !important;
+  color: #1f1123 !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="shinchan-cute"] .input-field {
-    background-color: rgba(42, 21, 48, 0.8) !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
-    color: var(--text);
+[data-theme='shinchan-cute'] .input-field {
+  background-color: rgba(42, 21, 48, 0.8) !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
+  color: var(--text);
 }
-[data-theme="shinchan-cute"] .main-save-btn:hover {
-    animation: wobble 0.5s ease-in-out;
+[data-theme='shinchan-cute'] .main-save-btn:hover {
+  animation: wobble 0.5s ease-in-out;
 }
-[data-theme="shinchan-cute"] .summary-banner,
-[data-theme="shinchan-cute"] .card {
-    background: rgba(42, 21, 48, 0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+[data-theme='shinchan-cute'] .summary-banner,
+[data-theme='shinchan-cute'] .card {
+  background: rgba(42, 21, 48, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
-[data-theme="shinchan-cute"] #view-salary > .card:first-of-type {
-    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
-    border: none !important;
-    color: #1F1123 !important;
+[data-theme='shinchan-cute'] #view-salary > .card:first-of-type {
+  background: linear-gradient(135deg, #ff9eb5, #c084fc) !important;
+  border: none !important;
+  color: #1f1123 !important;
 }
-[data-theme="shinchan-cute"] #view-salary > .card:first-of-type div {
-    color: #1F1123 !important;
+[data-theme='shinchan-cute'] #view-salary > .card:first-of-type div {
+  color: #1f1123 !important;
 }
-[data-theme="shinchan-cute"] .nav-tabs {
-    background: #2A1530 !important;
+[data-theme='shinchan-cute'] .nav-tabs {
+  background: #2a1530 !important;
 }
-[data-theme="shinchan-cute"] .date-slider-item.active {
-    background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
-    color: #1F1123 !important;
+[data-theme='shinchan-cute'] .date-slider-item.active {
+  background: linear-gradient(135deg, #ff9eb5, #c084fc) !important;
+  color: #1f1123 !important;
 }
-[data-theme="shinchan-cute"] .date-slider-item.today {
-    background: rgba(255, 158, 181, 0.35) !important;
+[data-theme='shinchan-cute'] .date-slider-item.today {
+  background: rgba(255, 158, 181, 0.35) !important;
 }
-[data-theme="shinchan-cute"] .modal-content,
-[data-theme="shinchan-cute"] .month-bar {
-    background: #2A1530 !important;
-    border: 3px solid var(--border) !important;
+[data-theme='shinchan-cute'] .modal-content,
+[data-theme='shinchan-cute'] .month-bar {
+  background: #2a1530 !important;
+  border: 3px solid var(--border) !important;
 }
 
 /* ===================================================
    👕 THEME: Shin-chan White (Dark)
    =================================================== */
-[data-theme="shinchan-white"] {
-    --glass-bg: rgba(40,30,25,0.6);
-    --glass-border: rgba(255,255,255,0.08);
-    --bg: #1E1410;
-    --body-bg-image: url("/files/shinchan-white-bg.jpg");
-    --body-bg-size: cover;
-    --body-bg-attachment: fixed;
-    --card: #2D201C;
-    --text: #F5E8E0;
-    --muted: #B09890;
-    --border: #5A4038;
-    --primary: #E8836C !important;
-    --primary-bg: rgba(232, 131, 108, 0.15) !important;
-    --secondary: #F0B090 !important;
-    --active-date-text: #1E1410;
-    --hero-gradient: linear-gradient(135deg, #E8836C, #F0B090);
+[data-theme='shinchan-white'] {
+  --glass-bg: rgba(40, 30, 25, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --bg: #1e1410;
+  --body-bg-image: url('/files/shinchan-white-bg.jpg');
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #2d201c;
+  --text: #f5e8e0;
+  --muted: #b09890;
+  --border: #5a4038;
+  --primary: #e8836c !important;
+  --primary-bg: rgba(232, 131, 108, 0.15) !important;
+  --secondary: #f0b090 !important;
+  --active-date-text: #1e1410;
+  --hero-gradient: linear-gradient(135deg, #e8836c, #f0b090);
 }
-[data-theme="shinchan-white"] .card,
-[data-theme="shinchan-white"] .tab,
-[data-theme="shinchan-white"] .seg-btn,
-[data-theme="shinchan-white"] .main-save-btn,
-[data-theme="shinchan-white"] .cal-cell,
-[data-theme="shinchan-white"] .date-bar-item {
-    border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
-    border: 3px solid var(--border) !important;
-    box-shadow: 0 4px 15px rgba(232, 131, 108, 0.12) !important;
+[data-theme='shinchan-white'] .card,
+[data-theme='shinchan-white'] .tab,
+[data-theme='shinchan-white'] .seg-btn,
+[data-theme='shinchan-white'] .main-save-btn,
+[data-theme='shinchan-white'] .cal-cell,
+[data-theme='shinchan-white'] .date-bar-item {
+  border-radius: 18px 28px 16px 30px / 24px 16px 28px 20px !important;
+  border: 3px solid var(--border) !important;
+  box-shadow: 0 4px 15px rgba(232, 131, 108, 0.12) !important;
 }
-[data-theme="shinchan-white"] .tab.active,
-[data-theme="shinchan-white"] .main-save-btn,
-[data-theme="shinchan-white"] .auth-btn,
-[data-theme="shinchan-white"] .seg-btn.active {
-    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
-    color: #1E1410 !important;
-    font-weight: 800;
-    border: none !important;
+[data-theme='shinchan-white'] .tab.active,
+[data-theme='shinchan-white'] .main-save-btn,
+[data-theme='shinchan-white'] .auth-btn,
+[data-theme='shinchan-white'] .seg-btn.active {
+  background: linear-gradient(135deg, #e8836c, #f0b090) !important;
+  color: #1e1410 !important;
+  font-weight: 800;
+  border: none !important;
 }
-[data-theme="shinchan-white"] .input-field {
-    background-color: rgba(45, 32, 28, 0.8) !important;
-    border: 3px solid var(--border) !important;
-    border-radius: 12px !important;
-    color: var(--text);
+[data-theme='shinchan-white'] .input-field {
+  background-color: rgba(45, 32, 28, 0.8) !important;
+  border: 3px solid var(--border) !important;
+  border-radius: 12px !important;
+  color: var(--text);
 }
-[data-theme="shinchan-white"] .summary-banner,
-[data-theme="shinchan-white"] .card {
-    background: rgba(45, 32, 28, 0.85) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+[data-theme='shinchan-white'] .summary-banner,
+[data-theme='shinchan-white'] .card {
+  background: rgba(45, 32, 28, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
-[data-theme="shinchan-white"] #view-salary > .card:first-of-type {
-    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
-    border: none !important;
-    color: #1E1410 !important;
+[data-theme='shinchan-white'] #view-salary > .card:first-of-type {
+  background: linear-gradient(135deg, #e8836c, #f0b090) !important;
+  border: none !important;
+  color: #1e1410 !important;
 }
-[data-theme="shinchan-white"] #view-salary > .card:first-of-type div {
-    color: #1E1410 !important;
+[data-theme='shinchan-white'] #view-salary > .card:first-of-type div {
+  color: #1e1410 !important;
 }
-[data-theme="shinchan-white"] .nav-tabs {
-    background: #2D201C !important;
+[data-theme='shinchan-white'] .nav-tabs {
+  background: #2d201c !important;
 }
-[data-theme="shinchan-white"] .date-slider-item.active {
-    background: linear-gradient(135deg, #E8836C, #F0B090) !important;
-    color: #1E1410 !important;
+[data-theme='shinchan-white'] .date-slider-item.active {
+  background: linear-gradient(135deg, #e8836c, #f0b090) !important;
+  color: #1e1410 !important;
 }
-[data-theme="shinchan-white"] .date-slider-item.today {
-    background: rgba(232, 131, 108, 0.35) !important;
+[data-theme='shinchan-white'] .date-slider-item.today {
+  background: rgba(232, 131, 108, 0.35) !important;
 }
-[data-theme="shinchan-white"] .modal-content,
-[data-theme="shinchan-white"] .month-bar {
-    background: #2D201C !important;
-    border: 3px solid var(--border) !important;
+[data-theme='shinchan-white'] .modal-content,
+[data-theme='shinchan-white'] .month-bar {
+  background: #2d201c !important;
+  border: 3px solid var(--border) !important;
 }
