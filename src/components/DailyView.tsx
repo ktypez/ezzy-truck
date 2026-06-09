@@ -67,8 +67,33 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     }
   }, [selectedDay]);
 
-  // Load day log via TanStack Query
   const queryClient = useQueryClient();
+
+  const { data: availableDates } = useQuery({
+    queryKey: ['available-dates', userId],
+    queryFn: async () => {
+      const { data } = await sb
+        .from('logs')
+        .select('year, month')
+        .eq('user_id', userId);
+      if (data) {
+        const years = [...new Set(data.map(r => r.year))] as number[];
+        const yearMonthMap: Record<number, number[]> = {};
+        data.forEach(r => {
+          if (!yearMonthMap[r.year]) yearMonthMap[r.year] = [];
+          if (!yearMonthMap[r.year].includes(r.month)) yearMonthMap[r.year].push(r.month);
+        });
+        return { years, yearMonthMap };
+      }
+      return { years: [] as number[], yearMonthMap: {} as Record<number, number[]> };
+    },
+    enabled: !!userId,
+  });
+
+  const availableYears = availableDates?.years ?? [];
+  const availableMonths = (availableDates?.yearMonthMap[currentYear] ?? []).map(m => m - 1);
+
+  // Load day log via TanStack Query
   const { data: dayData } = useQuery({
     queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay],
     queryFn: async () => {
@@ -151,7 +176,7 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     <div id="view-daily" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: 'var(--space-sm) 0' }}>
-        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} availableMonths={availableMonths} />
       </div>
       
       {/* Date Slider (Embla) */}
@@ -234,7 +259,7 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
             <div className="input-group"><span>ไมล์เข้า</span><input type="number" id="odoIn" className="input-field input-field-accent" value={odoIn} onChange={e => setOdoIn(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('odoOut')?.focus() }} /></div>
             <div className="input-group"><span>ไมล์ออก</span><input type="number" id="odoOut" className="input-field input-field-accent" value={odoOut} onChange={e => setOdoOut(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('otHours')?.focus() }} /></div>
             <div className="input-group"><span>ชั่วโมง OT</span><input type="number" step="0.5" id="otHours" className="input-field input-field-accent" value={otHours} onChange={e => setOtHours(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') document.getElementById('lateMin')?.focus() }} /></div>
-            <div className="input-group"><span>สาย (นาที)</span><input type="number" id="lateMin" className="input-field input-field-accent" value={lateMin} onChange={e => setLateMin(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur() }} /></div>
+            <div className="input-group"><span>สาย (นาที)</span><input type="number" id="lateMin" className="input-field input-field-accent" value={lateMin} onChange={e => setLateMin(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') handleSave() }} /></div>
           </div>
 
           <div style={{ background: 'var(--primary-bg)', borderRadius: '12px', padding: 'var(--space-sm) var(--space-md)', marginBottom: 'var(--space-md)', border: '1px solid var(--border)', boxShadow: '0 2px 8px rgba(0,0,0,0.09)' }}>

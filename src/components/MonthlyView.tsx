@@ -48,21 +48,29 @@ const [isSavingShift, setIsSavingShift] = useState(false);
     enabled: !!userId,
   });
 
-  const { data: availableYears = [] } = useQuery({
-    queryKey: ['available-years', userId],
+  const { data: availableDates } = useQuery({
+    queryKey: ['available-dates', userId],
     queryFn: async () => {
       const { data } = await sb
         .from('logs')
-        .select('year')
-        .eq('user_id', userId)
-        .order('year', { ascending: false });
+        .select('year, month')
+        .eq('user_id', userId);
       if (data) {
-        return [...new Set(data.map(r => r.year))] as number[];
+        const years = [...new Set(data.map(r => r.year))] as number[];
+        const yearMonthMap: Record<number, number[]> = {};
+        data.forEach(r => {
+          if (!yearMonthMap[r.year]) yearMonthMap[r.year] = [];
+          if (!yearMonthMap[r.year].includes(r.month)) yearMonthMap[r.year].push(r.month);
+        });
+        return { years, yearMonthMap };
       }
-      return [];
+      return { years: [] as number[], yearMonthMap: {} as Record<number, number[]> };
     },
     enabled: !!userId,
   });
+
+  const availableYears = availableDates?.years ?? [];
+  const availableMonths = (availableDates?.yearMonthMap[year] ?? []).map(m => m - 1);
 
     const months = MONTHS_TH;
 
@@ -144,7 +152,7 @@ const [isSavingShift, setIsSavingShift] = useState(false);
     <div id="view-monthly" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: 'var(--space-sm) 0' }}>
-        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} />
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} availableMonths={availableMonths} />
       </div>
 
       {/* ── Calendar Grid ── */}

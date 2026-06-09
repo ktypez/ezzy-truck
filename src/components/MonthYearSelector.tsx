@@ -15,10 +15,17 @@ const arrowStyle: React.CSSProperties = {
   boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
 };
 
-export default function MonthYearSelector({ currentDate, onChangeMonth, availableYears }: { currentDate: Date; onChangeMonth: (diff: number) => void; availableYears?: number[] }) {
+export default function MonthYearSelector({ currentDate, onChangeMonth, availableYears, availableMonths }: {
+  currentDate: Date; onChangeMonth: (diff: number) => void; availableYears?: number[]; availableMonths?: number[];
+}) {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
   const years = (availableYears && availableYears.length > 0) ? [...availableYears].sort((a, b) => a - b) : [year];
+
+  const monthOptions = MONTHS_TH.map((m, i) => ({ label: m, value: i }));
+  const filteredMonths = (availableMonths && availableMonths.length > 0)
+    ? monthOptions.filter(opt => opt.value === month || availableMonths.includes(opt.value))
+    : monthOptions;
 
   const handleMonthChange = (val: string | number) => {
     const newMonth = Number(val);
@@ -43,7 +50,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth, availabl
         aria-label="เดือนก่อนหน้า"
       >‹</button>
       <DropdownSelect
-        options={MONTHS_TH.map((m, i) => ({ label: m, value: i }))}
+        options={filteredMonths}
         value={month}
         onChange={handleMonthChange}
         style={{ flex: 1, minWidth: 0 }}
