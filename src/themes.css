@@ -109,7 +109,9 @@
     background: rgb(232, 245, 233) !important;
 }
 [data-theme="shinchan"] .nav-tabs {
-    background: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 [data-theme="shinchan"] .date-slider-item.active {
     background: linear-gradient(135deg, #4CAF50, #00897B) !important;
@@ -264,6 +266,16 @@
     border-left: 4px solid #F39C12 !important;
 }
 
+
+[data-theme="blue-sky"] .input-field {
+    background: #F0F8FF !important;
+}
+[data-theme="blue-sky"] .daily-summary {
+    background: rgba(255, 255, 255, 0.92) !important;
+}
+[data-theme="blue-sky"] .input-field-accent {
+    background: #F0F8FF !important;
+}
 /* ===================================================
    🌊 THEME: Midnight Ocean
    =================================================== */
@@ -439,9 +451,6 @@
     background: linear-gradient(135deg, #EC4899, #A78BFA) !important;
 }
 
-
-
-/* ===================================================
 
 
 /* ===================================================
