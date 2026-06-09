@@ -1,9 +1,12 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 const MONTHS_TH = [
   'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
   'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม',
 ];
+
+const MIN_YEAR = 2026;
+const MIN_MONTH = 0; // January
 
 const smallBtn: React.CSSProperties = {
   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -31,11 +34,8 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
 
-  const thisYear = useMemo(() => new Date().getFullYear(), []);
-  const thisMonth = useMemo(() => new Date().getMonth(), []);
-
-  const canPrevYear = year > thisYear;
-  const canPrevMonth = year > thisYear || (year === thisYear && month > thisMonth);
+  const canPrevYear = year > MIN_YEAR;
+  const canPrevMonth = year > MIN_YEAR || (year === MIN_YEAR && month > MIN_MONTH);
 
   const prevMonth = useCallback(() => {
     if (canPrevMonth) onChangeMonth(-1);
