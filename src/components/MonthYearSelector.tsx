@@ -1,3 +1,4 @@
+import DropdownSelect from './DropdownSelect';
 import { useCallback } from 'react';
 
 const MONTHS_TH = [
@@ -23,16 +24,17 @@ const smallBtnDisabled: React.CSSProperties = {
   pointerEvents: 'none',
 };
 
-const labelStyle: React.CSSProperties = {
-  fontSize: 16, fontWeight: 700, color: 'var(--text)',
-  textAlign: 'center', whiteSpace: 'nowrap',
-};
-
 export default function MonthYearSelector({ currentDate, onChangeMonth }: {
   currentDate: Date; onChangeMonth: (diff: number) => void;
 }) {
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
+
+  const monthOptions = MONTHS_TH.map((m, i) => ({ label: m, value: i }));
+  const handleMonthChange = (val: string | number) => {
+    const newMonth = Number(val);
+    onChangeMonth(newMonth - month);
+  };
 
   const canPrevYear = year > MIN_YEAR;
   const canPrevMonth = year > MIN_YEAR || (year === MIN_YEAR && month > MIN_MONTH);
@@ -53,12 +55,17 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', alignItems: 'center' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <button onClick={prevMonth} style={canPrevMonth ? smallBtn : smallBtnDisabled} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนก่อนหน้า">‹</button>
-        <span style={labelStyle}>{MONTHS_TH[month]}</span>
+        <DropdownSelect
+          options={monthOptions}
+          value={month}
+          onChange={handleMonthChange}
+          style={{ minWidth: 140 }}
+        />
         <button onClick={nextMonth} style={smallBtn} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="เดือนถัดไป">›</button>
       </div>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <button onClick={prevYear} style={canPrevYear ? smallBtn : smallBtnDisabled} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="ปีก่อนหน้า">‹</button>
-        <span style={{ ...labelStyle, fontSize: 15 }}>{year + 543}</span>
+        <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', textAlign: 'center', whiteSpace: 'nowrap' }}>{year + 543}</span>
         <button onClick={nextYear} style={smallBtn} onMouseEnter={hoverIn} onMouseLeave={hoverOut} aria-label="ปีถัดไป">›</button>
       </div>
     </div>
