@@ -69,30 +69,6 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
 
   const queryClient = useQueryClient();
 
-  const { data: availableDates } = useQuery({
-    queryKey: ['available-dates', userId],
-    queryFn: async () => {
-      const { data } = await sb
-        .from('logs')
-        .select('year, month')
-        .eq('user_id', userId);
-      if (data) {
-        const years = [...new Set(data.map(r => r.year))] as number[];
-        const yearMonthMap: Record<number, number[]> = {};
-        data.forEach(r => {
-          if (!yearMonthMap[r.year]) yearMonthMap[r.year] = [];
-          if (!yearMonthMap[r.year].includes(r.month)) yearMonthMap[r.year].push(r.month);
-        });
-        return { years, yearMonthMap };
-      }
-      return { years: [] as number[], yearMonthMap: {} as Record<number, number[]> };
-    },
-    enabled: !!userId,
-  });
-
-  const availableYears = availableDates?.years ?? [];
-  const availableMonths = (availableDates?.yearMonthMap[currentYear] ?? []).map(m => m - 1);
-
   // Load day log via TanStack Query
   const { data: dayData } = useQuery({
     queryKey: ['day-log', userId, currentYear, currentMonth, selectedDay],
@@ -176,7 +152,7 @@ const months = ["มกราคม", "กุมภาพันธ์", "มี�
     <div id="view-daily" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: 'var(--space-sm) 0' }}>
-        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} availableMonths={availableMonths} />
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
       </div>
       
       {/* Date Slider (Embla) */}

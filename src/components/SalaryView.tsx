@@ -29,30 +29,6 @@ const month = currentDate.getMonth() + 1;
     enabled: !!userId,
   });
 
-  const { data: availableDates } = useQuery({
-    queryKey: ['available-dates', userId],
-    queryFn: async () => {
-      const { data } = await sb
-        .from('logs')
-        .select('year, month')
-        .eq('user_id', userId);
-      if (data) {
-        const years = [...new Set(data.map(r => r.year))] as number[];
-        const yearMonthMap: Record<number, number[]> = {};
-        data.forEach(r => {
-          if (!yearMonthMap[r.year]) yearMonthMap[r.year] = [];
-          if (!yearMonthMap[r.year].includes(r.month)) yearMonthMap[r.year].push(r.month);
-        });
-        return { years, yearMonthMap };
-      }
-      return { years: [] as number[], yearMonthMap: {} as Record<number, number[]> };
-    },
-    enabled: !!userId,
-  });
-
-  const availableYears = availableDates?.years ?? [];
-  const availableMonths = (availableDates?.yearMonthMap[year] ?? []).map(m => m - 1);
-
   const { data: leaveTotals } = useQuery({
     queryKey: ['yearly-leave', userId, year],
     queryFn: async () => {
@@ -101,7 +77,7 @@ const month = currentDate.getMonth() + 1;
     <div id="view-salary" className="view active">
       {/* Month/Year Selector */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--space-sm)', padding: 'var(--space-sm) 0' }}>
-        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} availableYears={availableYears} availableMonths={availableMonths} />
+        <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
       </div>
       
       {/* Hero Net Income Card */}
