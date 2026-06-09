@@ -60,6 +60,12 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
     setShowPopup(true);
   };
 
+  const handleMonthPick = (i: number) => {
+    const diff = (pickYear - year) * 12 + (i - month);
+    if (diff !== 0) onChangeMonth(diff);
+    setShowPopup(false);
+  };
+
   const confirmPick = () => {
     const diff = (pickYear - year) * 12 + (pickMonth - month);
     if (diff !== 0) onChangeMonth(diff);
@@ -231,7 +237,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
                 return (
                   <div
                     key={i}
-                    onClick={() => setPickMonth(i)}
+                    onClick={() => handleMonthPick(i)}
                     style={{
                       padding: '6px 0', cursor: 'pointer', textAlign: 'center',
                       fontSize: 14, fontWeight: i === pickMonth ? 700 : 500,
@@ -264,22 +270,7 @@ export default function MonthYearSelector({ currentDate, onChangeMonth }: {
               })}
             </div>
 
-            {/* Confirm button */}
-            <button
-              onClick={confirmPick}
-              style={{
-                width: '100%', padding: '12px', border: 'none', borderRadius: 14,
-                background: 'var(--primary)', color: 'white', fontWeight: 800,
-                fontSize: 17, cursor: 'pointer', fontFamily: 'inherit',
-                transition: 'opacity 0.15s',
-                backdropFilter: 'blur(2px) saturate(1.3)',
-                WebkitBackdropFilter: 'blur(2px) saturate(1.3)',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
-            >
-              ตกลง
-            </button>
+
           </div>
         </>
       )}
