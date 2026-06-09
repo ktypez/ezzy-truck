@@ -95,7 +95,9 @@
 }
 [data-theme="shinchan"] .summary-banner,
 [data-theme="shinchan"] .card {
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 [data-theme="shinchan"] #view-salary > .card:first-of-type {
     background: var(--hero-gradient) !important;
@@ -279,7 +281,7 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
-    --body-bg-image: linear-gradient(160deg, #030A14 0%, #0A1A30 25%, #0D2840 50%, #0A1A30 75%, #030A14 100%);
+    --body-bg-image: linear-gradient(160deg, #01060E 0%, #041220 25%, #081C32 50%, #041220 75%, #01060E 100%);
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
     --card: #0C1A2E;
@@ -345,7 +347,7 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
-    --body-bg-image: linear-gradient(160deg, #0E0312 0%, #1A0828 25%, #2D1040 50%, #1A0828 75%, #0E0312 100%);
+    --body-bg-image: linear-gradient(160deg, #060110 0%, #120624 25%, #2A0E3C 50%, #120624 75%, #060110 100%);
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
     --card: #1E0A26;
@@ -402,7 +404,10 @@
 [data-theme="cotton-candy"] {
     --glass-bg: rgba(255,255,255,0.7);
     --glass-border: rgba(0,0,0,0.08);
-    --bg: #FDF2F8;
+    --bg: #FFF0F5;
+    --body-bg-image: linear-gradient(160deg, #FFF0F5 0%, #FFE4F0 25%, #FCE7F3 50%, #FFE4F0 75%, #FFF0F5 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #FFFFFF;
     --text: #4A2040;
     --muted: #9D6B8A;
@@ -456,7 +461,7 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #030A14;
-    --body-bg-image: linear-gradient(160deg, #030A14 0%, #0A1A30 25%, #0D2840 50%, #0A1A30 75%, #030A14 100%);
+    --body-bg-image: linear-gradient(160deg, #01060E 0%, #041220 25%, #081C32 50%, #041220 75%, #01060E 100%);
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
     --card: #0C1A2E;
@@ -522,7 +527,7 @@
     --glass-bg: rgba(255,255,255,0.08);
     --glass-border: rgba(255,255,255,0.10);
     --bg: #0E0312;
-    --body-bg-image: linear-gradient(160deg, #0E0312 0%, #1A0828 25%, #2D1040 50%, #1A0828 75%, #0E0312 100%);
+    --body-bg-image: linear-gradient(160deg, #060110 0%, #120624 25%, #2A0E3C 50%, #120624 75%, #060110 100%);
     --body-bg-size: cover;
     --body-bg-attachment: fixed;
     --card: #1E0A26;
@@ -579,7 +584,10 @@
 [data-theme="cotton-candy"] {
     --glass-bg: rgba(255,255,255,0.7);
     --glass-border: rgba(0,0,0,0.08);
-    --bg: #FDF2F8;
+    --bg: #FFF0F5;
+    --body-bg-image: linear-gradient(160deg, #FFF0F5 0%, #FFE4F0 25%, #FCE7F3 50%, #FFE4F0 75%, #FFF0F5 100%);
+    --body-bg-size: cover;
+    --body-bg-attachment: fixed;
     --card: #FFFFFF;
     --text: #4A2040;
     --muted: #9D6B8A;
@@ -753,7 +761,9 @@
 }
 [data-theme="shinchan-sleep"] .summary-banner,
 [data-theme="shinchan-sleep"] .card {
-    background: #1A2035;
+    background: rgba(26, 32, 53, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 [data-theme="shinchan-sleep"] #view-salary > .card:first-of-type {
     background: linear-gradient(135deg, #2A3F5F, #1A2035) !important;
@@ -828,7 +838,9 @@
 }
 [data-theme="shinchan-bath"] .summary-banner,
 [data-theme="shinchan-bath"] .card {
-    background: #FFFFFF;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 [data-theme="shinchan-bath"] #view-salary > .card:first-of-type {
     background: var(--hero-gradient) !important;
@@ -903,7 +915,9 @@
 }
 [data-theme="shinchan-cute"] .summary-banner,
 [data-theme="shinchan-cute"] .card {
-    background: #2A1530;
+    background: rgba(42, 21, 48, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 [data-theme="shinchan-cute"] #view-salary > .card:first-of-type {
     background: linear-gradient(135deg, #FF9EB5, #C084FC) !important;
@@ -974,12 +988,11 @@
     border-radius: 12px !important;
     color: var(--text);
 }
-[data-theme="shinchan-white"] .main-save-btn:hover {
-    animation: wobble 0.5s ease-in-out;
-}
 [data-theme="shinchan-white"] .summary-banner,
 [data-theme="shinchan-white"] .card {
-    background: #2D201C;
+    background: rgba(45, 32, 28, 0.85) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
 }
 [data-theme="shinchan-white"] #view-salary > .card:first-of-type {
     background: linear-gradient(135deg, #E8836C, #F0B090) !important;

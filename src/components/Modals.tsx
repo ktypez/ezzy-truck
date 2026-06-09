@@ -189,10 +189,10 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
                     ['retro-pastel', 'Retro Pastel'],
                     ['shinchan', 'ชินจัง - กางเกง'],
                     ['blue-sky', 'ชินจัง - Blue'],
+                    ['shinchan-bath', 'ชินจัง - อาบน้ำ'],
                     ['modern', 'Modern'],
                     ['cotton-candy', 'Cotton Candy'],
                     ['summer-morning', 'Summer Morning'],
-                    ['shinchan-bath', 'ชินจัง - อาบน้ำ'],
                   ].map(([key, label]) => {
                     const c = themeColors[key];
                     return (
