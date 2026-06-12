@@ -55,11 +55,16 @@ export default function Modals({ activeModal, onClose, onSelectTheme }: ModalsPr
   }
 
   const handleUpdateEmail = async () => {
-    if (!newEmail.includes('@')) {
+    const trimmed = newEmail.trim()
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
       alert('กรุณากรอกอีเมลที่ถูกต้อง')
       return
     }
-    const { error } = await sb.auth.updateUser({ email: newEmail })
+    if (trimmed === currentEmail) {
+      alert('อีเมลใหม่ต้องไม่ซ้ำกับอีเมลเดิม')
+      return
+    }
+    const { error } = await sb.auth.updateUser({ email: trimmed })
     if (!error) {
       alert('🔗 ระบบส่งลิงก์ยืนยันไปที่อีเมลใหม่ของคุณแล้ว\n📧 และส่งอีเมลแจ้งเตือนไปที่อีเมลเดิม')
       setNewEmail('')
