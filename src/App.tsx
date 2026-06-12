@@ -127,7 +127,7 @@ export default function Home() {
   }
 
   // Pilot mode - no auth required
-  if (activeView === 'pilot') {
+  if (activeView === 'pilot' || activeView.startsWith('pilot/')) {
     return (
       <div data-theme={theme} style={{ minHeight: '100vh' }}>
         <div
