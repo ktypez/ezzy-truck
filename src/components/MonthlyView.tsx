@@ -154,7 +154,6 @@ export default function MonthlyView({
   )
 
   const selected = selDay ? merged.find((m) => m.day === selDay) : null
-  const maxKm = Math.max(...merged.map((r) => r.km), 1)
 
   return (
     <>
@@ -247,21 +246,7 @@ export default function MonthlyView({
                 <div key={`e${i}`} />
               ))}
               {merged.map((r) => {
-                const intensity = r.km / maxKm
                 const hasData = r.hasData
-
-                let bg = 'var(--card)'
-                let borderColor = 'var(--border)'
-                let textColor = 'var(--text)'
-
-                if (r.isOff) {
-                  bg = 'var(--primary-bg)'
-                  borderColor = 'var(--border)'
-                  textColor = 'var(--primary)'
-                } else if (hasData) {
-                  bg = `color-mix(in srgb, var(--primary) ${Math.round(8 + intensity * 20)}%, var(--card))`
-                  borderColor = 'var(--primary)'
-                }
 
                 const isSelected = selDay === r.day
                 const isToday =
@@ -275,8 +260,8 @@ export default function MonthlyView({
                     onClick={() => setSelDay(isSelected ? null : r.day)}
                     onDoubleClick={() => onSelectDayRow(r.day)}
                     style={{
-                      background: bg,
-                      border: `${isSelected ? 2 : isToday ? 2 : 1}px solid ${isSelected ? 'var(--primary)' : isToday ? 'var(--primary)' : borderColor}`,
+                      background: 'var(--card)',
+                      border: `${isSelected ? 2 : isToday ? 2 : 1}px solid ${isSelected ? 'var(--primary)' : isToday ? 'var(--primary)' : 'var(--border)'}`,
                       borderRadius: 8,
                       padding: 'var(--space-xs) 0',
                       cursor: 'pointer',
@@ -309,7 +294,7 @@ export default function MonthlyView({
                       }}
                     >
                       <div
-                        style={{ fontSize: 16, fontWeight: 700, color: textColor, lineHeight: 1.1 }}
+                        style={{ fontSize: 16, fontWeight: 700, color: 'var(--text)', lineHeight: 1.1 }}
                       >
                         {r.day}
                       </div>
