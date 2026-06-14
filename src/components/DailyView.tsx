@@ -268,7 +268,8 @@ export default function DailyView({
       </div>
 
       {/* Date Slider (Embla) */}
-      <div className="date-slider-container" ref={sliderRef}>
+      <div className="card" style={{ padding: 'var(--space-sm) var(--space-md)', marginBottom: 'var(--space-md)' }}>
+        <div className="date-slider-container" ref={sliderRef}>
         {allDaysArray.map((item) => {
           const isActive = selectedDay === item.dayNum
           const today = isToday(item.dayNum)
@@ -283,7 +284,8 @@ export default function DailyView({
               <span className="slider-day-num">{item.dayNum}</span>
             </button>
           )
-        })}
+        }        )}
+      </div>
       </div>
 
       {/* Shift badge + Day type */}
