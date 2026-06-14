@@ -159,7 +159,7 @@ export default function SalaryView({ userId, currentDate, onChangeMonth }: Salar
           alignItems: 'center',
           justifyContent: 'center',
           gap: 'var(--space-sm)',
-          padding: 'var(--space-sm) 0',
+          marginBottom: 'var(--space-md)',
         }}
       >
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
