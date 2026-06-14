@@ -49,8 +49,6 @@ export default function Home() {
     return () => subscription.unsubscribe()
   }, [])
 
-  <ThemeEffects theme={theme} />
-
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1)
     setCurrentDate(newDate)
@@ -100,6 +98,7 @@ export default function Home() {
 
   return (
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
+      <ThemeEffects theme={theme} />
       <Header userEmail={session.user.email} onOpenModal={setActiveModal} onLogout={handleLogout} />
 
       <main className="content-area">
