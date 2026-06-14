@@ -5,7 +5,7 @@ import { sb } from '@/lib/supabase'
 import Header from '@/components/Header'
 import Modals from '@/components/Modals'
 import AuthScreen from '@/components/AuthScreen'
-import Sidebar from '@/components/Sidebar'
+import NavTabs from '@/components/NavTabs'
 
 import ThemeEffects from '@/components/ThemeEffects'
 import PageLayout from '@/components/PageLayout'
@@ -49,7 +49,7 @@ export default function Home() {
     return () => subscription.unsubscribe()
   }, [])
 
-
+  <ThemeEffects theme={theme} />
 
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1)
@@ -100,25 +100,7 @@ export default function Home() {
 
   return (
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
-       <ThemeEffects theme={theme} />
-       {/* Mobile header (hidden on desktop) */}
-       <header className="mobile-header">
-         <Header 
-           userEmail={session.user.email} 
-           onOpenModal={setActiveModal} 
-           onLogout={handleLogout} 
-         />
-       </header>
-       {/* Desktop sidebar */}
-       <Sidebar
-         userEmail={session.user.email}
-         onOpenModal={setActiveModal}
-         onLogout={handleLogout}
-         activeView={activeView}
-         lastTapRef={lastTapRef}
-         setCurrentDate={setCurrentDate}
-         setSelectedDay={setSelectedDay}
-       />
+      <Header userEmail={session.user.email} onOpenModal={setActiveModal} onLogout={handleLogout} />
 
       <main className="content-area">
         <Suspense
@@ -196,6 +178,16 @@ export default function Home() {
           </Routes>
         </Suspense>
       </main>
+
+        <NavTabs basePath="" activeView={activeView} onDoubleTapDaily={() => {
+          const now = Date.now()
+          if (now - lastTapRef.current < 300) {
+            const today = new Date()
+            setCurrentDate(today)
+            setSelectedDay(today.getDate())
+          }
+          lastTapRef.current = now
+        }} lastTapRef={lastTapRef} />
 
       <Modals
         activeModal={activeModal}
