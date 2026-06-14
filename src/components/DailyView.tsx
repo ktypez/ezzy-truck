@@ -261,7 +261,7 @@ export default function DailyView({
           alignItems: 'center',
           justifyContent: 'center',
           gap: 'var(--space-sm)',
-          marginBottom: 'var(--space-md)',
+          margin: 'var(--space-md) 0',
         }}
       >
         <MonthYearSelector currentDate={currentDate} onChangeMonth={onChangeMonth} />
