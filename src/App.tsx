@@ -5,13 +5,15 @@ import { sb } from '@/lib/supabase'
 import Header from '@/components/Header'
 import Modals from '@/components/Modals'
 import AuthScreen from '@/components/AuthScreen'
+import NavTabs from '@/components/NavTabs'
+
+import ThemeEffects from '@/components/ThemeEffects'
+import PageLayout from '@/components/PageLayout'
 
 const DailyView = lazy(() => import('@/components/DailyView'))
 const MonthlyView = lazy(() => import('@/components/MonthlyView'))
 const SalaryView = lazy(() => import('@/components/SalaryView'))
-const PilotDailyView = lazy(() => import('@/components/pilot/DailyView'))
-const PilotMonthlyView = lazy(() => import('@/components/pilot/MonthlyView'))
-const PilotSalaryView = lazy(() => import('@/components/pilot/SalaryView'))
+
 
 export default function Home() {
   const navigate = useNavigate()
@@ -47,42 +49,7 @@ export default function Home() {
     return () => subscription.unsubscribe()
   }, [])
 
-  // Effect จัดการ Particle เอฟเฟกต์ (ซากุระ และ ช็อกโกบี) ตามธีมที่กดเลือก
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    localStorage.setItem('truck-theme', theme)
-
-    const oldSakura = document.querySelector('.sakura-fall')
-    const oldChocobi = document.querySelector('.chocobi-fall')
-    if (oldSakura) oldSakura.remove()
-    if (oldChocobi) oldChocobi.remove()
-
-    if (theme === 'sakura') {
-      const container = document.createElement('div')
-      container.className = 'sakura-fall'
-      document.body.appendChild(container)
-      for (let i = 0; i < 15; i++) {
-        const p = document.createElement('div')
-        p.className = 'petal'
-        p.style.left = Math.random() * 100 + '%'
-        p.style.animationDuration = Math.random() * 5 + 5 + 's'
-        p.style.animationDelay = Math.random() * 5 + 's'
-        container.appendChild(p)
-      }
-    } else if (theme === 'shinchan') {
-      const container = document.createElement('div')
-      container.className = 'chocobi-fall'
-      document.body.appendChild(container)
-      for (let i = 0; i < 10; i++) {
-        const s = document.createElement('div')
-        s.className = 'star'
-        s.style.left = Math.random() * 100 + '%'
-        s.style.animationDuration = Math.random() * 4 + 4 + 's'
-        s.style.animationDelay = Math.random() * 3 + 's'
-        container.appendChild(s)
-      }
-    }
-  }, [theme])
+  <ThemeEffects theme={theme} />
 
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1)
@@ -126,123 +93,6 @@ export default function Home() {
     navigate('/daily')
   }
 
-  // Pilot mode - no auth required
-  if (activeView === 'pilot' || activeView.startsWith('pilot/')) {
-    return (
-      <div data-theme={theme} style={{ minHeight: '100vh' }}>
-        <div
-          style={{
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            padding: '12px',
-            textAlign: 'center',
-            color: 'white',
-            fontWeight: 700,
-            fontSize: '14px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-          }}
-        >
-          <i className="ph-duotone ph-flask" style={{ fontSize: '18px' }}></i>
-          Demo Mode - ข้อมูลเก็บในเครื่องเท่านั้น
-        </div>
-
-        <main className="content-area">
-          <Suspense
-            fallback={
-              <div className="card" style={{ textAlign: 'center', padding: '40px 20px', color: 'var(--muted)', fontWeight: 500 }}>
-                Loading...
-              </div>
-            }
-          >
-            <Routes>
-              <Route
-                path="/pilot/daily"
-                element={
-                  <PilotDailyView
-                    userId="pilot-user"
-                    currentDate={currentDate}
-                    selectedDay={selectedDay}
-                    onSelectDay={setSelectedDay}
-                    onSaveSuccess={handleSaveSuccess}
-                    onChangeMonth={handleChangeMonth}
-                  />
-                }
-              />
-              <Route
-                path="/pilot/monthly"
-                element={
-                  <PilotMonthlyView
-                    userId="pilot-user"
-                    currentDate={currentDate}
-                    onSelectDayRow={(day) => {
-                      setSelectedDay(day)
-                      navigate('/pilot/daily')
-                    }}
-                    onChangeMonth={handleChangeMonth}
-                  />
-                }
-              />
-              <Route
-                path="/pilot/salary"
-                element={
-                  <PilotSalaryView
-                    userId="pilot-user"
-                    currentDate={currentDate}
-                    onChangeMonth={handleChangeMonth}
-                  />
-                }
-              />
-              <Route
-                path="/pilot"
-                element={
-                  <PilotDailyView
-                    userId="pilot-user"
-                    currentDate={currentDate}
-                    selectedDay={selectedDay}
-                    onSelectDay={setSelectedDay}
-                    onSaveSuccess={handleSaveSuccess}
-                    onChangeMonth={handleChangeMonth}
-                  />
-                }
-              />
-            </Routes>
-          </Suspense>
-        </main>
-
-        <div className="nav-tabs">
-          <div
-            className={`tab ${activeView === 'pilot' || activeView === 'pilot/daily' ? 'active' : ''}`}
-            onClick={() => {
-              const now = Date.now()
-              if (now - lastTapRef.current < 300) {
-                const today = new Date()
-                setCurrentDate(today)
-                setSelectedDay(today.getDate())
-              }
-              lastTapRef.current = now
-              navigate('/pilot/daily')
-            }}
-          >
-            <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
-          </div>
-          <div
-            className={`tab ${activeView === 'pilot/monthly' ? 'active' : ''}`}
-            onClick={() => navigate('/pilot/monthly')}
-          >
-            <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
-          </div>
-          <div
-            className={`tab ${activeView === 'pilot/salary' ? 'active' : ''}`}
-            onClick={() => navigate('/pilot/salary')}
-          >
-            <i className="ph-duotone ph-wallet i-icon"></i> รายได้
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   if (!session) {
     return <AuthScreen onAuth={() => {}} />
@@ -269,43 +119,49 @@ export default function Home() {
           }
         >
           <Routes>
-            <Route
-              path="/daily"
-              element={
-                <DailyView
-                  userId={session.user.id}
-                  currentDate={currentDate}
-                  selectedDay={selectedDay}
-                  onSelectDay={setSelectedDay}
-                  onSaveSuccess={handleSaveSuccess}
-                  onChangeMonth={handleChangeMonth}
+                <Route
+                  path="/daily"
+                  element={
+                    <PageLayout>
+                      <DailyView
+                        userId={session.user.id}
+                        currentDate={currentDate}
+                        selectedDay={selectedDay}
+                        onSelectDay={setSelectedDay}
+                        onSaveSuccess={handleSaveSuccess}
+                        onChangeMonth={handleChangeMonth}
+                      />
+                    </PageLayout>
+                  }
                 />
-              }
-            />
-            <Route
-              path="/monthly"
-              element={
-                <MonthlyView
-                  userId={session.user.id}
-                  currentDate={currentDate}
-                  onSelectDayRow={(day) => {
-                    setSelectedDay(day)
-                    navigate('/daily')
-                  }}
-                  onChangeMonth={handleChangeMonth}
+                <Route
+                  path="/monthly"
+                  element={
+                    <PageLayout>
+                      <MonthlyView
+                        userId={session.user.id}
+                        currentDate={currentDate}
+                        onSelectDayRow={(day) => {
+                          setSelectedDay(day)
+                          navigate('/daily')
+                        }}
+                        onChangeMonth={handleChangeMonth}
+                      />
+                    </PageLayout>
+                  }
                 />
-              }
-            />
-            <Route
-              path="/salary"
-              element={
-                <SalaryView
-                  userId={session.user.id}
-                  currentDate={currentDate}
-                  onChangeMonth={handleChangeMonth}
+                <Route
+                  path="/salary"
+                  element={
+                    <PageLayout>
+                      <SalaryView
+                        userId={session.user.id}
+                        currentDate={currentDate}
+                        onChangeMonth={handleChangeMonth}
+                      />
+                    </PageLayout>
+                  }
                 />
-              }
-            />
             <Route
               path="/"
               element={
@@ -323,35 +179,15 @@ export default function Home() {
         </Suspense>
       </main>
 
-      <div className="nav-tabs">
-        <div
-          className={`tab ${activeView === 'daily' ? 'active' : ''}`}
-          onClick={() => {
-            const now = Date.now()
-            if (now - lastTapRef.current < 300) {
-              const today = new Date()
-              setCurrentDate(today)
-              setSelectedDay(today.getDate())
-            }
-            lastTapRef.current = now
-            goToDaily()
-          }}
-        >
-          <i className="ph-duotone ph-note-pencil i-icon"></i> บันทึก
-        </div>
-        <div
-          className={`tab ${activeView === 'monthly' ? 'active' : ''}`}
-          onClick={() => navigate('/monthly')}
-        >
-          <i className="ph-duotone ph-clock-counter-clockwise i-icon"></i> ประวัติ
-        </div>
-        <div
-          className={`tab ${activeView === 'salary' ? 'active' : ''}`}
-          onClick={() => navigate('/salary')}
-        >
-          <i className="ph-duotone ph-wallet i-icon"></i> รายได้
-        </div>
-      </div>
+        <NavTabs basePath="" activeView={activeView} onDoubleTapDaily={() => {
+          const now = Date.now()
+          if (now - lastTapRef.current < 300) {
+            const today = new Date()
+            setCurrentDate(today)
+            setSelectedDay(today.getDate())
+          }
+          lastTapRef.current = now
+        }} lastTapRef={lastTapRef} />
 
       <Modals
         activeModal={activeModal}

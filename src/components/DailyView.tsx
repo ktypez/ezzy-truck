@@ -172,7 +172,6 @@ export default function DailyView({
           odo_out: 0,
           ot: 0,
           late: 0,
-          drivers: [],
           trucks: 0,
           odo: 0,
         })
@@ -220,7 +219,6 @@ export default function DailyView({
         fix_work: fixWork,
         trucks: roundCount,
         odo: distance,
-        drivers: [],
         leave_type: null,
       })
     } else {
@@ -238,7 +236,6 @@ export default function DailyView({
         fix_work: 0,
         trucks: 0,
         odo: 0,
-        drivers: [],
         leave_type: leaveType,
       })
     }

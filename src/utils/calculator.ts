@@ -35,7 +35,7 @@ export const calculateSalary = (logs: any[], daysInMonth?: number) => {
   const dailyRate = base / totalDays
 
   const roundInc = totalRounds * 5
-  const pointInc = totalPoints * 0
+  const pointInc = totalPoints * 5
 
   const otInc = totalOT * 75
   const foodInc = workDays * 30
