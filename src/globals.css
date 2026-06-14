@@ -709,6 +709,54 @@ body {
   border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.08));
 }
 
+/* Mobile nav-tabs (bottom) */
+@media (max-width: 767px) {
+  .nav-tabs {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--glass-bg, rgba(255,255,255,0.7));
+    backdrop-filter: blur(4px) saturate(1.5);
+    -webkit-backdrop-filter: blur(4px) saturate(1.5);
+    border-top: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.12);
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+  .content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: var(--space-md);
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+    max-width: 100%;
+    margin-left: 0;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+}
+
+/* Mobile header */
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--glass-bg, rgba(255,255,255,0.7));
+  backdrop-filter: blur(4px) saturate(1.5);
+  -webkit-backdrop-filter: blur(4px) saturate(1.5);
+  border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+}
+
+/* Sidebar hidden on mobile */
+.sidebar {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .mobile-header {
     display: none;
@@ -727,7 +775,7 @@ body {
     backdrop-filter: blur(4px) saturate(1.5);
     -webkit-backdrop-filter: blur(4px) saturate(1.5);
     z-index: 100;
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-md) var(--space-sm);
   }
 
   .sidebar .sticky-header {
@@ -738,8 +786,8 @@ body {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.08));
-    padding: var(--space-md) 0;
-    margin: 0 calc(-1 * var(--space-md));
+    padding: var(--space-sm) 0;
+    margin: 0 calc(-1 * var(--space-sm));
     border-radius: 0;
     margin-left: 0;
   }
@@ -748,8 +796,8 @@ body {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border-radius: 12px;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 8px;
     transition: background 0.2s;
   }
 
@@ -758,11 +806,11 @@ body {
   }
 
   .sidebar .user-bar .i-sm {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 
   .sidebar .user-bar span {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -788,16 +836,16 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: var(--space-md) 0;
+    gap: 2px;
+    padding: var(--space-sm) 0;
     overflow-y: auto;
   }
 
   .nav-tabs .tab {
     justify-content: flex-start;
-    padding: var(--space-md) var(--space-lg);
-    border-radius: 12px;
-    font-size: 15px;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 8px;
+    font-size: 14px;
     font-weight: 600;
     border: none;
     background: transparent;
@@ -817,7 +865,7 @@ body {
 
   .nav-tabs .tab .i-icon {
     margin-right: var(--space-sm);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
   }
 
   .card {
