@@ -734,10 +734,20 @@ body {
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
-  .mobile-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
+
+  /* Mobile header compact */
+  .mobile-header .user-bar {
+    padding: var(--space-xs) var(--space-sm);
+  }
+  .mobile-header .user-bar > div {
+    padding: var(--space-xs) var(--space-sm);
+    gap: var(--space-xs);
+  }
+  .mobile-header .user-bar .i-sm {
+    font-size: 1rem;
+  }
+  .mobile-header .user-bar span {
+    font-size: 13px;
   }
 }
 
