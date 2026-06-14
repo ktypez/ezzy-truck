@@ -316,7 +316,81 @@
 }
 /* ===================================================
    🌊 THEME: Midnight Ocean
-   =================================================== *//* ===================================================
+   =================================================== */
+[data-theme='midnight-ocean'] {
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --bg: #030a14;
+  --body-bg-image: linear-gradient(
+    160deg,
+    #01060e 0%,
+    #041220 25%,
+    #081c32 50%,
+    #041220 75%,
+    #01060e 100%
+  );
+  --body-bg-size: cover;
+  --body-bg-attachment: fixed;
+  --card: #0c1a2e;
+  --text: #e0f0ff;
+  --muted: #7a9ab8;
+  --border: #1a304a;
+  --primary: #38bdf8 !important;
+  --primary-bg: #0c2d48 !important;
+  --secondary: #2dd4bf !important;
+
+  --pattern-color: rgba(56, 189, 248, 0.04);
+  --active-date-text: #ffffff;
+  --hero-gradient: linear-gradient(135deg, #0284c7, #0d9488);
+}
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .tab,
+[data-theme='midnight-ocean'] .seg-btn,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .cal-cell,
+[data-theme='midnight-ocean'] .date-bar-item {
+  border-radius: 14px !important;
+  border: 2px solid var(--border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+[data-theme='midnight-ocean'] .tab.active,
+[data-theme='midnight-ocean'] .main-save-btn,
+[data-theme='midnight-ocean'] .auth-btn,
+[data-theme='midnight-ocean'] .seg-btn.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
+  font-weight: 800;
+  border: none !important;
+}
+[data-theme='midnight-ocean'] .input-field {
+  background-color: #1b2f44 !important;
+  border: 2px solid var(--border) !important;
+  color: var(--text) !important;
+  border-radius: 10px !important;
+}
+[data-theme='midnight-ocean'] .main-save-btn:hover {
+  animation: pulseGlow 1s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+  }
+}
+[data-theme='midnight-ocean'] .summary-banner,
+[data-theme='midnight-ocean'] .card,
+[data-theme='midnight-ocean'] .shift-sheet {
+  background: rgba(27, 47, 68, 0.95) !important;
+  backdrop-filter: blur(8px);
+}
+[data-theme='midnight-ocean'] .date-slider-item.active {
+  background: linear-gradient(135deg, #38bdf8, #2dd4bf) !important;
+  color: #0d1b2a !important;
+}
+/* ===================================================
    🌙 THEME: Twilight (Dark Purple)
    =================================================== */
 [data-theme='twilight'] {
