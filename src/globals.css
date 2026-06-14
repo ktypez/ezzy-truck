@@ -145,7 +145,7 @@ body {
 
 .content-area {
   flex: 1;
-  padding: var(--space-md) var(--space-lg);
+  padding: 0 var(--space-lg) var(--space-md);
   max-width: 100%;
   margin: 0 auto;
   width: 100%;
