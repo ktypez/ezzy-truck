@@ -697,21 +697,121 @@ body {
     transform: translateY(0);
   }
 }
-/* Responsive desktop layout */
+
+/* Mobile header */
+.mobile-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--glass-bg, rgba(255,255,255,0.7));
+  backdrop-filter: blur(4px) saturate(1.5);
+  -webkit-backdrop-filter: blur(4px) saturate(1.5);
+  border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+}
+
 @media (min-width: 768px) {
-  .content-area {
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
+  .mobile-header {
+    display: none;
+  }
+  .sidebar {
+    max-width: calc(100% - 240px);
+    margin-left: 240px;
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
   }
 
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+    background: var(--glass-bg, rgba(255,255,255,0.7));
+    backdrop-filter: blur(4px) saturate(1.5);
+    -webkit-backdrop-filter: blur(4px) saturate(1.5);
+    z-index: 100;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .sidebar .user-bar {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--glass-border, rgba(0,0,0,0.08));
+    padding: var(--space-md) 0;
+    margin: 0 calc(-1 * var(--space-md));
+    border-radius: 0;
+  }
+
+  .sidebar .user-bar > div {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 12px;
+    transition: background 0.2s;
+  }
+
+  .sidebar .user-bar > div:hover {
+    background: var(--primary-bg);
+  }
+
+  .sidebar .user-bar .i-sm {
+    font-size: 1.25rem;
+  }
+
+  .sidebar .user-bar span {
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sticky-header {
+    margin-left: 240px;
+  }
+
+  .user-bar {
+    margin-left: 240px;
+  }
+
   .nav-tabs {
-    position: static;
-    justify-content: center;
-    gap: 12px;
-    padding: 12px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md) 0;
+    overflow-y: auto;
+  }
+
+  .nav-tabs .tab {
+    justify-content: flex-start;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .nav-tabs .tab:hover {
+    background: var(--primary-bg);
+    color: var(--primary);
+  }
+
+  .nav-tabs .tab.active {
+    background: var(--primary);
+    color: var(--active-date-text);
+  }
+
+  .nav-tabs .tab .i-icon {
+    margin-right: var(--space-sm);
+    font-size: 1.25rem;
   }
 
   .card {

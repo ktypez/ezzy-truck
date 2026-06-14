@@ -5,7 +5,7 @@ import { sb } from '@/lib/supabase'
 import Header from '@/components/Header'
 import Modals from '@/components/Modals'
 import AuthScreen from '@/components/AuthScreen'
-import NavTabs from '@/components/NavTabs'
+import Sidebar from '@/components/Sidebar'
 
 import ThemeEffects from '@/components/ThemeEffects'
 import PageLayout from '@/components/PageLayout'
@@ -49,7 +49,7 @@ export default function Home() {
     return () => subscription.unsubscribe()
   }, [])
 
-  <ThemeEffects theme={theme} />
+
 
   const handleChangeMonth = (diff: number) => {
     const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + diff, 1)
@@ -100,7 +100,25 @@ export default function Home() {
 
   return (
     <div data-theme={theme} style={{ minHeight: '100vh' }}>
-      <Header userEmail={session.user.email} onOpenModal={setActiveModal} onLogout={handleLogout} />
+       <ThemeEffects theme={theme} />
+       {/* Mobile header (hidden on desktop) */}
+       <header className="mobile-header">
+         <Header 
+           userEmail={session.user.email} 
+           onOpenModal={setActiveModal} 
+           onLogout={handleLogout} 
+         />
+       </header>
+       {/* Desktop sidebar */}
+       <Sidebar
+         userEmail={session.user.email}
+         onOpenModal={setActiveModal}
+         onLogout={handleLogout}
+         activeView={activeView}
+         lastTapRef={lastTapRef}
+         setCurrentDate={setCurrentDate}
+         setSelectedDay={setSelectedDay}
+       />
 
       <main className="content-area">
         <Suspense
