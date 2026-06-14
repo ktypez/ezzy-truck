@@ -713,12 +713,6 @@ body {
   .mobile-header {
     display: none;
   }
-  .sidebar {
-    max-width: calc(100% - 240px);
-    margin-left: 240px;
-    padding-left: var(--space-lg);
-    padding-right: var(--space-lg);
-  }
 
   .sidebar {
     position: fixed;
@@ -736,6 +730,10 @@ body {
     padding: var(--space-lg) var(--space-md);
   }
 
+  .sidebar .sticky-header {
+    margin-left: 0;
+  }
+
   .sidebar .user-bar {
     display: flex;
     flex-direction: column;
@@ -743,6 +741,7 @@ body {
     padding: var(--space-md) 0;
     margin: 0 calc(-1 * var(--space-md));
     border-radius: 0;
+    margin-left: 0;
   }
 
   .sidebar .user-bar > div {
@@ -776,6 +775,13 @@ body {
 
   .user-bar {
     margin-left: 240px;
+  }
+
+  .content-area {
+    max-width: calc(100% - 240px);
+    margin-left: 240px;
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
   }
 
   .nav-tabs {

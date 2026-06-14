@@ -197,16 +197,6 @@ export default function Home() {
         </Suspense>
       </main>
 
-        <NavTabs basePath="" activeView={activeView} onDoubleTapDaily={() => {
-          const now = Date.now()
-          if (now - lastTapRef.current < 300) {
-            const today = new Date()
-            setCurrentDate(today)
-            setSelectedDay(today.getDate())
-          }
-          lastTapRef.current = now
-        }} lastTapRef={lastTapRef} />
-
       <Modals
         activeModal={activeModal}
         onClose={() => setActiveModal(null)}
