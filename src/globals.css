@@ -153,8 +153,8 @@ body {
 
 @media (max-width: 767px) {
   .content-area {
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
+    padding-left: var(--space-sm);
+    padding-right: var(--space-sm);
   }
 }
 .view {
